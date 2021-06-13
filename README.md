@@ -1,1 +1,2 @@
-medium-projects
+Learning projects that take hours to days to complete
+
