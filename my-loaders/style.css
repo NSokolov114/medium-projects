@@ -62,7 +62,7 @@ input {
   border: 15px solid;
   border-color: black black transparent transparent;
   animation-name: loader1-animation;
-  animation-duration: 3s;
+  animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-timing-function: cubic-bezier(0.3, -0.1, 0.8, 1.2);
 }
@@ -111,17 +111,120 @@ input {
 
 /* LOADER 3 */
 #loader3 {
-  background-color: rgb(9, 114, 114);
+  background-color: whitesmoke;
+}
+
+.loader3__layer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+  margin: 5px;
+
+  border-radius: 25%;
+  border: 10px solid;
+  border-color: rgb(2, 154, 255) rgb(136, 0, 248);
+  animation-name: loader3-animation;
+  animation-delay: 1s;
+
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.loader3__layer-last {
+  border-color: transparent;
+}
+
+@keyframes loader3-animation {
+  40% {
+    transform: rotateZ(0.5turn);
+  }
+  50% {
+    transform: rotateZ(0.5turn);
+  }
+  90% {
+    transform: rotateZ(0turn);
+  }
+  100% {
+    transform: rotateZ(0turn);
+  }
 }
 
 /* LOADER 4 */
 #loader4 {
-  background-color: rgb(52, 32, 231);
+  background-color: whitesmoke;
+}
+
+.loader4__layer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+  margin: 15px;
+
+  border-radius: 50%;
+  border: 20px solid;
+  border-color: steelblue transparent transparent;
+  animation-name: loader4-animation;
+  animation-delay: 1s;
+
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.loader4__layer-last {
+  border: 20px solid steelblue;
+}
+
+@keyframes loader4-animation {
+  80% {
+    transform: rotateZ(1turn);
+  }
+  100% {
+    transform: rotateZ(1turn);
+  }
 }
 
 /* LOADER 5 */
 #loader5 {
-  background-color: aqua;
+  background-color: whitesmoke;
+  position: relative;
+}
+
+.loader5__layer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: whitesmoke;
+  margin: -2px;
+  border-radius: 50%;
+  border: 17px solid;
+  border-color: black transparent black black;
+  animation-name: loader5-animation;
+  animation-delay: 3s;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes loader5-animation {
+  80% {
+    transform: rotateZ(1turn);
+  }
+  100% {
+    transform: rotateZ(1turn);
+  }
+}
+
+.loader5__pacman {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-color: tomato;
+  top: 35%;
+  left: 45%;
+  z-index: 1;
+  border-radius: 50%;
 }
 
 /* LOADER 6 */
@@ -146,7 +249,6 @@ input {
 /* LOADERS END */
 
 /* CAROUSEL MOVEMENT */
-
 #radio1:checked ~ .carousel .slides {
   transform: translateX(0);
 }
