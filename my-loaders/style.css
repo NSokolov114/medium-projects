@@ -1,0 +1,81 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  align-items: center;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  align-items: center;
+  background-color: whitesmoke;
+  display: flex;
+  height: 700px;
+  justify-content: center;
+  width: 700px;
+  overflow: hidden;
+}
+
+.layer {
+  align-items: center;
+
+  display: flex;
+
+  justify-content: center;
+
+  background-color: yellow;
+  margin: -1px;
+
+  transform: rotate(45deg);
+
+  border-radius: 50%;
+  border: 20px solid;
+  border-color: steelblue steelblue transparent transparent;
+  animation-name: loader-animation;
+  animation-direction: alternate;
+  animation-delay: 2s;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  /* cubic-bezier(0.3, -0.1, 0.8, 1.2) */
+}
+
+/* #layer2,
+#layer4,
+#layer6,
+#layer8,
+#layer10 {
+
+
+  border-color: steelblue steelblue chartreuse chartreuse;
+}
+
+#layer1,
+#layer3,
+#layer5,
+#layer7,
+#layer9,
+#layer11 {
+
+  border-color: steelblue steelblue chartreuse chartreuse;
+} */
+
+#layer1 {
+  /* border-color: steelblue; */
+  border: 5px solid steelblue;
+}
+
+@keyframes loader-animation {
+  90% {
+    transform: rotateZ(1turn);
+  }
+  100% {
+    transform: rotateZ(1turn);
+  }
+}
