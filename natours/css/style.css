@@ -35,17 +35,17 @@ body {
   position: relative;
 }
 
-.logo-box {
+.header__logo-box {
   left: 4rem;
   position: absolute;
   top: 4rem;
 }
 
-.logo {
+.header__logo {
   height: 3.5rem;
 }
 
-.text-box {
+.header__text-box {
   left: 50%;
   position: absolute;
   top: 40%;
@@ -60,7 +60,7 @@ body {
   text-transform: uppercase;
 }
 
-.heading-primary-main {
+.heading-primary--main {
   animation-duration: 1s;
   animation-name: moveInLeft;
   animation-timing-function: ease-in-out;
@@ -70,7 +70,7 @@ body {
   letter-spacing: 4rem;
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
   animation: moveInRight 1s ease-in-out;
   display: block;
   font-size: 2.4rem;
@@ -103,7 +103,7 @@ body {
   transform: translateY(-0.1rem);
 }
 
-.btn-white {
+.btn--white {
   background-color: #fff;
   color: #777;
 }
@@ -121,7 +121,7 @@ body {
   z-index: -1;
 }
 
-.btn-white::after {
+.btn--white::after {
   background-color: #fff;
 }
 
@@ -130,7 +130,7 @@ body {
   transform: scaleX(1.4) scaleY(1.6);
 }
 
-.btn-animated {
+.btn--animated {
   animation: moveInBottom 0.5s ease-out 0.7s;
   animation-fill-mode: backwards;
 }
