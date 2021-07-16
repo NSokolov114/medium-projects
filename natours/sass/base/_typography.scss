@@ -30,3 +30,40 @@ body {
     letter-spacing: 1.7rem;
   }
 }
+
+.heading-secondary {
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+  color: $color-grey-light-1; // fallback
+  display: inline-block;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 0 30px;
+  text-transform: uppercase;
+  transition: all 0.25s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(10deg) scale(1.05);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, 0.2);
+  }
+}
+
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}
