@@ -195,6 +195,25 @@ body {
   .composition:hover .composition__photo:not(:hover) {
     transform: scale(0.95); }
 
+.feature-box {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  transition: transform 0.3s; }
+  .feature-box__icon {
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-image: linear-gradient(to right, #55c57a, #28b485);
+    color: #f7f7f7;
+    display: inline-block;
+    font-size: 6rem;
+    margin-bottom: 0.5rem; }
+  .feature-box:hover {
+    transform: translateY(-1rem) scale(1.02); }
+
 .header {
   background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
   background-position: top;
@@ -245,3 +264,12 @@ body {
   background-color: #f7f7f7;
   margin-top: -15vh;
   padding: 25rem 0; }
+
+.section-features {
+  background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url(../img/nat-4.jpg);
+  background-size: cover;
+  padding: 20rem 0;
+  margin-top: -10rem;
+  transform: skewY(-5deg); }
+  .section-features > * {
+    transform: skewY(5deg); }
