@@ -454,26 +454,44 @@ body {
     filter: blur(3px) brightness(0.7);
     transform: translateX(-4rem) scale(1); }
 
-.header {
-  background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
-  background-position: top;
-  background-size: cover;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  height: 90vh;
-  position: relative; }
-  .header__logo-box {
-    left: 4rem;
-    position: absolute;
-    top: 4rem; }
-  .header__logo {
-    height: 3.5rem; }
-  .header__text-box {
-    left: 50%;
-    position: absolute;
-    top: 40%;
-    text-align: center;
-    transform: translate(-50%, -50%); }
+.footer {
+  background-color: #333;
+  color: #e0e0e0;
+  font-size: 1.4rem;
+  padding: 10rem 0; }
+  .footer__logo-box {
+    margin-bottom: 8rem;
+    text-align: center; }
+  .footer__logo {
+    height: auto;
+    width: 15rem; }
+  .footer__navigation {
+    border-top: 1px solid #777;
+    display: inline-block;
+    padding-top: 2rem; }
+  .footer__list {
+    list-style: none;
+    padding: 1rem; }
+  .footer__item {
+    display: inline-block; }
+    .footer__item:not(:last-child) {
+      margin-right: 1.5rem; }
+  .footer__link:link, .footer__link:visited {
+    background-color: #333;
+    color: #e0e0e0;
+    display: inline-block;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.25s ease-in-out; }
+  .footer__link:hover, .footer__link:active {
+    color: #28b485;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    transform: rotate(5deg) scale(1.03); }
+  .footer__copyright {
+    border-top: 1px solid #777;
+    float: right;
+    padding-top: 2rem;
+    width: 80%; }
 
 .row {
   margin: 0 auto;
@@ -500,6 +518,27 @@ body {
     width: calc((100% - 3 * 6rem) / 2 + 6rem); }
   .row .col-3-of-4 {
     width: calc( (100% - 3 * 6rem) * 3 / 4 + 2 * 6rem); }
+
+.header {
+  background-image: linear-gradient(to right bottom, rgba(85, 197, 122, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-position: top;
+  background-size: cover;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  height: 90vh;
+  position: relative; }
+  .header__logo-box {
+    left: 4rem;
+    position: absolute;
+    top: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    left: 50%;
+    position: absolute;
+    top: 40%;
+    text-align: center;
+    transform: translate(-50%, -50%); }
 
 .section-about {
   background-color: #e0e0e0;
