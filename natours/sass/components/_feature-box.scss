@@ -7,6 +7,10 @@
   text-align: center;
   transition: transform 0.3s;
 
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+
   &__icon {
     -webkit-text-fill-color: transparent; // transp color
     -webkit-background-clip: text; // clip on text only
@@ -19,6 +23,10 @@
     display: inline-block;
     font-size: 6rem;
     margin-bottom: 0.5rem;
+
+    @include respond(tab-port) {
+      margin-bottom: 0;
+    }
   }
 
   &:hover {

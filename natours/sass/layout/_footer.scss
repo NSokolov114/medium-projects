@@ -11,6 +11,10 @@
   &__logo-box {
     margin-bottom: 8rem;
     text-align: center;
+
+    @include respond(tab-port) {
+      margin-bottom: 5rem;
+    }
   }
 
   &__logo {
