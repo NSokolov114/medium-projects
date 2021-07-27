@@ -7,12 +7,18 @@
     url(../img/hero-small.jpg);
   background-position: top;
   background-size: cover;
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  height: 90vh;
+  height: 80vh;
   position: relative;
 
-  @media (min-resolution: 192dpi) and (min-width: 600px), (min-width: 2000px) {
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 90vh;
+  }
+
+  @media (min-resolution: 192dpi) and (min-width: 600px),
+    (-webkit-min-device-pixel-ratio: 2) and (min-width: 600px),
+    (min-width: 2000px) {
     // apple retina
     background-image: linear-gradient(
         to right bottom,
