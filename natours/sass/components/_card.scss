@@ -174,9 +174,10 @@
     margin-bottom: 8rem;
   }
 
-  // MEDIA QUERY
+  // MEDIA QUERY - can't use mixin and check for a touch device
 
-  @include respond(tab-port) {
+  // @include respond(tab-port) {
+  @media only screen and (max-width: 900px), only screen and (hover: none) {
     background-color: $color-white;
     border-radius: 5px;
     box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);

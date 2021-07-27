@@ -16,9 +16,9 @@
     height: 90vh;
   }
 
-  @media (min-resolution: 192dpi) and (min-width: 600px),
-    (-webkit-min-device-pixel-ratio: 2) and (min-width: 600px),
-    (min-width: 2000px) {
+  @media only screen and (min-resolution: 192dpi) and (min-width: 600px),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 600px),
+    only screen and (min-width: 2000px) {
     // apple retina
     background-image: linear-gradient(
         to right bottom,
