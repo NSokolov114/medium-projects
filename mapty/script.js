@@ -18,8 +18,8 @@ if (navigator.geolocation)
       // in case of success
       const { latitude } = position.coords;
       const { longitude } = position.coords;
-      console.log(latitude, longitude);
-      console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
+      // console.log(latitude, longitude);
+      // console.log(`https://www.google.com/maps/@${latitude},${longitude}`);
       const coords = [latitude, longitude];
       const map = L.map('map').setView(coords, 14);
 
@@ -28,10 +28,24 @@ if (navigator.geolocation)
           '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
       }).addTo(map);
 
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-        .openPopup();
+      console.log(map);
+      map.on('click', function (mapEvent) {
+        const { lat, lng } = mapEvent.latlng;
+
+        L.marker([lat, lng])
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+            })
+          )
+          .setPopupContent('My Marker My Marker')
+          .openPopup();
+      });
     },
     function () {
       // in case of failure
