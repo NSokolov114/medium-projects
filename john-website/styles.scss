@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap');
+@import './fonts/icons.ttf';
+
 // 1. ABSTRACTS
 //   1.1. FUNCTIONS
 //   1.2. MIXINS
@@ -41,12 +44,119 @@
 }
 //   1.3. VARIABLES
 
-$primary-color: #fff;
+$primary-color: #333;
+$fontFamily: 'Heebo', sans-serif;
+
+// 0. NORMALIZATION
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+}
+
+*,
+*::after,
+*::before {
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+a,
+a:visited,
+a:hover {
+  text-decoration: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html {
+  font-size: 62.5%;
+  height: 100%;
+  width: 100%;
+
+  @include respond(tab-land) {
+    font-size: 56.25%; // 1rem is 9px (56.25% of 16px)
+  }
+
+  @include respond(tab-port) {
+    font-size: 50%; // 1rem is 8px (50% of 16px)
+  }
+
+  @include respond(big-desktop) {
+    font-size: 75%; // 1rem is 12px (75% of 16px)
+  }
+}
+body {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: $fontFamily;
+  font-size: 1.6rem;
+  height: 100%;
+  line-height: 1;
+  width: 100%;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
 
 // 2. BASE
 //   2.1. ANIMATIONS
 //   2.2. BASE
 //   2.3. TYPOGRAPHY
+//           ICONS
+._icon-fb:before {
+  content: '\e900';
+}
+._icon-tw:before {
+  content: '\e901';
+}
+._icon-in:before {
+  content: '\e902';
+}
+._icon-li:before {
+  content: '\e903';
+}
 //   2.4. UTILITIES
 
 // 3. COMPONENTS
@@ -70,4 +180,10 @@ $primary-color: #fff;
 body {
   text-align: center;
   color: $primary-color;
+  font-family: $fontFamily;
+}
+
+p,
+h1 {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
