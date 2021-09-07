@@ -1,37 +1,35 @@
 :root {
-  --color-brand--1: #ffb545;
-  --color-brand--2: #00c46a;
+  --color-brand--1: #6fb2ff;
+  --color-brand--2: #bb0eff;
 
-  --color-dark--1: #2d3439;
-  --color-dark--2: #42484d;
-  --color-light--1: #aaa;
-  --color-light--2: #ececec;
-  --color-light--3: rgb(214, 222, 224);
+  --color-dark--1: #1a2e3b;
+  --color-dark--2: #2e495f;
+  --color-light--1: white;
+  --color-light--2: whitesmoke;
+  --color-light--3: antiquewhite;
 }
 
 * {
+  box-sizing: inherit;
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
 }
 
 html {
-  font-size: 62.5%;
   box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  background-color: var(--color-light--3);
   color: var(--color-light--2);
-  font-weight: 400;
-  line-height: 1.6;
-  height: 100vh;
-  overscroll-behavior-y: none;
-
-  background-color: #fff;
-  padding: 2.5rem;
-
   display: flex;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  line-height: 1.6;
+  overscroll-behavior-y: none;
+  padding: 2.5rem;
 }
 
 /* GENERAL */
@@ -42,22 +40,25 @@ a:visited {
 
 /* SIDEBAR */
 .sidebar {
-  flex-basis: 50rem;
   background-color: var(--color-dark--1);
-  padding: 3rem 5rem 4rem 5rem;
+  border-radius: 10px;
   display: flex;
+  flex-basis: 50rem;
   flex-direction: column;
+  margin-right: 10px;
+  padding: 3rem 5rem 4rem 5rem;
 }
 
 .logo {
-  height: 5.2rem;
   align-self: center;
+  filter: brightness(0.7);
+  height: 5.2rem;
   margin-bottom: 4rem;
 }
 
 .workouts {
-  list-style: none;
   height: 77vh;
+  list-style: none;
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -69,13 +70,12 @@ a:visited {
 .workout {
   background-color: var(--color-dark--2);
   border-radius: 5px;
-  padding: 1.5rem 2.25rem;
-  margin-bottom: 1.75rem;
   cursor: pointer;
-
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 0.75rem 1.5rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-bottom: 1.75rem;
+  padding: 1.5rem 2.25rem;
 }
 .workout--running {
   border-left: 5px solid var(--color-brand--2);
@@ -91,14 +91,14 @@ a:visited {
 }
 
 .workout__details {
-  display: flex;
   align-items: baseline;
+  display: flex;
 }
 
 .workout__icon {
   font-size: 1.8rem;
-  margin-right: 0.2rem;
   height: 0.28rem;
+  margin-right: 0.2rem;
 }
 
 .workout__value {
@@ -107,38 +107,35 @@ a:visited {
 }
 
 .workout__unit {
-  font-size: 1.1rem;
   color: var(--color-light--1);
-  text-transform: uppercase;
+  font-size: 1.1rem;
   font-weight: 800;
+  text-transform: uppercase;
 }
 
 .form {
   background-color: var(--color-dark--2);
   border-radius: 5px;
-  padding: 1.5rem 2.75rem;
-  margin-bottom: 1.75rem;
-
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem 2.5rem;
-
-  /* Match height and activity boxes */
   height: 9.25rem;
+  margin-bottom: 1.75rem;
   transition: all 0.5s, transform 1ms;
+  padding: 1.5rem 2.75rem;
 }
 
 .form.hidden {
-  transform: translateY(-30rem);
   height: 0;
-  padding: 0 2.25rem;
   margin-bottom: 0;
   opacity: 0;
+  padding: 0 2.25rem;
+  transform: translateY(-30rem);
 }
 
 .form__row {
-  display: flex;
   align-items: center;
+  display: flex;
 }
 
 .form__row--hidden {
@@ -152,19 +149,19 @@ a:visited {
 }
 
 .form__input {
-  width: 100%;
-  padding: 0.3rem 1.1rem;
-  font-family: inherit;
-  font-size: 1.4rem;
+  background-color: var(--color-light--3);
   border: none;
   border-radius: 3px;
-  background-color: var(--color-light--3);
+  font-family: inherit;
+  font-size: 1.4rem;
+  padding: 0.3rem 1.1rem;
   transition: all 0.2s;
+  width: 100%;
 }
 
 .form__input:focus {
+  background-color: var(--color-light--2);
   outline: none;
-  background-color: #fff;
 }
 
 .form__btn {
@@ -172,10 +169,11 @@ a:visited {
 }
 
 .copyright {
-  margin-top: auto;
-  font-size: 1.3rem;
-  text-align: center;
   color: var(--color-light--1);
+  filter: brightness(0.7);
+  font-size: 1.3rem;
+  margin-top: auto;
+  text-align: center;
 }
 
 .twitter-link:link,
@@ -191,16 +189,17 @@ a:visited {
 
 /* MAP */
 #map {
+  background-color: var(--color-light--1);
+  border-radius: 10px;
   flex: 1;
   height: 100%;
-  background-color: var(--color-light--1);
 }
 
 /* Popup width is defined in JS using options */
 .leaflet-popup .leaflet-popup-content-wrapper {
   background-color: var(--color-dark--1);
-  color: var(--color-light--2);
   border-radius: 5px;
+  color: var(--color-light--2);
   padding-right: 0.6rem;
 }
 

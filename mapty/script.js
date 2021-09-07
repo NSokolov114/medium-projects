@@ -26,9 +26,9 @@ class Workout {
       'November',
       'December',
     ];
-    this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}`;
+    this.description = `${this.type[0].toUpperCase()}${this.type.slice(
+      1
+    )}: ${months[this.date.getMonth()].slice(0, 3)} ${this.date.getDate()}`;
   }
 
   click() {
@@ -67,14 +67,13 @@ class Cycling extends Workout {
 }
 
 // ARCHITECTURE
-
-const form = document.querySelector('.form');
-const containerWorkouts = document.querySelector('.workouts');
-const inputType = document.querySelector('.form__input--type');
-const inputDistance = document.querySelector('.form__input--distance');
-const inputDuration = document.querySelector('.form__input--duration');
-const inputCadence = document.querySelector('.form__input--cadence');
-const inputElevation = document.querySelector('.form__input--elevation');
+const containerWorkouts = document.querySelector('.workouts'),
+  form = containerWorkouts.querySelector('.form'),
+  inputType = form.querySelector('.form__input--type'),
+  inputDistance = form.querySelector('.form__input--distance'),
+  inputDuration = form.querySelector('.form__input--duration'),
+  inputCadence = form.querySelector('.form__input--cadence'),
+  inputElevation = form.querySelector('.form__input--elevation');
 
 class App {
   #map;
@@ -107,9 +106,10 @@ class App {
   }
 
   _loadMap(position) {
-    const { latitude } = position.coords;
-    const { longitude } = position.coords;
-    const coords = [latitude, longitude];
+    const { latitude } = position.coords,
+      { longitude } = position.coords,
+      coords = [latitude, longitude];
+
     this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
       attribution:
@@ -152,10 +152,10 @@ class App {
     e.preventDefault();
 
     // get data from form
-    const type = inputType.value;
-    const distance = +inputDistance.value;
-    const duration = +inputDuration.value;
-    const { lat, lng } = this.#mapEvent.latlng;
+    const type = inputType.value,
+      distance = +inputDistance.value,
+      duration = +inputDuration.value,
+      { lat, lng } = this.#mapEvent.latlng;
     let workout;
 
     // running Object
