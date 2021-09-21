@@ -1,0 +1,22 @@
+Matching game with WoW icons.
+
+GENERAL IDEAS
+* decks based on class
+* user can set grid 3x3 4x4 5x5, maybe even type grid width and height with some boundaries, up to 10x10.
+** if grid has an odd number of cards, 1 card becomes a joker
+* grid is generated on the fly. Container's width can be set by the number of cards
+
+* custom backside (img), maybe with filter
+
+? when user guessed right, either hide the cards completely or lock on front side and desaturate
+
+TODO
++ find and download and prepare wow icons
+- hardcode a grid
+- fill the grid with random images. F.e. 100 images, need to choose NOC/2 images of that pool.
+- make sure that's the grid has 2 of each image
+
+ABBREVIATIONS
+NOC - number of cards. Either is set by user or calculated if GW+GH is set by the user.
+GW - grid width in cards
+GH - grid height in cards

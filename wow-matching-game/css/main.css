@@ -21,8 +21,78 @@
 }
 
 .cards-container {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   background-color: dimgray;
-  height: 600px;
-  width: 600px;
+  background-color: transparent;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  height: 1088px;
+  width: 1088px;
+}
+
+.card {
+  height: 128px;
+  width: 128px;
+  margin: 3px;
+  -webkit-perspective: 750px;
+          perspective: 750px;
+  position: relative;
+}
+
+.card__side {
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  background-color: turquoise;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  -webkit-transition: all 0.8s ease;
+  transition: all 0.8s ease;
+  width: 100%;
+}
+
+.card__side img {
+  border-radius: 5px;
+  height: 100%;
+  width: 100%;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.card__side--front {
+  background-color: #fff;
+}
+
+.card__side--back {
+  background-color: violet;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.card:hover .card__side--front {
+  -webkit-transform: rotateY(-180deg);
+          transform: rotateY(-180deg);
+}
+
+.card:hover .card__side--back {
+  -webkit-transform: rotateY(0);
+          transform: rotateY(0);
 }
 /*# sourceMappingURL=main.css.map */

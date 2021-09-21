@@ -15,7 +15,71 @@
 }
 
 .cards-container {
+  align-items: flex-start;
   background-color: dimgray;
-  height: 600px;
-  width: 600px;
+  background-color: transparent;
+
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  height: 136 * 8px;
+  width: 136 * 8px;
+}
+
+.card {
+  // background-color: dodgerblue;
+  // border-radius: 15px;
+  height: 128px;
+  width: 128px;
+  margin: 3px;
+  // 136px x 136px
+  perspective: 750px;
+  position: relative;
+
+  &__side {
+    backface-visibility: hidden;
+    background-color: turquoise;
+    border-radius: 5px;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    transition: all 0.8s ease;
+    width: 100%;
+
+    & img {
+      border-radius: 5px;
+      height: 100%;
+      width: 100%;
+      // TODO forbid drag via JS
+      -webkit-user-drag: none;
+
+      user-select: none;
+    }
+  }
+  &__side--front {
+    background-color: #fff;
+  }
+  &__side--back {
+    background-color: violet;
+    transform: rotateY(180deg);
+  }
+  // &__side--back-1 {
+  //   background: linear-gradient(to right bottom, #ffb900, #ff7730);
+  // }
+  // &__side--back-2 {
+  //   background: linear-gradient(to right bottom, #55c57a, #28b485);
+  // }
+  // &__side--back-3 {
+  //   background: linear-gradient(to right bottom, #2998ff, #5643fa);
+  // }
+  &:hover .card__side--front {
+    transform: rotateY(-180deg);
+  }
+  &:hover .card__side--back {
+    transform: rotateY(0);
+  }
 }
