@@ -46,6 +46,8 @@
   -webkit-perspective: 750px;
           perspective: 750px;
   position: relative;
+  -webkit-transition: all 2.5s;
+  transition: all 2.5s;
 }
 
 .card.card__active .card__side--front {

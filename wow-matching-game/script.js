@@ -9,6 +9,9 @@ const cardsContainer = document.querySelector('.cards-container');
 const NOC = 16;
 const deckName = 'druid';
 const NOCinDeck = 97;
+
+let block = false;
+let solvedCards = 0;
 // cardsContainer.style.backgroundColor = 'white';
 function addCard(num, deckName) {
   const cardHTML = `
@@ -38,9 +41,13 @@ for (let i = 0; i < cards.length; i++) {
 }
 
 function checkCards(e) {
+  if (block) {
+    return;
+  }
   e.target.closest('div.card').classList.add('card__active');
   const activeCards = cardsContainer.querySelectorAll('.card__active');
   if (activeCards.length === 2) {
+    block = true;
     setTimeout(() => {
       const card1 = activeCards[0].querySelector('img');
       const card2 = activeCards[1].querySelector('img');
@@ -50,12 +57,60 @@ function checkCards(e) {
         activeCards[1].classList.add('card__solved');
         activeCards[0].removeEventListener('click', checkCards);
         activeCards[1].removeEventListener('click', checkCards);
+        solvedCards += 2;
       }
       activeCards[0].classList.remove('card__active');
       activeCards[1].classList.remove('card__active');
+      block = false;
+      if (solvedCards >= NOC - 2) {
+        block = true;
+        const lastCards = cardsContainer.querySelectorAll(
+          '.card:not(.card__solved)'
+        );
+        lastCards[0].classList.add('card__active');
+        lastCards[1].classList.add('card__active');
+        setTimeout(() => {
+          lastCards[0].classList.remove('card__active');
+          lastCards[1].classList.remove('card__active');
+          lastCards[0].classList.add('card__solved');
+          lastCards[1].classList.add('card__solved');
+          lastCards[0].removeEventListener('click', checkCards);
+          lastCards[1].removeEventListener('click', checkCards);
+          setTimeout(() => {
+            clearDesk();
+          }, 1500);
+        }, 1500);
+      }
     }, 1000);
   }
 }
+
+function clearDesk() {
+  cardsContainer.style.justifyContent = 'center';
+  cardsContainer.style.alignItems = 'center';
+  for (let i = 0; i < NOC; i++) {
+    cards[i].style.width = 0;
+    cards[i].style.height = 0;
+  }
+  setTimeout(() => {
+    cardsContainer.innerHTML = '';
+    cardsContainer.style.justifyContent = 'space-evenly';
+    cardsContainer.style.alignItems = 'flex-start';
+  }, 2500);
+}
+
+// function deleteCard(counter) {
+//   if (counter < NOC) {
+//     setTimeout(function () {
+//       console.log(counter);
+//       // cards[arr[counter]].remove();
+//       cards[arr[counter]].style.width = 0;
+//       cards[arr[counter]].style.height = 0;
+//       counter++;
+//       deleteCard(counter);
+//     }, 500);
+//   }
+// }
 
 function generateRndArray(NOC, NOCinDeck) {
   const arr = [];

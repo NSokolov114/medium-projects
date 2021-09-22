@@ -35,6 +35,7 @@
   // 136px x 136px
   perspective: 750px;
   position: relative;
+  transition: all 2.5s;
 
   &.card__active {
     & .card__side--front {
