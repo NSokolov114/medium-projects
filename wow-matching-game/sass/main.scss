@@ -18,13 +18,12 @@
   align-items: flex-start;
   background-color: dimgray;
   background-color: transparent;
-
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  height: 136 * 8px;
-  width: 136 * 8px;
+  height: 136 * 4px;
+  width: 136 * 4px;
 }
 
 .card {
@@ -36,6 +35,21 @@
   // 136px x 136px
   perspective: 750px;
   position: relative;
+
+  &.card__active {
+    & .card__side--front {
+      transform: rotateY(0);
+    }
+    & .card__side--back {
+      transform: rotateY(-180deg);
+    }
+  }
+
+  &.card__solved {
+    & .card__side--back {
+      background-color: chartreuse;
+    }
+  }
 
   &__side {
     backface-visibility: hidden;
@@ -62,10 +76,10 @@
   }
   &__side--front {
     background-color: #fff;
+    transform: rotateY(180deg);
   }
   &__side--back {
     background-color: violet;
-    transform: rotateY(180deg);
   }
   // &__side--back-1 {
   //   background: linear-gradient(to right bottom, #ffb900, #ff7730);
@@ -76,10 +90,10 @@
   // &__side--back-3 {
   //   background: linear-gradient(to right bottom, #2998ff, #5643fa);
   // }
-  &:hover .card__side--front {
-    transform: rotateY(-180deg);
-  }
-  &:hover .card__side--back {
-    transform: rotateY(0);
-  }
+  // &:hover .card__side--front {
+  //   transform: rotateY(-180deg);
+  // }
+  // &:hover .card__side--back {
+  //   transform: rotateY(0);
+  // }
 }

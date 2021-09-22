@@ -6,7 +6,7 @@
 
 const cardsContainer = document.querySelector('.cards-container');
 
-const NOC = 64;
+const NOC = 16;
 const deckName = 'druid';
 const NOCinDeck = 97;
 // cardsContainer.style.backgroundColor = 'white';
@@ -32,6 +32,30 @@ for (let i = 0; i < NOC; i++) {
   addCard(imgNumbersSequence[i], deckName);
   // console.log(Math.floor(Math.random() * NOCinDeck));
 }
+const cards = cardsContainer.querySelectorAll('.card');
+for (let i = 0; i < cards.length; i++) {
+  cards[i].addEventListener('click', checkCards);
+}
+
+function checkCards(e) {
+  e.target.closest('div.card').classList.add('card__active');
+  const activeCards = cardsContainer.querySelectorAll('.card__active');
+  if (activeCards.length === 2) {
+    setTimeout(() => {
+      const card1 = activeCards[0].querySelector('img');
+      const card2 = activeCards[1].querySelector('img');
+      console.log(card1.src, card2.src);
+      if (card1.src === card2.src) {
+        activeCards[0].classList.add('card__solved');
+        activeCards[1].classList.add('card__solved');
+        activeCards[0].removeEventListener('click', checkCards);
+        activeCards[1].removeEventListener('click', checkCards);
+      }
+      activeCards[0].classList.remove('card__active');
+      activeCards[1].classList.remove('card__active');
+    }, 1000);
+  }
+}
 
 function generateRndArray(NOC, NOCinDeck) {
   const arr = [];
@@ -51,29 +75,3 @@ function shuffleArray(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
 }
-
-/* <div class="card">
-<div class="card__side card__side--front">
-  <img src="./img/druid (1).jpg" alt="#" />
-</div>
-<div class="card__side card__side--back"></div>
-</div>
-
-const renderCountry = function (data) {
-  const html = `
-    <article class="country">
-      <img class="country__img" src="${data.flag}" />
-      <div class="country__data">
-        <h3 class="country__name">${data.name}</h3>
-        <h4 class="country__region">${data.region}</h4>
-        <p class="country__row"><span>👫</span>${(
-          +data.population / 1000000
-        ).toFixed(1)} people</p>
-        <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-        <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-      </div>
-    </article>
-  `;
-  countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
-}; */
