@@ -17,7 +17,7 @@ function addCard(num, deckName) {
   const cardHTML = `
     <div class="card">
       <div class="card__side card__side--front">
-        <img src="./img/druid (${num}).jpg" alt="${deckName}-${num}" />
+        <img src="./decks/druid/druid (${num}).jpg" alt="${deckName}-${num}" />
       </div>
       <div class="card__side card__side--back"></div>
     </div>
