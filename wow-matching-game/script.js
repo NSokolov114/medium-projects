@@ -6,8 +6,14 @@
 
 const cardsContainer = document.querySelector('.cards-container');
 
+const decksInfo = {
+  deckNames: ['druid', 'hunter', 'mage', 'monk', 'paladin', 'priest'],
+  deckCards: [100, 126, 105, 104, 101, 103],
+  deckColor: ['#FF7C0A', '#AAD372', '#68CCEF', '#008467', '#F48CBA', '#FFFFFF'],
+};
+
 const NOC = 16;
-const deckName = 'druid';
+const deckName = 'hunter';
 const NOCinDeck = 97;
 
 let block = false;
@@ -17,7 +23,7 @@ function addCard(num, deckName) {
   const cardHTML = `
     <div class="card">
       <div class="card__side card__side--front">
-        <img src="./decks/druid/druid (${num}).jpg" alt="${deckName}-${num}" />
+        <img src="./decks/${deckName}/${deckName} (${num}).jpg" alt="${deckName}-${num}" />
       </div>
       <div class="card__side card__side--back"></div>
     </div>
