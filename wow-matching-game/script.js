@@ -12,9 +12,11 @@ const decksInfo = {
   deckColor: ['#FF7C0A', '#AAD372', '#68CCEF', '#008467', '#F48CBA', '#FFFFFF'],
 };
 
+const x = 3;
+
 const NOC = 16;
-const deckName = 'priest';
-const NOCinDeck = 97;
+const deckName = decksInfo.deckNames[x];
+const NOCinDeck = decksInfo.deckCards[x];
 
 let block = false;
 let solvedCards = 0;
@@ -25,7 +27,7 @@ function addCard(num, deckName) {
       <div class="card__side card__side--front">
         <img src="./decks/${deckName}/${deckName} (${num}).jpg" alt="${deckName}-${num}" />
       </div>
-      <div class="card__side card__side--back"></div>
+      <div class="card__side card__side--back card__side--back-${deckName}" ></div>
     </div>
   `;
   cardsContainer.insertAdjacentHTML('beforeend', cardHTML);
@@ -35,7 +37,7 @@ function addCard(num, deckName) {
 let imgNumbersSequence = generateRndArray(NOC, NOCinDeck);
 shuffleArray(imgNumbersSequence);
 
-console.log(imgNumbersSequence);
+// console.log(imgNumbersSequence);
 
 for (let i = 0; i < NOC; i++) {
   addCard(imgNumbersSequence[i], deckName);

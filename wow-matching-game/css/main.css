@@ -9,15 +9,53 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: darkslategrey;
+  background-color: #222d5c;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   min-height: 100vh;
   min-width: 100vw;
+}
+
+h2,
+h3 {
+  color: #fff;
+  padding: 15px;
+}
+
+.deck__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.deck__card {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 5px;
+}
+
+.deck__name {
+  color: #fff;
+}
+
+.deck__image-container img {
+  border-radius: 50%;
 }
 
 .cards-container {
@@ -98,7 +136,27 @@
           transform: rotateY(180deg);
 }
 
-.card__side--back {
-  background-color: violet;
+.card__side--back-druid {
+  background-color: #ff7c0a;
+}
+
+.card__side--back-hunter {
+  background-color: #aad372;
+}
+
+.card__side--back-mage {
+  background-color: #68ccef;
+}
+
+.card__side--back-monk {
+  background-color: #008467;
+}
+
+.card__side--back-paladin {
+  background-color: #f48cba;
+}
+
+.card__side--back-priest {
+  background-color: #fff;
 }
 /*# sourceMappingURL=main.css.map */

@@ -1,3 +1,5 @@
+$primary-color: #fff;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,12 +8,40 @@
 
 .container {
   align-items: center;
-  background-color: darkslategrey;
+  background-color: rgb(34, 45, 92);
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   min-height: 100vh;
   min-width: 100vw;
+}
+
+h2,
+h3 {
+  color: $primary-color;
+  padding: 15px;
+}
+
+.deck {
+  &__container {
+    display: flex;
+  }
+
+  &__card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+  }
+  &__name {
+    color: $primary-color;
+  }
+  &__image-container {
+    & img {
+      border-radius: 50%;
+    }
+  }
 }
 
 .cards-container {
@@ -80,21 +110,25 @@
     transform: rotateY(180deg);
   }
   &__side--back {
-    background-color: violet;
+    // background-color: violet;
+
+    &-druid {
+      background-color: #ff7c0a;
+    }
+    &-hunter {
+      background-color: #aad372;
+    }
+    &-mage {
+      background-color: #68ccef;
+    }
+    &-monk {
+      background-color: #008467;
+    }
+    &-paladin {
+      background-color: #f48cba;
+    }
+    &-priest {
+      background-color: #fff;
+    }
   }
-  // &__side--back-1 {
-  //   background: linear-gradient(to right bottom, #ffb900, #ff7730);
-  // }
-  // &__side--back-2 {
-  //   background: linear-gradient(to right bottom, #55c57a, #28b485);
-  // }
-  // &__side--back-3 {
-  //   background: linear-gradient(to right bottom, #2998ff, #5643fa);
-  // }
-  // &:hover .card__side--front {
-  //   transform: rotateY(-180deg);
-  // }
-  // &:hover .card__side--back {
-  //   transform: rotateY(0);
-  // }
 }
