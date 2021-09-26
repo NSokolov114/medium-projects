@@ -98,13 +98,96 @@ h6 {
 }
 
 body {
-  text-align: center;
   color: #333;
   font-family: "Heebo", sans-serif;
 }
 
-p,
-h1 {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+._container {
+  margin: 0 auto;
+  max-width: 856px;
+}
+
+.header__content {
+  margin: 0 auto;
+  max-width: 1052px;
+  background-color: aquamarine;
+}
+
+.menu__list {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 82px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 10px 20px;
+}
+
+.menu__list li {
+  margin: 0 0 0 33px;
+}
+
+.menu__link {
+  color: #000;
+  font-size: 20px;
+  font-weight: 500;
+  -webkit-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+}
+
+.menu__link:hover {
+  color: #ff6464;
+}
+
+.icon-menu {
+  display: none;
+}
+
+@media (max-width: 862px) {
+  .icon-menu {
+    display: block;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    width: 32px;
+    height: 18px;
+    cursor: pointer;
+    z-index: 5;
+  }
+  .icon-menu span {
+    -webkit-transition: all 0.3s ease 0s;
+    transition: all 0.3s ease 0s;
+    top: calc(50% - 1px);
+    left: 0;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    border: 1px solid #333;
+  }
+  .icon-menu span:first-child {
+    top: 0;
+  }
+  .icon-menu span:last-child {
+    bottom: 0;
+    top: auto;
+  }
+  .icon-menu ._active span {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  .icon-menu ._active span:first-child {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    top: calc(50% - 1px);
+  }
+  .icon-menu ._active span:last-child {
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    top: calc(50% - 1px);
+  }
 }
 /*# sourceMappingURL=styles.css.map */
