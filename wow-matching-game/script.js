@@ -13,7 +13,7 @@ const decksInfo = {
 };
 
 const NOC = 16;
-const deckName = 'hunter';
+const deckName = 'priest';
 const NOCinDeck = 97;
 
 let block = false;

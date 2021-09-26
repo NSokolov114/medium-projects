@@ -46,6 +46,9 @@
 
 $primary-color: #333;
 $fontFamily: 'Heebo', sans-serif;
+$minWidth: 320px;
+$maxWidth: 1152px;
+$maxWidthContainer: 856px;
 
 // 0. NORMALIZATION
 * {
@@ -145,18 +148,18 @@ h6 {
 //   2.2. BASE
 //   2.3. TYPOGRAPHY
 //           ICONS
-._icon-fb:before {
-  content: '\e900';
-}
-._icon-tw:before {
-  content: '\e901';
-}
-._icon-in:before {
-  content: '\e902';
-}
-._icon-li:before {
-  content: '\e903';
-}
+// ._icon-fb:before {
+//   content: '\e900';
+// }
+// ._icon-tw:before {
+//   content: '\e901';
+// }
+// ._icon-in:before {
+//   content: '\e902';
+// }
+// ._icon-li:before {
+//   content: '\e903';
+// }
 //   2.4. UTILITIES
 
 // 3. COMPONENTS
