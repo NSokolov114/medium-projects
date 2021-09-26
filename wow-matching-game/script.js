@@ -12,7 +12,7 @@ const decksInfo = {
   deckColor: ['#FF7C0A', '#AAD372', '#68CCEF', '#008467', '#F48CBA', '#FFFFFF'],
 };
 
-const x = 3;
+const x = 4;
 
 const NOC = 16;
 const deckName = decksInfo.deckNames[x];

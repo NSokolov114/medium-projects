@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+
 $primary-color: #fff;
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
@@ -20,6 +26,7 @@ $primary-color: #fff;
 h2,
 h3 {
   color: $primary-color;
+  letter-spacing: 1px;
   padding: 15px;
 }
 
@@ -78,7 +85,7 @@ h3 {
 
   &.card__solved {
     & .card__side--back {
-      background-color: chartreuse;
+      background-color: rgb(34, 45, 92);
     }
   }
 
