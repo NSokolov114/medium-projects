@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://www.google.com/s2/favicons?domain=https://www.volkswagen-commercial.ru/"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Image Carousel</title>
+    <!-- All images are downloaded from Unsplash.com, cropped and resized -->
+  </head>
+  <body>
+    <div class="image-carousel">
+      <div class="image-carousel__container">
+        <!-- INSERT any number of pictures. Order matters: -->
+        <!-- a carousel picture should be followed by the same picture in highres for modal -->
+        <picture class="image-carousel__img">
+          <source srcset="./assets/1-caleb-george-unsplash-small.webp" type="image/webp" />
+          <source srcset="./assets/1-caleb-george-unsplash-small.jpg" type="image/jpg" />
+          <img src="./assets/1-caleb-george-unsplash-small.jpg" alt="vw t1" />
+        </picture>
+        <picture class="modal-window__img hidden">
+          <source srcset="./assets/1-caleb-george-unsplash-big.webp" type="image/webp" />
+          <source srcset="./assets/1-caleb-george-unsplash-big.jpg" type="image/jpg" />
+          <img src="./assets/1-caleb-george-unsplash-big.jpg" alt="vw t1" />
+        </picture>
+
+        <picture class="image-carousel__img">
+          <source srcset="./assets/2-tobias-weinhold-unsplash-small.webp" type="image/webp" />
+          <source srcset="./assets/2-tobias-weinhold-unsplash-small.jpg" type="image/jpg" />
+          <img src="./assets/2-tobias-weinhold-unsplash-small.jpg" alt="vw t2" />
+        </picture>
+        <picture class="modal-window__img hidden">
+          <source srcset="./assets/2-tobias-weinhold-unsplash-big.webp" type="image/webp" />
+          <source srcset="./assets/2-tobias-weinhold-unsplash-big.jpg" type="image/jpg" />
+          <img src="./assets/2-tobias-weinhold-unsplash-big.jpg" alt="vw t2" />
+        </picture>
+
+        <picture class="image-carousel__img">
+          <source srcset="./assets/3-kurt-von-unsplash-small.webp" type="image/webp" />
+          <source srcset="./assets/3-kurt-von-unsplash-small.jpg" type="image/jpg" />
+          <img src="./assets/3-kurt-von-unsplash-small.jpg" alt="vw t3" />
+        </picture>
+        <picture class="modal-window__img hidden">
+          <source srcset="./assets/3-kurt-von-unsplash-big.webp" type="image/webp" />
+          <source srcset="./assets/3-kurt-von-unsplash-big.jpg" type="image/jpg" />
+          <img src="./assets/3-kurt-von-unsplash-big.jpg" alt="vw t3" />
+        </picture>
+
+        <picture class="image-carousel__img">
+          <source srcset="./assets/4-jan-kopriva-unsplash-small.webp" type="image/webp" />
+          <source srcset="./assets/4-jan-kopriva-unsplash-small.jpg" type="image/jpg" />
+          <img src="./assets/4-jan-kopriva-unsplash-small.jpg" alt="vw t4" />
+        </picture>
+        <picture class="modal-window__img hidden">
+          <source srcset="./assets/4-jan-kopriva-unsplash-big.webp" type="image/webp" />
+          <source srcset="./assets/4-jan-kopriva-unsplash-big.jpg" type="image/jpg" />
+          <img src="./assets/4-jan-kopriva-unsplash-big.jpg" alt="vw t4" />
+        </picture>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
