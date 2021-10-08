@@ -175,12 +175,12 @@ function ready() {
 
   function renderWeatherForecast(weatherForecast) {
     const title = weatherForecastContainer.querySelector('.weather-forecast__title'),
-      subtitles = weatherForecastContainer.querySelectorAll('.weather-forecast__subtitle'),
-      cards = weatherForecastContainer.querySelectorAll('.weather-forecast__card'),
-      icons = weatherForecastContainer.querySelectorAll('i'),
-      temperatures = weatherForecastContainer.querySelectorAll('.weather-forecast__temperature'),
-      descriptions = weatherForecastContainer.querySelectorAll('.weather-forecast__description'),
-      secondaries = weatherForecastContainer.querySelectorAll('.weather-forecast__secondary-info');
+      subtitles = document.querySelectorAll('.weather-forecast__subtitle'),
+      cards = document.querySelectorAll('.weather-forecast__card'),
+      icons = document.querySelectorAll('i'),
+      temperatures = document.querySelectorAll('.weather-forecast__temperature'),
+      descriptions = document.querySelectorAll('.weather-forecast__description'),
+      secondaries = document.querySelectorAll('.weather-forecast__secondary-info');
 
     title.innerText = `5 day weather forecast with 3 hour step for ${
       weatherForecast.city.name ? weatherForecast.city.name : 'an unknown place'
@@ -208,12 +208,12 @@ function ready() {
 
       // if (!!weatherForecastContainer) return;
 
-      temperatures[i].innerText = `${weatherForecast.list[j].main.temp.toFixed(0)} °C`;
       descriptions[i].innerText = weatherForecast.list[j].weather[0].description;
+      temperatures[i].innerText = `${weatherForecast.list[j].main.temp.toFixed(0)} °C`;
       secondaries[i].innerText = `${weatherForecast.list[j].wind.speed.toFixed(1)} m/s, clouds: ${
         weatherForecast.list[j].clouds.all
       }%, ${weatherForecast.list[j].main.pressure} hpa`;
-      icons[i].classList.add(
+      icons[i + 1].classList.add(
         `wi-owm-${getApproxDayOrNight(weatherForecast.list[j].dt)}-${weatherForecast.list[j].weather[0].id}`
       );
     }
