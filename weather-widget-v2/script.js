@@ -206,6 +206,13 @@ function ready() {
     for (let i = skip; i < numberCards; i++) {
       const j = i - skip;
 
+      console.log(
+        'lengths of selected arrays:',
+        descriptions.length,
+        temperatures.length,
+        secondaries.length,
+        icons.length
+      );
       // if (!!weatherForecastContainer) return;
 
       descriptions[i].innerText = weatherForecast.list[j].weather[0].description;
