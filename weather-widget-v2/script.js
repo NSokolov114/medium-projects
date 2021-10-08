@@ -118,6 +118,7 @@ function ready() {
       } else {
         inpLng.classList.remove('weather-current__error');
       }
+
       if (!changeLocationForm.checkValidity()) {
         inpLng.classList.add('weather-current__error');
         inpLat.classList.add('weather-current__error');
@@ -176,7 +177,7 @@ function ready() {
     const title = weatherForecastContainer.querySelector('.weather-forecast__title'),
       subtitles = weatherForecastContainer.querySelectorAll('.weather-forecast__subtitle'),
       cards = weatherForecastContainer.querySelectorAll('.weather-forecast__card'),
-      icons = weatherForecastContainer.querySelectorAll('.wi'),
+      icons = weatherForecastContainer.querySelectorAll('i'),
       temperatures = weatherForecastContainer.querySelectorAll('.weather-forecast__temperature'),
       descriptions = weatherForecastContainer.querySelectorAll('.weather-forecast__description'),
       secondaries = weatherForecastContainer.querySelectorAll('.weather-forecast__secondary-info');
@@ -194,9 +195,9 @@ function ready() {
     const skip = startingHour / 3;
     console.log(convertUnixTime(weatherForecast.list[0].dt));
 
-    // for (let i = 0; i < 8; i++) {
-    //   cards[i].classList.remove('weather-forecast__hidden');
-    // }
+    for (let i = 0; i < 8; i++) {
+      cards[i].classList.remove('weather-forecast__hidden');
+    }
 
     for (let i = 0; i < skip; i++) {
       cards[i].classList.add('weather-forecast__hidden');
@@ -204,6 +205,8 @@ function ready() {
 
     for (let i = skip; i < numberCards; i++) {
       const j = i - skip;
+
+      // if (!!weatherForecastContainer) return;
 
       icons[i].classList.add(
         `wi-owm-${getApproxDayOrNight(weatherForecast.list[j].dt)}-${weatherForecast.list[j].weather[0].id}`
