@@ -193,10 +193,11 @@ function ready() {
     const numberCards = 40;
     const startingHour = +convertUnixTime(weatherForecast.list[0].dt).slice(0, 2);
     const skip = Math.floor(startingHour / 3);
-    console.log(convertUnixTime(weatherForecast.list[0].dt));
 
-    for (let i = 0; i < 8; i++) {
-      cards[i].classList.remove('weather-forecast__hidden');
+    if (cards[0].classList.contains('weather-forecast__hidden')) {
+      for (let i = 0; i < 8; i++) {
+        cards[i].classList.remove('weather-forecast__hidden');
+      }
     }
 
     for (let i = 0; i < skip; i++) {
@@ -211,7 +212,7 @@ function ready() {
       secondaries[i].innerText = `${weatherForecast.list[j].wind.speed.toFixed(1)} m/s, clouds: ${
         weatherForecast.list[j].clouds.all
       }%, ${weatherForecast.list[j].main.pressure} hpa`;
-      icons[i + 1].classList.add(
+      icons[i].classList.add(
         `wi-owm-${getApproxDayOrNight(weatherForecast.list[j].dt)}-${weatherForecast.list[j].weather[0].id}`
       );
     }
