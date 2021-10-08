@@ -175,12 +175,12 @@ function ready() {
 
   function renderWeatherForecast(weatherForecast) {
     const title = weatherForecastContainer.querySelector('.weather-forecast__title'),
-      subtitles = document.querySelectorAll('.weather-forecast__subtitle'),
-      cards = document.querySelectorAll('.weather-forecast__card'),
-      icons = document.querySelectorAll('i'),
-      temperatures = document.querySelectorAll('.weather-forecast__temperature'),
-      descriptions = document.querySelectorAll('.weather-forecast__description'),
-      secondaries = document.querySelectorAll('.weather-forecast__secondary-info');
+      subtitles = weatherForecastContainer.querySelectorAll('.weather-forecast__subtitle'),
+      cards = weatherForecastContainer.querySelectorAll('.weather-forecast__card'),
+      icons = weatherForecastContainer.querySelectorAll('i'),
+      temperatures = weatherForecastContainer.querySelectorAll('.weather-forecast__temperature'),
+      descriptions = weatherForecastContainer.querySelectorAll('.weather-forecast__description'),
+      secondaries = weatherForecastContainer.querySelectorAll('.weather-forecast__secondary-info');
 
     title.innerText = `5 day weather forecast with 3 hour step for ${
       weatherForecast.city.name ? weatherForecast.city.name : 'an unknown place'
@@ -192,7 +192,7 @@ function ready() {
 
     const numberCards = 40;
     const startingHour = +convertUnixTime(weatherForecast.list[0].dt).slice(0, 2);
-    const skip = startingHour / 3;
+    const skip = Math.floor(startingHour / 3);
     console.log(convertUnixTime(weatherForecast.list[0].dt));
 
     for (let i = 0; i < 8; i++) {
@@ -206,15 +206,6 @@ function ready() {
     for (let i = skip; i < numberCards; i++) {
       const j = i - skip;
 
-      console.log(
-        'lengths of selected arrays:',
-        descriptions.length,
-        temperatures.length,
-        secondaries.length,
-        icons.length
-      );
-      // if (!!weatherForecastContainer) return;
-
       descriptions[i].innerText = weatherForecast.list[j].weather[0].description;
       temperatures[i].innerText = `${weatherForecast.list[j].main.temp.toFixed(0)} °C`;
       secondaries[i].innerText = `${weatherForecast.list[j].wind.speed.toFixed(1)} m/s, clouds: ${
@@ -225,7 +216,7 @@ function ready() {
       );
     }
 
-    // weatherForecastContainer.classList.remove('weather-forecast__hidden');
+    weatherForecastContainer.classList.remove('weather-forecast__hidden');
     loadForecastBtn.innerText = 'load new forecast';
   }
   // Forecast weather main functions END
