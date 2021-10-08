@@ -206,7 +206,7 @@ function ready() {
     for (let i = skip; i < numberCards; i++) {
       const j = i - skip;
 
-      if (!!weatherForecastContainer) return;
+      // if (!!weatherForecastContainer) return;
 
       icons[i].classList.add(
         `wi-owm-${getApproxDayOrNight(weatherForecast.list[j].dt)}-${weatherForecast.list[j].weather[0].id}`
