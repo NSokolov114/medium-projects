@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./img/favicon.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.css"
+      integrity="sha512-WrHplq3TYPEkwmx3iOWybuK9tQ4oq6Qxff1aM48V2RI4CHPU3zBXebikfBsSf+/pMwc6vNUaMQLtwG7KUoP+kA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <!-- current weather -->
+    <div class="weather-current__container">
+      <div class="weather-current__location">&nbsp;</div>
+      <div class="weather-current__line">
+        <div class="weather-current__temperature">&nbsp;</div>
+        <div class="weather-current__icon-container"><i class="wi"></i></div>
+      </div>
+      <div class="weather-current__main">&nbsp;</div>
+      <div class="weather-current__time">&nbsp;</div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Description</div>
+        <div class="weather-current__description-info"></div>
+      </div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Wind</div>
+        <div class="weather-current__wind-info"></div>
+      </div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Pressure</div>
+        <div class="weather-current__pressure-info"></div>
+      </div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Humidity</div>
+        <div class="weather-current__humidity-info"></div>
+      </div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Sunrise</div>
+        <div class="weather-current__sunrise-info"></div>
+      </div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Sunset</div>
+        <div class="weather-current__sunset-info"></div>
+      </div>
+      <div class="weather-current__line">
+        <div class="weather-current__subtitle">Geo coords</div>
+        <div class="weather-current__geo-info"></div>
+      </div>
+
+      <div class="weather-current__btns-container">
+        <button class="weather-current__show-forecast-btn">Load 5-day Forecast</button>
+        <button class="weather-current__change-location-btn">Wrong Location?</button>
+      </div>
+      <form class="weather-current__change-location-form weather-current__hidden">
+        <label for="inpLat">
+          <input
+            type="text"
+            name="inpLat"
+            id="inpLat"
+            class="weather-current__change-location-lat"
+            placeholder="Your Latitude"
+            required
+        /></label>
+        <label for="inpLng">
+          <input
+            type="text"
+            name="inpLng"
+            id="inpLng"
+            class="weather-current__change-location-lng"
+            placeholder="Your Longitude"
+            required
+        /></label>
+        <button type="submit" class="weather-current__change-location-submit">Accept</button>
+      </form>
+      <!-- loader -->
+      <div class="weather-current__loader">
+        <img src="./img/loader.svg" alt="loader icon" />
+      </div>
+    </div>
+
+    <!-- 5 day forecast weather -->
+    <div class="weather-forecast__container weather-forecast__hidden">
+      <div class="weather-forecast__title">5 day weather forecast with 3 hour step for sdfs</div>
+
+      <!-- day 1 -->
+      <div class="weather-forecast__subtitle"></div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">00:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">03:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">06:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">09:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">12:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">15:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">18:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">21:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+
+      <!-- day 2 -->
+      <div class="weather-forecast__subtitle"></div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">00:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">03:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">06:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">09:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">12:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">15:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">18:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">21:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+
+      <!-- day 3 -->
+      <div class="weather-forecast__subtitle"></div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">00:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">03:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">06:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">09:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">12:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">15:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">18:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">21:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+
+      <!-- day 4 -->
+      <div class="weather-forecast__subtitle"></div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">00:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">03:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">06:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">09:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">12:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">15:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">18:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">21:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+
+      <!-- day 5 -->
+      <div class="weather-forecast__subtitle"></div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">00:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">03:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">06:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">09:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">12:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">15:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">18:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+      <div class="weather-forecast__card">
+        <div class="weather-forecast__time">21:00</div>
+        <div class="weather-forecast__icon-container">
+          <i class="wi"></i>
+        </div>
+        <div class="weather-forecast__info-container">
+          <div class="weather-forecast__main-info">
+            <span class="weather-forecast__temperature"></span>
+            <span class="weather-forecast__description"></span>
+          </div>
+          <div class="weather-forecast__secondary-info"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
