@@ -208,14 +208,14 @@ function ready() {
 
       // if (!!weatherForecastContainer) return;
 
-      icons[i].classList.add(
-        `wi-owm-${getApproxDayOrNight(weatherForecast.list[j].dt)}-${weatherForecast.list[j].weather[0].id}`
-      );
       temperatures[i].innerText = `${weatherForecast.list[j].main.temp.toFixed(0)} °C`;
       descriptions[i].innerText = weatherForecast.list[j].weather[0].description;
       secondaries[i].innerText = `${weatherForecast.list[j].wind.speed.toFixed(1)} m/s, clouds: ${
         weatherForecast.list[j].clouds.all
       }%, ${weatherForecast.list[j].main.pressure} hpa`;
+      icons[i].classList.add(
+        `wi-owm-${getApproxDayOrNight(weatherForecast.list[j].dt)}-${weatherForecast.list[j].weather[0].id}`
+      );
     }
 
     // weatherForecastContainer.classList.remove('weather-forecast__hidden');
