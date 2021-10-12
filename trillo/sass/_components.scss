@@ -9,9 +9,15 @@
 // SEARCH
 .search {
   align-items: center;
+  background-color: var(--color-grey-light-2);
   display: flex;
   flex: 0 0 40%;
   justify-content: center;
+
+  @media only screen and (max-width: $bp-smallest) {
+    flex: 0 0 100%;
+    order: 1;
+  }
 
   &__input {
     background-color: var(--color-grey-light-2);
@@ -29,6 +35,10 @@
       background-color: var(--color-grey-light-3);
       outline: none;
       width: 100%;
+
+      @media only screen and (max-width: $bp-smallest) {
+        width: 95%;
+      }
     }
 
     &::placeholder {
@@ -122,11 +132,24 @@
   list-style: none;
   margin-top: 3.5rem;
 
+  @media only screen and (max-width: $bp-medium) {
+    display: flex;
+    margin: 0;
+  }
+
   &__item {
     position: relative;
 
     &:not(:last-child) {
       margin-bottom: 0.5rem;
+
+      @media only screen and (max-width: $bp-medium) {
+        margin: 0;
+      }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      flex: 1;
     }
   }
 
@@ -163,6 +186,17 @@
     text-decoration: none;
     text-transform: uppercase;
     z-index: 2;
+
+    @media only screen and (max-width: $bp-medium) {
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      flex-direction: column;
+      margin-right: 0;
+      padding: 1.5rem;
+    }
   }
 
   &__icon {
@@ -170,6 +204,13 @@
     height: 1.75rem;
     margin-right: 2rem;
     width: 1.75rem;
+
+    @media only screen and (max-width: $bp-small) {
+      height: 1.5rem;
+      margin-bottom: 0.7rem;
+      margin-right: 0;
+      width: 1.5rem;
+    }
   }
 }
 
@@ -181,6 +222,10 @@
   font-size: 1.2rem;
   padding: 2.5rem;
   text-align: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    display: none;
+  }
 }
 
 //////////////////////////////////////
@@ -209,6 +254,11 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 1.5rem 3rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+      padding: 1.25rem 2rem;
+    }
   }
 
   &__stars {
@@ -242,17 +292,29 @@
     justify-content: center;
     margin-left: 3rem;
     padding: 0 2.25rem;
+
+    @media only screen and (max-width: $bp-small) {
+      padding: 0 1.5rem;
+    }
   }
 
   &__rating-average {
     font-size: 2.25rem;
     font-weight: 300;
     margin-bottom: -0.3rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 1.8rem;
+    }
   }
 
   &__rating-count {
     font-size: 0.8rem;
     text-transform: uppercase;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 0.5rem;
+    }
   }
 }
 
@@ -330,16 +392,20 @@
     margin-bottom: 0.7rem;
 
     &::before {
-      // background-image: url(../img/chevron-thin-right.svg);
-      // background-size: cover;
-      background-color: var(--color-primary);
+      background-image: url(../img/chevron-thin-right.svg);
+      background-size: cover;
       content: '';
       display: inline-block;
       height: 1rem;
       margin-right: 0.7rem;
-      mask-image: url(../img/chevron-thin-right.svg);
-      mask-size: cover;
       width: 1rem;
+
+      @supports (mask-image: url()) or (-webkit-mask-image: url()) {
+        background-color: var(--color-primary);
+        mask-image: url(../img/chevron-thin-right.svg);
+        mask-size: cover;
+        background-image: none;
+      }
     }
   }
 }
@@ -356,6 +422,10 @@
     margin-right: auto;
   }
 
+  &__friends {
+    display: flex;
+  }
+
   &__photo {
     border: 3px solid #fff;
     border-radius: 50%;
@@ -364,7 +434,7 @@
     width: 4rem;
 
     &:not(:last-child) {
-      margin-right: -1.5rem;
+      margin-right: -2rem;
     }
   }
 }
@@ -379,6 +449,15 @@
   overflow: hidden;
   padding: 3rem;
   position: relative;
+
+  @media only screen and (max-width: $bp-medium) {
+    margin-bottom: 3rem;
+    padding: 2rem;
+  }
+
+  @media only screen and (max-width: $bp-medium) {
+    width: 100%;
+  }
 
   &__text {
     margin-bottom: 2rem;
@@ -439,6 +518,10 @@
 .cta {
   padding: 3.5rem 0;
   text-align: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    padding: 2rem 0;
+  }
 
   &__book-now {
     font-size: 2rem;
