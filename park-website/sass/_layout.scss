@@ -1,7 +1,5 @@
 .wrapper {
-  background-color: var(--color-grey-light-1);
-  box-shadow: var(--shadow-dark);
-  margin: 8rem auto;
+  margin: 8rem auto 0;
   max-width: $bp-largest;
 
   @media only screen and (max-width: $bp-largest) {
@@ -21,11 +19,14 @@
   @media only screen and (max-width: $bp-smallest) {
     align-content: space-around;
     flex-wrap: wrap;
-    height: 11rem;
+    justify-content: center;
+    height: 15rem;
   }
 }
 
 .content {
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
   display: flex;
 
   @media only screen and (max-width: $bp-medium) {
@@ -90,4 +91,17 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+}
+
+.footer {
+  // background-color: transparent;
+  color: #fff;
+  font-size: 1.2rem;
+
+  padding: 3.5rem;
+  text-align: center;
+
+  @media only screen and (max-width: $bp-largest) {
+    background-color: var(--color-grey-dark-1);
+  }
 }
