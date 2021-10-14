@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
 :root {
   --color-primary: #4682b4;
   --color-primary-light: #5789d3;
@@ -12,6 +13,7 @@
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.1);
   --line: 1px solid var(--color-grey-light-2);
+  --font-title: 'IM Fell English SC', serif;
 }
 
 * {
@@ -208,7 +210,10 @@ body {
 
 .footer {
   color: #fff;
-  font-size: 1.2rem;
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 1px;
   padding: 3.5rem;
   text-align: center;
 }
@@ -226,12 +231,13 @@ body {
 
 .title {
   color: var(--color-primary);
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: var(--font-title);
   font-size: 3rem;
-  font-weight: inherit;
+  font-weight: 400;
   letter-spacing: 2px;
   margin-left: 1rem;
   margin-right: auto;
+  text-decoration: underline;
   text-transform: uppercase;
 }
 
@@ -240,7 +246,15 @@ body {
   text-transform: none;
 }
 
+.title a:link,
+.title a:visited {
+  color: inherit;
+}
+
 @media only screen and (max-width: 900px) {
+  .title {
+    font-size: 2.5rem;
+  }
   .title span {
     display: none;
   }
@@ -269,6 +283,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: transparent;
   cursor: pointer;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -283,12 +298,17 @@ body {
   }
 }
 
-.user-nav > *:hover {
-  background-color: var(--color-grey-light-2);
+.user-nav__icon-box {
+  border: none;
+  position: relative;
 }
 
-.user-nav__icon-box {
-  position: relative;
+.user-nav__icon-box:hover {
+  background-color: var(--color-grey-light-4);
+}
+
+.user-nav__icon-box:active {
+  background-color: var(--color-grey-light-1);
 }
 
 .user-nav__icon {
@@ -325,6 +345,18 @@ body {
   }
 }
 
+.user-nav__user {
+  border: none;
+}
+
+.user-nav__user:hover {
+  background-color: var(--color-grey-light-4);
+}
+
+.user-nav__user:active {
+  background-color: var(--color-grey-light-1);
+}
+
 .user-nav__user-photo {
   border-radius: 50%;
   height: 3.75rem;
@@ -342,7 +374,10 @@ body {
 }
 
 .side-nav {
+  font-family: var(--font-title);
   font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 2px;
   list-style: none;
   margin-top: 3.5rem;
   position: fixed;

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap');
+
 :root {
   --color-primary: #4682b4;
   --color-primary-light: #5789d3;
@@ -16,6 +18,8 @@
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.1);
 
   --line: 1px solid var(--color-grey-light-2);
+
+  --font-title: 'IM Fell English SC', serif;
 }
 
 $bp-largest: 1200px;
