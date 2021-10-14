@@ -1,8 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
 :root {
   --color-primary: #4682b4;
+  --color-primary-semitransparent: #5788d388;
   --color-primary-light: #5789d3;
   --color-primary-dark: #3a5097;
+  --color-white: #fff;
   --color-grey-light-1: #faf9f9;
   --color-grey-light-2: #f4f2f2;
   --color-grey-light-3: #f0eeee;
@@ -66,7 +68,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  background-color: #fff;
+  background-color: var(--color-white);
   border-bottom: var(--line);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -78,7 +80,7 @@ body {
           justify-content: space-between;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .header {
     -ms-flex-line-pack: distribute;
         align-content: space-around;
@@ -135,8 +137,16 @@ body {
   }
 }
 
+.intro {
+  background-color: var(--color-grey-light-3);
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 60vh;
+}
+
 .hotel-view {
-  background-color: #fff;
+  background-color: var(--color-white);
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -168,7 +178,7 @@ body {
 }
 
 .description {
-  background-color: #fff;
+  background-color: var(--color-white);
   -webkit-box-shadow: var(--shadow-light);
           box-shadow: var(--shadow-light);
   -webkit-box-flex: 0;
@@ -209,7 +219,7 @@ body {
 }
 
 .footer {
-  color: #fff;
+  color: var(--color-white);
   font-family: var(--font-title);
   font-size: 1.4rem;
   font-weight: 400;
@@ -260,7 +270,7 @@ body {
   }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .title {
     -webkit-box-flex: 1;
         -ms-flex: 1;
@@ -292,7 +302,7 @@ body {
   padding: 0 2rem;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .user-nav > * {
     padding: 0 3rem;
   }
@@ -323,7 +333,7 @@ body {
           align-items: center;
   background-color: var(--color-primary);
   border-radius: 50%;
-  color: #fff;
+  color: var(--color-white);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -338,10 +348,10 @@ body {
   width: 1.75rem;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .user-nav__notification {
     right: 2rem;
-    top: 0.5rem;
+    top: 1.5rem;
   }
 }
 
@@ -362,10 +372,24 @@ body {
   height: 3.75rem;
   margin-right: 1rem;
   width: 3.75rem;
+  background-image: url(../img/user.svg);
+  background-size: cover;
 }
 
-@media only screen and (max-width: 500px) {
+@supports ((-webkit-mask-image: url()) or (mask-image: url())) or (-webkit-mask-image: url()) {
+  .user-nav__user-photo {
+    background-color: var(--color-grey-dark-2);
+    -webkit-mask-image: url(../img/user.svg);
+            mask-image: url(../img/user.svg);
+    -webkit-mask-size: cover;
+            mask-size: cover;
+    background-image: none;
+  }
+}
+
+@media only screen and (max-width: 600px) {
   .user-nav {
+    height: 7.5rem;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -497,6 +521,52 @@ body {
   }
 }
 
+.intro {
+  position: relative;
+}
+
+.intro__img-container {
+  background-image: linear-gradient(105deg, transparent 0%, transparent 60%, var(--color-primary-semitransparent) 60%, var(--color-primary-semitransparent) 100%), url(../img/park1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .intro__img-container {
+    background-image: linear-gradient(155deg, transparent 0%, transparent 30%, var(--color-primary-semitransparent) 50%, var(--color-primary-semitransparent) 100%), url(../img/park1.jpg);
+  }
+}
+
+.intro__text-container {
+  bottom: 0;
+  color: black;
+  padding: 3rem;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  width: 40%;
+}
+
+@media only screen and (max-width: 600px) {
+  .intro__text-container {
+    width: 100%;
+  }
+}
+
+.intro__heading {
+  font-family: var(--font-title);
+  font-size: 4rem;
+  font-weight: inherit;
+}
+
+.intro__subtitle {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
 .gallery {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -565,7 +635,7 @@ body {
   -ms-flex-item-align: stretch;
       align-self: stretch;
   background-color: var(--color-primary);
-  color: #fff;
+  color: var(--color-white);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -760,7 +830,7 @@ body {
 }
 
 .recommend__photo {
-  border: 3px solid #fff;
+  border: 3px solid var(--color-white);
   border-radius: 50%;
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
@@ -773,7 +843,7 @@ body {
 }
 
 .review {
-  background-color: #fff;
+  background-color: var(--color-white);
   -webkit-box-shadow: var(--shadow-light);
           box-shadow: var(--shadow-light);
   margin-bottom: 3.5rem;
@@ -869,7 +939,7 @@ body {
   background-image: linear-gradient(to right, var(--color-primary-light), var(--color-primary-dark));
   border: none;
   border-radius: 100px;
-  color: #fff;
+  color: var(--color-white);
   cursor: pointer;
   font-size: 1.5rem;
   font-weight: 300;
