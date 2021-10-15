@@ -593,14 +593,16 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  height: 800px;
+  height: 600px;
   position: relative;
-  width: 400px;
+  width: 300px;
 }
 
 .card__subcard {
   background-color: chartreuse;
-  height: 600px;
+  height: 450px;
+  position: relative;
+  overflow: hidden;
   width: 100%;
 }
 
@@ -608,12 +610,44 @@ body {
   width: 100%;
 }
 
+.card__text-container {
+  background-color: rgba(175, 28, 35, 0.425);
+  bottom: 0;
+  color: cornsilk;
+  position: absolute;
+  text-align: center;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.card__text-container:hover {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+}
+
+.card__title {
+  font-family: var(--font-title);
+  font-size: 3rem;
+  font-weight: inherit;
+  padding: 0.75rem;
+}
+
+.card__subtitle {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  font-weight: inherit;
+  padding: 0.5rem;
+}
+
 .card__rating {
   left: -1rem;
-  height: 90px;
+  height: 70px;
   position: absolute;
   top: -1rem;
-  width: 90px;
+  width: 70px;
 }
 
 .rating {

@@ -313,14 +313,16 @@
   background-color: burlywood;
   display: flex;
   flex-direction: column;
-  height: 800px;
+  height: 600px;
   // justify-content: center;
   position: relative;
-  width: 400px;
+  width: 300px;
 
   &__subcard {
     background-color: chartreuse;
-    height: 600px;
+    height: 450px;
+    position: relative;
+    overflow: hidden;
     width: 100%;
   }
 
@@ -328,20 +330,44 @@
     width: 100%;
   }
   &__text-container {
+    background-color: rgba(175, 28, 35, 0.425);
+    bottom: 0;
+    color: cornsilk;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: space-around;
+    position: absolute;
+    text-align: center;
+    transform: translateY(50%);
+    transition: all 0.3s;
+    width: 100%;
+
+    &:hover {
+      transform: translateY(0%);
+    }
   }
+
   &__title {
+    font-family: var(--font-title);
+    font-size: 3rem;
+    font-weight: inherit;
+    padding: 0.75rem;
   }
   &__subtitle {
+    font-family: var(--font-title);
+    font-size: 2rem;
+    font-weight: inherit;
+    padding: 0.5rem;
   }
   &__btn {
   }
   &__rating {
     left: -1rem;
-    height: 90px;
+    height: 70px;
     // margin: 0;
     position: absolute;
     top: -1rem;
-    width: 90px;
+    width: 70px;
   }
 }
 
