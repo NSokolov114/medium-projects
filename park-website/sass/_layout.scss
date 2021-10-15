@@ -54,6 +54,14 @@
   height: 60vh;
 }
 
+.cards-container {
+  background-color: aqua;
+  display: grid;
+  // height: 30rem;
+  margin: 3rem 0;
+  width: 100%;
+}
+
 .hotel-view {
   background-color: var(--color-white);
   flex: 1;
