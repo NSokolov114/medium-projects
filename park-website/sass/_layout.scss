@@ -34,6 +34,17 @@
   }
 }
 
+.container {
+  background-color: var(--color-grey-light-1);
+  box-shadow: var(--shadow-dark);
+  // display: flex;
+  // flex-direction: column;
+
+  // @media only screen and (max-width: $bp-medium) {
+  //   flex-direction: column;
+  // }
+}
+
 .sidebar {
   background-color: var(--color-grey-dark-1);
   display: flex;
@@ -54,12 +65,15 @@
   height: 60vh;
 }
 
-.cards-container {
-  background-color: aqua;
+.cards__container {
+  background-color: var(--color-grey-light-4);
   display: grid;
-  // height: 30rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5rem;
   margin: 3rem 0;
+  position: relative;
   width: 100%;
+  padding: 5rem 2rem;
 }
 
 .hotel-view {
