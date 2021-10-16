@@ -36,6 +36,26 @@ body {
   font-weight: 400;
 }
 
+.heading-2 {
+  font-size: 4rem;
+  font-style: italic;
+  line-height: 1;
+}
+
+.heading-2--light {
+  color: #f9f7f6;
+}
+
+.heading-2--dark {
+  color: #54483a;
+}
+
+.heading-3 {
+  color: #c69963;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+
 .heading-4 {
   font-size: 1.9rem;
 }
@@ -46,6 +66,24 @@ body {
 
 .heading-4--dark {
   color: #54483a;
+}
+
+.btn {
+  background-color: #c69963;
+  border-radius: 0;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.5rem;
+  padding: 1.8rem 3rem;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn:hover {
+  background-color: #b28451;
 }
 
 .sidebar {
@@ -104,13 +142,77 @@ body {
 }
 
 .story__pictures {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #c69963;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(198, 153, 99, 0.4)), to(rgba(198, 153, 99, 0.4))), url(../img/back.jpg);
+  background-image: linear-gradient(rgba(198, 153, 99, 0.4), rgba(198, 153, 99, 0.4)), url(../img/back.jpg);
+  display: -ms-grid;
+  display: grid;
   grid-column: full-start / col-end 4;
+  -ms-grid-columns: (1fr)[6];
+      grid-template-columns: repeat(6, 1fr);
+  -ms-grid-rows: (1fr)[6];
+      grid-template-rows: repeat(6, 1fr);
+}
+
+.story__img--1 {
+  -webkit-box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.1);
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+  grid-column: 2/6;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 4;
+  grid-row: 2/6;
+  width: 100%;
+}
+
+.story__img--2 {
+  -webkit-box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 3;
+  grid-column: 4/7;
+  -ms-grid-row: 4;
+  -ms-grid-row-span: 2;
+  grid-row: 4/6;
+  width: 115%;
+  z-index: 2;
 }
 
 .story__content {
+  -ms-flex-line-pack: center;
+      align-content: center;
   background-color: #f9f7f6;
+  display: -ms-grid;
+  display: grid;
   grid-column: col-start 5 / full-end;
+  justify-items: start;
+  padding: 6rem 8vw;
+}
+
+.story__text {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 4rem;
+}
+
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 3rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.mb-hg {
+  margin-bottom: 8rem;
 }
 
 .homes {
