@@ -31,6 +31,23 @@ body {
       grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
 }
 
+.heading-1, .heading-2, .heading-3, .heading-4 {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+}
+
+.heading-4 {
+  font-size: 1.9rem;
+}
+
+.heading-4--light {
+  color: #f9f7f6;
+}
+
+.heading-4--dark {
+  color: #54483a;
+}
+
 .sidebar {
   background-color: #c69963;
   grid-column: sidebar-start / sidebar-end;
@@ -48,14 +65,42 @@ body {
 }
 
 .features {
-  background-color: #aaa;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
   display: -ms-grid;
   display: grid;
   grid-column: center-start / center-end;
   grid-gap: 6rem;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
+  -ms-grid-columns: (minmax(25rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   margin: 15rem 0;
+}
+
+.feature {
+  display: -ms-grid;
+  display: grid;
+  -webkit-column-gap: 2.5rem;
+          column-gap: 2.5rem;
+  row-gap: 1.5rem;
+  -ms-grid-columns: min-content 1fr;
+      grid-template-columns: -webkit-min-content 1fr;
+      grid-template-columns: min-content 1fr;
+}
+
+.feature__icon {
+  fill: #c69963;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1 / span 2;
+  height: 4.5rem;
+  -webkit-transform: translateY(-1rem);
+          transform: translateY(-1rem);
+  width: 4.5rem;
+}
+
+.feature__text {
+  font-size: 1.7rem;
 }
 
 .story__pictures {
