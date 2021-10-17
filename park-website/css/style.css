@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
 :root {
   --color-primary: #4682b4;
-  --color-primary-semitransparent: #5788d388;
+  --color-primary-semitransparent: #5788d3ab;
   --color-primary-light: #5789d3;
   --color-primary-dark: #3a5097;
   --color-white: #fff;
@@ -155,8 +155,8 @@ body {
   background-color: var(--color-grey-light-4);
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[3];
-      grid-template-columns: repeat(3, 1fr);
+  -ms-grid-columns: (minmax(265px, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   gap: 5rem;
   margin: 3rem 0;
   position: relative;
@@ -586,7 +586,7 @@ body {
 
 @media only screen and (max-width: 600px) {
   .intro__text-container {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -619,9 +619,11 @@ body {
 }
 
 .card__cards-title {
+  text-align: center;
   font-family: var(--font-title);
   font-size: 4rem;
   font-weight: inherit;
+  line-height: 1;
   -ms-grid-column-align: center;
       justify-self: center;
   -ms-grid-row: 1;
@@ -652,12 +654,19 @@ body {
   color: cornsilk;
   position: absolute;
   text-align: center;
-  -webkit-transform: translateY(70%);
-          transform: translateY(70%);
+  -webkit-transform: translateY(60%);
+          transform: translateY(60%);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   padding-bottom: 1rem;
   width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .card__text-container {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
 }
 
 .card__text-container:hover {
@@ -669,14 +678,16 @@ body {
   font-family: var(--font-title);
   font-size: 3rem;
   font-weight: inherit;
-  padding: 0.75rem;
+  line-height: 1.2;
+  padding: 1.5rem 0.75rem;
 }
 
 .card__subtitle {
   font-family: var(--font-title);
   font-size: 2rem;
   font-weight: inherit;
-  padding: 1rem;
+  padding: 1.5rem 1rem 2rem;
+  line-height: 1.2;
 }
 
 .card__btn.btn-inline {
@@ -698,6 +709,12 @@ body {
   position: absolute;
   top: -1rem;
   width: 70px;
+}
+
+@media only screen and (max-width: 900px) {
+  .card__rating .rating__average {
+    font-size: 3rem;
+  }
 }
 
 .card__cta {
@@ -730,22 +747,10 @@ body {
   margin-bottom: -0.3rem;
 }
 
-@media only screen and (max-width: 600px) {
-  .rating__average {
-    font-size: 1.8rem;
-  }
-}
-
 .rating__count {
   font-size: 0.8rem;
   text-align: center;
   text-transform: uppercase;
-}
-
-@media only screen and (max-width: 600px) {
-  .rating__count {
-    font-size: 0.5rem;
-  }
 }
 
 .hotel-view__photos-container {
@@ -1149,21 +1154,21 @@ body {
   background-color: var(--color-grey-light-4);
   display: -ms-grid;
   display: grid;
+  gap: 1.5rem;
   -ms-grid-columns: (1fr)[8];
       grid-template-columns: repeat(8, 1fr);
   -ms-grid-rows: (5vw)[7];
       grid-template-rows: repeat(7, 5vw);
-  gap: 1.5rem;
   padding: 1.5rem;
 }
 
 @media only screen and (max-width: 600px) {
   .gallery {
+    gap: 1rem;
     -ms-grid-columns: (1fr)[5];
         grid-template-columns: repeat(5, 1fr);
     -ms-grid-rows: (10vh)[9];
         grid-template-rows: repeat(9, 10vh);
-    gap: 1rem;
     padding: 1rem;
   }
 }

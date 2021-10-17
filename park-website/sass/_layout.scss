@@ -61,7 +61,7 @@
 .card__container {
   background-color: var(--color-grey-light-4);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   gap: 5rem;
   margin: 3rem 0;
   position: relative;
