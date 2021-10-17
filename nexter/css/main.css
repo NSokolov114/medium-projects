@@ -459,5 +459,45 @@ body {
 .footer {
   background-color: #101d2c;
   grid-column: full-start / full-end;
+  padding: 8rem;
+}
+
+.nav {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -ms-grid;
+  display: grid;
+  gap: 2rem;
+  -ms-grid-columns: (minmax(15rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  list-style: none;
+}
+
+.nav__link:link, .nav__link:visited {
+  color: #fff;
+  display: block;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.4rem;
+  padding: 1.5rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.nav__link:hover, .nav__link:active {
+  background-color: rgba(255, 255, 255, 0.05);
+  -webkit-transform: translateY(-3px);
+          transform: translateY(-3px);
+}
+
+.copyright {
+  color: #aaa;
+  font-size: 1.4rem;
+  margin: 6rem auto 0;
+  text-align: center;
+  width: 70%;
 }
 /*# sourceMappingURL=main.css.map */
