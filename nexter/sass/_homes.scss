@@ -1,9 +1,8 @@
 .homes {
-  background-color: $color-secondary;
-  grid-column: center-start / center-end;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 7rem;
+  grid-column: center-start / center-end;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   margin: 15rem 0;
 }
 
@@ -14,14 +13,14 @@
   row-gap: 3.5rem;
 
   &__img {
-    width: 100%;
-    grid-row: 1/2;
     grid-column: 1/-1;
+    grid-row: 1/2;
+    width: 100%;
     z-index: 1;
   }
 
   &__like {
-    fill: $color-primary;
+    fill: $color-secondary;
     grid-column: 2/3;
     grid-row: 1/2;
     height: 2.5rem;
@@ -30,6 +29,7 @@
     width: 2.5rem;
     z-index: 2;
   }
+
   &__name {
     align-self: end;
     background-color: $color-secondary;
@@ -56,16 +56,16 @@
   &__rooms,
   &__area,
   &__price {
+    align-items: center;
+    display: flex;
     font-size: 1.5rem;
     margin-left: 2rem;
-    display: flex;
-    align-items: center;
 
     svg {
-      fill: $color-primary;
+      fill: $color-secondary;
       height: 2rem;
-      width: 2rem;
       margin-right: 1rem;
+      width: 2rem;
     }
   }
 

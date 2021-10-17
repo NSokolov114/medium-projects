@@ -2,11 +2,15 @@
   align-content: center;
   background-color: $color-secondary;
   display: grid;
-  row-gap: 2rem;
   grid-column: col-start 7 / full-end;
   justify-content: center;
   justify-items: center;
   padding: 3rem;
+  row-gap: 2rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1/-1;
+  }
 
   &__list {
     align-items: center;
@@ -14,6 +18,14 @@
     display: grid;
     grid-template-columns: min-content max-content;
     row-gap: 5vh;
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-template-columns: repeat(3, min-content max-content);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: min-content max-content;
+    }
   }
 
   &__img {
