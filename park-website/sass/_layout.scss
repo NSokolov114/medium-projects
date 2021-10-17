@@ -37,12 +37,6 @@
 .container {
   background-color: var(--color-grey-light-1);
   box-shadow: var(--shadow-dark);
-  // display: flex;
-  // flex-direction: column;
-
-  // @media only screen and (max-width: $bp-medium) {
-  //   flex-direction: column;
-  // }
 }
 
 .sidebar {
@@ -61,11 +55,10 @@
 .intro {
   background-color: var(--color-grey-light-3);
   flex: 1;
-
   height: 60vh;
 }
 
-.cards__container {
+.card__container {
   background-color: var(--color-grey-light-4);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -124,13 +117,25 @@
 
 .footer {
   // background-color: transparent;
+  align-items: center;
   color: var(--color-white);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr max-content 1fr;
   font-family: var(--font-title);
   font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: 1px;
   padding: 3.5rem;
   text-align: center;
+
+  &::after,
+  &::before {
+    background-color: currentColor;
+    content: '';
+    display: block;
+    height: 1px;
+  }
 
   @media only screen and (max-width: $bp-largest) {
     background-color: var(--color-grey-dark-1);
