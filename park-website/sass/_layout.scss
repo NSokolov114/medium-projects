@@ -24,6 +24,23 @@
   }
 }
 
+.contacts {
+  background-color: burlywood;
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+
+  &__info {
+    background-color: cornsilk;
+    height: 50%;
+  }
+
+  & #mapid {
+    background-color: chartreuse;
+    height: 50%;
+  }
+}
+
 .content {
   background-color: var(--color-grey-light-1);
   box-shadow: var(--shadow-dark);
