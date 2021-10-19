@@ -94,7 +94,7 @@ body {
 }
 
 .about {
-  background-color: var(--color-grey-light-3);
+  background-color: var(--color-grey-light-4);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -122,7 +122,6 @@ body {
 }
 
 .about__info {
-  background-color: cornsilk;
   display: -ms-grid;
   display: grid;
   -ms-flex-line-pack: center;
@@ -144,8 +143,47 @@ body {
   line-height: 1;
 }
 
+.about__social {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  gap: 1rem;
+  -ms-grid-columns: (min-content)[4];
+      grid-template-columns: repeat(4, -webkit-min-content);
+      grid-template-columns: repeat(4, min-content);
+  list-style: none;
+}
+
+.about__icon {
+  fill: currentColor;
+  height: 2rem;
+  width: 2rem;
+}
+
+.about__item {
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: violet;
+  height: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 4rem;
+}
+
 .about #mapid {
   background-color: chartreuse;
+  border-top-right-radius: 10px;
   height: 60vh;
   width: 75%;
 }
@@ -215,7 +253,6 @@ body {
   -ms-grid-columns: (minmax(265px, 1fr))[auto-fit];
       grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   gap: 5rem;
-  margin: 3rem 0;
   position: relative;
   width: 100%;
   padding: 5rem 2rem;
@@ -615,6 +652,7 @@ body {
 
 .intro {
   position: relative;
+  background-color: violet;
 }
 
 .intro__img-container {
@@ -732,11 +770,23 @@ body {
 }
 
 .card__title {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   font-family: var(--font-title);
   font-size: 3rem;
   font-weight: inherit;
+  height: 90px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   line-height: 1.2;
-  padding: 1.5rem 0.75rem;
+  padding: 1.5rem 0;
+  margin: 0 1rem;
+  border-bottom: 1px solid var(--color-white);
 }
 
 .card__subtitle {

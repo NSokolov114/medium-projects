@@ -25,11 +25,12 @@
 }
 
 .about {
-  background-color: var(--color-grey-light-3);
+  background-color: var(--color-grey-light-4);
   display: flex;
   // flex-direction: column;
   flex-wrap: wrap;
   height: calc(60vh + 10rem);
+  // margin-bottom: 2rem;
 
   & h3 {
     display: flex;
@@ -47,11 +48,12 @@
   }
 
   &__info {
-    background-color: cornsilk;
+    // background-color: cornsilk;
     display: grid;
     align-content: center;
     text-align: center;
     height: 60vh;
+
     width: 25%;
 
     & p {
@@ -67,8 +69,45 @@
     }
   }
 
+  &__social {
+    display: grid;
+    // background-color: violet;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+    grid-template-columns: repeat(4, min-content);
+    list-style: none;
+  }
+
+  &__icon {
+    fill: currentColor;
+    height: 2rem;
+
+    width: 2rem;
+
+    // @media only screen and (max-width: $bp-small) {
+    //   height: 1.5rem;
+    //   margin-bottom: 0.7rem;
+    //   margin-right: 0;
+    //   width: 1.5rem;
+    // }
+  }
+
+  &__item {
+    // padding: 1rem;
+    border: 1px solid black;
+    border-radius: 50%;
+    background-color: violet;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+  }
+
   & #mapid {
     background-color: chartreuse;
+    border-top-right-radius: 10px;
     height: 60vh;
     width: 75%;
   }
@@ -113,7 +152,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   gap: 5rem;
-  margin: 3rem 0;
+  // margin: 3rem 0;
   position: relative;
   width: 100%;
   padding: 5rem 2rem;

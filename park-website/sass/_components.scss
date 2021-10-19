@@ -244,6 +244,7 @@
 // INTRO
 .intro {
   position: relative;
+  background-color: violet;
 
   &__img-container {
     background-image: linear-gradient(
@@ -361,11 +362,17 @@
   }
 
   &__title {
+    align-items: center;
+    display: flex;
     font-family: var(--font-title);
     font-size: 3rem;
     font-weight: inherit;
+    height: 90px;
+    justify-content: center;
     line-height: 1.2;
-    padding: 1.5rem 0.75rem;
+    padding: 1.5rem 0;
+    margin: 0 1rem;
+    border-bottom: 1px solid var(--color-white);
   }
   &__subtitle {
     font-family: var(--font-title);
