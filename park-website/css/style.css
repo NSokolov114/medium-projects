@@ -93,26 +93,61 @@ body {
   }
 }
 
-.contacts {
-  background-color: burlywood;
+.about {
+  background-color: var(--color-grey-light-3);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 90vh;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: calc(60vh + 10rem);
 }
 
-.contacts__info {
+.about h3 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: var(--font-title);
+  font-size: 4rem;
+  font-weight: inherit;
+  text-align: center;
+  height: 10rem;
+  width: 100%;
+}
+
+.about__info {
   background-color: cornsilk;
-  height: 50%;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  text-align: center;
+  height: 60vh;
+  width: 25%;
 }
 
-.contacts #mapid {
+.about__info p {
+  font-size: 1.2rem;
+  padding: 0.25rem 1rem;
+  line-height: 1;
+}
+
+.about__info h4 {
+  font-size: 1.6rem;
+  padding: 1rem;
+  line-height: 1;
+}
+
+.about #mapid {
   background-color: chartreuse;
-  height: 50%;
+  height: 60vh;
+  width: 75%;
 }
 
 .content {
