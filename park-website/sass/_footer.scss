@@ -1,0 +1,19 @@
+.footer {
+  align-items: center;
+  display: grid;
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 400;
+  gap: 1rem;
+  grid-template-columns: 1fr max-content 1fr;
+  letter-spacing: 1px;
+  text-align: center;
+
+  &::after,
+  &::before {
+    background-color: currentColor;
+    content: '';
+    display: block;
+    height: 1px;
+  }
+}
