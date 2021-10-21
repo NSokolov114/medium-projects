@@ -5,18 +5,7 @@
         "../sass/style.scss",
         "../sass/_base.scss",
         "../sass/_layout.scss",
-        "../sass/_components.scss",
-        "../sass/_header.scss",
-        "../sass/_sidebar.scss",
-        "../sass/_intro.scss",
-        "../sass/_cards.scss",
-        "../sass/_gallery.scss",
-        "../sass/_hotel.scss",
-        "../sass/_about.scss",
-        "../sass/_footer.scss",
-        "../sass/_registration.scss",
-        "../sass/_account.scss",
-        "../sass/_reservation.scss"
+        "../sass/_components.scss"
     ],
     "names": [],
     "file": "style.css"

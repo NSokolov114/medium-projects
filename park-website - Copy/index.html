@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="shortcut icon" type="image/png" href="./img/favicon.png" />
+
+    <title>Ski National Park</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <a href="./index.html"
+          ><img src="./img/logo.png" alt="logo" class="logo"
+        /></a>
+        <h1 class="title">
+          <a href="./index.html">
+            Ski National Park <span>in Carpathian Mountains</span></a
+          >
+        </h1>
+
+        <nav class="user-nav">
+          <button class="user-nav__icon-box">
+            <svg class="user-nav__icon">
+              <use xlink:href="./img/sprite.svg#icon-bookmark"></use>
+            </svg>
+            <span class="user-nav__notification">7</span>
+          </button>
+          <button class="user-nav__icon-box">
+            <svg class="user-nav__icon">
+              <use xlink:href="./img/sprite.svg#icon-chat"></use>
+            </svg>
+            <span class="user-nav__notification">13</span>
+          </button>
+          <button class="user-nav__user">
+            <svg
+              src="./img/user.svg"
+              alt="user photo"
+              class="user-nav__user-photo"
+            ></svg>
+            <span class="user-nav__user-name">Jonas</span>
+          </button>
+        </nav>
+      </header>
+
+      <div class="content">
+        <!-- sidebar -->
+        <nav class="sidebar">
+          <ul class="side-nav">
+            <li class="side-nav__item">
+              <a href="./index.html" class="side-nav__link">
+                <svg class="side-nav__icon">
+                  <use xlink:href="./img/sprite.svg#icon-home"></use>
+                </svg>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="side-nav__item side-nav__item--active">
+              <a href="#" class="side-nav__link">
+                <svg class="side-nav__icon">
+                  <use
+                    xlink:href="./img/sprite.svg#icon-aircraft-take-off"
+                  ></use>
+                </svg>
+                <span>Lodgings</span>
+              </a>
+            </li>
+            <li class="side-nav__item">
+              <a href="#" class="side-nav__link">
+                <svg class="side-nav__icon">
+                  <use xlink:href="./img/sprite.svg#icon-key"></use>
+                </svg>
+                <span>Book</span>
+              </a>
+            </li>
+            <li class="side-nav__item">
+              <a href="#" class="side-nav__link">
+                <svg class="side-nav__icon">
+                  <use xlink:href="./img/sprite.svg#icon-map"></use>
+                </svg>
+                <span>About Us</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- main content -->
+        <main class="container">
+          <!-- intro -->
+          <div class="intro">
+            <div class="intro__img-container"></div>
+            <div class="intro__text-container">
+              <h2 class="intro__heading">Welcome!</h2>
+              <p class="intro__subtitle">
+                Ski National Park in Carpathian Mountains welcomes visitors from
+                all over the world since 1883
+              </p>
+            </div>
+          </div>
+
+          <!-- hotel cards -->
+          <div class="card__container">
+            <h2 class="card__cards-title">
+              Choose a comfortable house or a picturesque campsite
+            </h2>
+            <!-- card 1 -->
+            <div class="card">
+              <div class="card__subcard">
+                <img
+                  src="./img/lodgings-1.jpg"
+                  alt="houses and mountains"
+                  class="card__photo"
+                />
+                <div class="card__text-container">
+                  <h4 class="card__title">Ursa Major Cabins</h4>
+                  <p class="card__subtitle">
+                    Comfortable rooms with magnificent lake outside!
+                  </p>
+                  <button class="card__btn btn-inline">
+                    More info<span>&rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rating card__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <!-- card 2 -->
+            <div class="card">
+              <div class="card__subcard">
+                <img
+                  src="./img/lodgings-2.jpg"
+                  alt="houses and mountains"
+                  class="card__photo"
+                />
+                <div class="card__text-container">
+                  <h4 class="card__title">Spruce Cabins</h4>
+                  <p class="card__subtitle">
+                    Comfortable rooms with magnificent lake outside!
+                  </p>
+                  <button class="card__btn btn-inline">
+                    More info<span>&rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rating card__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <!-- card 3 -->
+            <div class="card">
+              <div class="card__subcard">
+                <img
+                  src="./img/lodgings-3.jpg"
+                  alt="houses and mountains"
+                  class="card__photo"
+                />
+                <div class="card__text-container">
+                  <h4 class="card__title">Fire Cabins</h4>
+                  <p class="card__subtitle">
+                    Comfortable rooms with magnificent lake outside!
+                  </p>
+                  <button class="card__btn btn-inline">
+                    More info<span>&rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rating card__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <!-- card 4 -->
+            <div class="card">
+              <div class="card__subcard">
+                <img
+                  src="./img/lodgings-4.jpg"
+                  alt="houses and mountains"
+                  class="card__photo"
+                />
+                <div class="card__text-container">
+                  <h4 class="card__title">Bear Meadow Campground</h4>
+                  <p class="card__subtitle">
+                    Comfortable rooms with magnificent lake outside!
+                  </p>
+                  <button class="card__btn btn-inline">
+                    More info<span>&rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rating card__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <!-- card 5 -->
+            <div class="card">
+              <div class="card__subcard">
+                <img
+                  src="./img/lodgings-5.jpg"
+                  alt="houses and mountains"
+                  class="card__photo"
+                />
+                <div class="card__text-container">
+                  <h4 class="card__title">Leadfoot Campground</h4>
+                  <p class="card__subtitle">
+                    Comfortable rooms with magnificent lake outside!
+                  </p>
+                  <button class="card__btn btn-inline">
+                    More info<span>&rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rating card__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <!-- card 6 -->
+            <div class="card">
+              <div class="card__subcard">
+                <img
+                  src="./img/lodgings-6.jpg"
+                  alt="houses and mountains"
+                  class="card__photo"
+                />
+                <div class="card__text-container">
+                  <h4 class="card__title">Lakeside Campground</h4>
+                  <p class="card__subtitle">
+                    Comfortable rooms with magnificent lake outside!
+                  </p>
+                  <button class="card__btn btn-inline">
+                    More info<span>&rarr;</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="rating card__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="cta card__cta">
+              <h2 class="cta__book-now">
+                Choose dates, check all the available options and book your next
+                best holiday!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Start Booking</span>
+                <span class="btn__invisible">before it's too late</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- img gallery grid -->
+          <section class="gallery">
+            <figure class="gallery__item gallery__item--1">
+              <img
+                src="./img/gallery/gallery-1.jpg"
+                alt="gallery image 1"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--2">
+              <img
+                src="./img/gallery/gallery-2.jpg"
+                alt="gallery image 2"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--3">
+              <img
+                src="./img/gallery/gallery-3.jpg"
+                alt="gallery image 3"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--4">
+              <img
+                src="./img/gallery/gallery-4.jpg"
+                alt="gallery image 4"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--5">
+              <img
+                src="./img/gallery/gallery-5.jpg"
+                alt="gallery image 5"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--6">
+              <img
+                src="./img/gallery/gallery-6.jpg"
+                alt="gallery image 6"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--7">
+              <img
+                src="./img/gallery/gallery-7.jpg"
+                alt="gallery image 7"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--8">
+              <img
+                src="./img/gallery/gallery-8.jpg"
+                alt="gallery image 8"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--9">
+              <img
+                src="./img/gallery/gallery-9.jpg"
+                alt="gallery image 9"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--10">
+              <img
+                src="./img/gallery/gallery-10.jpg"
+                alt="gallery image 10"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--11">
+              <img
+                src="./img/gallery/gallery-11.jpg"
+                alt="gallery image 11"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--12">
+              <img
+                src="./img/gallery/gallery-12.jpg"
+                alt="gallery image 12"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--13">
+              <img
+                src="./img/gallery/gallery-13.jpg"
+                alt="gallery image 13"
+                class="gallery__img"
+              />
+            </figure>
+            <figure class="gallery__item gallery__item--14">
+              <img
+                src="./img/gallery/gallery-14.jpg"
+                alt="gallery image 14"
+                class="gallery__img"
+              />
+            </figure>
+          </section>
+
+          <!-- hotel 1 -->
+
+          <div class="hotel-view">
+            <div class="hotel-view__photos-container">
+              <figure class="hotel-view__item">
+                <img
+                  src="./img/hotel-1.jpg"
+                  alt="photo of hotel 1"
+                  class="hotel-view__photo"
+                />
+              </figure>
+              <figure class="hotel-view__item">
+                <img
+                  src="./img/hotel-2.jpg"
+                  alt="photo of hotel 2"
+                  class="hotel-view__photo"
+                />
+              </figure>
+              <figure class="hotel-view__item">
+                <img
+                  src="./img/hotel-3.jpg"
+                  alt="photo of hotel 3"
+                  class="hotel-view__photo"
+                />
+              </figure>
+            </div>
+
+            <div class="overview">
+              <h2 class="overview__heading">Hotel Las Palmas</h2>
+
+              <div class="overview__stars">
+                <svg class="overview__icon-star">
+                  <use xlink:href="./img/sprite.svg#icon-star"></use>
+                </svg>
+                <svg class="overview__icon-star">
+                  <use xlink:href="./img/sprite.svg#icon-star"></use>
+                </svg>
+                <svg class="overview__icon-star">
+                  <use xlink:href="./img/sprite.svg#icon-star"></use>
+                </svg>
+                <svg class="overview__icon-star">
+                  <use xlink:href="./img/sprite.svg#icon-star"></use>
+                </svg>
+                <svg class="overview__icon-star">
+                  <use xlink:href="./img/sprite.svg#icon-star"></use>
+                </svg>
+              </div>
+
+              <div class="overview__location">
+                <svg class="overview__icon-location">
+                  <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
+                </svg>
+                <button class="btn-inline">Albufeira, Portugal</button>
+              </div>
+
+              <div class="rating overview__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="description">
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia culpa voluptatibus quae corporis, nesciunt
+                  necessitatibus!
+                </p>
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia.
+                </p>
+                <ul class="list">
+                  <li class="list__item">Close to the beach</li>
+                  <li class="list__item">Breakfast included</li>
+                  <li class="list__item">Free airport shuttle</li>
+                  <li class="list__item">Free WiFi in all rooms</li>
+                  <li class="list__item">Pets allowed</li>
+                  <li class="list__item">Air conditioning and heating</li>
+                  <li class="list__item">We speak all languages</li>
+                  <li class="list__item">Perfect for families</li>
+                </ul>
+                <div class="recommend">
+                  <p class="recommend__count">
+                    Lucy and 3 other friends recommend this hotel.
+                  </p>
+                  <div class="recommend__friends">
+                    <img
+                      src="./img/user-5.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-3.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-4.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-6.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="user-reviews">
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod aut iste voluptatum explicabo nihil totam non, ab
+                    repudiandae.
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-1.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Nick Smith</p>
+                      <p class="review__user-date">Feb 23, 2022</p>
+                    </div>
+                    <div class="review__rating">8.0</div>
+                  </figcaption>
+                </figure>
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-2.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Mary Thomas</p>
+                      <p class="review__user-date">Dec 3, 2022</p>
+                    </div>
+                    <div class="review__rating">9.7</div>
+                  </figcaption>
+                </figure>
+                <button class="btn-inline">
+                  Show All Reviews <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta">
+              <h2 class="cta__book-now">
+                Good news! We have 4 free rooms for your selected dates!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Book now</span>
+                <span class="btn__invisible">Only 4 rooms left</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- hotel 2 -->
+
+          <!-- hotel 3 -->
+
+          <!-- about -->
+          <div class="about">
+            <h3 class="about__title">Where to find us?</h3>
+            <div id="mapid"></div>
+            <div class="about__info">
+              <h4>Ski National Park in Carpathian Mountains</h4>
+              <p>Address: Dolní Lomná, Czechia</p>
+              <p>Phone: +42 (0) 5 58 55 55 55</p>
+              <p>Email: support@snpicm.cz</p>
+
+              <ul class="about__social">
+                <li class="about__item">
+                  <a href="./index.html" class="about__link">
+                    <svg class="about__icon">
+                      <use xlink:href="./img/sprite.svg#icon-home"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="about__item">
+                  <a href="#" class="about__link">
+                    <svg class="about__icon">
+                      <use
+                        xlink:href="./img/sprite.svg#icon-aircraft-take-off"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="about__item">
+                  <a href="#" class="about__link">
+                    <svg class="about__icon">
+                      <use xlink:href="./img/sprite.svg#icon-key"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="about__item">
+                  <a href="#" class="about__link">
+                    <svg class="about__icon">
+                      <use xlink:href="./img/sprite.svg#icon-map"></use>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </main>
+      </div>
+      <footer class="footer">
+        &copy; 2021 by Some Random Company. All rights reserved
+      </footer>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

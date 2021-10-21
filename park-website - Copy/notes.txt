@@ -1,0 +1,24 @@
+
+
+TASK 3.6 Create web app where users can create a profile, 
+which they can use to reserve cabins or camping spots.
+---------------------------------------------------------
+Create website for Ski National Park in Carpathian Mountains, Czech Republic. The park wants 
+to enable website users to create a profile, which they can use to reserve cabins or camping spots.
+To create a profile, a user needs to provide a username and a password that conform 
+to a set of rules, along with an email address.
+In addition, each user will have the option of specifying one or more cabins or camping areas 
+as favorites, which will be associated with their profile  
+Create desktop and mobile version of application
+Note: This task about Data in Strings and Arrays. 
+Your task will be to use properties and methods of the String, Regexp, Array, 
+and JSON objects to check and manipulate values entered by users
+---------------------------------------------------------
+
+1. Website for some National Park (keywords: Czech, Mountains, Ski)
+2. User can create a profile. Info about preferable lodgings.
+3. Logged User can reserve lodgings.
+4. Mobile + desktop versions.
+5. Topic: Data in Strings and Arrays.
+
+<div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
