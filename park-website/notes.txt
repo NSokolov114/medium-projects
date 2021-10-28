@@ -22,3 +22,11 @@ and JSON objects to check and manipulate values entered by users
 5. Topic: Data in Strings and Arrays.
 
 <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
+
+Features to implement:
+dark/light mode
+generate object of random reviews, bookings, etc and store it in session storage
+pwd generator - allow user to generate a good password
+weather widget
+image carousel ?
