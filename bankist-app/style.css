@@ -85,7 +85,6 @@ nav {
   grid-template-rows: auto repeat(3, 15rem) auto;
   margin: 4rem auto;
   max-width: 100rem;
-  opacity: 0;
   position: relative;
   transition: all 1s;
 }
