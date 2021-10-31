@@ -1,6 +1,7 @@
 .about {
   display: flex;
   flex-wrap: wrap;
+  height: auto;
 
   & h3 {
     display: flex;
@@ -36,6 +37,11 @@
       font-size: 1.6rem;
       padding: 1rem;
       line-height: 1;
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+      height: auto;
+      width: 100%;
     }
   }
 
@@ -80,5 +86,9 @@
     border-top-right-radius: 10px;
     height: 60vh;
     width: 75%;
+
+    @media only screen and (max-width: $bp-medium) {
+      width: 100%;
+    }
   }
 }

@@ -1408,6 +1408,7 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  height: auto;
 }
 
 .about h3 {
@@ -1448,6 +1449,13 @@ body {
   font-size: 1.6rem;
   padding: 1rem;
   line-height: 1;
+}
+
+@media only screen and (max-width: 900px) {
+  .about__info {
+    height: auto;
+    width: 100%;
+  }
 }
 
 .about__social {
@@ -1493,6 +1501,12 @@ body {
   border-top-right-radius: 10px;
   height: 60vh;
   width: 75%;
+}
+
+@media only screen and (max-width: 900px) {
+  .about #mapid {
+    width: 100%;
+  }
 }
 
 .footer {
