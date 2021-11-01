@@ -105,23 +105,53 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+let timer;
+
+function startLogOutTimer() {
+  const tick = () => {
+    const sec = time % 60;
+    const min = (time - sec) / 60;
+
+    labelTimer.textContent = `${String(min).padStart(2, '0')}:${String(
+      sec
+    ).padStart(2, '0')}`;
+
+    if (time === 0) {
+      clearInterval(timer);
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = 'Please, log in again';
+    }
+
+    time--;
+  };
+
+  let time = 120;
+  tick();
+  timer = setInterval(tick, 1000);
+  return timer;
+}
+
 function calDaysPassed(d1, d2) {
   return Math.round(Math.abs(d2 - d1) / 1000 / 60 / 60 / 24);
 }
 
-const formatMovementDate = function (date) {
+const formatMovementDate = function (date, locale) {
   const daysPassed = calDaysPassed(new Date(), date);
-  console.log(daysPassed);
 
   if (daysPassed === 0) return 'Today';
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 7) return `${daysPassed} days ago`;
 
-  return `${(date.getDate() + '').padStart(2, '0')}/${(
-    date.getMonth() +
-    1 +
-    ''
-  ).padStart(2, '0')}/${date.getFullYear()}`;
+  // return `${(date.getDate() + '').padStart(2, '0')}/${(
+  //   date.getMonth() + 1 + '').padStart(2, '0')}/${date.getFullYear()}`;
+  return new Intl.DateTimeFormat(locale).format(date);
+};
+
+const formatCur = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
 };
 
 const displayMovements = function (acc, sort = false) {
@@ -133,10 +163,9 @@ const displayMovements = function (acc, sort = false) {
 
   movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-
     const date = new Date(acc.movementsDates[i]);
-
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
 
     const html = `
         <div class="movements__row">
@@ -144,7 +173,7 @@ const displayMovements = function (acc, sort = false) {
             ${i + 1} ${type}
           </div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${mov.toFixed(2)}€</div>
+          <div class="movements__value">${formattedMov}</div>
         </div>
       `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -153,7 +182,11 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
+  labelBalance.textContent = formatCur(
+    account.balance,
+    account.locale,
+    account.currency
+  );
 };
 
 const createUsernames = function (accs) {
@@ -170,19 +203,19 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = formatCur(incomes, acc.locale, acc.currency);
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${-out.toFixed(2)}€`;
+  labelSumOut.textContent = formatCur(Math.abs(out), acc.locale, acc.currency);
 
   const interest = acc.movements
     .filter(mov => mov > 0)
     .map(dep => (dep * acc.interestRate) / 100)
     .filter(int => int >= 1)
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = formatCur(interest, acc.locale, acc.currency);
 };
 
 const updateUI = function (acc) {
@@ -210,18 +243,25 @@ btnLogin.addEventListener('click', function (e) {
   }
 
   const now = new Date();
-  const hour = now.getHours();
-  const min = now.getMinutes();
-  labelDate.textContent = `${(now.getDate() + '').padStart(2, '0')}/${(
-    now.getMonth() +
-    1 +
-    ''
-  ).padStart(2, '0')}/${now.getFullYear()}, ${(hour + '').padStart(2, '0')}:${(
-    min + ''
-  ).padStart(2, '0')}`;
+  const options = {
+    hour: 'numeric',
+    minute: 'numeric',
+    day: '2-digit',
+    month: 'numeric',
+    year: '2-digit',
+    // weekday: 'short',
+  };
+  // const locale = navigator.language;
+
+  labelDate.textContent = new Intl.DateTimeFormat(
+    currentAccount.locale,
+    options
+  ).format(now);
 
   inputLoginUsername.value = inputLoginPin.value = '';
   inputLoginPin.blur();
+  if (timer) clearInterval(timer);
+  timer = startLogOutTimer();
 
   updateUI(currentAccount);
 });
@@ -247,6 +287,9 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
     updateUI(currentAccount);
   }
+
+  clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 btnLoan.addEventListener('click', function (e) {
@@ -255,12 +298,17 @@ btnLoan.addEventListener('click', function (e) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount / 10)) {
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(new Date().toISOString());
-    updateUI(currentAccount);
+    setTimeout(() => {
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(new Date().toISOString());
+      updateUI(currentAccount);
+    }, 3000);
   }
 
   inputLoanAmount.value = '';
+
+  clearInterval(timer);
+  timer = startLogOutTimer();
 });
 
 btnClose.addEventListener('click', function (e) {
@@ -290,11 +338,3 @@ btnSort.addEventListener('click', function (e) {
     if (i % 2) row.style.backgroundColor = 'lightgrey';
   });
 });
-
-// FAKE ALWAYS LOG IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 1;
-
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////

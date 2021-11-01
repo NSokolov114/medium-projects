@@ -120,6 +120,7 @@ nav {
   border-radius: 1rem;
   grid-row: 2 / span 3;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 .movements__row {
