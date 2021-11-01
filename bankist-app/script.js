@@ -42,17 +42,17 @@ const account1 = {
   movements: [200, 455.23, -306.5, 25000, -642.21, -133.9, 79.97, 1300],
   interestRate: 1.2,
   pin: 1111,
-
   movementsDates: [
-    '2019-11-18T21:31:17.178Z',
-    '2019-12-23T07:42:02.383Z',
-    '2020-01-28T09:15:04.904Z',
-    '2020-04-01T10:17:24.185Z',
-    '2020-05-08T14:11:59.604Z',
-    '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2020-11-01T13:15:33.035Z',
+    '2020-11-30T09:48:16.867Z',
+    '2020-12-25T06:04:23.907Z',
+    '2021-01-25T14:18:46.235Z',
+    '2021-02-05T16:33:06.386Z',
+    '2021-04-10T14:43:26.374Z',
+    '2021-10-29T18:49:59.371Z',
+    '2021-10-31T12:01:20.894Z',
   ],
+
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
 };
@@ -64,14 +64,14 @@ const account2 = {
   pin: 2222,
 
   movementsDates: [
-    '2019-11-01T13:15:33.035Z',
-    '2019-11-30T09:48:16.867Z',
-    '2019-12-25T06:04:23.907Z',
-    '2020-01-25T14:18:46.235Z',
-    '2020-02-05T16:33:06.386Z',
-    '2020-04-10T14:43:26.374Z',
-    '2020-06-25T18:49:59.371Z',
-    '2020-07-26T12:01:20.894Z',
+    '2019-11-18T21:31:17.178Z',
+    '2019-12-23T07:42:02.383Z',
+    '2020-01-28T09:15:04.904Z',
+    '2020-04-01T10:17:24.185Z',
+    '2020-05-08T14:11:59.604Z',
+    '2020-05-27T17:01:17.194Z',
+    '2020-07-11T23:36:17.929Z',
+    '2020-07-12T10:51:36.790Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -105,21 +105,46 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements, sort = false) {
+function calDaysPassed(d1, d2) {
+  return Math.round(Math.abs(d2 - d1) / 1000 / 60 / 60 / 24);
+}
+
+const formatMovementDate = function (date) {
+  const daysPassed = calDaysPassed(new Date(), date);
+  console.log(daysPassed);
+
+  if (daysPassed === 0) return 'Today';
+  if (daysPassed === 1) return 'Yesterday';
+  if (daysPassed <= 7) return `${daysPassed} days ago`;
+
+  return `${(date.getDate() + '').padStart(2, '0')}/${(
+    date.getMonth() +
+    1 +
+    ''
+  ).padStart(2, '0')}/${date.getFullYear()}`;
+};
+
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
 
   movs.forEach((mov, i) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const date = new Date(acc.movementsDates[i]);
+
+    const displayDate = formatMovementDate(date);
 
     const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">
             ${i + 1} ${type}
           </div>
- 
-          <div class="movements__value">${mov}€</div>
+          <div class="movements__date">${displayDate}</div>
+          <div class="movements__value">${mov.toFixed(2)}€</div>
         </div>
       `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -128,7 +153,7 @@ const displayMovements = function (movements, sort = false) {
 
 const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${account.balance}€`;
+  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
 };
 
 const createUsernames = function (accs) {
@@ -145,12 +170,12 @@ const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${-out}€`;
+  labelSumOut.textContent = `${-out.toFixed(2)}€`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -161,7 +186,7 @@ const calcDisplaySummary = function (acc) {
 };
 
 const updateUI = function (acc) {
-  displayMovements(acc.movements);
+  displayMovements(acc);
   calcDisplayBalance(acc);
   calcDisplaySummary(acc);
 };
@@ -183,6 +208,17 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     containerApp.style.opacity = 1;
   }
+
+  const now = new Date();
+  const hour = now.getHours();
+  const min = now.getMinutes();
+  labelDate.textContent = `${(now.getDate() + '').padStart(2, '0')}/${(
+    now.getMonth() +
+    1 +
+    ''
+  ).padStart(2, '0')}/${now.getFullYear()}, ${(hour + '').padStart(2, '0')}:${(
+    min + ''
+  ).padStart(2, '0')}`;
 
   inputLoginUsername.value = inputLoginPin.value = '';
   inputLoginPin.blur();
@@ -207,6 +243,8 @@ btnTransfer.addEventListener('click', function (e) {
   ) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
     updateUI(currentAccount);
   }
 });
@@ -214,10 +252,11 @@ btnTransfer.addEventListener('click', function (e) {
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount / 10)) {
     currentAccount.movements.push(amount);
+    currentAccount.movementsDates.push(new Date().toISOString());
     updateUI(currentAccount);
   }
 
@@ -245,21 +284,17 @@ let sorted = false;
 
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2) row.style.backgroundColor = 'lightgrey';
+  });
 });
+
+// FAKE ALWAYS LOG IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 1;
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-
-// console.log(0.1 + 0.2 === 0.3); // false
-// console.log(0.1 + 0.2); // 0.300000004
-
-// console.log(+'11');
-// console.log(+'11');
-// console.log(Number.parseInt('50px', 10)); // 50
-// console.log(Number.parseInt('11px', 2)); // 3
-
-// console.log(Number.parseFloat('2.5rem')); // 2.5
-
-console.log(Number.isInteger('20')); // false
-console.log(Number.isInteger(20.0)); // true
