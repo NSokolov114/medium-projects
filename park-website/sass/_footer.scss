@@ -9,6 +9,11 @@
   letter-spacing: 1px;
   text-align: center;
 
+  @media only screen and (max-width: $bp-medium) {
+    display: block;
+    padding: 3rem;
+  }
+
   &::after,
   &::before {
     background-color: currentColor;

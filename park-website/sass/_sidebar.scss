@@ -20,10 +20,12 @@
   @media only screen and (max-width: $bp-medium) {
     display: flex;
     margin: 0;
-
+    flex-direction: row;
+    flex-wrap: nowrap;
     position: relative;
     top: auto;
     width: auto;
+    min-height: 10rem;
   }
 
   &__item {
@@ -38,6 +40,10 @@
     }
 
     @media only screen and (max-width: $bp-medium) {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 1;
     }
   }

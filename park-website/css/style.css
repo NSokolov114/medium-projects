@@ -430,22 +430,33 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  height: 10rem;
 }
 
 @media only screen and (max-width: 600px) {
   .header {
-    -ms-flex-line-pack: distribute;
-        align-content: space-around;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    height: 20rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .header a {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
 }
 
 .logo {
-  height: 3.25rem;
+  height: 6rem;
   margin-left: 2rem;
 }
 
@@ -485,6 +496,9 @@ body {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center;
   }
 }
 
@@ -497,6 +511,16 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .user-nav {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    background-color: var(--color-grey-light-4);
+    width: 100%;
+  }
 }
 
 .user-nav > * {
@@ -520,7 +544,17 @@ body {
 
 .user-nav__icon-box {
   border: none;
+  min-width: 8rem;
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .user-nav__icon-box:hover {
@@ -535,6 +569,13 @@ body {
   fill: var(--color-grey-dark-2);
   height: 2.25rem;
   width: 2.25rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .user-nav__icon {
+    height: 4rem;
+    width: 4rem;
+  }
 }
 
 .user-nav__notification {
@@ -553,15 +594,15 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   position: absolute;
-  right: 1rem;
-  top: 1.5rem;
+  right: 1.5rem;
+  top: 3rem;
   width: 1.75rem;
 }
 
 @media only screen and (max-width: 600px) {
   .user-nav__notification {
     right: 2rem;
-    top: 1.5rem;
+    top: 1.25rem;
   }
 }
 
@@ -598,12 +639,9 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  .user-nav {
-    height: 7.5rem;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    width: 100%;
+  .user-nav__user-photo {
+    height: 5rem;
+    width: 5rem;
   }
 }
 
@@ -639,9 +677,16 @@ body {
     display: -ms-flexbox;
     display: flex;
     margin: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
     position: relative;
     top: auto;
     width: auto;
+    min-height: 10rem;
   }
 }
 
@@ -661,6 +706,17 @@ body {
 
 @media only screen and (max-width: 900px) {
   .side-nav__item {
+    -ms-flex-item-align: stretch;
+        align-self: stretch;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
@@ -1467,23 +1523,31 @@ body {
   -ms-flex-line-pack: center;
       align-content: center;
   gap: 1rem;
-  -ms-grid-columns: (min-content)[4];
-      grid-template-columns: repeat(4, -webkit-min-content);
-      grid-template-columns: repeat(4, min-content);
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
   list-style: none;
+  padding: 3rem;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .about__social {
+    -ms-grid-columns: (min-content)[4];
+        grid-template-columns: repeat(4, -webkit-min-content);
+        grid-template-columns: repeat(4, min-content);
+  }
 }
 
 .about__icon {
   fill: currentColor;
-  height: 2rem;
-  width: 2rem;
+  height: 3rem;
+  width: 3rem;
 }
 
 .about__item {
-  border: 1px solid black;
-  border-radius: 50%;
-  background-color: violet;
-  height: 4rem;
+  padding: 1rem;
+  height: 6rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1493,7 +1557,7 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 4rem;
+  width: 6rem;
 }
 
 .about #mapid {
@@ -1524,6 +1588,13 @@ body {
       grid-template-columns: 1fr max-content 1fr;
   letter-spacing: 1px;
   text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .footer {
+    display: block;
+    padding: 3rem;
+  }
 }
 
 .footer::after, .footer::before {

@@ -51,15 +51,21 @@
     justify-content: center;
     align-content: center;
     gap: 1rem;
-    grid-template-columns: repeat(4, min-content);
+    grid-template-columns: 1fr;
     list-style: none;
+    padding: 3rem;
+    justify-self: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-template-columns: repeat(4, min-content);
+    }
   }
 
   &__icon {
     fill: currentColor;
-    height: 2rem;
+    height: 3rem;
 
-    width: 2rem;
+    width: 3rem;
 
     // @media only screen and (max-width: $bp-small) {
     //   height: 1.5rem;
@@ -70,15 +76,15 @@
   }
 
   &__item {
-    // padding: 1rem;
-    border: 1px solid black;
-    border-radius: 50%;
-    background-color: violet;
-    height: 4rem;
+    padding: 1rem;
+    // border: 1px solid black;
+    // border-radius: 50%;
+    // background-color: violet;
+    height: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4rem;
+    width: 6rem;
   }
 
   & #mapid {
