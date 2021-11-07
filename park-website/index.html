@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- leaflet -->
+    <!-- leaflet maps css-->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""
     />
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <!-- leaflet maps js-->
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -289,6 +289,51 @@
             </div>
           </div>
 
+          <!-- about -->
+          <div class="about">
+            <h3 class="about__title">Where to find us?</h3>
+            <div id="mapid"></div>
+            <div class="about__info">
+              <h4>Ski National Park in Carpathian Mountains</h4>
+              <p>Address: Dolní Lomná, Czechia</p>
+              <p>Phone: +42 (0) 5 58 55 55 55</p>
+              <p>Email: support@snpicm.cz</p>
+
+              <ul class="about__social">
+                <li class="about__item">
+                  <a href="./index.html" class="about__link">
+                    <svg class="about__icon">
+                      <use xlink:href="./img/sprite.svg#icon-home"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="about__item">
+                  <a href="#" class="about__link">
+                    <svg class="about__icon">
+                      <use
+                        xlink:href="./img/sprite.svg#icon-aircraft-take-off"
+                      ></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="about__item">
+                  <a href="#" class="about__link">
+                    <svg class="about__icon">
+                      <use xlink:href="./img/sprite.svg#icon-key"></use>
+                    </svg>
+                  </a>
+                </li>
+                <li class="about__item">
+                  <a href="#" class="about__link">
+                    <svg class="about__icon">
+                      <use xlink:href="./img/sprite.svg#icon-map"></use>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
           <!-- gallery -->
           <section class="gallery">
             <figure class="gallery__item gallery__item--1">
@@ -392,58 +437,15 @@
           </section>
 
           <!-- hotel 1 -->
-
           <div class="hotel">
-            <div class="hotel__photos-container">
-              <figure class="hotel__item">
-                <img
-                  src="./img/hotel-1.jpg"
-                  alt="photo of hotel 1"
-                  class="hotel__photo"
-                />
-              </figure>
-              <figure class="hotel__item">
-                <img
-                  src="./img/hotel-2.jpg"
-                  alt="photo of hotel 2"
-                  class="hotel__photo"
-                />
-              </figure>
-              <figure class="hotel__item">
-                <img
-                  src="./img/hotel-3.jpg"
-                  alt="photo of hotel 3"
-                  class="hotel__photo"
-                />
-              </figure>
-            </div>
-
             <div class="overview">
-              <h2 class="overview__heading">Hotel Las Palmas</h2>
-
-              <div class="overview__stars">
-                <svg class="overview__icon-star">
-                  <use xlink:href="./img/sprite.svg#icon-star"></use>
-                </svg>
-                <svg class="overview__icon-star">
-                  <use xlink:href="./img/sprite.svg#icon-star"></use>
-                </svg>
-                <svg class="overview__icon-star">
-                  <use xlink:href="./img/sprite.svg#icon-star"></use>
-                </svg>
-                <svg class="overview__icon-star">
-                  <use xlink:href="./img/sprite.svg#icon-star"></use>
-                </svg>
-                <svg class="overview__icon-star">
-                  <use xlink:href="./img/sprite.svg#icon-star"></use>
-                </svg>
-              </div>
+              <h2 class="overview__heading">Ursa Major Cabins</h2>
 
               <div class="overview__location">
                 <svg class="overview__icon-location">
                   <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
                 </svg>
-                <button class="btn-inline">Albufeira, Portugal</button>
+                <button class="btn-inline">Foot of the mountain Cshepsh</button>
               </div>
 
               <div class="rating overview__rating">
@@ -461,9 +463,10 @@
                   necessitatibus!
                 </p>
                 <p class="paragraph">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Sapiente inventore ex adipisci odit, temporibus a molestias
-                  quia.
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere distinctio quibusdam nulla tenetur illo. Molestias
+                  aliquam optio maxime repudiandae sit mollitia dolores amet
+                  maiores consectetur nihil, quaerat quod accusantium fugiat.
                 </p>
                 <ul class="list">
                   <li class="list__item">Close to the beach</li>
@@ -477,7 +480,7 @@
                 </ul>
                 <div class="recommend">
                   <p class="recommend__count">
-                    Lucy and 3 other friends recommend this hotel.
+                    More than 158 people recommend this hotel.
                   </p>
                   <div class="recommend__friends">
                     <img
@@ -508,7 +511,7 @@
                   <blockquote class="review__text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Quod aut iste voluptatum explicabo nihil totam non, ab
-                    repudiandae.
+                    repudiandae...
                   </blockquote>
                   <figcaption class="review__user">
                     <img
@@ -526,6 +529,8 @@
                 <figure class="review">
                   <blockquote class="review__text">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ipsam voluptate assumenda culpa laboriosam officia,
+                    laborum...
                   </blockquote>
                   <figcaption class="review__user">
                     <img
@@ -546,7 +551,7 @@
               </div>
             </div>
 
-            <div class="cta">
+            <div class="cta cta hotel__cta">
               <h2 class="cta__book-now">
                 Good news! We have 4 free rooms for your selected dates!
               </h2>
@@ -558,51 +563,632 @@
           </div>
 
           <!-- hotel 2 -->
+          <div class="hotel">
+            <div class="overview">
+              <h2 class="overview__heading">Spruce Cabins</h2>
+
+              <div class="overview__location">
+                <svg class="overview__icon-location">
+                  <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
+                </svg>
+                <button class="btn-inline">Foot of the mountain Cshepsh</button>
+              </div>
+
+              <div class="rating overview__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="description">
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia culpa voluptatibus quae corporis, nesciunt
+                  necessitatibus!
+                </p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere distinctio quibusdam nulla tenetur illo. Molestias
+                  aliquam optio maxime repudiandae sit mollitia dolores amet
+                  maiores consectetur nihil, quaerat quod accusantium fugiat.
+                </p>
+                <ul class="list">
+                  <li class="list__item">Close to the beach</li>
+                  <li class="list__item">Breakfast included</li>
+                  <li class="list__item">Free airport shuttle</li>
+                  <li class="list__item">Free WiFi in all rooms</li>
+                  <li class="list__item">Pets allowed</li>
+                  <li class="list__item">Air conditioning and heating</li>
+                  <li class="list__item">We speak all languages</li>
+                  <li class="list__item">Perfect for families</li>
+                </ul>
+                <div class="recommend">
+                  <p class="recommend__count">
+                    More than 158 people recommend this hotel.
+                  </p>
+                  <div class="recommend__friends">
+                    <img
+                      src="./img/user-5.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-3.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-4.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-6.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="user-reviews">
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod aut iste voluptatum explicabo nihil totam non, ab
+                    repudiandae...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-1.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Nick Smith</p>
+                      <p class="review__user-date">Feb 23, 2022</p>
+                    </div>
+                    <div class="review__rating">8.0</div>
+                  </figcaption>
+                </figure>
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ipsam voluptate assumenda culpa laboriosam officia,
+                    laborum...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-2.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Mary Thomas</p>
+                      <p class="review__user-date">Dec 3, 2022</p>
+                    </div>
+                    <div class="review__rating">9.7</div>
+                  </figcaption>
+                </figure>
+                <button class="btn-inline">
+                  Show All Reviews <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta hotel__cta">
+              <h2 class="cta__book-now">
+                Good news! We have 4 free rooms for your selected dates!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Book now</span>
+                <span class="btn__invisible">Only 4 rooms left</span>
+              </button>
+            </div>
+          </div>
 
           <!-- hotel 3 -->
+          <div class="hotel">
+            <div class="overview">
+              <h2 class="overview__heading">Fire Cabins</h2>
 
-          <!-- about -->
-          <div class="about">
-            <h3 class="about__title">Where to find us?</h3>
-            <div id="mapid"></div>
-            <div class="about__info">
-              <h4>Ski National Park in Carpathian Mountains</h4>
-              <p>Address: Dolní Lomná, Czechia</p>
-              <p>Phone: +42 (0) 5 58 55 55 55</p>
-              <p>Email: support@snpicm.cz</p>
+              <div class="overview__location">
+                <svg class="overview__icon-location">
+                  <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
+                </svg>
+                <button class="btn-inline">Foot of the mountain Cshepsh</button>
+              </div>
 
-              <ul class="about__social">
-                <li class="about__item">
-                  <a href="./index.html" class="about__link">
-                    <svg class="about__icon">
-                      <use xlink:href="./img/sprite.svg#icon-home"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li class="about__item">
-                  <a href="#" class="about__link">
-                    <svg class="about__icon">
-                      <use
-                        xlink:href="./img/sprite.svg#icon-aircraft-take-off"
-                      ></use>
-                    </svg>
-                  </a>
-                </li>
-                <li class="about__item">
-                  <a href="#" class="about__link">
-                    <svg class="about__icon">
-                      <use xlink:href="./img/sprite.svg#icon-key"></use>
-                    </svg>
-                  </a>
-                </li>
-                <li class="about__item">
-                  <a href="#" class="about__link">
-                    <svg class="about__icon">
-                      <use xlink:href="./img/sprite.svg#icon-map"></use>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
+              <div class="rating overview__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="description">
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia culpa voluptatibus quae corporis, nesciunt
+                  necessitatibus!
+                </p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere distinctio quibusdam nulla tenetur illo. Molestias
+                  aliquam optio maxime repudiandae sit mollitia dolores amet
+                  maiores consectetur nihil, quaerat quod accusantium fugiat.
+                </p>
+                <ul class="list">
+                  <li class="list__item">Close to the beach</li>
+                  <li class="list__item">Breakfast included</li>
+                  <li class="list__item">Free airport shuttle</li>
+                  <li class="list__item">Free WiFi in all rooms</li>
+                  <li class="list__item">Pets allowed</li>
+                  <li class="list__item">Air conditioning and heating</li>
+                  <li class="list__item">We speak all languages</li>
+                  <li class="list__item">Perfect for families</li>
+                </ul>
+                <div class="recommend">
+                  <p class="recommend__count">
+                    More than 158 people recommend this hotel.
+                  </p>
+                  <div class="recommend__friends">
+                    <img
+                      src="./img/user-5.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-3.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-4.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-6.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="user-reviews">
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod aut iste voluptatum explicabo nihil totam non, ab
+                    repudiandae...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-1.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Nick Smith</p>
+                      <p class="review__user-date">Feb 23, 2022</p>
+                    </div>
+                    <div class="review__rating">8.0</div>
+                  </figcaption>
+                </figure>
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ipsam voluptate assumenda culpa laboriosam officia,
+                    laborum...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-2.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Mary Thomas</p>
+                      <p class="review__user-date">Dec 3, 2022</p>
+                    </div>
+                    <div class="review__rating">9.7</div>
+                  </figcaption>
+                </figure>
+                <button class="btn-inline">
+                  Show All Reviews <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta hotel__cta">
+              <h2 class="cta__book-now">
+                Good news! We have 4 free rooms for your selected dates!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Book now</span>
+                <span class="btn__invisible">Only 4 rooms left</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- hotel 4 -->
+          <div class="hotel">
+            <div class="overview">
+              <h2 class="overview__heading">Bear Meadow Campground</h2>
+
+              <div class="overview__location">
+                <svg class="overview__icon-location">
+                  <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
+                </svg>
+                <button class="btn-inline">Foot of the mountain Cshepsh</button>
+              </div>
+
+              <div class="rating overview__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="description">
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia culpa voluptatibus quae corporis, nesciunt
+                  necessitatibus!
+                </p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere distinctio quibusdam nulla tenetur illo. Molestias
+                  aliquam optio maxime repudiandae sit mollitia dolores amet
+                  maiores consectetur nihil, quaerat quod accusantium fugiat.
+                </p>
+                <ul class="list">
+                  <li class="list__item">Close to the beach</li>
+                  <li class="list__item">Breakfast included</li>
+                  <li class="list__item">Free airport shuttle</li>
+                  <li class="list__item">Free WiFi in all rooms</li>
+                  <li class="list__item">Pets allowed</li>
+                  <li class="list__item">Air conditioning and heating</li>
+                  <li class="list__item">We speak all languages</li>
+                  <li class="list__item">Perfect for families</li>
+                </ul>
+                <div class="recommend">
+                  <p class="recommend__count">
+                    More than 158 people recommend this hotel.
+                  </p>
+                  <div class="recommend__friends">
+                    <img
+                      src="./img/user-5.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-3.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-4.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-6.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="user-reviews">
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod aut iste voluptatum explicabo nihil totam non, ab
+                    repudiandae...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-1.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Nick Smith</p>
+                      <p class="review__user-date">Feb 23, 2022</p>
+                    </div>
+                    <div class="review__rating">8.0</div>
+                  </figcaption>
+                </figure>
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ipsam voluptate assumenda culpa laboriosam officia,
+                    laborum...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-2.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Mary Thomas</p>
+                      <p class="review__user-date">Dec 3, 2022</p>
+                    </div>
+                    <div class="review__rating">9.7</div>
+                  </figcaption>
+                </figure>
+                <button class="btn-inline">
+                  Show All Reviews <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta hotel__cta">
+              <h2 class="cta__book-now">
+                Good news! We have 4 free rooms for your selected dates!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Book now</span>
+                <span class="btn__invisible">Only 4 rooms left</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- hotel 5 -->
+          <div class="hotel">
+            <div class="overview">
+              <h2 class="overview__heading">Leadfoot Campground</h2>
+
+              <div class="overview__location">
+                <svg class="overview__icon-location">
+                  <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
+                </svg>
+                <button class="btn-inline">Foot of the mountain Cshepsh</button>
+              </div>
+
+              <div class="rating overview__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="description">
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia culpa voluptatibus quae corporis, nesciunt
+                  necessitatibus!
+                </p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere distinctio quibusdam nulla tenetur illo. Molestias
+                  aliquam optio maxime repudiandae sit mollitia dolores amet
+                  maiores consectetur nihil, quaerat quod accusantium fugiat.
+                </p>
+                <ul class="list">
+                  <li class="list__item">Close to the beach</li>
+                  <li class="list__item">Breakfast included</li>
+                  <li class="list__item">Free airport shuttle</li>
+                  <li class="list__item">Free WiFi in all rooms</li>
+                  <li class="list__item">Pets allowed</li>
+                  <li class="list__item">Air conditioning and heating</li>
+                  <li class="list__item">We speak all languages</li>
+                  <li class="list__item">Perfect for families</li>
+                </ul>
+                <div class="recommend">
+                  <p class="recommend__count">
+                    More than 158 people recommend this hotel.
+                  </p>
+                  <div class="recommend__friends">
+                    <img
+                      src="./img/user-5.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-3.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-4.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-6.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="user-reviews">
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod aut iste voluptatum explicabo nihil totam non, ab
+                    repudiandae...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-1.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Nick Smith</p>
+                      <p class="review__user-date">Feb 23, 2022</p>
+                    </div>
+                    <div class="review__rating">8.0</div>
+                  </figcaption>
+                </figure>
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ipsam voluptate assumenda culpa laboriosam officia,
+                    laborum...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-2.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Mary Thomas</p>
+                      <p class="review__user-date">Dec 3, 2022</p>
+                    </div>
+                    <div class="review__rating">9.7</div>
+                  </figcaption>
+                </figure>
+                <button class="btn-inline">
+                  Show All Reviews <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta hotel__cta">
+              <h2 class="cta__book-now">
+                Good news! We have 4 free rooms for your selected dates!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Book now</span>
+                <span class="btn__invisible">Only 4 rooms left</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- hotel 6 -->
+          <div class="hotel">
+            <div class="overview">
+              <h2 class="overview__heading">Lakeside Campground</h2>
+
+              <div class="overview__location">
+                <svg class="overview__icon-location">
+                  <use xlink:href="./img/sprite.svg#icon-location-pin"></use>
+                </svg>
+                <button class="btn-inline">Foot of the mountain Cshepsh</button>
+              </div>
+
+              <div class="rating overview__rating">
+                <div class="rating__average">8.6</div>
+                <div class="rating__count">462 votes</div>
+              </div>
+            </div>
+
+            <div class="detail">
+              <div class="description">
+                <p class="paragraph">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Sapiente inventore ex adipisci odit, temporibus a molestias
+                  quia culpa voluptatibus quae corporis, nesciunt
+                  necessitatibus!
+                </p>
+                <p class="paragraph">
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Facere distinctio quibusdam nulla tenetur illo. Molestias
+                  aliquam optio maxime repudiandae sit mollitia dolores amet
+                  maiores consectetur nihil, quaerat quod accusantium fugiat.
+                </p>
+                <ul class="list">
+                  <li class="list__item">Close to the beach</li>
+                  <li class="list__item">Breakfast included</li>
+                  <li class="list__item">Free airport shuttle</li>
+                  <li class="list__item">Free WiFi in all rooms</li>
+                  <li class="list__item">Pets allowed</li>
+                  <li class="list__item">Air conditioning and heating</li>
+                  <li class="list__item">We speak all languages</li>
+                  <li class="list__item">Perfect for families</li>
+                </ul>
+                <div class="recommend">
+                  <p class="recommend__count">
+                    More than 158 people recommend this hotel.
+                  </p>
+                  <div class="recommend__friends">
+                    <img
+                      src="./img/user-5.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-3.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-4.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                    <img
+                      src="./img/user-6.jpg"
+                      alt="User photo"
+                      class="recommend__photo"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="user-reviews">
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Quod aut iste voluptatum explicabo nihil totam non, ab
+                    repudiandae...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-1.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Nick Smith</p>
+                      <p class="review__user-date">Feb 23, 2022</p>
+                    </div>
+                    <div class="review__rating">8.0</div>
+                  </figcaption>
+                </figure>
+                <figure class="review">
+                  <blockquote class="review__text">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Ipsam voluptate assumenda culpa laboriosam officia,
+                    laborum...
+                  </blockquote>
+                  <figcaption class="review__user">
+                    <img
+                      src="./img/user-2.jpg"
+                      alt="user photo"
+                      class="review__photo"
+                    />
+                    <div class="review__user-box">
+                      <p class="review__user-name">Mary Thomas</p>
+                      <p class="review__user-date">Dec 3, 2022</p>
+                    </div>
+                    <div class="review__rating">9.7</div>
+                  </figcaption>
+                </figure>
+                <button class="btn-inline">
+                  Show All Reviews <span>&rarr;</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="cta cta hotel__cta">
+              <h2 class="cta__book-now">
+                Good news! We have 4 free rooms for your selected dates!
+              </h2>
+              <button class="btn">
+                <span class="btn__visible">Book now</span>
+                <span class="btn__invisible">Only 4 rooms left</span>
+              </button>
             </div>
           </div>
         </main>
