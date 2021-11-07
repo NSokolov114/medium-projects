@@ -49,4 +49,32 @@ function ready() {
       Math.random() * 900 + 100
     )} votes`;
   }
+
+  // BACK TO TOP BUTTON
+  //Get the button:
+  const toTopBtn = document.querySelector('.to-top-btn');
+
+  // When the user scrolls down 20px from the top of the document, show the button
+  window.onscroll = function () {
+    scrollFunction();
+  };
+
+  function scrollFunction() {
+    if (
+      document.body.scrollTop > 20 ||
+      document.documentElement.scrollTop > 20
+    ) {
+      toTopBtn.classList.remove('hidden');
+    } else {
+      toTopBtn.classList.add('hidden');
+    }
+  }
+
+  // When the user clicks on the button, scroll to the top of the document
+  function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+  }
+
+  toTopBtn.addEventListener('click', topFunction);
 }

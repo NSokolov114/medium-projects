@@ -228,3 +228,41 @@
     outline: none;
   }
 }
+
+// BACK TO TOP BUTTON
+.to-top-btn {
+  position: fixed;
+  bottom: 3rem;
+  left: calc(50vw - 655px);
+  z-index: 3;
+  border: none;
+  outline: none;
+  background-color: var(--color-grey-dark-1);
+
+  color: var(--color-white);
+  cursor: pointer;
+  padding: 2rem 1.5rem;
+  border-radius: 10px;
+  font-size: 2rem;
+  transition: all 0.2s;
+  transform: translateX(-50%);
+
+  &:hover,
+  &:focus {
+    filter: brightness(0.9);
+  }
+
+  &:active {
+    transform: translateX(-50%) scale(0.98);
+  }
+
+  @media only screen and (max-width: 1400px) {
+    background-color: var(--color-primary-light);
+    left: 3rem;
+    transform: translateX(0);
+
+    &:active {
+      transform: translateX(0) scale(0.98);
+    }
+  }
+}
