@@ -27,5 +27,5 @@ Features to implement:
 dark/light mode
 generate object of random reviews, bookings, etc and store it in session storage
 pwd generator - allow user to generate a good password
-weather widget
+weather widget in the park
 image carousel ?

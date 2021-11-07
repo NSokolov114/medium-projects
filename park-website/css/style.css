@@ -56,6 +56,7 @@ body {
 .wrapper {
   margin: 8rem auto 0;
   max-width: 1200px;
+  min-height: 100vh;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -67,13 +68,7 @@ body {
 .header {
   background-color: var(--color-white);
   border-bottom: var(--line);
-  height: 7rem;
-}
-
-@media only screen and (max-width: 600px) {
-  .header {
-    height: 15rem;
-  }
+  min-height: 12rem;
 }
 
 .content {
@@ -161,6 +156,10 @@ body {
   .footer {
     background-color: var(--color-grey-dark-1);
   }
+}
+
+.hidden {
+  display: none !important;
 }
 
 .rating {
@@ -430,20 +429,17 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  height: 10rem;
+  max-width: 1200px;
+  width: 100%;
 }
 
 @media only screen and (max-width: 600px) {
   .header {
-    -webkit-box-align: stretch;
-        -ms-flex-align: stretch;
-            align-items: stretch;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    height: 20rem;
   }
 }
 
@@ -466,9 +462,10 @@ body {
   font-size: 3rem;
   font-weight: 400;
   letter-spacing: 2px;
+  line-height: 1.2;
   margin-left: 1rem;
   margin-right: auto;
-  text-decoration: underline;
+  text-decoration: none;
   text-transform: uppercase;
 }
 
@@ -480,6 +477,7 @@ body {
 .title a:link,
 .title a:visited {
   color: inherit;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 900px) {
@@ -643,6 +641,40 @@ body {
     height: 5rem;
     width: 5rem;
   }
+}
+
+.create-account {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 1.5rem 3rem;
+  background-color: transparent;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  margin-right: 5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .create-account {
+    margin-right: 2rem;
+    padding: 1.75rem 2rem;
+  }
+}
+
+.create-account:hover {
+  background-color: var(--color-primary);
+}
+
+.create-account:focus {
+  outline: none;
+}
+
+.create-account a:link,
+.create-account a:visited {
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .sidebar {
