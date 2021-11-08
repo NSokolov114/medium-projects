@@ -275,3 +275,8 @@
     }
   }
 }
+
+// LEAFLET: changing color of an icon
+.entranceIcon {
+  filter: hue-rotate(295deg);
+}

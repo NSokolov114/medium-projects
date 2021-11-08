@@ -5,14 +5,49 @@ document.addEventListener('DOMContentLoaded', ready);
 function ready() {
   console.log('hello there!');
 
-  // map for the about us page
-  var mymap = L.map('mapid').setView([49.544, 18.684], 16);
+  // Leaflet JS map and markers
+  const overviewLocationBtns = document.querySelectorAll(
+    '.overview__location-btn'
+  );
+
+  overviewLocationBtns[0].addEventListener('click', () => {});
+
+  const locations = [
+    { description: 'Park entrance & reception', coords: [49.494, 18.472] },
+    { description: 'Ursa Major Cabins', coords: [49.495, 18.426] },
+    { description: 'Spruce Cabins', coords: [49.5, 18.45] },
+    { description: 'Fire Cabins', coords: [49.481, 18.456] },
+    { description: 'Bear Meadow Campground', coords: [49.498, 18.457] },
+    { description: 'Leadfoot Campground', coords: [49.485, 18.467] },
+    { description: 'Lakeside Campground', coords: [49.509, 18.426] },
+  ];
+
+  var myMap = L.map('mapid').setView(locations[0].coords, 13);
   L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(mymap);
-  var marker = L.marker([49.544, 18.684]).addTo(mymap);
-  marker.bindPopup('Park entrance');
+  }).addTo(myMap);
+  // var markerEntrance = L.marker([49.544, 18.684]).addTo(myMap);
+  // markerEntrance.bindPopup('Reception').openPopup();
+
+  // createMarker(coordsArr[0], 'Reception').openPopup();
+  // coordsArr.forEach((coords, idx) => {
+  //   createMarker(coords, `spot ${idx}`);
+  //   console.log(coords, idx);
+  // });
+
+  const markerEntrance = createMarker(
+    locations[0].coords,
+    locations[0].description
+  );
+  markerEntrance._icon.classList.add('entranceIcon');
+
+  function createMarker(coords, text) {
+    var marker = L.marker(coords).addTo(myMap);
+    marker.bindPopup(`${text}`);
+    return marker;
+  }
+  ///////////////////////
 
   // RND gallery images order
   function shuffle(array) {
