@@ -46,6 +46,15 @@
   padding-bottom: 2px;
   transition: all 0.25s;
 
+  & a:link,
+  a:visited {
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    // letter-spacing: 1px;
+  }
+
   & span {
     margin-left: 3px;
     transition: margin-left 0.25s;
@@ -242,7 +251,7 @@
   color: var(--color-white);
   cursor: pointer;
   padding: 2rem 1.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 2rem;
   transition: all 0.2s;
   transform: translateX(-50%);

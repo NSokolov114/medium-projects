@@ -44,6 +44,7 @@ $bp-smallest: 500px;
 html {
   box-sizing: border-box;
   font-size: 62.5%; // 1 rem = 10 px
+  scroll-behavior: smooth;
 
   @media only screen and (max-width: $bp-large) {
     font-size: 50%;

@@ -28,12 +28,12 @@
   </head>
   <body>
     <div class="wrapper">
-      <header class="header">
-        <a href="./index.html"
+      <header class="header" id="header">
+        <a href="./index.html#header"
           ><img src="./img/logo.png" alt="logo" class="logo"
         /></a>
         <h1 class="title">
-          <a href="./index.html">
+          <a href="./index.html#header">
             National Ski&nbsp;Park <span>in Carpathian Mountains</span></a
           >
         </h1>
@@ -62,7 +62,10 @@
           </button>
         </nav>
 
-        <button class="create-account">
+        <button
+          class="create-account"
+          title="Login with existing account or create new"
+        >
           <a href="./index.html">Login</a>
         </button>
       </header>
@@ -72,7 +75,7 @@
         <nav class="sidebar">
           <ul class="side-nav">
             <li class="side-nav__item">
-              <a href="./index.html" class="side-nav__link">
+              <a href="./index.html#header" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-home"></use>
                 </svg>
@@ -80,7 +83,7 @@
               </a>
             </li>
             <li class="side-nav__item side-nav__item--active">
-              <a href="#" class="side-nav__link">
+              <a href="./index.html#hotel-1" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use
                     xlink:href="./img/sprite.svg#icon-aircraft-take-off"
@@ -90,7 +93,7 @@
               </a>
             </li>
             <li class="side-nav__item">
-              <a href="#" class="side-nav__link">
+              <a href="./index.html#" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-key"></use>
                 </svg>
@@ -98,11 +101,11 @@
               </a>
             </li>
             <li class="side-nav__item">
-              <a href="#" class="side-nav__link">
+              <a href="./index.html#about" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-map"></use>
                 </svg>
-                <span>About Us</span>
+                <span>Contacts</span>
               </a>
             </li>
           </ul>
@@ -141,7 +144,9 @@
                     Comfortable rooms with magnificent lake outside!
                   </p>
                   <button class="card__btn btn-inline">
-                    More info<span>&rarr;</span>
+                    <a href="./index.html#hotel-1"
+                      >More info <span>&rarr;</span></a
+                    >
                   </button>
                 </div>
               </div>
@@ -166,7 +171,9 @@
                     Comfortable rooms with magnificent lake outside!
                   </p>
                   <button class="card__btn btn-inline">
-                    More info<span>&rarr;</span>
+                    <a href="./index.html#hotel-2"
+                      >More info <span>&rarr;</span></a
+                    >
                   </button>
                 </div>
               </div>
@@ -191,7 +198,9 @@
                     Comfortable rooms with magnificent lake outside!
                   </p>
                   <button class="card__btn btn-inline">
-                    More info<span>&rarr;</span>
+                    <a href="./index.html#hotel-3"
+                      >More info <span>&rarr;</span></a
+                    >
                   </button>
                 </div>
               </div>
@@ -216,7 +225,9 @@
                     Comfortable rooms with magnificent lake outside!
                   </p>
                   <button class="card__btn btn-inline">
-                    More info<span>&rarr;</span>
+                    <a href="./index.html#hotel-4"
+                      >More info <span>&rarr;</span></a
+                    >
                   </button>
                 </div>
               </div>
@@ -241,7 +252,9 @@
                     Comfortable rooms with magnificent lake outside!
                   </p>
                   <button class="card__btn btn-inline">
-                    More info<span>&rarr;</span>
+                    <a href="./index.html#hotel-5"
+                      >More info <span>&rarr;</span></a
+                    >
                   </button>
                 </div>
               </div>
@@ -266,7 +279,9 @@
                     Comfortable rooms with magnificent lake outside!
                   </p>
                   <button class="card__btn btn-inline">
-                    More info<span>&rarr;</span>
+                    <a href="./index.html#hotel-6"
+                      >More info <span>&rarr;</span></a
+                    >
                   </button>
                 </div>
               </div>
@@ -290,7 +305,7 @@
           </div>
 
           <!-- about -->
-          <div class="about">
+          <div class="about" id="about">
             <h3 class="about__title">Where to find us?</h3>
             <div id="mapid"></div>
             <div class="about__info">
@@ -437,7 +452,7 @@
           </section>
 
           <!-- hotel 1 -->
-          <div class="hotel">
+          <div class="hotel" id="hotel-1">
             <div class="overview">
               <h2 class="overview__heading">Ursa Major Cabins</h2>
 
@@ -563,7 +578,7 @@
           </div>
 
           <!-- hotel 2 -->
-          <div class="hotel">
+          <div class="hotel" id="hotel-2">
             <div class="overview">
               <h2 class="overview__heading">Spruce Cabins</h2>
 
@@ -689,7 +704,7 @@
           </div>
 
           <!-- hotel 3 -->
-          <div class="hotel">
+          <div class="hotel" id="hotel-3">
             <div class="overview">
               <h2 class="overview__heading">Fire Cabins</h2>
 
@@ -815,7 +830,7 @@
           </div>
 
           <!-- hotel 4 -->
-          <div class="hotel">
+          <div class="hotel" id="hotel-4">
             <div class="overview">
               <h2 class="overview__heading">Bear Meadow Campground</h2>
 
@@ -941,7 +956,7 @@
           </div>
 
           <!-- hotel 5 -->
-          <div class="hotel">
+          <div class="hotel" id="hotel-5">
             <div class="overview">
               <h2 class="overview__heading">Leadfoot Campground</h2>
 
@@ -1067,7 +1082,7 @@
           </div>
 
           <!-- hotel 6 -->
-          <div class="hotel">
+          <div class="hotel" id="hotel-6">
             <div class="overview">
               <h2 class="overview__heading">Lakeside Campground</h2>
 
@@ -1192,6 +1207,7 @@
             </div>
           </div>
 
+          <!-- back to top button -->
           <button
             class="to-top-btn hidden"
             title="Go back to the top of the page"

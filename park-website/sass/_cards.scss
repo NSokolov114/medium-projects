@@ -89,6 +89,11 @@
       color: var(--color-grey-light-4);
       letter-spacing: 2px;
     }
+
+    // & a:link,
+    // a:visited {
+    //   text-decoration: none;
+    // }
   }
 
   &__rating {

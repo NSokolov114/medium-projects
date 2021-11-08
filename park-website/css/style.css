@@ -34,6 +34,7 @@ html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -206,6 +207,14 @@ body {
   padding-bottom: 2px;
   -webkit-transition: all 0.25s;
   transition: all 0.25s;
+}
+
+.btn-inline a:link,
+.btn-inline a:visited {
+  color: inherit;
+  text-decoration: none;
+  font-family: var(--font-title);
+  text-transform: uppercase;
 }
 
 .btn-inline span {
@@ -430,7 +439,7 @@ body {
   color: var(--color-white);
   cursor: pointer;
   padding: 2rem 1.5rem;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 2rem;
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
@@ -687,7 +696,7 @@ body {
 }
 
 .create-account {
-  border: 1px solid black;
+  border: 2px solid var(--color-primary-light);
   border-radius: 10px;
   padding: 1.5rem 3rem;
   background-color: transparent;
@@ -705,17 +714,23 @@ body {
 }
 
 .create-account:hover {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-light);
 }
 
 .create-account:focus {
   outline: none;
 }
 
+.create-account:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
 .create-account a:link,
 .create-account a:visited {
   color: inherit;
   text-decoration: none;
+  font-family: var(--font-title);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
