@@ -185,7 +185,7 @@
 .btn {
   background-image: linear-gradient(
     to right,
-    var(--color-primary-light),
+    var(--color-primary),
     var(--color-primary-dark)
   );
   border: none;
@@ -219,7 +219,7 @@
   &:hover {
     background-image: linear-gradient(
       to left,
-      var(--color-primary-light),
+      var(--color-primary),
       var(--color-primary-dark)
     );
   }
