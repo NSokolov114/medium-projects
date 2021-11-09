@@ -105,4 +105,54 @@ function ready() {
   };
 
   toTopBtn.addEventListener('click', topFunction);
+  ////////////////////////////////
+
+  // Highlighting nav items
+  const headerSection = document.getElementById('header');
+  const aboutSection = document.getElementById('about');
+  const gallerySection = document.getElementById('gallery');
+  const lodgingsSection = document.getElementById('hotel');
+
+  //prettier-ignore
+  const sectionsPositions = [
+    { section: 'header', top: 1000, el: headerSection, active: false },
+    { section: 'about', top: 1000, el: aboutSection, active: false },
+    { section: 'gallery', top: 1000, el: gallerySection, active: false },
+    { section: 'hotel', top: 1000, el: lodgingsSection, active: false },
+  ];
+  let activeSectionIdx;
+
+  // aboutIsInFocus = aboutSection.getBoundingClientRect()
+
+  document.addEventListener('scroll', updateSectionPositions);
+
+  function test() {
+    // console.log(headerSection.getBoundingClientRect().top);
+    console.log(
+      Math.trunc(sectionsPositions[1].el.getBoundingClientRect().top),
+      Math.trunc(sectionsPositions[2].el.getBoundingClientRect().top),
+      Math.trunc(sectionsPositions[3].el.getBoundingClientRect().top)
+    );
+  }
+
+  function updateSectionPositions() {
+    const tops = [];
+    for (const sect of sectionsPositions) {
+      sect.top = Math.trunc(sect.el.getBoundingClientRect().top);
+      sect.top > 100 ? tops.push(-Infinity) : tops.push(sect.top);
+    }
+    const currentIdx = tops.findIndex(num => num === Math.max(...tops));
+    console.log(Math.max(...tops), currentIdx, activeSectionIdx);
+    if (currentIdx !== activeSectionIdx) {
+      activeSectionIdx = currentIdx;
+      for (const [idx, sect] of sectionsPositions.entries()) {
+        console.log('changing', idx, sect);
+        if (idx === activeSectionIdx) {
+          sect.el.classList.add('side-nav__item--active');
+        } else {
+          sect.el.classList.remove('side-nav__item--active');
+        }
+      }
+    }
+  }
 }
