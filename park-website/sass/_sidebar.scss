@@ -6,6 +6,7 @@
 }
 
 .side-nav {
+  background-color: var(--color-grey-dark-1);
   font-family: var(--font-title);
   font-size: 1.4rem;
   font-weight: 400;
@@ -45,6 +46,16 @@
       align-items: center;
       justify-content: center;
       flex: 1;
+
+      &--account {
+        display: none;
+      }
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      &--gallery {
+        display: none;
+      }
     }
   }
 
@@ -59,6 +70,10 @@
     transition: transform 0.25s, width 0.5s cubic-bezier(1, 0, 0, 1) 0.25s,
       background-color 0.1s;
     width: 3px;
+
+    @media only screen and (max-width: $bp-medium) {
+      background-color: transparent;
+    }
   }
 
   &__item:hover::before,
@@ -69,6 +84,10 @@
 
   &__item:active::before {
     background-color: var(--color-primary-light);
+
+    // @media only screen and (max-width: $bp-medium) {
+    //   background-color: transparent;
+    // }
   }
 
   &__link:link,

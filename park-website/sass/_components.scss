@@ -285,7 +285,6 @@
 
 .social {
   display: grid;
-  // background-color: violet;
   justify-content: center;
   align-content: center;
   gap: 1rem;
@@ -293,14 +292,29 @@
   list-style: none;
   padding: 3rem;
   justify-self: center;
+  max-width: 100%;
 
   @media only screen and (max-width: $bp-medium) {
     grid-template-columns: repeat(4, min-content);
   }
 
+  &__item {
+    align-items: center;
+    display: flex;
+    height: 6rem;
+    justify-content: center;
+    padding: 1rem;
+    width: 6rem;
+  }
+
   &__icon {
     height: 3rem;
     width: 3rem;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: scale(1.5);
+    }
 
     &--youtube {
       fill: #f00;
@@ -316,15 +330,7 @@
 
     &--facebook {
       fill: #3b5998;
+      fill: #1877f2;
     }
-  }
-
-  &__item {
-    align-items: center;
-    display: flex;
-    height: 6rem;
-    justify-content: center;
-    padding: 1rem;
-    width: 6rem;
   }
 }
