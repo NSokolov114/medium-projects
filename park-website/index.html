@@ -76,7 +76,10 @@
         <!-- sidebar nav-->
         <nav class="sidebar">
           <ul class="side-nav">
-            <li class="side-nav__item">
+            <li
+              class="side-nav__item side-nav__item--active"
+              id="side-nav__header"
+            >
               <a href="./index.html#header" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-home"></use>
@@ -84,7 +87,7 @@
                 <span>Home</span>
               </a>
             </li>
-            <li class="side-nav__item side-nav__item--active">
+            <li class="side-nav__item" id="side-nav__hotel">
               <a href="./index.html#hotel" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-key"></use>
@@ -93,14 +96,14 @@
               </a>
             </li>
             <li class="side-nav__item">
-              <a href="./index.html#" class="side-nav__link">
+              <a href="./index.html#book" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-calendar"></use>
                 </svg>
                 <span>Book</span>
               </a>
             </li>
-            <li class="side-nav__item">
+            <li class="side-nav__item" id="side-nav__about">
               <a href="./index.html#about" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-map"></use>
@@ -108,7 +111,7 @@
                 <span>Contacts</span>
               </a>
             </li>
-            <li class="side-nav__item">
+            <li class="side-nav__item" id="side-nav__gallery">
               <a href="./index.html#gallery" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-camera"></use>
@@ -117,7 +120,7 @@
               </a>
             </li>
             <li class="side-nav__item">
-              <a href="./index.html#gallery" class="side-nav__link">
+              <a href="./index.html#account" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-user"></use>
                 </svg>
@@ -329,31 +332,31 @@
               <p>Phone: +42 (0) 5 58 55 55 55</p>
               <p>Email: support@snpicm.cz</p>
 
-              <ul class="about__social">
-                <li class="about__item">
-                  <a href="./index.html" class="about__link">
-                    <svg class="about__icon">
+              <ul class="social">
+                <li class="social__item">
+                  <a href="https://www.youtube.com/" class="social__link">
+                    <svg class="social__icon social__icon--youtube">
                       <use xlink:href="./img/sprite.svg#icon-youtube"></use>
                     </svg>
                   </a>
                 </li>
-                <li class="about__item">
-                  <a href="#" class="about__link">
-                    <svg class="about__icon">
+                <li class="social__item">
+                  <a href="https://www.instagram.com/" class="social__link">
+                    <svg class="social__icon social__icon--instagram">
                       <use xlink:href="./img/sprite.svg#icon-instagram"></use>
                     </svg>
                   </a>
                 </li>
-                <li class="about__item">
-                  <a href="#" class="about__link">
-                    <svg class="about__icon">
+                <li class="social__item">
+                  <a href="https://twitter.com/" class="social__link">
+                    <svg class="social__icon social__icon--twitter">
                       <use xlink:href="./img/sprite.svg#icon-twitter"></use>
                     </svg>
                   </a>
                 </li>
-                <li class="about__item">
-                  <a href="#" class="about__link">
-                    <svg class="about__icon">
+                <li class="social__item">
+                  <a href="https://www.facebook.com/" class="social__link">
+                    <svg class="social__icon social__icon--facebook">
                       <use xlink:href="./img/sprite.svg#icon-facebook2"></use>
                     </svg>
                   </a>
@@ -1232,7 +1235,36 @@
         </main>
       </div>
       <footer class="footer">
-        &copy; 2021 by Some Random Company. All rights reserved
+        <ul class="about__social">
+          <li class="about__item">
+            <a href="https://www.youtube.com/" class="about__link">
+              <svg class="about__icon icon__youtube">
+                <use xlink:href="./img/sprite.svg#icon-youtube"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="about__item">
+            <a href="https://www.instagram.com/" class="about__link">
+              <svg class="about__icon icon__instagram">
+                <use xlink:href="./img/sprite.svg#icon-instagram"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="about__item">
+            <a href="https://twitter.com/" class="about__link">
+              <svg class="about__icon icon__twitter">
+                <use xlink:href="./img/sprite.svg#icon-twitter"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="about__item">
+            <a href="https://www.facebook.com/" class="about__link">
+              <svg class="about__icon icon__facebook">
+                <use xlink:href="./img/sprite.svg#icon-facebook2"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
       </footer>
     </div>
     <script src="./script.js"></script>

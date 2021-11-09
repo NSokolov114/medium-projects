@@ -479,6 +479,67 @@ body {
           filter: hue-rotate(295deg);
 }
 
+.social {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  gap: 1rem;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  list-style: none;
+  padding: 3rem;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .social {
+    -ms-grid-columns: (min-content)[4];
+        grid-template-columns: repeat(4, -webkit-min-content);
+        grid-template-columns: repeat(4, min-content);
+  }
+}
+
+.social__icon {
+  height: 3rem;
+  width: 3rem;
+}
+
+.social__icon--youtube {
+  fill: #f00;
+}
+
+.social__icon--twitter {
+  fill: #1da1f2;
+}
+
+.social__icon--instagram {
+  fill: #c32aa3;
+}
+
+.social__icon--facebook {
+  fill: #3b5998;
+}
+
+.social__item {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 6rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 1rem;
+  width: 6rem;
+}
+
 .header {
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -1579,52 +1640,6 @@ body {
     height: auto;
     width: 100%;
   }
-}
-
-.about__social {
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
-  gap: 1rem;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
-  list-style: none;
-  padding: 3rem;
-  -ms-grid-column-align: center;
-      justify-self: center;
-}
-
-@media only screen and (max-width: 900px) {
-  .about__social {
-    -ms-grid-columns: (min-content)[4];
-        grid-template-columns: repeat(4, -webkit-min-content);
-        grid-template-columns: repeat(4, min-content);
-  }
-}
-
-.about__icon {
-  fill: #5789d3;
-  height: 3rem;
-  width: 3rem;
-}
-
-.about__item {
-  padding: 1rem;
-  height: 6rem;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 6rem;
 }
 
 .about #mapid {

@@ -280,3 +280,51 @@
 .entranceIcon {
   filter: hue-rotate(295deg);
 }
+
+// SOCIAL ICONS
+
+.social {
+  display: grid;
+  // background-color: violet;
+  justify-content: center;
+  align-content: center;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  list-style: none;
+  padding: 3rem;
+  justify-self: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-template-columns: repeat(4, min-content);
+  }
+
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+
+    &--youtube {
+      fill: #f00;
+    }
+
+    &--twitter {
+      fill: #1da1f2;
+    }
+
+    &--instagram {
+      fill: #c32aa3;
+    }
+
+    &--facebook {
+      fill: #3b5998;
+    }
+  }
+
+  &__item {
+    align-items: center;
+    display: flex;
+    height: 6rem;
+    justify-content: center;
+    padding: 1rem;
+    width: 6rem;
+  }
+}

@@ -109,50 +109,46 @@ function ready() {
 
   // Highlighting nav items
   const headerSection = document.getElementById('header');
+  const headerNav = document.getElementById('side-nav__header');
   const aboutSection = document.getElementById('about');
+  const aboutNav = document.getElementById('side-nav__about');
   const gallerySection = document.getElementById('gallery');
+  const galleryNav = document.getElementById('side-nav__gallery');
   const lodgingsSection = document.getElementById('hotel');
+  const lodgingsNav = document.getElementById('side-nav__hotel');
 
   //prettier-ignore
   const sectionsPositions = [
-    { section: 'header', top: 1000, el: headerSection, active: false },
-    { section: 'about', top: 1000, el: aboutSection, active: false },
-    { section: 'gallery', top: 1000, el: gallerySection, active: false },
-    { section: 'hotel', top: 1000, el: lodgingsSection, active: false },
+    { section: 'header', top: 1000, el: headerSection, nav: headerNav },
+    { section: 'about', top: 1000, el: aboutSection, nav: aboutNav },
+    { section: 'gallery', top: 1000, el: gallerySection, nav: galleryNav },
+    { section: 'hotel', top: 1000, el: lodgingsSection, nav: lodgingsNav },
   ];
   let activeSectionIdx;
 
-  // aboutIsInFocus = aboutSection.getBoundingClientRect()
-
-  document.addEventListener('scroll', updateSectionPositions);
-
-  function test() {
-    // console.log(headerSection.getBoundingClientRect().top);
-    console.log(
-      Math.trunc(sectionsPositions[1].el.getBoundingClientRect().top),
-      Math.trunc(sectionsPositions[2].el.getBoundingClientRect().top),
-      Math.trunc(sectionsPositions[3].el.getBoundingClientRect().top)
-    );
-  }
-
   function updateSectionPositions() {
     const tops = [];
+
     for (const sect of sectionsPositions) {
       sect.top = Math.trunc(sect.el.getBoundingClientRect().top);
-      sect.top > 100 ? tops.push(-Infinity) : tops.push(sect.top);
+      // I want to select the element which has the biggest top value,
+      // if that top value is below 150px:
+      sect.top > 150 ? tops.push(-Infinity) : tops.push(sect.top);
     }
+
     const currentIdx = tops.findIndex(num => num === Math.max(...tops));
-    console.log(Math.max(...tops), currentIdx, activeSectionIdx);
+
     if (currentIdx !== activeSectionIdx) {
       activeSectionIdx = currentIdx;
       for (const [idx, sect] of sectionsPositions.entries()) {
-        console.log('changing', idx, sect);
         if (idx === activeSectionIdx) {
-          sect.el.classList.add('side-nav__item--active');
+          sect.nav.classList.add('side-nav__item--active');
         } else {
-          sect.el.classList.remove('side-nav__item--active');
+          sect.nav.classList.remove('side-nav__item--active');
         }
       }
     }
   }
+
+  document.addEventListener('scroll', updateSectionPositions);
 }
