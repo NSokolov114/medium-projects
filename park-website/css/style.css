@@ -126,11 +126,15 @@ body {
   width: 100%;
 }
 
-.hotel {
+.hotel__hotels-container {
   background-color: var(--color-white);
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+}
+
+.hotel {
+  background-color: var(--color-white);
 }
 
 .gallery {

@@ -63,9 +63,14 @@
   width: 100%;
 }
 
-.hotel {
+.hotel__hotels-container {
   background-color: var(--color-white);
   flex: 1;
+}
+
+.hotel {
+  background-color: var(--color-white);
+  // flex: 1;
 }
 
 .gallery {
