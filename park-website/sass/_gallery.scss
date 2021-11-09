@@ -4,7 +4,7 @@
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(7, 5vw);
 
-  @media only screen and (max-width: $bp-small) {
+  @media only screen and (max-width: $bp-medium) {
     gap: 1rem;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(9, 10vh);
@@ -68,7 +68,7 @@
       grid-column: 8 / 9;
     }
 
-    @media only screen and (max-width: $bp-small) {
+    @media only screen and (max-width: $bp-medium) {
       &--1 {
         display: none;
       }

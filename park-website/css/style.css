@@ -1180,7 +1180,7 @@ body {
       grid-template-rows: repeat(7, 5vw);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .gallery {
     gap: 1rem;
     -ms-grid-columns: (1fr)[5];
@@ -1316,7 +1316,7 @@ body {
   grid-column: 8 / 9;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .gallery__item--1 {
     display: none;
   }
@@ -1644,7 +1644,7 @@ body {
   -ms-flex-line-pack: center;
       align-content: center;
   text-align: center;
-  height: 60vh;
+  height: auto;
   width: 25%;
 }
 
@@ -1671,11 +1671,14 @@ body {
   background-color: chartreuse;
   border-top-right-radius: 10px;
   height: 60vh;
+  max-height: 60rem;
+  min-height: 45rem;
   width: 75%;
 }
 
 @media only screen and (max-width: 900px) {
   .about #mapid {
+    min-height: 30rem;
     width: 100%;
   }
 }
@@ -1697,7 +1700,7 @@ body {
   text-align: center;
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 500px) {
   .footer {
     display: block;
     padding: 3rem;

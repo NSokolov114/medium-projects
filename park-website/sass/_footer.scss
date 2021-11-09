@@ -9,7 +9,7 @@
   letter-spacing: 1px;
   text-align: center;
 
-  @media only screen and (max-width: $bp-medium) {
+  @media only screen and (max-width: $bp-smallest) {
     display: block;
     padding: 3rem;
   }

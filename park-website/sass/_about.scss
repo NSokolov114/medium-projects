@@ -24,7 +24,7 @@
     display: grid;
     align-content: center;
     text-align: center;
-    height: 60vh;
+    height: auto;
 
     width: 25%;
 
@@ -50,9 +50,12 @@
     background-color: chartreuse;
     border-top-right-radius: 10px;
     height: 60vh;
+    max-height: 60rem;
+    min-height: 45rem;
     width: 75%;
 
     @media only screen and (max-width: $bp-medium) {
+      min-height: 30rem;
       width: 100%;
     }
   }

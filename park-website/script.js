@@ -54,16 +54,19 @@ function ready() {
     }
   }
 
-  const galleryImgs = document.querySelectorAll('.gallery__img');
-  const galleryRndOrder = Array.from(
-    { length: galleryImgs.length },
-    (_, idx) => idx + 1
-  );
+  function randomizeGalleryImgs() {
+    shuffle(galleryRndOrder);
+    galleryImgs.forEach(function (el, idx) {
+      el.src = `./img/gallery/gallery-${galleryRndOrder[idx]}.jpg`;
+    });
+  }
 
-  shuffle(galleryRndOrder);
-  galleryImgs.forEach(function (el, idx) {
-    el.src = `./img/gallery/gallery-${galleryRndOrder[idx]}.jpg`;
-  });
+  const galleryImgs = document.querySelectorAll('.gallery__img');
+  const galleryRndOrder = Array.from({ length: 25 }, (_, idx) => idx + 1);
+
+  randomizeGalleryImgs();
+  galleryImgs.forEach(el => el.addEventListener('click', randomizeGalleryImgs));
+
   /////////////////////////
 
   ///// generating random stuff /////
