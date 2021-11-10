@@ -51,6 +51,15 @@
   box-shadow: var(--shadow-dark);
 }
 
+.account {
+  height: 800px;
+  width: 100%;
+  background-color: burlywood;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .intro {
   background-color: var(--color-grey-light-3);
   flex: 1;
