@@ -73,15 +73,20 @@ function ready() {
   // rating, number of votes
   const averageRatingEls = document.querySelectorAll('.rating__average');
   const countRatingEls = document.querySelectorAll('.rating__count');
+  const ratingNumber = countRatingEls.length / 2;
 
   const averageRatings = [];
   const countRatings = [];
 
-  for (let i = 0; i < averageRatingEls.length; i++) {
-    averageRatingEls[i].innerText = Math.floor(Math.random() * 50 + 51) / 10;
-    countRatingEls[i].innerText = `${Math.floor(
-      Math.random() * 900 + 100
-    )} votes`;
+  for (let i = 0; i < ratingNumber; i++) {
+    const rating = Math.floor(Math.random() * 50 + 51) / 10;
+    const votes = Math.floor(Math.random() * 900 + 100);
+
+    // same numbers for cards section and lodgings section
+    averageRatingEls[i].innerText = rating;
+    averageRatingEls[i + ratingNumber].innerText = rating;
+    countRatingEls[i].innerText = `${votes} votes`;
+    countRatingEls[i + ratingNumber].innerText = `${votes} votes`;
   }
 
   // BACK TO TOP BUTTON
@@ -154,4 +159,5 @@ function ready() {
   }
 
   document.addEventListener('scroll', updateSectionPositions);
+  /////////////////////
 }
