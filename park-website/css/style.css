@@ -1721,7 +1721,6 @@ body {
 }
 
 .footer__social.social {
-  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 25px;
   -ms-grid-columns: (min-content)[4];
       grid-template-columns: repeat(4, -webkit-min-content);
@@ -1729,9 +1728,9 @@ body {
   padding: 1rem;
 }
 
-@media only screen and (max-width: 1200px) {
-  .footer__social.social {
-    background-color: transparent;
+@media only screen and (min-width: 1200px) {
+  .footer__social.social .social__icon {
+    fill: black;
   }
 }
 /*# sourceMappingURL=style.css.map */
