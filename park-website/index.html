@@ -152,26 +152,42 @@
 
           <!-- account -->
           <section class="account" id="account">
-            <div class="card">
-              <div class="card__side card__side--front">
-                <h3>LOG IN</h3>
-                <div class="form-control">
+            <div class="account-card">
+              <!-- front side -->
+              <div class="account-card__side account-card__side--front">
+                <h3>Log In</h3>
+                <div class="account-card__form">
                   <input type="text" required />
                   <label>Email</label>
                 </div>
 
-                <div class="form-control">
+                <div class="account-card__form">
                   <input type="password" required />
                   <label>Password</label>
                 </div>
-                <button class="btn">Login</button>
+                <button class="account-card__btn">Login</button>
 
-                <p class="text">
+                <p class="account-card__text">
                   Don't have an account? <a href="#">Register now!</a>
                 </p>
               </div>
-              <div class="card__side card__side--back">
-                <p>create account form</p>
+              <!-- back side -->
+              <div class="account-card__side account-card__side--back">
+                <h3>Sign In</h3>
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Email</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="password" required />
+                  <label>Password</label>
+                </div>
+                <button class="account-card__btn">Create account</button>
+
+                <p class="account-card__text">
+                  Already have an account? <a href="#">Log in now!</a>
+                </p>
               </div>
             </div>
           </section>

@@ -3,6 +3,21 @@
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
+  // ACCOUNT
+  const labels = document.querySelectorAll('.account-card__form label');
+
+  labels.forEach(label => {
+    label.innerHTML = label.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          `<span style="transition-delay:${idx * 30}ms">${letter}</span>`
+      )
+      .join('');
+  });
+
+  /////////////
+
   // Leaflet JS map and markers
   function createMarker(coords, text) {
     var marker = L.marker(coords).addTo(myMap);
