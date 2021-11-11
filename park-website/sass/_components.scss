@@ -334,3 +334,15 @@
     }
   }
 }
+
+// section title
+.section-title {
+  font-family: var(--font-title);
+  font-size: 4rem;
+  font-weight: inherit;
+  // line-height: 1.2;
+  // padding: 1.5rem 0.75rem;
+  text-align: center;
+  margin: 2rem auto;
+  width: 100%;
+}

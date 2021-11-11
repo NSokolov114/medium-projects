@@ -30,7 +30,7 @@
 
   &__text-container {
     bottom: 0;
-    color: black;
+    color: var(--color-black);
     padding: 3rem;
     position: absolute;
     right: 0;
@@ -42,10 +42,11 @@
     }
   }
 
-  &__heading {
+  & .section-title {
     font-family: var(--font-title);
     font-size: 5rem;
     font-weight: inherit;
+    text-align: right;
   }
 
   &__subtitle {

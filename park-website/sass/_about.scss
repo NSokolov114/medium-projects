@@ -4,21 +4,6 @@
   height: auto;
   // padding-bottom: 6rem;
 
-  & h3 {
-    display: flex;
-    // background-color: aqua;
-    align-items: flex-end;
-    justify-content: center;
-    font-family: var(--font-title);
-    font-size: 4rem;
-    font-weight: inherit;
-    // line-height: 1.2;
-    // padding: 1.5rem 0.75rem;
-    text-align: center;
-    height: 10rem;
-    width: 100%;
-  }
-
   &__info {
     // background-color: cornsilk;
     display: grid;

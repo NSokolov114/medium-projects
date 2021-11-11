@@ -142,7 +142,7 @@
           <section class="intro">
             <div class="intro__img-container"></div>
             <div class="intro__text-container">
-              <h2 class="intro__heading">Welcome!</h2>
+              <h2 class="section-title">Welcome!</h2>
               <p class="intro__subtitle">
                 Ski National Park in Carpathian Mountains welcomes visitors from
                 all over the world since 1883
@@ -152,7 +152,8 @@
 
           <!-- account -->
           <section class="account" id="account">
-            <div class="account-card">
+            <h3 class="section-title">Your account</h3>
+            <div class="account-card account-card--user-input">
               <!-- front side -->
               <div class="account-card__side account-card__side--front">
                 <h3>Log In</h3>
@@ -176,6 +177,54 @@
                 <h3>Sign In</h3>
                 <div class="account-card__form">
                   <input type="text" required />
+                  <label>Username</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Email</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="password" required />
+                  <label>Password</label>
+                </div>
+                <button class="account-card__btn">Create account</button>
+
+                <p class="account-card__text">
+                  Already have an account? <a href="#">Log in now!</a>
+                </p>
+              </div>
+            </div>
+            <div class="account-card account-card--info">
+              <!-- front side -->
+              <div class="account-card__side account-card__side--front">
+                <h3>Log In</h3>
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Email</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="password" required />
+                  <label>Password</label>
+                </div>
+                <button class="account-card__btn">Login</button>
+
+                <p class="account-card__text">
+                  Don't have an account? <a href="#">Register now!</a>
+                </p>
+              </div>
+              <!-- back side -->
+              <div class="account-card__side account-card__side--back">
+                <h3>Sign In</h3>
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Username</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="text" required />
                   <label>Email</label>
                 </div>
 
@@ -194,9 +243,9 @@
 
           <!-- cards -->
           <section class="card__container">
-            <h2 class="card__cards-title">
+            <h3 class="section-title">
               Choose a comfortable house or a picturesque campsite
-            </h2>
+            </h3>
             <!-- card 1 -->
             <div class="card">
               <div class="card__subcard">
@@ -371,7 +420,7 @@
 
           <!-- about -->
           <section class="about" id="about">
-            <h3 class="about__title">Where to find us?</h3>
+            <h3 class="section-title">Where to find us?</h3>
             <div id="mapid"></div>
             <div class="about__info">
               <h4>Ski National Park in Carpathian Mountains</h4>

@@ -52,12 +52,13 @@
 }
 
 .account {
-  height: 800px;
+  // height: 800px;
   width: 100%;
   background-color: burlywood;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .intro {
