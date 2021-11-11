@@ -1,9 +1,12 @@
 'use strict';
 
+console.log(`Hi there! Your account details are stored only in the local storage of your browser.
+You can delete it by typing "localStorage.clear()" in the console.`);
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
-  // ACCOUNT
+  ///// ACCOUNT /////
+  // animation for labels
   const labels = document.querySelectorAll('.account-card__form label');
 
   labels.forEach(label => {
@@ -16,11 +19,27 @@ function ready() {
       .join('');
   });
 
-  /////////////
+  const cards = document.querySelectorAll('.account-card__side');
+  const testBtn = document.querySelector('.testing');
+  let counter = 0;
+  testBtn.addEventListener('click', () => {
+    counter++;
+    if (counter > 2) counter = 0;
+    console.log(counter);
+    cards.forEach(card => {
+      card.classList.add('account-card__side--back');
+      // card.classList.remove('account-card__side--front');
+    });
+    cards[counter].classList.remove('account-card__side--back');
+    // cards[counter].classList.add('account-card__side--front');
+  });
+  console.log(cards.length);
+
+  ///// LEAFLET MAP /////
 
   // Leaflet JS map and markers
   function createMarker(coords, text) {
-    var marker = L.marker(coords).addTo(myMap);
+    const marker = L.marker(coords).addTo(myMap);
     marker.bindPopup(`${text}`);
     return marker;
   }
@@ -39,7 +58,7 @@ function ready() {
     { description: 'Lakeside Campground', coords: [49.509, 18.426] },
   ];
 
-  var myMap = L.map('mapid').setView(locations[0].coords, 13);
+  const myMap = L.map('mapid').setView(locations[0].coords, 13);
   L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
