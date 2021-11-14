@@ -22,16 +22,22 @@ function ready() {
   const cards = document.querySelectorAll('.account-card__side');
   const testBtn = document.querySelector('.testing');
   let counter = 0;
+  const rotate = [180, 0, 0];
+  // let rotateA = 180;
+  // let rotateB = 0;
+  // let rotateC = 0;
+  cards.forEach((card, idx) => {
+    card.style.transform = `rotateY(${rotate[idx]}deg)`;
+  });
   testBtn.addEventListener('click', () => {
+    rotate[counter] += 180;
     counter++;
     if (counter > 2) counter = 0;
+    rotate[counter] += 180;
     console.log(counter);
-    cards.forEach(card => {
-      card.classList.add('account-card__side--back');
-      // card.classList.remove('account-card__side--front');
+    cards.forEach((card, idx) => {
+      card.style.transform = `rotateY(${rotate[idx]}deg)`;
     });
-    cards[counter].classList.remove('account-card__side--back');
-    // cards[counter].classList.add('account-card__side--front');
   });
   console.log(cards.length);
 
