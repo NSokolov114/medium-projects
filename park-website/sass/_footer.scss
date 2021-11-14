@@ -8,6 +8,7 @@
   grid-template-columns: 1fr max-content 1fr;
   letter-spacing: 1px;
   text-align: center;
+  margin-left: 200px;
 
   @media only screen and (max-width: $bp-smallest) {
     display: block;
@@ -16,7 +17,7 @@
 
   &::after,
   &::before {
-    background-color: var(--color-grey-dark-1);
+    background-color: var(--color-white);
     content: '';
     display: block;
     height: 1px;
@@ -34,7 +35,7 @@
 
     @media only screen and (min-width: $bp-largest) {
       & .social__icon {
-        fill: black;
+        fill: white;
       }
     }
   }

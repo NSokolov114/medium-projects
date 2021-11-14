@@ -11,32 +11,33 @@
   &__side {
     backface-visibility: hidden;
     border-radius: 5px;
-    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.9);
     height: 100%;
     left: 0;
     overflow: hidden;
     position: absolute;
     top: 0;
-    transition: all 3.8s ease;
+    transition: all 1s ease-in-out;
     width: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    background-color: var(--color-grey-dark-1);
     color: var(--color-white);
     border-radius: 5px;
     padding: 20px 40px;
+    z-index: 20;
 
-    &--front {
-      background-color: var(--color-grey-dark-1);
-    }
+    // &--front {
+    //   background-color: var(--color-grey-dark-1);
+    // }
 
-    &--back {
-      transform: rotateY(-180deg);
-      background-color: var(--color-black);
-    }
+    // &--back {
+    //   transform: rotateY(-180deg);
+    //   background-color: var(--color-black);
+    // }
 
     & h3 {
       margin-bottom: 3rem;

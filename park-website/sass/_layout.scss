@@ -6,6 +6,10 @@
   @media only screen and (max-width: $bp-largest) {
     margin: 0;
   }
+
+  @media only screen and (max-width: $bp-largest) {
+    background-color: var(--color-grey-dark-1);
+  }
 }
 
 .header {
