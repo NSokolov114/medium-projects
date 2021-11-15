@@ -41,13 +41,13 @@
         </h1>
         <!-- user nav -->
         <nav class="user-nav hidden">
-          <button class="user-nav__icon-box">
+          <button class="user-nav__icon-box disabled">
             <svg class="user-nav__icon">
               <use xlink:href="./img/sprite.svg#icon-bookmark"></use>
             </svg>
             <span class="user-nav__notification">7</span>
           </button>
-          <button class="user-nav__icon-box">
+          <button class="user-nav__icon-box disabled">
             <svg class="user-nav__icon">
               <use xlink:href="./img/sprite.svg#icon-chat"></use>
             </svg>
@@ -60,7 +60,7 @@
               alt="user photo"
               class="user-nav__user-photo"
             ></svg>
-            <span class="user-nav__user-name">Jonas</span>
+            <span class="user-nav__user-name">Vasya</span>
           </button>
         </nav>
 
@@ -68,7 +68,7 @@
           class="create-account"
           title="Login with existing account or create new"
         >
-          <a href="./index.html">Login</a>
+          <a href="./index.html#account">Log In</a>
         </button>
       </header>
 
@@ -159,22 +159,23 @@
                 <h3>Log In</h3>
                 <div class="account-card__form">
                   <input type="text" required />
-                  <label>Email</label>
+                  <label>Username</label>
                 </div>
 
                 <div class="account-card__form">
                   <input type="password" required />
                   <label>Password</label>
                 </div>
-                <button class="account-card__btn">Login</button>
+                <button class="account-card__btn">Log In</button>
 
-                <p class="account-card__text">
-                  Don't have an account? <a href="#">Register now!</a>
+                <p>
+                  Don't have an account?
+                  <a class="account-card__activate-signup">Register now!</a>
                 </p>
               </div>
               <!-- side B -->
               <div class="account-card__side">
-                <h3>Sign In</h3>
+                <h3>Sign Up</h3>
                 <div class="account-card__form">
                   <input type="text" required />
                   <label>Username</label>
@@ -191,32 +192,58 @@
                 </div>
                 <button class="account-card__btn">Create account</button>
 
-                <p class="account-card__text">
-                  Already have an account? <a href="#">Log in now!</a>
+                <p>
+                  Already have an account?
+                  <a class="account-card__activate-login">Log in now!</a>
                 </p>
               </div>
               <!-- side C -->
-              <div class="account-card__side">
-                <h3>Title C</h3>
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Username</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Email</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="password" required />
-                  <label>Password</label>
-                </div>
-                <button class="account-card__btn">Create account</button>
-
-                <p class="account-card__text">
-                  Already have an account? <a href="#">Log in now!</a>
-                </p>
+              <div class="account-card__side account-card__side--settings">
+                <h3>Your favorite lodgings</h3>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="items" id="item1" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item1">Ursa Major Cabins</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item2" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item2">Spruce Cabins</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item3" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item3">Fire Cabins</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item4" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item4">Bear Meadow Campground</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item5" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item5">Leadfoot Campground</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item6" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item6">Lakeside Campground</label>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -235,55 +262,44 @@
                 </div>
                 <button class="account-card__btn">Login</button>
 
-                <p class="account-card__text">
-                  Don't have an account? <a href="#">Register now!</a>
-                </p>
+                <p>Don't have an account? <a href="#">Register now!</a></p>
               </div>
               <!-- side B -->
               <div class="account-card__side">
-                <h3>Sign In</h3>
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Username</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Email</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="password" required />
-                  <label>Password</label>
-                </div>
-                <button class="account-card__btn">Create account</button>
-
-                <p class="account-card__text">
-                  Already have an account? <a href="#">Log in now!</a>
+                <h3>Creating new account</h3>
+                <p>
+                  If you want to create new account, you need to specify your
+                  preferred Username, Email and Password.
                 </p>
+                <p>Username may only include letters and digits.</p>
+                <p>
+                  Password should be at least 8 symbols long and include at
+                  least one letter, one capital letter and 1 digit. If you want,
+                  press the button below to generate a unique password that
+                  meets the requirements and copy-paste it to use it as your
+                  password.
+                </p>
+                <button class="account-card__btn-generate-pwd">
+                  Generate password
+                </button>
+
+                <p>Already have an account? <a href="#">Log in now!</a></p>
               </div>
               <!-- side C -->
               <div class="account-card__side">
-                <h3>Title C</h3>
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Username</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Email</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="password" required />
-                  <label>Password</label>
-                </div>
-                <button class="account-card__btn">Create account</button>
-
-                <p class="account-card__text">
-                  Already have an account? <a href="#">Log in now!</a>
+                <h3>Welcome back!</h3>
+                <p>You're logged in as Vasya.</p>
+                <p>
+                  Now you can change some account settings and manage your
+                  bookings.
                 </p>
+                <button class="account-card__btn">
+                  Book your next holiday
+                </button>
+                <button class="account-card__btn">Manage your bookings</button>
+                <button class="account-card__btn account-card__btn-logout">
+                  Log out
+                </button>
               </div>
             </div>
           </section>

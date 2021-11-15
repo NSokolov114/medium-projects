@@ -22,26 +22,70 @@ function ready() {
   const cards = document.querySelectorAll('.account-card__side');
   const testBtn = document.querySelector('.testing');
   let counter = 0;
-  const rotate = [0, 180, 180, 0, 180, 180];
-  // let rotateA = 180;
+  const rotations = [1, 1, 0, 1, 1, 0];
+  const sidesNum = rotations.length / 2;
+  // let rotateA = 1;
   // let rotateB = 0;
   // let rotateC = 0;
-  cards.forEach((card, idx) => {
-    card.style.transform = `rotateY(${rotate[idx]}deg)`;
-  });
+  rotateCards(cards, rotations);
   testBtn.addEventListener('click', () => {
-    rotate[counter] += 180;
-    rotate[counter + 3] += 180;
+    rotations[counter]++;
+    rotations[counter + sidesNum]++;
     counter++;
     if (counter > 2) counter = 0;
-    rotate[counter] += 180;
-    rotate[counter + 3] += 180;
+    rotations[counter]++;
+    rotations[counter + sidesNum]++;
     console.log(counter);
-    cards.forEach((card, idx) => {
-      card.style.transform = `rotateY(${rotate[idx]}deg)`;
-    });
+    rotateCards(cards, rotations);
   });
   console.log(cards.length);
+
+  function rotateCards(cards, rotations) {
+    cards.forEach((card, idx) => {
+      card.style.transform = `rotateY(${rotations[idx] * 180}deg)`;
+    });
+  }
+
+  const activateLoginBtn = document.querySelector(
+    '.account-card__activate-login'
+  );
+  const activateSignupBtn = document.querySelector(
+    '.account-card__activate-signup'
+  );
+
+  activateLoginBtn.addEventListener('click', e => {
+    e.preventDefault();
+    if (rotations[0] % 2) {
+      rotations[0]++;
+      rotations[0 + sidesNum]++;
+    }
+    if (!(rotations[1] % 2)) {
+      rotations[1]++;
+      rotations[1 + sidesNum]++;
+    }
+    if (!(rotations[2] % 2)) {
+      rotations[2]++;
+      rotations[2 + sidesNum]++;
+    }
+    rotateCards(cards, rotations);
+  });
+
+  activateSignupBtn.addEventListener('click', e => {
+    e.preventDefault();
+    if (rotations[1] % 2) {
+      rotations[1]++;
+      rotations[1 + sidesNum]++;
+    }
+    if (!(rotations[0] % 2)) {
+      rotations[0]++;
+      rotations[0 + sidesNum]++;
+    }
+    if (!(rotations[2] % 2)) {
+      rotations[2]++;
+      rotations[2 + sidesNum]++;
+    }
+    rotateCards(cards, rotations);
+  });
 
   ///// LEAFLET MAP /////
 

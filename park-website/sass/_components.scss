@@ -3,6 +3,11 @@
   display: none !important;
 }
 
+// DISABLED BUTTONS (not implemented functionality)
+.disabled {
+  cursor: not-allowed !important;
+}
+
 // RATING
 .rating {
   align-items: center;
