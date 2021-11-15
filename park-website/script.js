@@ -5,15 +5,55 @@ You can delete it by typing "localStorage.clear()" in the console.`);
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
-  // HEART icons
+  // HEART icons +
 
   const cardHearts = document.querySelectorAll('.card__icon-heart');
 
   cardHearts.forEach(card => {
     card.addEventListener('click', () => {
       card.classList.toggle('card__icon-heart--active');
+      card.classList.contains('card__icon-heart--active')
+        ? createNotification('Lodging option is marked as favorite', 'success')
+        : createNotification(
+            'Lodging option is removed from favorites',
+            'info'
+          );
     });
   });
+
+  // TOAST NOTIFICATIONS
+  // const button = cardHearts[0];
+  const toasts = document.querySelector('.toasts');
+  const messages = [
+    'Message One',
+    'Message Two',
+    'Message Three',
+    'Message Four',
+  ];
+  const types = ['info', 'success', 'error'];
+
+  function getRandomMessage() {
+    return messages[Math.floor(Math.random() * messages.length)];
+  }
+
+  function getRandomType() {
+    return types[Math.floor(Math.random() * types.length)];
+  }
+
+  // button.addEventListener('click', () => createNotification());
+
+  function createNotification(message = null, type = null) {
+    const notification = document.createElement('div');
+    notification.classList.add('toast');
+    notification.classList.add(type ? type : getRandomType());
+    notification.innerText = message ? message : getRandomMessage();
+    toasts.appendChild(notification);
+    setTimeout(() => {
+      notification.remove();
+    }, 5000);
+  }
+
+  /////////////////////////
 
   ///// ACCOUNT /////
   // animation for labels

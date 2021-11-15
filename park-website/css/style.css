@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap");
 :root {
   --color-primary: #4682b4;
-  --color-primary-semitransparent: #5788d3ab;
+  --color-primary-semitransparent: #5789d3bd;
   --color-primary-light: #5789d3;
   --color-primary-dark: #3a5097;
   --color-heart: rgb(175, 6, 6);
@@ -16,6 +16,16 @@
   --color-grey-dark-3: #999;
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.1);
+  --background-gradient-1: linear-gradient(
+    to right bottom,
+    var(--color-grey-light-1),
+    var(--color-grey-light-3)
+  );
+  --background-gradient-2: linear-gradient(
+    to right bottom,
+    var(--color-grey-light-4),
+    var(--color-grey-dark-3)
+  );
   --line: 1px solid var(--color-grey-light-2);
   --font-title: 'IM Fell English SC', serif;
 }
@@ -79,7 +89,6 @@ body {
 }
 
 .content {
-  background-color: var(--color-grey-light-1);
   -webkit-box-shadow: var(--shadow-dark);
           box-shadow: var(--shadow-dark);
   display: -webkit-box;
@@ -113,14 +122,13 @@ body {
 }
 
 .container {
-  background-color: var(--color-grey-light-1);
   -webkit-box-shadow: var(--shadow-dark);
           box-shadow: var(--shadow-dark);
 }
 
 .account {
   width: 100%;
-  background-color: burlywood;
+  background-image: var(--background-gradient-1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -132,10 +140,11 @@ body {
           justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  padding-bottom: 3rem;
 }
 
 .intro {
-  background-color: var(--color-grey-light-3);
+  background-image: var(--background-gradient-1);
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -143,24 +152,19 @@ body {
 }
 
 .card__container {
-  background-color: var(--color-grey-light-4);
+  background-image: var(--background-gradient-2);
   padding: 5rem 2rem;
   width: 100%;
 }
 
 .hotel__hotels-container {
-  background-color: var(--color-white);
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
 }
 
-.hotel {
-  background-color: var(--color-white);
-}
-
 .gallery {
-  background-color: var(--color-grey-light-4);
+  background-image: var(--background-gradient-2);
   padding: 1.5rem;
 }
 
@@ -171,7 +175,7 @@ body {
 }
 
 .about {
-  background-color: var(--color-grey-light-4);
+  background-image: var(--background-gradient-1);
   height: calc(60vh + 10rem);
 }
 
@@ -554,8 +558,8 @@ body {
 }
 
 .social__icon:hover {
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
+  -webkit-transform: scale(1.25);
+          transform: scale(1.25);
 }
 
 .social__icon--youtube {
@@ -575,12 +579,52 @@ body {
 }
 
 .section-title {
+  color: var(--color-grey-dark-1);
   font-family: var(--font-title);
   font-size: 4rem;
   font-weight: inherit;
   text-align: center;
   margin: 2rem auto;
   width: 100%;
+}
+
+.toasts {
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  bottom: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  right: 1.5rem;
+}
+
+.toasts .toast {
+  color: var(--color-black);
+  border-radius: 5px;
+  letter-spacing: 1px;
+  margin: 0.5rem;
+  padding: 1rem 2rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.toasts .toast.info {
+  background-color: var(--color-primary-light);
+}
+
+.toasts .toast.success {
+  background-color: green;
+}
+
+.toasts .toast.error {
+  background-color: var(--color-heart);
 }
 
 .header {
@@ -1025,9 +1069,10 @@ body {
 }
 
 .intro__img-container {
-  background-image: linear-gradient(105deg, transparent 0%, transparent 60%, var(--color-primary-semitransparent) 60%, var(--color-primary-semitransparent) 100%), url(../img/park1.jpg);
+  background-image: linear-gradient(105deg, transparent 0%, transparent 60%, var(--color-primary-semitransparent) 60%, var(--color-primary-semitransparent) 100%), url(../img/hero2000.jpg);
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
   height: 100%;
   width: 100%;
 }
@@ -1055,6 +1100,7 @@ body {
 }
 
 .intro .section-title {
+  color: var(--color-black);
   font-family: var(--font-title);
   font-size: 5rem;
   font-weight: inherit;
@@ -1462,8 +1508,7 @@ body {
 }
 
 .hotel {
-  background-image: -webkit-gradient(linear, left top, right bottom, from(var(--color-grey-light-1)), to(var(--color-grey-light-3)));
-  background-image: linear-gradient(to right bottom, var(--color-grey-light-1), var(--color-grey-light-3));
+  background-image: var(--background-gradient-1);
   padding-top: 4.5rem;
 }
 
@@ -1477,6 +1522,7 @@ body {
 }
 
 .overview__heading {
+  font-family: var(--font-title);
   font-size: 2.5rem;
   font-weight: 500;
   letter-spacing: 1px;

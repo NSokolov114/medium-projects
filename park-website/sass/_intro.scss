@@ -9,9 +9,10 @@
         var(--color-primary-semitransparent) 60%,
         var(--color-primary-semitransparent) 100%
       ),
-      url(../img/park1.jpg);
+      url(../img/hero2000.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 
     height: 100%;
     width: 100%;
@@ -43,6 +44,7 @@
   }
 
   & .section-title {
+    color: var(--color-black);
     font-family: var(--font-title);
     font-size: 5rem;
     font-weight: inherit;
@@ -51,6 +53,7 @@
 
   &__subtitle {
     font-family: var(--font-title);
+
     font-size: 2.5rem;
     font-weight: 600;
   }

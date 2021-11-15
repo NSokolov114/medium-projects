@@ -26,7 +26,6 @@
 }
 
 .content {
-  background-color: var(--color-grey-light-1);
   box-shadow: var(--shadow-dark);
   display: flex;
   // padding-top: 12rem;
@@ -51,44 +50,42 @@
 }
 
 .container {
-  background-color: var(--color-grey-light-1);
   box-shadow: var(--shadow-dark);
 }
 
 .account {
   // height: 800px;
   width: 100%;
-  background-color: burlywood;
+  background-image: var(--background-gradient-1);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  padding-bottom: 3rem;
 }
 
 .intro {
-  background-color: var(--color-grey-light-3);
+  background-image: var(--background-gradient-1);
   flex: 1;
   height: 60vh;
 }
 
 .card__container {
-  background-color: var(--color-grey-light-4);
+  background-image: var(--background-gradient-2);
   padding: 5rem 2rem;
   width: 100%;
 }
 
 .hotel__hotels-container {
-  background-color: var(--color-white);
   flex: 1;
 }
 
 .hotel {
-  background-color: var(--color-white);
   // flex: 1;
 }
 
 .gallery {
-  background-color: var(--color-grey-light-4);
+  background-image: var(--background-gradient-2);
   padding: 1.5rem;
 
   @media only screen and (max-width: $bp-small) {
@@ -97,7 +94,7 @@
 }
 
 .about {
-  background-color: var(--color-grey-light-4);
+  background-image: var(--background-gradient-1);
   height: calc(60vh + 10rem);
 }
 

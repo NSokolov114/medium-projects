@@ -2,7 +2,7 @@
 
 :root {
   --color-primary: #4682b4;
-  --color-primary-semitransparent: #5788d3ab;
+  --color-primary-semitransparent: #5789d3bd;
   --color-primary-light: #5789d3;
   --color-primary-dark: #3a5097;
 
@@ -21,6 +21,17 @@
 
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.1);
+
+  --background-gradient-1: linear-gradient(
+    to right bottom,
+    var(--color-grey-light-1),
+    var(--color-grey-light-3)
+  );
+  --background-gradient-2: linear-gradient(
+    to right bottom,
+    var(--color-grey-light-4),
+    var(--color-grey-dark-3)
+  );
 
   --line: 1px solid var(--color-grey-light-2);
 
