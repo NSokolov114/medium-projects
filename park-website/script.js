@@ -5,6 +5,16 @@ You can delete it by typing "localStorage.clear()" in the console.`);
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
+  // HEART icons
+
+  const cardHearts = document.querySelectorAll('.card__icon-heart');
+
+  cardHearts.forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('card__icon-heart--active');
+    });
+  });
+
   ///// ACCOUNT /////
   // animation for labels
   const labels = document.querySelectorAll('.account-card__form label');
@@ -22,11 +32,9 @@ function ready() {
   const cards = document.querySelectorAll('.account-card__side');
   const testBtn = document.querySelector('.testing');
   let counter = 0;
-  const rotations = [1, 1, 0, 1, 1, 0];
-  const sidesNum = rotations.length / 2;
-  // let rotateA = 1;
-  // let rotateB = 0;
-  // let rotateC = 0;
+  const rotations = [0, 1, 1];
+  const sidesNum = cards.length / 2;
+
   rotateCards(cards, rotations);
   testBtn.addEventListener('click', () => {
     rotations[counter]++;
@@ -38,11 +46,10 @@ function ready() {
     console.log(counter);
     rotateCards(cards, rotations);
   });
-  console.log(cards.length);
 
   function rotateCards(cards, rotations) {
     cards.forEach((card, idx) => {
-      card.style.transform = `rotateY(${rotations[idx] * 180}deg)`;
+      card.style.transform = `rotateY(${rotations[idx % sidesNum] * 180}deg)`;
     });
   }
 

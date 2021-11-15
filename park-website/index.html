@@ -169,8 +169,12 @@
                 <button class="account-card__btn">Log In</button>
 
                 <p>
-                  Don't have an account?
-                  <a class="account-card__activate-signup">Register now!</a>
+                  <small
+                    >Don't have an account?
+                    <a class="account-card__activate-signup"
+                      >Register now!</a
+                    ></small
+                  >
                 </p>
               </div>
               <!-- side B -->
@@ -193,8 +197,12 @@
                 <button class="account-card__btn">Create account</button>
 
                 <p>
-                  Already have an account?
-                  <a class="account-card__activate-login">Log in now!</a>
+                  <small
+                    >Already have an account?
+                    <a class="account-card__activate-login"
+                      >Log in now!</a
+                    ></small
+                  >
                 </p>
               </div>
               <!-- side C -->
@@ -250,19 +258,24 @@
             <div class="account-card account-card--info">
               <!-- side A -->
               <div class="account-card__side">
-                <h3>Log In</h3>
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Email</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="password" required />
-                  <label>Password</label>
-                </div>
-                <button class="account-card__btn">Login</button>
-
-                <p>Don't have an account? <a href="#">Register now!</a></p>
+                <h3>Welcome!</h3>
+                <p>
+                  Please, log in to be able to manage your bookings, book a new
+                  property or add a review!
+                </p>
+                <p>
+                  If you don't have an account, you can
+                  <a href="#">create a new one</a>. It's free and only takes
+                  about 2 minutes.
+                </p>
+                <p>
+                  If you forgot your password or have some problems with logging
+                  in, please write us and we'll be happy to help you.
+                </p>
+                <p>
+                  Email:
+                  <a href="mailto:support@snpicm.cz">support@snpicm.cz</a>
+                </p>
               </div>
               <!-- side B -->
               <div class="account-card__side">
@@ -274,16 +287,16 @@
                 <p>Username may only include letters and digits.</p>
                 <p>
                   Password should be at least 8 symbols long and include at
-                  least one letter, one capital letter and 1 digit. If you want,
-                  press the button below to generate a unique password that
-                  meets the requirements and copy-paste it to use it as your
-                  password.
+                  least one of each: lowercase letters, uppercase letters and
+                  digits.
                 </p>
-                <button class="account-card__btn-generate-pwd">
+                <button
+                  class="account-card__btn account-card__btn-generate-pwd"
+                >
                   Generate password
                 </button>
 
-                <p>Already have an account? <a href="#">Log in now!</a></p>
+                <p>Generated password: <a href="#">KSgs7213</a></p>
               </div>
               <!-- side C -->
               <div class="account-card__side">
@@ -334,6 +347,12 @@
                 <div class="rating__average">8.6</div>
                 <div class="rating__count">462 votes</div>
               </div>
+
+              <div class="card__icon-heart">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                </svg>
+              </div>
             </div>
 
             <!-- card 2 -->
@@ -360,6 +379,12 @@
               <div class="rating card__rating">
                 <div class="rating__average">8.6</div>
                 <div class="rating__count">462 votes</div>
+              </div>
+
+              <div class="card__icon-heart">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                </svg>
               </div>
             </div>
 
@@ -388,6 +413,12 @@
                 <div class="rating__average">8.6</div>
                 <div class="rating__count">462 votes</div>
               </div>
+
+              <div class="card__icon-heart">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                </svg>
+              </div>
             </div>
 
             <!-- card 4 -->
@@ -414,6 +445,12 @@
               <div class="rating card__rating">
                 <div class="rating__average">8.6</div>
                 <div class="rating__count">462 votes</div>
+              </div>
+
+              <div class="card__icon-heart">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                </svg>
               </div>
             </div>
 
@@ -442,6 +479,12 @@
                 <div class="rating__average">8.6</div>
                 <div class="rating__count">462 votes</div>
               </div>
+
+              <div class="card__icon-heart">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                </svg>
+              </div>
             </div>
 
             <!-- card 6 -->
@@ -466,6 +509,12 @@
               <div class="rating card__rating">
                 <div class="rating__average">8.6</div>
                 <div class="rating__count">462 votes</div>
+              </div>
+
+              <div class="card__icon-heart">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                </svg>
               </div>
             </div>
 
@@ -917,9 +966,7 @@
                     <li class="list__item">In the middle of the forest</li>
                     <li class="list__item">Breakfast included</li>
                     <li class="list__item">Free WiFi in all rooms</li>
-                    <li class="list__item">
-                      Heating (if you find enough wood)
-                    </li>
+                    <li class="list__item">Heating (bring your wood)</li>
                     <li class="list__item">We speak all languages</li>
                   </ul>
                   <div class="recommend">

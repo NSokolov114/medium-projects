@@ -1198,6 +1198,28 @@ body {
   }
 }
 
+.card__icon-heart {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.card__icon-heart svg {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.card__icon-heart--active svg {
+  fill: var(--color-heart);
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
 .card__cta {
   grid-column: 1/-1;
   -webkit-box-ordinal-group: 5;
