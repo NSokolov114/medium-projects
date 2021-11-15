@@ -2,10 +2,11 @@
 
 console.log(`Hi there! Your account details are stored only in the local storage of your browser.
 You can delete it by typing "localStorage.clear()" in the console.`);
+
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
-  // HEART icons +
+  // HEART icons
 
   const cardHearts = document.querySelectorAll('.card__icon-heart');
 
@@ -175,6 +176,7 @@ function ready() {
         locations[idx + 1].coords,
         locations[idx + 1].description
       ).openPopup();
+      createNotification('Lodging marker is added to the map', 'info');
     });
   });
   ///////////////////////
