@@ -16,7 +16,12 @@
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin=""
     ></script>
-
+    <!-- calendar -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css"
+    />
+    <!-- fonts -->
     <link
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600"
       rel="stylesheet"
@@ -87,16 +92,8 @@
                 <span>Home</span>
               </a>
             </li>
-            <li class="side-nav__item" id="side-nav__hotel">
-              <a href="./index.html#hotel" class="side-nav__link">
-                <svg class="side-nav__icon">
-                  <use xlink:href="./img/sprite.svg#icon-key"></use>
-                </svg>
-                <span>Lodgings</span>
-              </a>
-            </li>
-            <li class="side-nav__item">
-              <a href="./index.html#book" class="side-nav__link">
+            <li class="side-nav__item" id="side-nav__booking">
+              <a href="./index.html#booking" class="side-nav__link">
                 <svg class="side-nav__icon">
                   <use xlink:href="./img/sprite.svg#icon-calendar"></use>
                 </svg>
@@ -112,6 +109,18 @@
               </a>
             </li>
             <li
+              class="side-nav__item side-nav__item--account"
+              id="side-nav__account"
+            >
+              <a href="./index.html#account" class="side-nav__link">
+                <svg class="side-nav__icon">
+                  <use xlink:href="./img/sprite.svg#icon-user"></use>
+                </svg>
+                <span>Account</span>
+              </a>
+            </li>
+
+            <li
               class="side-nav__item side-nav__item--gallery"
               id="side-nav__gallery"
             >
@@ -122,15 +131,12 @@
                 <span>Gallery</span>
               </a>
             </li>
-            <li
-              class="side-nav__item side-nav__item--account"
-              id="side-nav__account"
-            >
-              <a href="./index.html#account" class="side-nav__link">
+            <li class="side-nav__item" id="side-nav__hotel">
+              <a href="./index.html#hotel" class="side-nav__link">
                 <svg class="side-nav__icon">
-                  <use xlink:href="./img/sprite.svg#icon-user"></use>
+                  <use xlink:href="./img/sprite.svg#icon-key"></use>
                 </svg>
-                <span>Account</span>
+                <span>Lodgings</span>
               </a>
             </li>
           </ul>
@@ -147,173 +153,6 @@
                 National Ski Park in Carpathian Mountains welcomes visitors from
                 all over the world since 1883
               </p>
-            </div>
-          </section>
-
-          <!-- account -->
-          <section class="account" id="account">
-            <h3 class="section-title testing">Your account</h3>
-            <div class="account-card account-card--user-input">
-              <!-- side A -->
-              <div class="account-card__side">
-                <h3>Log In</h3>
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Username</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="password" required />
-                  <label>Password</label>
-                </div>
-                <button class="account-card__btn">Log In</button>
-
-                <p>
-                  <small
-                    >Don't have an account?
-                    <a class="account-card__activate-signup"
-                      >Register now!</a
-                    ></small
-                  >
-                </p>
-              </div>
-              <!-- side B -->
-              <div class="account-card__side">
-                <h3>Sign Up</h3>
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Username</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="text" required />
-                  <label>Email</label>
-                </div>
-
-                <div class="account-card__form">
-                  <input type="password" required />
-                  <label>Password</label>
-                </div>
-                <button class="account-card__btn">Create account</button>
-
-                <p>
-                  <small
-                    >Already have an account?
-                    <a class="account-card__activate-login"
-                      >Log in now!</a
-                    ></small
-                  >
-                </p>
-              </div>
-              <!-- side C -->
-              <div class="account-card__side account-card__side--settings">
-                <h3>Your favorite lodgings</h3>
-                <ul>
-                  <li>
-                    <input type="checkbox" name="items" id="item1" />
-                    <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
-                    </svg>
-                    <label for="item1">Ursa Major Cabins</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="items" id="item2" />
-                    <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
-                    </svg>
-                    <label for="item2">Spruce Cabins</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="items" id="item3" />
-                    <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
-                    </svg>
-                    <label for="item3">Fire Cabins</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="items" id="item4" />
-                    <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
-                    </svg>
-                    <label for="item4">Bear Meadow Campground</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="items" id="item5" />
-                    <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
-                    </svg>
-                    <label for="item5">Leadfoot Campground</label>
-                  </li>
-                  <li>
-                    <input type="checkbox" name="items" id="item6" />
-                    <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
-                    </svg>
-                    <label for="item6">Lakeside Campground</label>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="account-card account-card--info">
-              <!-- side A -->
-              <div class="account-card__side">
-                <h3>Welcome!</h3>
-                <p>
-                  Please, log in to be able to manage your bookings, book a new
-                  property or add a review!
-                </p>
-                <p>
-                  If you don't have an account, you can
-                  <a href="#">create a new one</a>. It's free and only takes
-                  about 2 minutes.
-                </p>
-                <p>
-                  If you forgot your password or have some problems with logging
-                  in, please write us and we'll be happy to help you.
-                </p>
-                <p>
-                  Email:
-                  <a href="mailto:support@snpicm.cz">support@snpicm.cz</a>
-                </p>
-              </div>
-              <!-- side B -->
-              <div class="account-card__side">
-                <h3>Creating new account</h3>
-                <p>
-                  If you want to create new account, you need to specify your
-                  preferred Username, Email and Password.
-                </p>
-                <p>Username may only include letters and digits.</p>
-                <p>
-                  Password should be at least 8 symbols long and include at
-                  least one of each: lowercase letters, uppercase letters and
-                  digits.
-                </p>
-                <button
-                  class="account-card__btn account-card__btn-generate-pwd"
-                >
-                  Generate password
-                </button>
-
-                <p>Generated password: <a href="#">KSgs7213</a></p>
-              </div>
-              <!-- side C -->
-              <div class="account-card__side">
-                <h3>Welcome back!</h3>
-                <p>You're logged in as Vasya.</p>
-                <p>
-                  Now you can change some account settings and manage your
-                  bookings.
-                </p>
-                <button class="account-card__btn">
-                  Book your next holiday
-                </button>
-                <button class="account-card__btn">Manage your bookings</button>
-                <button class="account-card__btn account-card__btn-logout">
-                  Log out
-                </button>
-              </div>
             </div>
           </section>
 
@@ -530,6 +369,49 @@
             </div>
           </section>
 
+          <!-- booking -->
+          <section class="booking" id="booking">
+            <form action="#" class="booking__form">
+              <h3 class="section-title">Book Now!</h3>
+              <label for="booking__lodgings">Where do you want to stay?</label>
+              <select name="booking__lodgings" id="booking__lodgings" required>
+                <option value="none" disabled selected>...</option>
+                <option value="1">Ursa Major Cabins</option>
+                <option value="2">Spruce Cabins</option>
+                <option value="3">Fire Cabins</option>
+                <option value="4">Bear Meadow Campground</option>
+                <option value="5">Leadfoot Campground</option>
+                <option value="6">Lakeside Campground</option>
+              </select>
+
+              <label for="booking__rooms">How many rooms/tents to book?</label>
+              <select name="booking__rooms" id="booking__rooms" required>
+                <option value="none" disabled selected>...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4+</option>
+              </select>
+
+              <label for="booking__people">How many people will come?</label>
+              <select name="booking__people" id="booking__people" required>
+                <option value="none" disabled selected>...</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6+</option>
+              </select>
+
+              <!-- calendar -->
+              <label for="litepicker">What are the dates of your visit?</label>
+              <input id="litepicker" placeholder="Pick the dates" />
+
+              <input type="submit" value="Submit" id="booking__submit" />
+            </form>
+          </section>
+
           <!-- about -->
           <section class="about" id="about">
             <h3 class="section-title">Where to find us?</h3>
@@ -570,6 +452,173 @@
                   </a>
                 </li>
               </ul>
+            </div>
+          </section>
+
+          <!-- account -->
+          <section class="account" id="account">
+            <h3 class="section-title testing">Your account</h3>
+            <div class="account-card account-card--user-input">
+              <!-- side A -->
+              <div class="account-card__side">
+                <h3>Log In</h3>
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Username</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="password" required />
+                  <label>Password</label>
+                </div>
+                <button class="account-card__btn">Log In</button>
+
+                <p>
+                  <small
+                    >Don't have an account?
+                    <a class="account-card__activate-signup"
+                      >Register now!</a
+                    ></small
+                  >
+                </p>
+              </div>
+              <!-- side B -->
+              <div class="account-card__side">
+                <h3>Sign Up</h3>
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Username</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="text" required />
+                  <label>Email</label>
+                </div>
+
+                <div class="account-card__form">
+                  <input type="password" required />
+                  <label>Password</label>
+                </div>
+                <button class="account-card__btn">Create account</button>
+
+                <p>
+                  <small
+                    >Already have an account?
+                    <a class="account-card__activate-login"
+                      >Log in now!</a
+                    ></small
+                  >
+                </p>
+              </div>
+              <!-- side C -->
+              <div class="account-card__side account-card__side--settings">
+                <h3>Your favorite lodgings</h3>
+                <ul>
+                  <li>
+                    <input type="checkbox" name="items" id="item1" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item1">Ursa Major Cabins</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item2" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item2">Spruce Cabins</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item3" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item3">Fire Cabins</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item4" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item4">Bear Meadow Campground</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item5" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item5">Leadfoot Campground</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="items" id="item6" />
+                    <svg class="todo-list__fake-input">
+                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                    </svg>
+                    <label for="item6">Lakeside Campground</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="account-card account-card--info">
+              <!-- side A -->
+              <div class="account-card__side">
+                <h3>Welcome!</h3>
+                <p>
+                  Please, log in to be able to manage your bookings, book a new
+                  property or add a review!
+                </p>
+                <p>
+                  If you don't have an account, you can
+                  <a href="#">create a new one</a>. It's free and only takes
+                  about 2 minutes.
+                </p>
+                <p>
+                  If you forgot your password or have some problems with logging
+                  in, please write us and we'll be happy to help you.
+                </p>
+                <p>
+                  Email:
+                  <a href="mailto:support@snpicm.cz">support@snpicm.cz</a>
+                </p>
+              </div>
+              <!-- side B -->
+              <div class="account-card__side">
+                <h3>Creating new account</h3>
+                <p>
+                  If you want to create new account, you need to specify your
+                  preferred Username, Email and Password.
+                </p>
+                <p>Username may only include letters and digits.</p>
+                <p>
+                  Password should be at least 8 symbols long and include at
+                  least one of each: lowercase letters, uppercase letters and
+                  digits.
+                </p>
+                <button
+                  class="account-card__btn account-card__btn-generate-pwd"
+                >
+                  Generate password
+                </button>
+
+                <p>Generated password: <a href="#">KSgs7213</a></p>
+              </div>
+              <!-- side C -->
+              <div class="account-card__side">
+                <h3>Welcome back!</h3>
+                <p>You're logged in as Vasya.</p>
+                <p>
+                  Now you can change some account settings and manage your
+                  bookings.
+                </p>
+                <button class="account-card__btn">
+                  Book your next holiday
+                </button>
+                <button class="account-card__btn">Manage your bookings</button>
+                <button class="account-card__btn account-card__btn-logout">
+                  Log out
+                </button>
+              </div>
             </div>
           </section>
 
@@ -1476,6 +1525,8 @@
       <!-- placeholder for toast notifications -->
       <div class="toasts"></div>
     </div>
+    <!-- calendar -->
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

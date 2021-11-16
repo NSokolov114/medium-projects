@@ -1,0 +1,76 @@
+.booking {
+  // height: 52rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  background-image: url(../img/book2000.jpg);
+  // background-image: linear-gradient(
+  //     105deg,
+  //     transparent 0%,
+  //     transparent 40%,
+  //     var(--color-primary-semitransparent) 40%,
+  //     var(--color-primary-semitransparent) 100%
+  //   ),
+  //   url(../img/book2000.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  width: 100%;
+
+  @media only screen and (max-width: $bp-medium) {
+    align-items: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    width: 300px;
+    background-color: var(--color-grey-dark-1);
+    margin: 4rem;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    color: var(--color-white);
+
+    & .section-title {
+      color: var(--color-white);
+    }
+
+    & label {
+      margin-bottom: 0.3rem;
+    }
+
+    & select,
+    input {
+      width: 250px;
+      font-size: 1.4rem;
+      // height: 3rem;
+      border: none;
+      outline: none;
+      background-color: var(--color-grey-dark-1);
+      filter: brightness(1.2);
+      color: var(--color-white);
+      border-radius: 3px;
+      margin-bottom: 2rem;
+      padding: 1rem 0.5rem;
+    }
+
+    & #booking__submit {
+      background-color: var(--color-primary-light);
+      filter: none;
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+.litepicker {
+  font-size: 1.5rem;
+}

@@ -6,6 +6,22 @@ You can delete it by typing "localStorage.clear()" in the console.`);
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
+  // calendar
+  const currentDate = new Date();
+  const picker = new Litepicker({
+    element: document.getElementById('litepicker'),
+    singleMode: false,
+    tooltipText: {
+      one: 'night',
+      other: 'nights',
+    },
+    tooltipNumber: totalDays => {
+      return totalDays - 1;
+    },
+    lockDays: ['2021-11-22', ['1970-11-11', currentDate]],
+  });
+  // picker.show();
+  console.log(currentDate);
   // HEART icons
 
   const cardHearts = document.querySelectorAll('.card__icon-heart');
@@ -256,6 +272,10 @@ function ready() {
   const galleryNav = document.getElementById('side-nav__gallery');
   const lodgingsSection = document.getElementById('hotel');
   const lodgingsNav = document.getElementById('side-nav__hotel');
+  const bookingSection = document.getElementById('booking');
+  const bookingNav = document.getElementById('side-nav__booking');
+  const accountSection = document.getElementById('account');
+  const accountNav = document.getElementById('side-nav__account');
 
   //prettier-ignore
   const sectionsPositions = [
@@ -263,6 +283,8 @@ function ready() {
     { section: 'about', top: 1000, el: aboutSection, nav: aboutNav },
     { section: 'gallery', top: 1000, el: gallerySection, nav: galleryNav },
     { section: 'hotel', top: 1000, el: lodgingsSection, nav: lodgingsNav },
+    { section: 'booking', top: 1000, el: bookingSection, nav: bookingNav },
+    { section: 'account', top: 1000, el: accountSection, nav: accountNav },
   ];
   let activeSectionIdx;
 

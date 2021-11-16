@@ -8,7 +8,7 @@
   --color-white: #fff;
   --color-grey-light-1: #faf9f9;
   --color-grey-light-2: #f4f2f2;
-  --color-grey-light-3: #f0eeee;
+  --color-grey-light-3: #ddd;
   --color-grey-light-4: #ccc;
   --color-black: #000;
   --color-grey-dark-1: #333;
@@ -89,8 +89,6 @@ body {
 }
 
 .content {
-  -webkit-box-shadow: var(--shadow-dark);
-          box-shadow: var(--shadow-dark);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -143,6 +141,11 @@ body {
   padding-bottom: 3rem;
 }
 
+.booking {
+  background-image: var(--background-gradient-1);
+  width: 100%;
+}
+
 .intro {
   background-image: var(--background-gradient-1);
   -webkit-box-flex: 1;
@@ -152,7 +155,7 @@ body {
 }
 
 .card__container {
-  background-image: var(--background-gradient-2);
+  background-image: var(--background-gradient-1);
   padding: 5rem 2rem;
   width: 100%;
 }
@@ -164,7 +167,7 @@ body {
 }
 
 .gallery {
-  background-image: var(--background-gradient-2);
+  background-image: var(--background-gradient-1);
   padding: 1.5rem;
 }
 
@@ -413,7 +416,7 @@ body {
   background-image: -webkit-gradient(linear, left top, right top, from(var(--color-primary)), to(var(--color-primary-dark)));
   background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
   border: none;
-  border-radius: 100px;
+  border-radius: 5px;
   color: var(--color-white);
   cursor: pointer;
   font-size: 1.5rem;
@@ -1081,7 +1084,7 @@ body {
 
 @media only screen and (max-width: 600px) {
   .intro__img-container {
-    background-image: linear-gradient(155deg, transparent 0%, transparent 30%, var(--color-primary-semitransparent) 50%, var(--color-primary-semitransparent) 100%), url(../img/park1.jpg);
+    background-image: linear-gradient(155deg, transparent 0%, transparent 30%, var(--color-primary-semitransparent) 50%, var(--color-primary-semitransparent) 100%), url(../img/hero2000.jpg);
   }
 }
 
@@ -1113,6 +1116,96 @@ body {
   font-family: var(--font-title);
   font-size: 2.5rem;
   font-weight: 600;
+}
+
+.booking {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-image: url(../img/book2000.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .booking {
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
+.booking__form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.5rem;
+  width: 300px;
+  background-color: var(--color-grey-dark-1);
+  margin: 4rem;
+  padding: 1rem 3rem;
+  border-radius: 5px;
+  color: var(--color-white);
+}
+
+.booking__form .section-title {
+  color: var(--color-white);
+}
+
+.booking__form label {
+  margin-bottom: 0.3rem;
+}
+
+.booking__form select,
+.booking__form input {
+  width: 250px;
+  font-size: 1.4rem;
+  border: none;
+  outline: none;
+  background-color: var(--color-grey-dark-1);
+  -webkit-filter: brightness(1.2);
+          filter: brightness(1.2);
+  color: var(--color-white);
+  border-radius: 3px;
+  margin-bottom: 2rem;
+  padding: 1rem 0.5rem;
+}
+
+.booking__form #booking__submit {
+  background-color: var(--color-primary-light);
+  -webkit-filter: none;
+          filter: none;
+}
+
+.booking__form #booking__submit:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
+.litepicker {
+  font-size: 1.5rem;
 }
 
 .card__container {
