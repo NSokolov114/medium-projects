@@ -14,11 +14,8 @@ function ready() {
     card.addEventListener('click', () => {
       card.classList.toggle('card__icon-heart--active');
       card.classList.contains('card__icon-heart--active')
-        ? createNotification('Lodging option is marked as favorite', 'success')
-        : createNotification(
-            'Lodging option is removed from favorites',
-            'info'
-          );
+        ? createNotification('Marked as favorite', 'success')
+        : createNotification('Removed from favorites', 'info');
     });
   });
 

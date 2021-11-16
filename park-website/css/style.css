@@ -463,22 +463,22 @@ body {
 }
 
 .to-top-btn {
-  position: fixed;
-  bottom: 3rem;
-  left: calc(50vw - 655px);
-  z-index: 3;
-  border: none;
-  outline: none;
   background-color: var(--color-grey-dark-1);
+  border-radius: 5px;
+  border: none;
+  bottom: 3rem;
   color: var(--color-white);
   cursor: pointer;
-  padding: 2rem 1.5rem;
-  border-radius: 5px;
   font-size: 2rem;
-  -webkit-transition: all 0.2s;
-  transition: all 0.2s;
+  left: calc(50vw - 655px);
+  outline: none;
+  padding: 2rem 1.5rem;
+  position: fixed;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  z-index: 3;
 }
 
 .to-top-btn:hover, .to-top-btn:focus {
@@ -613,14 +613,16 @@ body {
   font-family: inherit;
   font-size: 1.5rem;
   font-weight: bold;
+  max-width: 200px;
+  text-align: right;
 }
 
 .toasts .toast.info {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-primary-semitransparent);
 }
 
 .toasts .toast.success {
-  background-color: green;
+  background-color: rgba(0, 128, 0, 0.7);
 }
 
 .toasts .toast.error {
@@ -1759,6 +1761,7 @@ body {
   max-height: 60rem;
   min-height: 45rem;
   width: 75%;
+  z-index: 2;
 }
 
 @media only screen and (max-width: 900px) {

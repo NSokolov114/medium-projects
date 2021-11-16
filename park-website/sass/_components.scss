@@ -78,7 +78,7 @@
   }
 
   50% {
-    box-shadow: 0 1rem 4rem rgba($color: #000000, $alpha: 0.25);
+    box-shadow: 0 1rem 4rem rgba($color: #000, $alpha: 0.25);
     transform: scale(1.05);
   }
 
@@ -237,21 +237,20 @@
 
 // BACK TO TOP BUTTON
 .to-top-btn {
-  position: fixed;
-  bottom: 3rem;
-  left: calc(50vw - 655px);
-  z-index: 3;
-  border: none;
-  outline: none;
   background-color: var(--color-grey-dark-1);
-
+  border-radius: 5px;
+  border: none;
+  bottom: 3rem;
   color: var(--color-white);
   cursor: pointer;
-  padding: 2rem 1.5rem;
-  border-radius: 5px;
   font-size: 2rem;
-  transition: all 0.2s;
+  left: calc(50vw - 655px);
+  outline: none;
+  padding: 2rem 1.5rem;
+  position: fixed;
   transform: translateX(-50%);
+  transition: all 0.2s;
+  z-index: 3;
 
   &:hover,
   &:focus {
@@ -279,7 +278,6 @@
 }
 
 // SOCIAL ICONS
-
 .social {
   display: grid;
   justify-content: center;
@@ -360,13 +358,15 @@
     font-family: inherit;
     font-size: 1.5rem;
     font-weight: bold;
+    max-width: 200px;
+    text-align: right;
 
     &.info {
-      background-color: var(--color-primary-light);
+      background-color: var(--color-primary-semitransparent);
     }
 
     &.success {
-      background-color: green;
+      background-color: rgba(0, 128, 0, 0.7);
     }
 
     &.error {
