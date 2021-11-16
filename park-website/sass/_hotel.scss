@@ -12,6 +12,8 @@
 .overview {
   align-items: center;
   display: flex;
+  position: relative;
+  justify-content: center;
 
   &__heading {
     font-family: var(--font-title);
@@ -20,12 +22,20 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     padding: 1.5rem 3rem;
+    margin-left: 2rem;
     margin-right: auto;
 
     @media only screen and (max-width: $bp-small) {
       font-size: 1.8rem;
       padding: 1.25rem 2rem;
     }
+  }
+
+  &__icon-heart {
+    height: 2rem;
+    width: 2rem;
+    display: inline-block;
+    margin-left: 1rem;
   }
 
   &__icon-location {
@@ -46,6 +56,8 @@
   &__rating {
     margin-left: 3rem;
     padding: 0 2.25rem;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
     @media only screen and (max-width: $bp-small) {
       padding: 0 1.5rem;
@@ -77,6 +89,7 @@
   flex: 0 0 60%;
   margin-right: 4.5rem;
   padding: 3rem;
+  border-radius: 5px;
 
   @media only screen and (max-width: $bp-medium) {
     padding: 2rem;
@@ -95,6 +108,15 @@
   display: flex;
   flex: 1;
   flex-direction: column;
+
+  & figure {
+    border-radius: 5px;
+    transition: all 0.3s;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
+  }
 }
 
 // LIST
@@ -116,7 +138,7 @@
     }
 
     &::before {
-      background-image: url(../img/chevron-thin-right.svg);
+      background-image: url(../img/chevron.svg);
       background-size: cover;
       content: '';
       display: inline-block;
@@ -126,7 +148,7 @@
 
       @supports (mask-image: url()) or (-webkit-mask-image: url()) {
         background-color: var(--color-primary);
-        mask-image: url(../img/chevron-thin-right.svg);
+        mask-image: url(../img/chevron.svg);
         mask-size: cover;
         background-image: none;
       }

@@ -45,16 +45,16 @@
           >
         </h1>
         <!-- user nav -->
-        <nav class="user-nav hidden">
+        <nav class="user-nav">
           <button class="user-nav__icon-box disabled">
             <svg class="user-nav__icon">
-              <use xlink:href="./img/sprite.svg#icon-bookmark"></use>
+              <use xlink:href="./img/sprite.svg#icon-calendar"></use>
             </svg>
             <span class="user-nav__notification">7</span>
           </button>
           <button class="user-nav__icon-box disabled">
             <svg class="user-nav__icon">
-              <use xlink:href="./img/sprite.svg#icon-chat"></use>
+              <use xlink:href="./img/sprite.svg#icon-envelop"></use>
             </svg>
             <span class="user-nav__notification">13</span>
           </button>
@@ -70,10 +70,10 @@
         </nav>
 
         <button
-          class="create-account"
+          class="user-nav__to-account hidden"
           title="Login with existing account or create new"
         >
-          <a href="./index.html#account">Log In</a>
+          Log In
         </button>
       </header>
 
@@ -103,7 +103,7 @@
             <li class="side-nav__item" id="side-nav__about">
               <a href="./index.html#about" class="side-nav__link">
                 <svg class="side-nav__icon">
-                  <use xlink:href="./img/sprite.svg#icon-map"></use>
+                  <use xlink:href="./img/sprite.svg#icon-map2"></use>
                 </svg>
                 <span>Contacts</span>
               </a>
@@ -187,9 +187,9 @@
                 <div class="rating__count">462 votes</div>
               </div>
 
-              <div class="card__icon-heart">
+              <div class="card__icon-heart icon-heart">
                 <svg>
-                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                  <use xlink:href="./img/sprite.svg#icon-heart"></use>
                 </svg>
               </div>
             </div>
@@ -220,9 +220,9 @@
                 <div class="rating__count">462 votes</div>
               </div>
 
-              <div class="card__icon-heart">
+              <div class="card__icon-heart icon-heart">
                 <svg>
-                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                  <use xlink:href="./img/sprite.svg#icon-heart"></use>
                 </svg>
               </div>
             </div>
@@ -253,9 +253,9 @@
                 <div class="rating__count">462 votes</div>
               </div>
 
-              <div class="card__icon-heart">
+              <div class="card__icon-heart icon-heart">
                 <svg>
-                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                  <use xlink:href="./img/sprite.svg#icon-heart"></use>
                 </svg>
               </div>
             </div>
@@ -286,9 +286,9 @@
                 <div class="rating__count">462 votes</div>
               </div>
 
-              <div class="card__icon-heart">
+              <div class="card__icon-heart icon-heart">
                 <svg>
-                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                  <use xlink:href="./img/sprite.svg#icon-heart"></use>
                 </svg>
               </div>
             </div>
@@ -319,9 +319,9 @@
                 <div class="rating__count">462 votes</div>
               </div>
 
-              <div class="card__icon-heart">
+              <div class="card__icon-heart icon-heart">
                 <svg>
-                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                  <use xlink:href="./img/sprite.svg#icon-heart"></use>
                 </svg>
               </div>
             </div>
@@ -350,9 +350,9 @@
                 <div class="rating__count">462 votes</div>
               </div>
 
-              <div class="card__icon-heart">
+              <div class="card__icon-heart icon-heart">
                 <svg>
-                  <use xlink:href="./img/sprite.svg#icon-location"></use>
+                  <use xlink:href="./img/sprite.svg#icon-heart"></use>
                 </svg>
               </div>
             </div>
@@ -362,7 +362,7 @@
                 Choose dates, check all the available options and book your next
                 best holiday!
               </h2>
-              <button class="btn">
+              <button class="btn cta__book-btn">
                 <span class="btn__visible">Start Booking</span>
                 <span class="btn__invisible">before it's too late</span>
               </button>
@@ -458,6 +458,8 @@
           <!-- account -->
           <section class="account" id="account">
             <h3 class="section-title testing">Your account</h3>
+
+            <!-- FORM CARD -->
             <div class="account-card account-card--user-input">
               <!-- side A -->
               <div class="account-card__side">
@@ -517,42 +519,42 @@
                   <li>
                     <input type="checkbox" name="items" id="item1" />
                     <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
                     </svg>
                     <label for="item1">Ursa Major Cabins</label>
                   </li>
                   <li>
                     <input type="checkbox" name="items" id="item2" />
                     <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
                     </svg>
                     <label for="item2">Spruce Cabins</label>
                   </li>
                   <li>
                     <input type="checkbox" name="items" id="item3" />
                     <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
                     </svg>
                     <label for="item3">Fire Cabins</label>
                   </li>
                   <li>
                     <input type="checkbox" name="items" id="item4" />
                     <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
                     </svg>
                     <label for="item4">Bear Meadow Campground</label>
                   </li>
                   <li>
                     <input type="checkbox" name="items" id="item5" />
                     <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
                     </svg>
                     <label for="item5">Leadfoot Campground</label>
                   </li>
                   <li>
                     <input type="checkbox" name="items" id="item6" />
                     <svg class="todo-list__fake-input">
-                      <use xlink:href="./img/sprite.svg#icon-cog"></use>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
                     </svg>
                     <label for="item6">Lakeside Campground</label>
                   </li>
@@ -560,6 +562,7 @@
               </div>
             </div>
 
+            <!-- INFO CARD -->
             <div class="account-card account-card--info">
               <!-- side A -->
               <div class="account-card__side">
@@ -586,8 +589,8 @@
               <div class="account-card__side">
                 <h3>Creating new account</h3>
                 <p>
-                  If you want to create new account, you need to specify your
-                  preferred Username, Email and Password.
+                  To create new account you need to specify your preferred
+                  Username, Email and Password.
                 </p>
                 <p>Username may only include letters and digits.</p>
                 <p>
@@ -611,10 +614,12 @@
                   Now you can change some account settings and manage your
                   bookings.
                 </p>
-                <button class="account-card__btn">
+                <button class="account-card__btn cta__book-btn">
                   Book your next holiday
                 </button>
-                <button class="account-card__btn">Manage your bookings</button>
+                <button class="account-card__btn disabled">
+                  Manage your bookings
+                </button>
                 <button class="account-card__btn account-card__btn-logout">
                   Log out
                 </button>
@@ -729,7 +734,14 @@
             <!-- hotel 1 -->
             <div class="hotel" id="hotel-1">
               <div class="overview">
-                <h2 class="overview__heading">Ursa Major Cabins</h2>
+                <h2 class="overview__heading">
+                  <span>Ursa Major Cabins</span>
+                  <span class="overview__icon-heart icon-heart">
+                    <svg>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
+                    </svg>
+                  </span>
+                </h2>
 
                 <div class="overview__location">
                   <svg class="overview__icon-location">
@@ -834,17 +846,17 @@
                       <div class="review__rating">9.7</div>
                     </figcaption>
                   </figure>
-                  <button class="btn-inline">
+                  <button class="btn-inline disabled">
                     Show All Reviews <span>&rarr;</span>
                   </button>
                 </div>
               </div>
 
-              <div class="cta cta hotel__cta">
+              <div class="cta hotel__cta">
                 <h2 class="cta__book-now">
                   Good news! We have 4 free rooms for your selected dates!
                 </h2>
-                <button class="btn">
+                <button class="btn cta__book-btn">
                   <span class="btn__visible">Book now</span>
                   <span class="btn__invisible">Only 4 rooms left</span>
                 </button>
@@ -854,7 +866,14 @@
             <!-- hotel 2 -->
             <div class="hotel" id="hotel-2">
               <div class="overview">
-                <h2 class="overview__heading">Spruce Cabins</h2>
+                <h2 class="overview__heading">
+                  <span>Spruce Cabins</span>
+                  <span class="overview__icon-heart icon-heart">
+                    <svg>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
+                    </svg>
+                  </span>
+                </h2>
 
                 <div class="overview__location">
                   <svg class="overview__icon-location">
@@ -960,7 +979,7 @@
                       <div class="review__rating">9.7</div>
                     </figcaption>
                   </figure>
-                  <button class="btn-inline">
+                  <button class="btn-inline disabled">
                     Show All Reviews <span>&rarr;</span>
                   </button>
                 </div>
@@ -970,7 +989,7 @@
                 <h2 class="cta__book-now">
                   Good news! We have 4 free rooms for your selected dates!
                 </h2>
-                <button class="btn">
+                <button class="btn cta__book-btn">
                   <span class="btn__visible">Book now</span>
                   <span class="btn__invisible">Only 4 rooms left</span>
                 </button>
@@ -980,7 +999,14 @@
             <!-- hotel 3 -->
             <div class="hotel" id="hotel-3">
               <div class="overview">
-                <h2 class="overview__heading">Fire Cabins</h2>
+                <h2 class="overview__heading">
+                  <span>Fire Cabins</span>
+                  <span class="overview__icon-heart icon-heart">
+                    <svg>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
+                    </svg>
+                  </span>
+                </h2>
 
                 <div class="overview__location">
                   <svg class="overview__icon-location">
@@ -1085,7 +1111,7 @@
                       <div class="review__rating">9.7</div>
                     </figcaption>
                   </figure>
-                  <button class="btn-inline">
+                  <button class="btn-inline disabled">
                     Show All Reviews <span>&rarr;</span>
                   </button>
                 </div>
@@ -1095,7 +1121,7 @@
                 <h2 class="cta__book-now">
                   Good news! We have 4 free rooms for your selected dates!
                 </h2>
-                <button class="btn">
+                <button class="btn cta__book-btn">
                   <span class="btn__visible">Book now</span>
                   <span class="btn__invisible">Only 4 rooms left</span>
                 </button>
@@ -1105,7 +1131,14 @@
             <!-- hotel 4 -->
             <div class="hotel" id="hotel-4">
               <div class="overview">
-                <h2 class="overview__heading">Bear Meadow Campground</h2>
+                <h2 class="overview__heading">
+                  <span>Bear Meadow Campground</span>
+                  <span class="overview__icon-heart icon-heart">
+                    <svg>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
+                    </svg>
+                  </span>
+                </h2>
 
                 <div class="overview__location">
                   <svg class="overview__icon-location">
@@ -1211,7 +1244,7 @@
                       <div class="review__rating">9.7</div>
                     </figcaption>
                   </figure>
-                  <button class="btn-inline">
+                  <button class="btn-inline disabled">
                     Show All Reviews <span>&rarr;</span>
                   </button>
                 </div>
@@ -1221,7 +1254,7 @@
                 <h2 class="cta__book-now">
                   Good news! We have 4 free rooms for your selected dates!
                 </h2>
-                <button class="btn">
+                <button class="btn cta__book-btn">
                   <span class="btn__visible">Book now</span>
                   <span class="btn__invisible">Only 4 rooms left</span>
                 </button>
@@ -1231,7 +1264,14 @@
             <!-- hotel 5 -->
             <div class="hotel" id="hotel-5">
               <div class="overview">
-                <h2 class="overview__heading">Leadfoot Campground</h2>
+                <h2 class="overview__heading">
+                  <span>Leadfoot Campground</span>
+                  <span class="overview__icon-heart icon-heart">
+                    <svg>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
+                    </svg>
+                  </span>
+                </h2>
 
                 <div class="overview__location">
                   <svg class="overview__icon-location">
@@ -1336,7 +1376,7 @@
                       <div class="review__rating">9.7</div>
                     </figcaption>
                   </figure>
-                  <button class="btn-inline">
+                  <button class="btn-inline disabled">
                     Show All Reviews <span>&rarr;</span>
                   </button>
                 </div>
@@ -1346,7 +1386,7 @@
                 <h2 class="cta__book-now">
                   Good news! We have 4 free rooms for your selected dates!
                 </h2>
-                <button class="btn">
+                <button class="btn cta__book-btn">
                   <span class="btn__visible">Book now</span>
                   <span class="btn__invisible">Only 4 rooms left</span>
                 </button>
@@ -1356,7 +1396,14 @@
             <!-- hotel 6 -->
             <div class="hotel" id="hotel-6">
               <div class="overview">
-                <h2 class="overview__heading">Lakeside Campground</h2>
+                <h2 class="overview__heading">
+                  <span>Lakeside Campground</span>
+                  <span class="overview__icon-heart icon-heart">
+                    <svg>
+                      <use xlink:href="./img/sprite.svg#icon-heart"></use>
+                    </svg>
+                  </span>
+                </h2>
 
                 <div class="overview__location">
                   <svg class="overview__icon-location">
@@ -1462,17 +1509,17 @@
                       <div class="review__rating">9.7</div>
                     </figcaption>
                   </figure>
-                  <button class="btn-inline">
+                  <button class="btn-inline disabled">
                     Show All Reviews <span>&rarr;</span>
                   </button>
                 </div>
               </div>
 
-              <div class="cta cta hotel__cta">
+              <div class="cta hotel__cta">
                 <h2 class="cta__book-now">
                   Good news! We have 4 free rooms for your selected dates!
                 </h2>
-                <button class="btn">
+                <button class="btn cta__book-btn">
                   <span class="btn__visible">Book now</span>
                   <span class="btn__invisible">Only 4 rooms left</span>
                 </button>

@@ -24,12 +24,12 @@ function ready() {
   console.log(currentDate);
   // HEART icons
 
-  const cardHearts = document.querySelectorAll('.card__icon-heart');
+  const cardHearts = document.querySelectorAll('.icon-heart');
 
   cardHearts.forEach(card => {
     card.addEventListener('click', () => {
-      card.classList.toggle('card__icon-heart--active');
-      card.classList.contains('card__icon-heart--active')
+      card.classList.toggle('icon-heart--active');
+      card.classList.contains('icon-heart--active')
         ? createNotification('Marked as favorite', 'success')
         : createNotification('Removed from favorites', 'info');
     });
@@ -192,6 +192,22 @@ function ready() {
       createNotification('Lodging marker is added to the map', 'info');
     });
   });
+
+  // nav via buttons
+  const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
+  const moveToAccountBtn2 = document.querySelector('.user-nav__user');
+  const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
+
+  function navigateButtons(buttons, section) {
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        window.location = `./index.html#${section}`;
+      });
+    });
+  }
+
+  navigateButtons(moveToBookingBtns, 'booking');
+  navigateButtons([moveToAccountBtn1, moveToAccountBtn2], 'account');
   ///////////////////////
 
   // RND gallery images order
