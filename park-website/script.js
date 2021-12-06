@@ -83,6 +83,7 @@ function ready() {
       .join('');
   });
 
+  // nav between rotating cards
   const cards = document.querySelectorAll('.account-card__side');
   const testBtn = document.querySelector('.testing');
   let counter = 0;
@@ -225,8 +226,12 @@ function ready() {
     });
   }
 
+  const galleryImgsAmount = 25;
   const galleryImgs = document.querySelectorAll('.gallery__img');
-  const galleryRndOrder = Array.from({ length: 25 }, (_, idx) => idx + 1);
+  const galleryRndOrder = Array.from(
+    { length: galleryImgsAmount },
+    (_, idx) => idx + 1
+  );
 
   randomizeGalleryImgs();
   galleryImgs.forEach(el => el.addEventListener('click', randomizeGalleryImgs));
