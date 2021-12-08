@@ -22,14 +22,44 @@ function ready() {
   });
   // picker.show();
   console.log(currentDate);
+
   // HEART icons
 
-  const cardHearts = document.querySelectorAll('.icon-heart');
+  const heartIcons = document.querySelectorAll('.icon-heart');
+  // const accountHearts = document.querySelectorAll(
+  //   '.account-icon__heart-checkbox'
+  // );
+  // console.log(heartIcons);
+  // function syncHearts() {
 
-  cardHearts.forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('icon-heart--active');
-      card.classList.contains('icon-heart--active')
+  // }
+
+  //   accountHearts.forEach((icon, idx) => {
+  //     icon.addEventListener('change', syncHearts)
+  //   })
+
+  function toggleMatchingHeartIcons(idx) {
+    const numberOfSections = 3;
+    const numberOfHotels = heartIcons.length / numberOfSections;
+    const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
+    let position = idx % numberOfHotels;
+
+    for (let i = 0; i < numberOfSections; i++) {
+      heartIcons[position].classList.toggle('icon-heart--active');
+      if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') {
+        heartIcons[position].checked = !heartIcons[position].checked;
+      }
+      position += numberOfHotels;
+    }
+  }
+
+  heartIcons.forEach((icon, idx) => {
+    icon.addEventListener('click', () => {
+      // console.log(icon.tagName);
+      // const clickedOnInput = (icon.tagName === 'INPUT')
+      toggleMatchingHeartIcons(idx);
+
+      icon.classList.contains('icon-heart--active')
         ? createNotification('Marked as favorite', 'success')
         : createNotification('Removed from favorites', 'info');
     });
