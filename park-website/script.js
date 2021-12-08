@@ -23,20 +23,11 @@ function ready() {
   // picker.show();
   console.log(currentDate);
 
-  // HEART icons
+  // HEART icons & order based on HEARTS
 
   const heartIcons = document.querySelectorAll('.icon-heart');
-  // const accountHearts = document.querySelectorAll(
-  //   '.account-icon__heart-checkbox'
-  // );
-  // console.log(heartIcons);
-  // function syncHearts() {
-
-  // }
-
-  //   accountHearts.forEach((icon, idx) => {
-  //     icon.addEventListener('change', syncHearts)
-  //   })
+  const homeCardEls = document.querySelectorAll('.card');
+  const homeCardHearts = document.querySelectorAll('.card__icon-heart');
 
   function toggleMatchingHeartIcons(idx) {
     const numberOfSections = 3;
@@ -53,48 +44,46 @@ function ready() {
     }
   }
 
+  function changeCardsOrder() {
+    homeCardEls.forEach((el, idx) => {
+      if (homeCardHearts[idx].classList.contains('icon-heart--active')) {
+        el.style.order = '2';
+      } else {
+        el.style.order = '3';
+      }
+    });
+  }
+
+  function changeHotelsOrder() {}
+
   heartIcons.forEach((icon, idx) => {
     icon.addEventListener('click', () => {
-      // console.log(icon.tagName);
-      // const clickedOnInput = (icon.tagName === 'INPUT')
       toggleMatchingHeartIcons(idx);
-
-      icon.classList.contains('icon-heart--active')
-        ? createNotification('Marked as favorite', 'success')
-        : createNotification('Removed from favorites', 'info');
+      iconToast(icon);
+      changeCardsOrder();
+      changeHotelsOrder();
     });
   });
 
   // TOAST NOTIFICATIONS
-  // const button = cardHearts[0];
   const toasts = document.querySelector('.toasts');
-  const messages = [
-    'Message One',
-    'Message Two',
-    'Message Three',
-    'Message Four',
-  ];
-  const types = ['info', 'success', 'error'];
-
-  function getRandomMessage() {
-    return messages[Math.floor(Math.random() * messages.length)];
-  }
-
-  function getRandomType() {
-    return types[Math.floor(Math.random() * types.length)];
-  }
-
-  // button.addEventListener('click', () => createNotification());
+  // const types = ['info', 'success', 'error'];
 
   function createNotification(message = null, type = null) {
     const notification = document.createElement('div');
     notification.classList.add('toast');
-    notification.classList.add(type ? type : getRandomType());
-    notification.innerText = message ? message : getRandomMessage();
+    notification.classList.add(type);
+    notification.innerText = message;
     toasts.appendChild(notification);
     setTimeout(() => {
       notification.remove();
     }, 5000);
+  }
+
+  function iconToast(el) {
+    el.classList.contains('icon-heart--active')
+      ? createNotification('Marked as favorite', 'success')
+      : createNotification('Removed from favorites', 'info');
   }
 
   /////////////////////////
