@@ -1,6 +1,14 @@
+.hotel__hotels-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .hotel {
   background-image: var(--background-gradient-1);
   padding-top: 4.5rem;
+  order: 3;
   // border-bottom: var(--line);
 
   &__cta {

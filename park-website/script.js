@@ -27,11 +27,11 @@ function ready() {
 
   const heartIcons = document.querySelectorAll('.icon-heart');
   const homeCardEls = document.querySelectorAll('.card');
-  const homeCardHearts = document.querySelectorAll('.card__icon-heart');
+  const hotelEls = document.querySelectorAll('.hotel');
+  const numberOfSections = 3;
+  const numberOfHotels = heartIcons.length / numberOfSections;
 
   function toggleMatchingHeartIcons(idx) {
-    const numberOfSections = 3;
-    const numberOfHotels = heartIcons.length / numberOfSections;
     const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
     let position = idx % numberOfHotels;
 
@@ -44,24 +44,23 @@ function ready() {
     }
   }
 
-  function changeCardsOrder() {
-    homeCardEls.forEach((el, idx) => {
-      if (homeCardHearts[idx].classList.contains('icon-heart--active')) {
-        el.style.order = '2';
-      } else {
-        el.style.order = '3';
-      }
-    });
-  }
+  function sortCards(idx) {
+    const position = idx % numberOfHotels;
 
-  function changeHotelsOrder() {}
+    if (heartIcons[position].classList.contains('icon-heart--active')) {
+      homeCardEls[position].style.order = '2';
+      hotelEls[position].style.order = '2';
+    } else {
+      homeCardEls[position].style.order = '3';
+      hotelEls[position].style.order = '3';
+    }
+  }
 
   heartIcons.forEach((icon, idx) => {
     icon.addEventListener('click', () => {
       toggleMatchingHeartIcons(idx);
+      sortCards(idx);
       iconToast(icon);
-      changeCardsOrder();
-      changeHotelsOrder();
     });
   });
 
