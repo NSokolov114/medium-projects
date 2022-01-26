@@ -56,3 +56,26 @@ header.prepend(message);
 document
   .querySelector('.btn--close-cookie')
   .addEventListener('click', () => message.remove());
+
+// styles
+message.style.backgroundColor = '#37383d';
+message.style.width = '120%';
+console.log(message.style.width); // '120%'
+console.log(message.style.height); // ''
+console.log(getComputedStyle(message).height); // '49.53px'
+
+message.style.height =
+  Number.parseFloat(getComputedStyle(message).height, 10) + 30 + 'px';
+
+document.documentElement.style.setProperty('--color-primary', 'orangered');
+
+// attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.src); // http://127.0.0.1:5500/img/logo.png
+console.log(logo.getAttribute('src')); // img/logo.png
+console.log(logo.className); // not logo.class!
+console.log(logo.getAttribute('myNameIs')); // Slim
+
+logo.alt = 'my best logo';
+logo.setAttribute('company', 'Bankist');
+console.log(logo.dataset.versionNumber); // 3.0
