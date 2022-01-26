@@ -79,3 +79,21 @@ console.log(logo.getAttribute('myNameIs')); // Slim
 logo.alt = 'my best logo';
 logo.setAttribute('company', 'Bankist');
 console.log(logo.dataset.versionNumber); // 3.0
+
+// smooth scrolling
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  // const s1coords = section1.getBoundingClientRect();
+  // console.log(s1coords);
+  // console.log(window.pageYOffset);
+  // console.log(window.scrollY); // viewport Y offset in px
+
+  // window.scrollTo({
+  //   left: s1coords.left,
+  //   top: s1coords.top + window.scrollY,
+  //   behavior: 'smooth',
+  // });
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
