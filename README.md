@@ -1,2 +1,1 @@
-Learning projects that take hours to days to complete
-
+Projects for learning and testing some of my ideas
