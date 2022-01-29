@@ -1092,20 +1092,12 @@ body {
   background-position: center;
   height: 100%;
   width: 100%;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
 }
 
 @media only screen and (max-width: 600px) {
   .intro__img-container {
     background-image: linear-gradient(155deg, transparent 0%, transparent 30%, var(--color-primary-semitransparent) 50%, var(--color-primary-semitransparent) 100%), url(../img/hero2000.jpg);
   }
-}
-
-.intro:hover .intro__img-container,
-.intro:focus .intro__img-container {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
 }
 
 .intro__text-container {
@@ -1392,6 +1384,10 @@ body {
     -ms-grid-rows: (10vh)[9];
         grid-template-rows: repeat(9, 10vh);
   }
+}
+
+.gallery__item {
+  background: var(--background-gradient-2);
 }
 
 .gallery__item--1 {

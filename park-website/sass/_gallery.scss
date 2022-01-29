@@ -11,6 +11,8 @@
   }
 
   &__item {
+    background: var(--background-gradient-2);
+
     &--1 {
       grid-row: 1 / span 2;
       grid-column: 1 / span 2;
