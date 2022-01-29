@@ -15,29 +15,28 @@
 }
 
 * {
+  box-sizing: inherit;
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
 }
 
 html {
-  font-size: 62.5%;
   box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 body {
+  background-color: #f3f3f3;
+  color: #444;
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  color: #444;
   line-height: 1.9;
-  background-color: #f3f3f3;
 }
 
 /* GENERAL ELEMENTS */
 .section {
-  padding: 15rem 3rem;
   border-top: 1px solid #ddd;
-
+  padding: 15rem 3rem;
   transition: transform 1s, opacity 1s;
 }
 
@@ -47,34 +46,34 @@ body {
 }
 
 .section__title {
-  max-width: 80rem;
   margin: 0 auto 8rem auto;
+  max-width: 80rem;
 }
 
 .section__description {
+  color: var(--color-primary);
   font-size: 1.8rem;
   font-weight: 600;
-  text-transform: uppercase;
-  color: var(--color-primary);
   margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
 .section__header {
   font-size: 4rem;
-  line-height: 1.3;
   font-weight: 500;
+  line-height: 1.3;
 }
 
 .btn {
-  display: inline-block;
   background-color: var(--color-primary);
-  font-size: 1.6rem;
-  font-family: inherit;
-  font-weight: 500;
-  border: none;
-  padding: 1.25rem 4.5rem;
   border-radius: 10rem;
+  border: none;
   cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 1.25rem 4.5rem;
   transition: all 0.3s;
 }
 
@@ -83,26 +82,21 @@ body {
 }
 
 .btn--text {
-  display: inline-block;
   background: none;
-  font-size: 1.7rem;
-  font-family: inherit;
-  font-weight: 500;
-  color: var(--color-primary);
-  border: none;
   border-bottom: 1px solid currentColor;
-  padding-bottom: 2px;
+  border: none;
+  color: var(--color-primary);
   cursor: pointer;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 1.7rem;
+  font-weight: 500;
+  padding-bottom: 2px;
   transition: all 0.3s;
 }
 
 p {
   color: #666;
-}
-
-/* This is BAD for accessibility! Don't do in the real world! */
-button:focus {
-  outline: none;
 }
 
 img {
@@ -115,19 +109,19 @@ img {
 
 /* NAVIGATION */
 .nav {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   height: 9rem;
-  width: 100%;
+  justify-content: space-between;
   padding: 0 6rem;
+  width: 100%;
   z-index: 100;
 }
 
-/* nav and stickly class at the same time */
+/* nav and sticky class at the same time */
 .nav.sticky {
-  position: fixed;
   background-color: rgba(255, 255, 255, 0.95);
+  position: fixed;
 }
 
 .nav__logo {
@@ -136,8 +130,8 @@ img {
 }
 
 .nav__links {
-  display: flex;
   align-items: center;
+  display: flex;
   list-style: none;
 }
 
@@ -147,50 +141,47 @@ img {
 
 .nav__link:link,
 .nav__link:visited {
+  color: inherit;
+  display: block;
   font-size: 1.7rem;
   font-weight: 400;
-  color: inherit;
   text-decoration: none;
-  display: block;
   transition: all 0.3s;
 }
 
 .nav__link--btn:link,
 .nav__link--btn:visited {
-  padding: 0.8rem 2.5rem;
-  border-radius: 3rem;
   background-color: var(--color-primary);
+  border-radius: 3rem;
   color: #222;
+  padding: 0.8rem 2.5rem;
 }
 
 .nav__link--btn:hover,
 .nav__link--btn:active {
-  color: inherit;
   background-color: var(--color-primary-darker);
   color: #333;
 }
 
 /* HEADER */
 .header {
-  padding: 0 3rem;
-  height: 100vh;
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100vh;
+  padding: 0 3rem;
 }
 
 .header__title {
-  flex: 1;
-
-  max-width: 115rem;
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  row-gap: 3rem;
   align-content: center;
-  justify-content: center;
-
   align-items: start;
+  display: grid;
+  flex: 1;
+  grid-template-columns: 3fr 2fr;
+  justify-content: center;
   justify-items: start;
+  max-width: 115rem;
+  row-gap: 3rem;
 }
 
 h1 {
@@ -204,10 +195,10 @@ h4 {
 }
 
 .header__img {
-  width: 100%;
   grid-column: 2 / 3;
   grid-row: 1 / span 4;
   transform: translateY(-6rem);
+  width: 100%;
 }
 
 .highlight {
@@ -215,24 +206,24 @@ h4 {
 }
 
 .highlight::after {
-  display: block;
-  content: '';
-  position: absolute;
+  background-image: var(--gradient-primary);
   bottom: 0;
-  left: 0;
+  content: '';
+  display: block;
   height: 100%;
+  left: 0;
+  opacity: 0.7;
+  position: absolute;
+  transform: scale(1.07, 1.05) skewX(-15deg);
   width: 100%;
   z-index: -1;
-  opacity: 0.7;
-  transform: scale(1.07, 1.05) skewX(-15deg);
-  background-image: var(--gradient-primary);
 }
 
 /* FEATURES */
 .features {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 4rem;
+  grid-template-columns: 1fr 1fr;
   margin: 0 12rem;
 }
 
@@ -242,26 +233,26 @@ h4 {
 
 .features__feature {
   align-self: center;
+  font-size: 1.5rem;
   justify-self: center;
   width: 70%;
-  font-size: 1.5rem;
 }
 
 .features__icon {
-  display: flex;
   align-items: center;
-  justify-content: center;
   background-color: var(--color-primary-opacity);
-  height: 5.5rem;
-  width: 5.5rem;
   border-radius: 50%;
+  display: flex;
+  height: 5.5rem;
+  justify-content: center;
   margin-bottom: 2rem;
+  width: 5.5rem;
 }
 
 .features__icon svg {
+  fill: var(--color-primary);
   height: 2.5rem;
   width: 2.5rem;
-  fill: var(--color-primary);
 }
 
 .features__header {
@@ -271,10 +262,9 @@ h4 {
 
 /* OPERATIONS */
 .operations {
-  max-width: 100rem;
-  margin: 12rem auto 0 auto;
-
   background-color: #fff;
+  margin: 12rem auto 0 auto;
+  max-width: 100rem;
 }
 
 .operations__tab-container {
@@ -288,9 +278,9 @@ h4 {
 }
 
 .operations__tab span {
-  margin-right: 1rem;
-  font-weight: 600;
   display: inline-block;
+  font-weight: 600;
+  margin-right: 1rem;
 }
 
 .operations__tab--1 {
@@ -316,32 +306,28 @@ h4 {
 
 .operations__content {
   display: none;
-
-  /* JUST PRESENTATIONAL */
-  font-size: 1.7rem;
-  padding: 2.5rem 7rem 6.5rem 7rem;
 }
 
 .operations__content--active {
+  column-gap: 3rem;
   display: grid;
   grid-template-columns: 7rem 1fr;
-  column-gap: 3rem;
   row-gap: 0.5rem;
 }
 
 .operations__header {
+  align-self: center;
   font-size: 2.25rem;
   font-weight: 500;
-  align-self: center;
 }
 
 .operations__icon {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  height: 7rem;
-  width: 7rem;
   border-radius: 50%;
+  display: flex;
+  height: 7rem;
+  justify-content: center;
+  width: 7rem;
 }
 
 .operations__icon svg {
@@ -374,50 +360,43 @@ h4 {
 
 /* SLIDER */
 .slider {
-  max-width: 100rem;
   height: 50rem;
   margin: 0 auto;
-  position: relative;
-
-  /* IN THE END */
+  max-width: 100rem;
   overflow: hidden;
+  position: relative;
 }
 
 .slide {
+  align-items: center;
+  display: flex;
+  height: 50rem;
+  justify-content: center;
   position: absolute;
   top: 0;
-  width: 100%;
-  height: 50rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* THIS creates the animation! */
   transition: transform 1s;
+  width: 100%;
 }
 
 .slide > img {
-  /* Only for images that have different size than slide */
-  width: 100%;
   height: 100%;
   object-fit: cover;
+  width: 100%;
 }
 
 .slider__btn {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 3.25rem;
+  height: 5.5rem;
   position: absolute;
   top: 50%;
-  z-index: 10;
-
-  border: none;
-  background: rgba(255, 255, 255, 0.7);
-  font-family: inherit;
-  color: #333;
-  border-radius: 50%;
-  height: 5.5rem;
   width: 5.5rem;
-  font-size: 3.25rem;
-  cursor: pointer;
+  z-index: 10;
 }
 
 .slider__btn--left {
@@ -431,26 +410,23 @@ h4 {
 }
 
 .dots {
-  position: absolute;
   bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
 }
 
 .dots__dot {
-  border: none;
   background-color: #b9b9b9;
-  opacity: 0.7;
-  height: 1rem;
-  width: 1rem;
   border-radius: 50%;
-  margin-right: 1.75rem;
+  border: none;
   cursor: pointer;
+  height: 1rem;
+  margin-right: 1.75rem;
+  opacity: 0.7;
   transition: all 0.5s;
-
-  /* Only necessary when overlying images */
-  /* box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.7); */
+  width: 1rem;
 }
 
 .dots__dot:last-child {
@@ -458,26 +434,25 @@ h4 {
 }
 
 .dots__dot--active {
-  /* background-color: #fff; */
-  background-color: #888;
+  background-color: #fff;
   opacity: 1;
 }
 
 /* TESTIMONIALS */
 .testimonial {
-  width: 65%;
   position: relative;
+  width: 65%;
 }
 
 .testimonial::before {
+  color: var(--color-primary);
   content: '\201C';
-  position: absolute;
-  top: -5.7rem;
+  font-family: inherit;
+  font-size: 20rem;
   left: -6.8rem;
   line-height: 1;
-  font-size: 20rem;
-  font-family: inherit;
-  color: var(--color-primary);
+  position: absolute;
+  top: -5.7rem;
   z-index: -1;
 }
 
@@ -488,30 +463,29 @@ h4 {
 }
 
 .testimonial__text {
+  color: #666;
   font-size: 1.7rem;
   margin-bottom: 3.5rem;
-  color: #666;
 }
 
 .testimonial__author {
-  margin-left: 3rem;
-  font-style: normal;
-
-  display: grid;
-  grid-template-columns: 6.5rem 1fr;
   column-gap: 2rem;
+  display: grid;
+  font-style: normal;
+  grid-template-columns: 6.5rem 1fr;
+  margin-left: 3rem;
 }
 
 .testimonial__photo {
+  border-radius: 50%;
   grid-row: 1 / span 2;
   width: 6.5rem;
-  border-radius: 50%;
 }
 
 .testimonial__name {
+  align-self: end;
   font-size: 1.7rem;
   font-weight: 500;
-  align-self: end;
   margin: 0;
 }
 
@@ -526,10 +500,10 @@ h4 {
 /* SIGNUP */
 .section--sign-up {
   background-color: #37383d;
-  border-top: none;
   border-bottom: 1px solid #444;
-  text-align: center;
+  border-top: none;
   padding: 10rem 3rem;
+  text-align: center;
 }
 
 .section--sign-up .section__header {
@@ -548,14 +522,14 @@ h4 {
 
 /* FOOTER */
 .footer {
-  padding: 10rem 3rem;
   background-color: #37383d;
+  padding: 10rem 3rem;
 }
 
 .footer__nav {
-  list-style: none;
   display: flex;
   justify-content: center;
+  list-style: none;
   margin-bottom: 5rem;
 }
 
@@ -564,21 +538,21 @@ h4 {
 }
 
 .footer__link {
-  font-size: 1.6rem;
   color: #eee;
+  font-size: 1.6rem;
   text-decoration: none;
 }
 
 .footer__logo {
-  height: 5rem;
   display: block;
-  margin: 0 auto;
+  height: 5rem;
   margin-bottom: 5rem;
+  margin: 0 auto;
 }
 
 .footer__copyright {
-  font-size: 1.4rem;
   color: #aaa;
+  font-size: 1.4rem;
   text-align: center;
 }
 
@@ -588,42 +562,42 @@ h4 {
 
 /* MODAL WINDOW */
 .modal {
+  background-color: #f3f3f3;
+  box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
+  left: 50%;
+  max-width: 60rem;
+  padding: 5rem 6rem;
   position: fixed;
   top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  max-width: 60rem;
-  background-color: #f3f3f3;
-  padding: 5rem 6rem;
-  box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
-  z-index: 1000;
   transition: all 0.5s;
+  z-index: 1000;
 }
 
 .overlay {
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  z-index: 100;
   transition: all 0.5s;
+  width: 100%;
+  z-index: 100;
 }
 
 .modal__header {
   font-size: 3.25rem;
-  margin-bottom: 4.5rem;
   line-height: 1.5;
+  margin-bottom: 4.5rem;
 }
 
 .modal__form {
-  margin: 0 3rem;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
   align-items: center;
+  display: grid;
   gap: 2.5rem;
+  grid-template-columns: 1fr 2fr;
+  margin: 0 3rem;
 }
 
 .modal__form label {
@@ -632,10 +606,10 @@ h4 {
 }
 
 .modal__form input {
+  border-radius: 0.5rem;
+  border: 1px solid #ddd;
   font-size: 1.7rem;
   padding: 1rem 1.5rem;
-  border: 1px solid #ddd;
-  border-radius: 0.5rem;
 }
 
 .modal__form button {
@@ -645,30 +619,30 @@ h4 {
 }
 
 .btn--close-modal {
-  font-family: inherit;
-  color: inherit;
-  position: absolute;
-  top: 0.5rem;
-  right: 2rem;
-  font-size: 4rem;
-  cursor: pointer;
-  border: none;
   background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 4rem;
+  position: absolute;
+  right: 2rem;
+  top: 0.5rem;
 }
 
 .hidden {
-  visibility: hidden;
   opacity: 0;
+  visibility: hidden;
 }
 
 /* COOKIE MESSAGE */
 .cookie-message {
-  display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
   background-color: white;
   color: #bbb;
+  display: flex;
   font-size: 1.5rem;
   font-weight: 400;
+  justify-content: space-evenly;
+  width: 100%;
 }

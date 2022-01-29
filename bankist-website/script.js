@@ -385,3 +385,17 @@ const h1 = document.querySelector('h1');
 // console.log(h1.nextElementSibling);
 // console.log(h1.parentElement.children); // all siblings + itself
 // console.log(h1.nextSibling); // nodes, including comments
+
+/////////
+// document.addEventListener('DOMContentLoaded', e => {
+//   console.log(e, 'loaded');
+// });
+
+// window.addEventListener('load', e => {
+//   console.log(e, 'fully loaded');
+// });
+
+// window.addEventListener('beforeunload', e => {
+//   e.preventDefault();
+//   e.returnValue = '';
+// });
