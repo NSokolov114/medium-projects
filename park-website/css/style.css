@@ -1082,6 +1082,7 @@ body {
 
 .intro {
   position: relative;
+  overflow: hidden;
 }
 
 .intro__img-container {
@@ -1091,12 +1092,20 @@ body {
   background-position: center;
   height: 100%;
   width: 100%;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 @media only screen and (max-width: 600px) {
   .intro__img-container {
     background-image: linear-gradient(155deg, transparent 0%, transparent 30%, var(--color-primary-semitransparent) 50%, var(--color-primary-semitransparent) 100%), url(../img/hero2000.jpg);
   }
+}
+
+.intro:hover .intro__img-container,
+.intro:focus .intro__img-container {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
 }
 
 .intro__text-container {
@@ -1332,7 +1341,7 @@ body {
 
 .card__btn.btn-inline:hover {
   color: var(--color-grey-light-4);
-  letter-spacing: 2px;
+  letter-spacing: 0.5px;
 }
 
 .card__rating {
