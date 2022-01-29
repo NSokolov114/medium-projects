@@ -173,9 +173,99 @@ const loadImg = function (entries, observer) {
 const imgObserver = new IntersectionObserver(loadImg, {
   root: null,
   threshold: 0,
-  rootMargin: '-200px',
+  rootMargin: '200px',
 });
 imgTargets.forEach(img => imgObserver.observe(img));
+
+///////////////////////////////////////
+// Slider
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const maxSlide = slides.length;
+const dotContainer = document.querySelector('.dots');
+let curSlide = 0;
+
+const createDots = function () {
+  slides.forEach((_, idx) => {
+    const active = idx === 0 ? 'dots__dot--active' : '';
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot ${active}" data-slide="${idx}"></button>`
+    );
+  });
+};
+
+function updateCurDot() {
+  if (!dots.length) return;
+  for (const dot of dots) {
+    dot.classList.remove('dots__dot--active');
+  }
+  dots[curSlide].classList.add('dots__dot--active');
+}
+
+const dots = dotContainer.children;
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${(i - slide) * 100}%)`)
+  );
+  updateCurDot();
+};
+
+const nextSlide = function () {
+  if (this === 'right') {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+  } else if (this === 'left') {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+  }
+
+  goToSlide(curSlide);
+};
+
+let sliderIsVisible = false;
+const checkSliderVisibility = function (entries) {
+  const [entry] = entries;
+  sliderIsVisible = entry.isIntersecting;
+};
+
+const sliderObserver = new IntersectionObserver(checkSliderVisibility, {
+  root: null,
+  threshold: 0.1,
+});
+sliderObserver.observe(slider);
+
+document.addEventListener('keydown', e => {
+  console.log(e.key);
+  if (!sliderIsVisible) return;
+  if (e.key === 'ArrowRight') {
+    nextSlide.bind('right')();
+  } else if (e.key === 'ArrowLeft') {
+    nextSlide.bind('left')();
+  }
+});
+
+goToSlide(0);
+createDots();
+
+btnRight.addEventListener('click', nextSlide.bind('right'));
+btnLeft.addEventListener('click', nextSlide.bind('left'));
+
+dotContainer.addEventListener('click', e => {
+  if (e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset; // destructuring
+    goToSlide(slide);
+  }
+});
 
 ////////////////////////////////////////////
 /////////// EXPERIMENTATION ////////////////
