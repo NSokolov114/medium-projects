@@ -1930,6 +1930,12 @@ body {
   margin-left: 200px;
 }
 
+@media only screen and (max-width: 900px) {
+  .footer {
+    margin-left: 0;
+  }
+}
+
 @media only screen and (max-width: 500px) {
   .footer {
     display: block;
