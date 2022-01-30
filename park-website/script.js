@@ -217,6 +217,14 @@ function ready() {
     });
   });
 
+  // toggle mouse middle wheel zoom when using the map
+  myMap.on('focus', function () {
+    myMap.scrollWheelZoom.enable();
+  });
+  myMap.on('blur', function () {
+    myMap.scrollWheelZoom.disable();
+  });
+
   // nav via buttons
   const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
   const moveToAccountBtn2 = document.querySelector('.user-nav__user');
