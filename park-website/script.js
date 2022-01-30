@@ -190,7 +190,12 @@ function ready() {
     { description: 'Lakeside Campground', coords: [49.509, 18.426] },
   ];
 
-  const myMap = L.map('mapid').setView(locations[0].coords, 13);
+  const myMap = L.map('mapid', {
+    center: locations[0].coords,
+    zoom: 13,
+    scrollWheelZoom: false,
+  });
+
   L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
