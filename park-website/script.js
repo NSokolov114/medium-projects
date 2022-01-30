@@ -303,54 +303,116 @@ function ready() {
   ////////////////////////////////
 
   // Highlighting nav items
-  const headerSection = document.getElementById('header');
-  const headerNav = document.getElementById('side-nav__header');
-  const aboutSection = document.getElementById('about');
-  const aboutNav = document.getElementById('side-nav__about');
-  const gallerySection = document.getElementById('gallery');
-  const galleryNav = document.getElementById('side-nav__gallery');
-  const lodgingsSection = document.getElementById('hotel');
-  const lodgingsNav = document.getElementById('side-nav__hotel');
-  const bookingSection = document.getElementById('booking');
-  const bookingNav = document.getElementById('side-nav__booking');
-  const accountSection = document.getElementById('account');
-  const accountNav = document.getElementById('side-nav__account');
 
-  //prettier-ignore
-  const sectionsPositions = [
-    { section: 'header', top: 1000, el: headerSection, nav: headerNav },
-    { section: 'about', top: 1000, el: aboutSection, nav: aboutNav },
-    { section: 'gallery', top: 1000, el: gallerySection, nav: galleryNav },
-    { section: 'hotel', top: 1000, el: lodgingsSection, nav: lodgingsNav },
-    { section: 'booking', top: 1000, el: bookingSection, nav: bookingNav },
-    { section: 'account', top: 1000, el: accountSection, nav: accountNav },
+  // const headerSection = document.getElementById('header');
+  // const headerNav = document.getElementById('side-nav__header');
+  // const aboutSection = document.getElementById('about');
+  // const aboutNav = document.getElementById('side-nav__about');
+  // const gallerySection = document.getElementById('gallery');
+  // const galleryNav = document.getElementById('side-nav__gallery');
+  // const lodgingsSection = document.getElementById('hotel');
+  // const lodgingsNav = document.getElementById('side-nav__hotel');
+  // const bookingSection = document.getElementById('booking');
+  // const bookingNav = document.getElementById('side-nav__booking');
+  // const accountSection = document.getElementById('account');
+  // const accountNav = document.getElementById('side-nav__account');
+
+  // //prettier-ignore
+  // const sectionsPositions = [
+  //   { section: 'header', top: 1000, el: headerSection, nav: headerNav },
+  //   { section: 'about', top: 1000, el: aboutSection, nav: aboutNav },
+  //   { section: 'gallery', top: 1000, el: gallerySection, nav: galleryNav },
+  //   { section: 'hotel', top: 1000, el: lodgingsSection, nav: lodgingsNav },
+  //   { section: 'booking', top: 1000, el: bookingSection, nav: bookingNav },
+  //   { section: 'account', top: 1000, el: accountSection, nav: accountNav },
+  // ];
+  // let activeSectionIdx;
+
+  // function updateSectionPositions() {
+  //   const tops = [];
+  //   console.log('fire');
+  //   for (const sect of sectionsPositions) {
+  //     sect.top = Math.trunc(sect.el.getBoundingClientRect().top);
+  //     // I want to select the element which has the biggest top value,
+  //     // if that top value is below 150px:
+  //     sect.top > 250 ? tops.push(-Infinity) : tops.push(sect.top);
+  //   }
+
+  //   const currentIdx = tops.findIndex(num => num === Math.max(...tops));
+
+  //   if (currentIdx !== activeSectionIdx) {
+  //     activeSectionIdx = currentIdx;
+  //     for (const [idx, sect] of sectionsPositions.entries()) {
+  //       if (idx === activeSectionIdx) {
+  //         sect.nav.classList.add('side-nav__item--active');
+  //       } else {
+  //         sect.nav.classList.remove('side-nav__item--active');
+  //       }
+  //     }
+  //   }
+  // }
+
+  const sectionNames = [
+    'intro',
+    'cards',
+    'about',
+    'gallery',
+    'hotel',
+    'booking',
+    'account',
   ];
-  let activeSectionIdx;
+  const sectionEls = sectionNames.map(n => document.getElementById(`${n}`));
+  const navEls = sectionNames.map(n =>
+    document.getElementById(`side-nav__${n}`)
+  );
 
-  function updateSectionPositions() {
-    const tops = [];
+  console.log(sectionEls, navEls);
 
-    for (const sect of sectionsPositions) {
-      sect.top = Math.trunc(sect.el.getBoundingClientRect().top);
-      // I want to select the element which has the biggest top value,
-      // if that top value is below 150px:
-      sect.top > 150 ? tops.push(-Infinity) : tops.push(sect.top);
-    }
+  // const obsCallback = function (entries, observer) {
+  //   entries.forEach(entry => {
+  //     console.log(entry);
+  //   });
+  // };
 
-    const currentIdx = tops.findIndex(num => num === Math.max(...tops));
+  // if (window.matchMedia('(max-width: 900px)').matches) {
+  //   // Viewport is less or equal to 700 pixels wide
+  //   console.log('<=900, abort');
+  // } else {
+  //   // Viewport is greater than 700 pixels wide
+  //   console.log('>900');
+  // }
 
-    if (currentIdx !== activeSectionIdx) {
-      activeSectionIdx = currentIdx;
-      for (const [idx, sect] of sectionsPositions.entries()) {
-        if (idx === activeSectionIdx) {
-          sect.nav.classList.add('side-nav__item--active');
-        } else {
-          sect.nav.classList.remove('side-nav__item--active');
-        }
+  const obsCallback = function (entries) {
+    const [entry] = entries; // getting 1st element
+    console.log(entries);
+    console.log(entry.target);
+    console.log(sectionEls.findIndex(el => el === entry.target));
+    const idx = sectionEls.findIndex(el => el === entry.target);
+    navEls.forEach(el => {
+      if (el) {
+        el.classList.remove('side-nav__item--active');
       }
+    });
+    if (entry.isIntersecting) {
+      // add/remove the sticky class
+      navEls.at(idx).classList.add('side-nav__item--active');
+    } else {
+      // navEls.at(idx - 1).classList.add('side-nav__item--active');
     }
-  }
+  };
+  const obsOptions = {
+    root: null,
+    threshold: 0.45,
+    // rootMargin: '-250px',
+  };
 
-  document.addEventListener('scroll', updateSectionPositions);
+  const navObserver = new IntersectionObserver(obsCallback, obsOptions);
+
+  sectionEls.forEach((el, idx) => {
+    // console.log(sectionObj.el);
+    navObserver.observe(el);
+  });
+
+  // document.addEventListener('scroll', updateSectionPositions);
   /////////////////////
 }
