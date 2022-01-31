@@ -6,7 +6,8 @@ You can delete it by typing "localStorage.clear()" in the console.`);
 document.addEventListener('DOMContentLoaded', ready);
 
 function ready() {
-  // calendar
+  ////////////////////
+  ///// Date range picker for the booking form
   const currentDate = new Date();
   const picker = new Litepicker({
     element: document.getElementById('litepicker'),
@@ -23,7 +24,8 @@ function ready() {
   // picker.show();
   console.log(currentDate);
 
-  // HEART icons & order based on HEARTS
+  ////////////////////
+  ///// HEART icons & order based on HEARTS
 
   const heartIcons = document.querySelectorAll('.icon-heart');
   const homeCardEls = document.querySelectorAll('.card');
@@ -64,7 +66,8 @@ function ready() {
     });
   });
 
-  // TOAST NOTIFICATIONS
+  ////////////////////
+  ///// TOAST NOTIFICATIONS
   const toasts = document.querySelector('.toasts');
   // const types = ['info', 'success', 'error'];
 
@@ -85,9 +88,8 @@ function ready() {
       : createNotification('Removed from favorites', 'info');
   }
 
-  /////////////////////////
-
-  ///// ACCOUNT /////
+  ////////////////////
+  ///// ACCOUNT
   // animation for labels
   const labels = document.querySelectorAll('.account-card__form label');
 
@@ -167,7 +169,8 @@ function ready() {
     rotateCards(cards, rotations);
   });
 
-  ///// LEAFLET MAP /////
+  ////////////////////
+  ///// LEAFLET MAP
 
   // Leaflet JS map and markers
   function createMarker(coords, text) {
@@ -196,6 +199,7 @@ function ready() {
     scrollWheelZoom: false,
   });
 
+  // map initiation
   L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -207,6 +211,7 @@ function ready() {
   );
   markerEntrance._icon.classList.add('entranceIcon');
 
+  // show marker on map when clicking on hotel location
   overviewLocationBtns.forEach((btn, idx) => {
     btn.addEventListener('click', () => {
       createMarker(
@@ -225,7 +230,8 @@ function ready() {
     myMap.scrollWheelZoom.disable();
   });
 
-  // nav via buttons
+  ////////////////////
+  ///// nav via buttons
   const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
   const moveToAccountBtn2 = document.querySelector('.user-nav__user');
   const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
@@ -242,7 +248,8 @@ function ready() {
   navigateButtons([moveToAccountBtn1, moveToAccountBtn2], 'account');
   ///////////////////////
 
-  // RND gallery images order
+  ////////////////////
+  ///// RND gallery images order
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
@@ -267,8 +274,7 @@ function ready() {
   randomizeGalleryImgs();
   galleryImgs.forEach(el => el.addEventListener('click', randomizeGalleryImgs));
 
-  /////////////////////////
-
+  ////////////////////
   ///// generating random stuff /////
   // rating, number of votes
   const averageRatingEls = document.querySelectorAll('.rating__average');
@@ -289,7 +295,8 @@ function ready() {
     countRatingEls[i + ratingNumber].innerText = `${votes} votes`;
   }
 
-  // BACK TO TOP BUTTON
+  ////////////////////
+  ///// BACK TO TOP BUTTON
   const toTopBtn = document.querySelector('.to-top-btn');
 
   function scrollFunction() {
@@ -313,119 +320,57 @@ function ready() {
   };
 
   toTopBtn.addEventListener('click', topFunction);
-  ////////////////////////////////
 
-  // Highlighting nav items
+  ////////////////////
+  ///// Highlighting nav items
 
-  // const headerSection = document.getElementById('header');
-  // const headerNav = document.getElementById('side-nav__header');
-  // const aboutSection = document.getElementById('about');
-  // const aboutNav = document.getElementById('side-nav__about');
-  // const gallerySection = document.getElementById('gallery');
-  // const galleryNav = document.getElementById('side-nav__gallery');
-  // const lodgingsSection = document.getElementById('hotel');
-  // const lodgingsNav = document.getElementById('side-nav__hotel');
-  // const bookingSection = document.getElementById('booking');
-  // const bookingNav = document.getElementById('side-nav__booking');
-  // const accountSection = document.getElementById('account');
-  // const accountNav = document.getElementById('side-nav__account');
-
-  // //prettier-ignore
-  // const sectionsPositions = [
-  //   { section: 'header', top: 1000, el: headerSection, nav: headerNav },
-  //   { section: 'about', top: 1000, el: aboutSection, nav: aboutNav },
-  //   { section: 'gallery', top: 1000, el: gallerySection, nav: galleryNav },
-  //   { section: 'hotel', top: 1000, el: lodgingsSection, nav: lodgingsNav },
-  //   { section: 'booking', top: 1000, el: bookingSection, nav: bookingNav },
-  //   { section: 'account', top: 1000, el: accountSection, nav: accountNav },
-  // ];
-  // let activeSectionIdx;
-
-  // function updateSectionPositions() {
-  //   const tops = [];
-  //   console.log('fire');
-  //   for (const sect of sectionsPositions) {
-  //     sect.top = Math.trunc(sect.el.getBoundingClientRect().top);
-  //     // I want to select the element which has the biggest top value,
-  //     // if that top value is below 150px:
-  //     sect.top > 250 ? tops.push(-Infinity) : tops.push(sect.top);
-  //   }
-
-  //   const currentIdx = tops.findIndex(num => num === Math.max(...tops));
-
-  //   if (currentIdx !== activeSectionIdx) {
-  //     activeSectionIdx = currentIdx;
-  //     for (const [idx, sect] of sectionsPositions.entries()) {
-  //       if (idx === activeSectionIdx) {
-  //         sect.nav.classList.add('side-nav__item--active');
-  //       } else {
-  //         sect.nav.classList.remove('side-nav__item--active');
-  //       }
-  //     }
-  //   }
-  // }
-
-  const sectionNames = [
-    'intro',
-    'cards',
-    'about',
-    'gallery',
-    'hotel',
-    'booking',
-    'account',
-  ];
+  //prettier-ignore
+  const sectionNames = ['intro','cards','about','gallery','hotel','booking','account'];
   const sectionEls = sectionNames.map(n => document.getElementById(`${n}`));
   const navEls = sectionNames.map(n =>
     document.getElementById(`side-nav__${n}`)
   );
+  navEls[1] = navEls[0]; // workaround for the missing nav item
 
-  console.log(sectionEls, navEls);
-
-  // const obsCallback = function (entries, observer) {
-  //   entries.forEach(entry => {
-  //     console.log(entry);
-  //   });
-  // };
-
-  // if (window.matchMedia('(max-width: 900px)').matches) {
-  //   // Viewport is less or equal to 700 pixels wide
-  //   console.log('<=900, abort');
-  // } else {
-  //   // Viewport is greater than 700 pixels wide
-  //   console.log('>900');
-  // }
-
-  const obsCallback = function (entries) {
-    const [entry] = entries; // getting 1st element
-    console.log(entries);
-    console.log(entry.target);
-    console.log(sectionEls.findIndex(el => el === entry.target));
-    const idx = sectionEls.findIndex(el => el === entry.target);
-    navEls.forEach(el => {
-      if (el) {
-        el.classList.remove('side-nav__item--active');
-      }
-    });
-    if (entry.isIntersecting) {
-      // add/remove the sticky class
-      navEls.at(idx).classList.add('side-nav__item--active');
-    } else {
-      // navEls.at(idx - 1).classList.add('side-nav__item--active');
-    }
-  };
-  const obsOptions = {
+  const navObserverOptions = {
     root: null,
-    threshold: 0.45,
-    // rootMargin: '-250px',
+    threshold: [0, 0.25, 0.5],
+    rootMargin: '150px',
   };
+  const navObserver = new IntersectionObserver(
+    highlightNavEls,
+    navObserverOptions
+  );
+  let activeSectionIdx;
 
-  const navObserver = new IntersectionObserver(obsCallback, obsOptions);
+  function highlightNavEls() {
+    if (window.matchMedia('(max-width: 900px)').matches) return;
 
-  sectionEls.forEach((el, idx) => {
-    // console.log(sectionObj.el);
-    navObserver.observe(el);
-  });
+    const tops = [];
 
-  // document.addEventListener('scroll', updateSectionPositions);
+    // Find the element which has the biggest top value,
+    // if that value is below 200px:
+    for (const el of sectionEls) {
+      const top = Math.trunc(el.getBoundingClientRect().top);
+
+      top > 200 ? tops.push(-Infinity) : tops.push(top);
+    }
+
+    const currentIdx = tops.findIndex(num => num === Math.max(...tops));
+
+    if (currentIdx !== activeSectionIdx) {
+      activeSectionIdx = currentIdx;
+      navEls.forEach((el, idx) => {
+        if (idx === activeSectionIdx) {
+          el.classList.add('side-nav__item--active');
+        } else {
+          el.classList.remove('side-nav__item--active');
+        }
+      });
+    }
+  }
+
+  sectionEls.forEach(el => navObserver.observe(el));
+
   /////////////////////
 }
