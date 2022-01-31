@@ -231,24 +231,6 @@ function ready() {
   });
 
   ////////////////////
-  ///// nav via buttons
-  const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
-  const moveToAccountBtn2 = document.querySelector('.user-nav__user');
-  const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
-
-  function navigateButtons(buttons, section) {
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        window.location = `./index.html#${section}`;
-      });
-    });
-  }
-
-  navigateButtons(moveToBookingBtns, 'booking');
-  navigateButtons([moveToAccountBtn1, moveToAccountBtn2], 'account');
-  ///////////////////////
-
-  ////////////////////
   ///// RND gallery images order
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -373,4 +355,46 @@ function ready() {
   sectionEls.forEach(el => navObserver.observe(el));
 
   /////////////////////
+
+  // document.querySelector('.nav__links').addEventListener('click', function (e) {
+  //   e.preventDefault();
+
+  //   if (e.target.classList.contains('nav__link')) {
+  //     const id = e.target.getAttribute('href');
+  //     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // });
+
+  ////////////////////
+  ///// nav via buttons
+  const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
+  const moveToAccountBtn2 = document.querySelector('.user-nav__user');
+  const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
+
+  function navigateButtons(buttons, section) {
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        document
+          .querySelector(`#${section}`)
+          .scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  }
+
+  navigateButtons(moveToBookingBtns, 'booking');
+  navigateButtons([moveToAccountBtn1, moveToAccountBtn2], 'account');
+  ///////////////////////
+  // section1.scrollIntoView({ behavior: 'smooth' });
+
+  const navBar = document.querySelector('.sidebar');
+  navBar.addEventListener('click', e => {
+    e.preventDefault();
+    const navItem = e.target.closest('.side-nav__item');
+    if (!navItem) return;
+
+    const id = navItem.querySelector('a').getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  });
+  //#side-nav__about
+  // .side-nav__item
 }
