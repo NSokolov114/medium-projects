@@ -267,6 +267,7 @@ function ready() {
   const averageRatingEls = document.querySelectorAll('.rating__average');
   const countRatingEls = document.querySelectorAll('.rating__count');
   const ratingNumber = countRatingEls.length / 2;
+  const recommendCount = document.querySelectorAll('.recommend__count');
 
   // const averageRatings = [];
   // const countRatings = [];
@@ -278,13 +279,30 @@ function ready() {
   for (let i = 0; i < ratingNumber; i++) {
     const rating = randomInt(50, 97) / 10;
     const votes = randomInt(150, 600);
+    const recommendations = Math.floor((randomInt(25, 75) * votes) / 100);
 
     // same numbers for cards section and lodgings section
     averageRatingEls[i].innerText = rating;
     averageRatingEls[i + ratingNumber].innerText = rating;
     countRatingEls[i].innerText = `${votes} votes`;
     countRatingEls[i + ratingNumber].innerText = `${votes} votes`;
+    recommendCount[
+      i
+    ].innerText = `More than ${recommendations} people recommend this hotel.`;
   }
+
+  const reviewPhotos = document.querySelectorAll('.recommend__photo');
+  function generatePhotoLink() {
+    const gender = Math.random() - 0.5 > 0 ? 'men' : 'women';
+    const number = randomInt(1, 50);
+    return `https://randomuser.me/api/portraits/thumb/${gender}/${number}.jpg`;
+  }
+  reviewPhotos.forEach(photo => (photo.src = generatePhotoLink()));
+
+  //  .review__photo
+
+  // .review__rating
+  // .recommend__count
 
   ////////////////////
   ///// BACK TO TOP BUTTON
