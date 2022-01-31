@@ -211,9 +211,14 @@ function ready() {
   );
   markerEntrance._icon.classList.add('entranceIcon');
 
-  // show marker on map when clicking on hotel location
+  // show marker on map and scroll to map when clicking on hotel location
   overviewLocationBtns.forEach((btn, idx) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', e => {
+      const id = e.target.getAttribute('href');
+
+      e.preventDefault();
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+
       createMarker(
         locations[idx + 1].coords,
         locations[idx + 1].description
@@ -370,6 +375,8 @@ function ready() {
   const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
   const moveToAccountBtn2 = document.querySelector('.user-nav__user');
   const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
+  const navBar = document.querySelector('.sidebar');
+  const cardLinks = document.querySelectorAll('.card__btn a');
 
   function navigateButtons(buttons, section) {
     buttons.forEach(btn => {
@@ -383,10 +390,8 @@ function ready() {
 
   navigateButtons(moveToBookingBtns, 'booking');
   navigateButtons([moveToAccountBtn1, moveToAccountBtn2], 'account');
-  ///////////////////////
-  // section1.scrollIntoView({ behavior: 'smooth' });
 
-  const navBar = document.querySelector('.sidebar');
+  // sidebar nav buttons
   navBar.addEventListener('click', e => {
     e.preventDefault();
     const navItem = e.target.closest('.side-nav__item');
@@ -395,6 +400,14 @@ function ready() {
     const id = navItem.querySelector('a').getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   });
-  //#side-nav__about
-  // .side-nav__item
+
+  // card MORE INFO button
+  cardLinks.forEach(link =>
+    link.addEventListener('click', e => {
+      const id = e.target.getAttribute('href');
+
+      e.preventDefault();
+      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+    })
+  );
 }
