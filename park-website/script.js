@@ -268,12 +268,16 @@ function ready() {
   const countRatingEls = document.querySelectorAll('.rating__count');
   const ratingNumber = countRatingEls.length / 2;
 
-  const averageRatings = [];
-  const countRatings = [];
+  // const averageRatings = [];
+  // const countRatings = [];
+
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  }
 
   for (let i = 0; i < ratingNumber; i++) {
-    const rating = Math.floor(Math.random() * 50 + 51) / 10;
-    const votes = Math.floor(Math.random() * 900 + 100);
+    const rating = randomInt(50, 97) / 10;
+    const votes = randomInt(150, 600);
 
     // same numbers for cards section and lodgings section
     averageRatingEls[i].innerText = rating;
