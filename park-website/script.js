@@ -268,6 +268,8 @@ function ready() {
   const countRatingEls = document.querySelectorAll('.rating__count');
   const ratingNumber = countRatingEls.length / 2;
   const recommendCount = document.querySelectorAll('.recommend__count');
+  const reviewPhotos = document.querySelectorAll('.recommend__photo');
+  const reviewRatings = document.querySelectorAll('.review__rating');
 
   // const averageRatings = [];
   // const countRatings = [];
@@ -280,6 +282,11 @@ function ready() {
     const rating = randomInt(50, 97) / 10;
     const votes = randomInt(150, 600);
     const recommendations = Math.floor((randomInt(25, 75) * votes) / 100);
+    const reviewRating1 = randomInt(50, 90) / 10;
+    const reviewRating2 = randomInt(80, 100) / 10;
+
+    reviewRatings[i * 2].innerText = reviewRating1;
+    reviewRatings[i * 2 + 1].innerText = reviewRating2;
 
     // same numbers for cards section and lodgings section
     averageRatingEls[i].innerText = rating;
@@ -291,7 +298,6 @@ function ready() {
     ].innerText = `More than ${recommendations} people recommend this hotel.`;
   }
 
-  const reviewPhotos = document.querySelectorAll('.recommend__photo');
   function generatePhotoLink() {
     const gender = Math.random() - 0.5 > 0 ? 'men' : 'women';
     const number = randomInt(1, 50);
