@@ -26,6 +26,10 @@
 .logo {
   height: 6rem;
   margin-left: 2rem;
+
+  @media only screen and (max-height: 730px) {
+    margin-left: 220px;
+  }
 }
 
 // TITLE
@@ -52,7 +56,14 @@
     text-decoration: none;
   }
 
-  @media only screen and (max-width: $bp-medium) {
+  // @media only screen and (max-height: 730px) {
+  //   span {
+  //     display: none;
+  //   }
+  // }
+
+  @media only screen and (max-width: $bp-medium),
+    only screen and (max-height: 730px) {
     font-size: 2.5rem;
 
     span {
