@@ -266,13 +266,15 @@ function ready() {
   // rating, number of votes
   const averageRatingEls = document.querySelectorAll('.rating__average');
   const countRatingEls = document.querySelectorAll('.rating__count');
-  const ratingNumber = countRatingEls.length / 2;
+  const ratingsNumber = countRatingEls.length / 2;
+
   const recommendCount = document.querySelectorAll('.recommend__count');
   const recommendPhotos = document.querySelectorAll('.recommend__photo');
   const reviewRatings = document.querySelectorAll('.review__rating');
   const reviewNames = document.querySelectorAll('.review__user-name');
   const reviewDates = document.querySelectorAll('.review__user-date');
   const reviewPhotos = document.querySelectorAll('.review__photo');
+  const reviewsNumber = reviewNames.length;
 
   // const averageRatings = [];
   // const countRatings = [];
@@ -281,84 +283,77 @@ function ready() {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
 
-  for (let i = 0; i < ratingNumber; i++) {
-    const rating = randomInt(50, 97) / 10;
-    const votes = randomInt(150, 600);
-    const recommendations = Math.floor((randomInt(25, 75) * votes) / 100);
-    const reviewRating1 = randomInt(50, 90) / 10;
-    const reviewRating2 = randomInt(80, 100) / 10;
-
-    reviewRatings[i * 2].innerText = reviewRating1;
-    reviewRatings[i * 2 + 1].innerText = reviewRating2;
-
-    // same numbers for cards section and lodgings section
-    averageRatingEls[i].innerText = rating;
-    averageRatingEls[i + ratingNumber].innerText = rating;
-    countRatingEls[i].innerText = `${votes} votes`;
-    countRatingEls[i + ratingNumber].innerText = `${votes} votes`;
-    recommendCount[
-      i
-    ].innerText = `More than ${recommendations} people recommend this hotel.`;
-  }
-
   function generatePhotoLink() {
     const gender = Math.random() - 0.5 > 0 ? 'men' : 'women';
     const number = randomInt(1, 50);
     return `https://randomuser.me/api/portraits/thumb/${gender}/${number}.jpg`;
   }
 
-  recommendPhotos.forEach(photo => (photo.src = generatePhotoLink()));
-
-  //  .review__photo
-
-  // .review__rating
-  // .recommend__count
-
   // getting random user data
   async function getRndUsers(num) {
     let api;
 
-    num = num || 1;
+    if (!num) return;
 
     try {
       api = await fetch(`https://randomuser.me/api/?results=${num}`);
       const data = await api.json();
-      if (api) {
-        console.log('Received rnd users data: ', data);
-        console.log(data.results[0].gender);
-        reviewNames.forEach((nameEl, idx) => {
-          const fullName = `${data.results[idx].name.first} ${data.results[idx].name.last}`;
-          nameEl.innerText = fullName;
-        });
-        reviewDates.forEach((dateEl, idx) => {
-          const date = new Date(data.results[idx].registered.date);
-          const dateOptions = {
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric',
-          };
-          const formattedDate = new Intl.DateTimeFormat(
-            'en-US',
-            dateOptions
-          ).format(date);
-          dateEl.innerText = formattedDate;
-        });
-        reviewPhotos.forEach((photoEl, idx) => {
-          const link = data.results[idx].picture.thumbnail;
-          photoEl.src = link;
-        });
-      }
-
-      // return await api.json();
+      updateReviews(data);
     } catch (err) {
       console.log(`Error fetching rnd users data: ${err.message}`);
     }
   }
 
-  // const fullName = `${obj.name.first} ${obj.name.last}`;
+  function updateReviews(data) {
+    reviewNames.forEach((nameEl, idx) => {
+      const fullName = `${data.results[idx].name.first} ${data.results[idx].name.last}`;
 
-  const rndUsersData = getRndUsers(12);
-  console.log(rndUsersData);
+      nameEl.innerText = fullName;
+    });
+    reviewDates.forEach((dateEl, idx) => {
+      const date = new Date(data.results[idx].registered.date);
+      const dateOptions = {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      };
+      const formattedDate = new Intl.DateTimeFormat(
+        'en-US',
+        dateOptions
+      ).format(date);
+
+      dateEl.innerText = formattedDate;
+    });
+    reviewPhotos.forEach((photoEl, idx) => {
+      const link = data.results[idx].picture.thumbnail;
+
+      photoEl.src = link;
+    });
+  }
+
+  for (let i = 0; i < ratingsNumber; i++) {
+    const rating = randomInt(50, 97) / 10;
+    const votes = randomInt(150, 600);
+    const recommendations = Math.floor((randomInt(25, 75) * votes) / 100);
+    const reviewRating1 = randomInt(50, 90) / 10;
+    const reviewRating2 = randomInt(80, 100) / 10;
+    const accType = i < 3 ? 'option' : 'campsite';
+
+    reviewRatings[i * 2].innerText = reviewRating1;
+    reviewRatings[i * 2 + 1].innerText = reviewRating2;
+
+    // same numbers for cards section and lodgings section
+    averageRatingEls[i].innerText = rating;
+    averageRatingEls[i + ratingsNumber].innerText = rating;
+    countRatingEls[i].innerText = `${votes} votes`;
+    countRatingEls[i + ratingsNumber].innerText = `${votes} votes`;
+    recommendCount[
+      i
+    ].innerText = `More than ${recommendations} people recommend this ${accType}.`;
+  }
+
+  getRndUsers(reviewsNumber);
+  recommendPhotos.forEach(photo => (photo.src = generatePhotoLink()));
 
   ////////////////////
   ///// BACK TO TOP BUTTON
