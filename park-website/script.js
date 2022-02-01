@@ -268,8 +268,11 @@ function ready() {
   const countRatingEls = document.querySelectorAll('.rating__count');
   const ratingNumber = countRatingEls.length / 2;
   const recommendCount = document.querySelectorAll('.recommend__count');
-  const reviewPhotos = document.querySelectorAll('.recommend__photo');
+  const recommendPhotos = document.querySelectorAll('.recommend__photo');
   const reviewRatings = document.querySelectorAll('.review__rating');
+  const reviewNames = document.querySelectorAll('.review__user-name');
+  const reviewDates = document.querySelectorAll('.review__user-date');
+  const reviewPhotos = document.querySelectorAll('.review__photo');
 
   // const averageRatings = [];
   // const countRatings = [];
@@ -303,12 +306,59 @@ function ready() {
     const number = randomInt(1, 50);
     return `https://randomuser.me/api/portraits/thumb/${gender}/${number}.jpg`;
   }
-  reviewPhotos.forEach(photo => (photo.src = generatePhotoLink()));
+
+  recommendPhotos.forEach(photo => (photo.src = generatePhotoLink()));
 
   //  .review__photo
 
   // .review__rating
   // .recommend__count
+
+  // getting random user data
+  async function getRndUsers(num) {
+    let api;
+
+    num = num || 1;
+
+    try {
+      api = await fetch(`https://randomuser.me/api/?results=${num}`);
+      const data = await api.json();
+      if (api) {
+        console.log('Received rnd users data: ', data);
+        console.log(data.results[0].gender);
+        reviewNames.forEach((nameEl, idx) => {
+          const fullName = `${data.results[idx].name.first} ${data.results[idx].name.last}`;
+          nameEl.innerText = fullName;
+        });
+        reviewDates.forEach((dateEl, idx) => {
+          const date = new Date(data.results[idx].registered.date);
+          const dateOptions = {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric',
+          };
+          const formattedDate = new Intl.DateTimeFormat(
+            'en-US',
+            dateOptions
+          ).format(date);
+          dateEl.innerText = formattedDate;
+        });
+        reviewPhotos.forEach((photoEl, idx) => {
+          const link = data.results[idx].picture.thumbnail;
+          photoEl.src = link;
+        });
+      }
+
+      // return await api.json();
+    } catch (err) {
+      console.log(`Error fetching rnd users data: ${err.message}`);
+    }
+  }
+
+  // const fullName = `${obj.name.first} ${obj.name.last}`;
+
+  const rndUsersData = getRndUsers(12);
+  console.log(rndUsersData);
 
   ////////////////////
   ///// BACK TO TOP BUTTON
@@ -439,3 +489,38 @@ function ready() {
     })
   );
 }
+
+const obj = {
+  gender: 'female',
+  name: { title: 'Mrs', first: 'Abby', last: 'Holland' },
+  location: {
+    street: { number: 9647, name: 'London Road' },
+    city: 'Westminster',
+    state: 'Greater Manchester',
+    country: 'United Kingdom',
+    postcode: 'U5H 2DP',
+    coordinates: { latitude: '13.7113', longitude: '107.9493' },
+    timezone: { offset: '+2:00', description: 'Kaliningrad, South Africa' },
+  },
+  email: 'abby.holland@example.com',
+  login: {
+    uuid: '0668f5e6-75eb-4803-b031-9c05cb2e678c',
+    username: 'beautifulmeercat783',
+    password: 'candace',
+    salt: 'x6RGdoRd',
+    md5: 'fe64dc2634687519dc6a5593017a2baf',
+    sha1: '7cc5142d95c6f0620653ea7cfd60a7757b7194e4',
+    sha256: '20041e1dbf17c5d0e09ca500e8fecccb792f9e1b253838562cfcb2b03a520a70',
+  },
+  dob: { date: '1946-03-10T15:06:15.140Z', age: 76 },
+  registered: { date: '2008-04-09T16:36:09.355Z', age: 14 },
+  phone: '013873 65028',
+  cell: '0741-659-275',
+  id: { name: 'NINO', value: 'SZ 19 73 26 O' },
+  picture: {
+    large: 'https://randomuser.me/api/portraits/women/76.jpg',
+    medium: 'https://randomuser.me/api/portraits/med/women/76.jpg',
+    thumbnail: 'https://randomuser.me/api/portraits/thumb/women/76.jpg',
+  },
+  nat: 'GB',
+};
