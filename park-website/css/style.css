@@ -1183,10 +1183,10 @@ body {
   font-size: 1.5rem;
   width: 300px;
   background-color: var(--color-grey-dark-1);
+  color: var(--color-grey-light-3);
   margin: 4rem;
   padding: 1rem 3rem;
   border-radius: 5px;
-  color: var(--color-white);
 }
 
 .booking__form .section-title {
@@ -1199,6 +1199,7 @@ body {
 
 .booking__form select,
 .booking__form input {
+  color: var(--color-grey-light-3);
   width: 250px;
   font-size: 1.4rem;
   border: none;
@@ -1206,7 +1207,6 @@ body {
   background-color: var(--color-grey-dark-1);
   -webkit-filter: brightness(1.2);
           filter: brightness(1.2);
-  color: var(--color-white);
   border-radius: 3px;
   margin-bottom: 2rem;
   padding: 1rem 0.5rem;
@@ -1216,6 +1216,16 @@ body {
   background-color: var(--color-primary-light);
   -webkit-filter: none;
           filter: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.booking__form #booking__submit:hover, .booking__form #booking__submit:focus {
+  -webkit-filter: brightness(1.2);
+          filter: brightness(1.2);
 }
 
 .booking__form #booking__submit:active {
