@@ -410,44 +410,30 @@ function ready() {
 
   // nav between rotating cards
   const sides = document.querySelectorAll('.account-card__side');
-  // const testBtn = document.querySelector('.testing');
-  let counter = 0;
-  const sidesRot = [];
-  const sidesNum = sides.length / 2;
-  for (let i = 0; i < sidesNum; i++) {
-    i === 0 ? sidesRot.push(0) : sidesRot.push(1);
-  }
+  const sidesRot = [0, 1, 1]; // initial rotation
+  const sidesNum = 3;
 
-  // rotateCards(cards, rotations);
-  // testBtn.addEventListener('click', () => {
-  //   rotations[counter]++;
-  //   rotations[counter + sidesNum]++;
-  //   counter++;
-  //   if (counter > 2) counter = 0;
-  //   rotations[counter]++;
-  //   rotations[counter + sidesNum]++;
-  //   console.log(counter);
-  //   rotateCards(cards, rotations);
-  // });
-
-  function rotateSides(sides, rotations) {
+  function rotateSides() {
     sides.forEach((side, idx) => {
-      side.style.transform = `rotateY(${rotations[idx % sidesNum] * 180}deg)`;
+      side.style.transform = `rotateY(${sidesRot[idx % sidesNum] * 180}deg)`;
     });
   }
 
-  function gotoSignup() {
-    console.log(sidesRot);
-    updateRots(1);
-    console.log(sidesRot);
-    rotateSides(sides, sidesRot);
-  }
+  function gotoSide(side) {
+    let idx;
 
-  function gotoLogin() {
-    console.log(sidesRot);
-    updateRots(0);
-    console.log(sidesRot);
-    rotateSides(sides, sidesRot);
+    if (side === 'login') {
+      idx = 0;
+    } else if (side === 'signup') {
+      idx = 1;
+    } else if (side === 'settings') {
+      idx = 2;
+    } else {
+      return;
+    }
+
+    updateRots(idx);
+    rotateSides();
   }
 
   function updateRots(activeSideIdx) {
@@ -458,20 +444,21 @@ function ready() {
     }
   }
 
-  rotateSides(sides, sidesRot);
+  rotateSides();
 
   const gotoLoginBtn = document.querySelector('.account-card__goto-login');
   const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
+  // const gotoSignupBtn = document.querySelectorAll('.account-card__goto-settings');
 
   gotoLoginBtn.addEventListener('click', e => {
     e.preventDefault();
-    gotoLogin();
+    gotoSide('login');
   });
 
   gotoSignupBtn.forEach(btn =>
     btn.addEventListener('click', e => {
       e.preventDefault();
-      gotoSignup();
+      gotoSide('signup');
     })
   );
 
@@ -502,6 +489,7 @@ function ready() {
   const sidesSettings = document.querySelectorAll(
     '.account-card__side--settings'
   );
+  const welcomeMsg = document.querySelector('.account-card__welcome-msg');
 
   ///// LOG IN CARDs
   // 0. register now / create a new one button - go to SIGN UP
@@ -509,6 +497,35 @@ function ready() {
   // .account-card__login
   // if MATCH, go to WELCOME + upload favorite lodgings
   // if FAIL, highlight 'email us for support' <p>
+  btnLogin.addEventListener('click', e => {
+    e.preventDefault();
+    const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
+      '.account-card__form input'
+    );
+    const userInfo = userInfoEl.value;
+    const pwd = pwdEl.value;
+
+    const match = Math.max(
+      usersDB.findIndex(user => user.username === userInfo),
+      usersDB.findIndex(user => user.email === userInfo)
+    );
+    console.log(match, userInfo);
+
+    if (match < 0 || usersDB[match].password !== pwd) {
+      pwdEl.value = '';
+      pwdEl.focus();
+      pwdEl.placeholder = 'Wrong email or password';
+      //account-card__help-msg
+      document.querySelector('.account-card__help-msg').style.color =
+        'var(--color-primary-light)';
+      return;
+    }
+
+    welcomeMsg.innerText = `You're logged in as ${usersDB[match].username}!`;
+    gotoSide('settings');
+    userInfoEl.value = '';
+    pwdEl.value = '';
+  });
 
   ///// SIGN UP CARDs
   // 0. log in now button - go to LOG IN
@@ -553,9 +570,21 @@ function ready() {
     };
 
     usersDB.push(newUser);
+
+    welcomeMsg.innerText = `Congratulations, ${username}! You've successfully created a new account.`;
+    gotoSide('settings');
+    usernameEl.value = '';
+    emailEl.value = '';
+    pwdEl.value = '';
   });
 
   ///// WELCOME BACK CARDs
   // 1. add/rm favorites from/to local storage
   // 2. logout button - log out, go to LOG IN .account-card__logout
+  btnLogout.addEventListener('click', e => {
+    e.preventDefault();
+    gotoSide('login');
+  });
+
+  //
 }
