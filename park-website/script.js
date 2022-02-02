@@ -464,19 +464,40 @@ function ready() {
 
   ////////////////////
   ///// USERS DB (via local storage)
-  const usersDB = [];
-  const dummyUser1 = {
-    username: 'vasya83',
-    email: 'vasya83@macrosoft.com',
-    password: 'passWORD83',
-  };
-  const dummyUser2 = {
-    username: 'vasya38',
-    email: 'vasya38@macrosoft.com',
-    password: 'passWORD38',
-  };
-  usersDB.push(dummyUser1);
-  usersDB.push(dummyUser2);
+  const dummyUsersDB = [
+    {
+      username: 'vasya83',
+      email: 'vasya83@macrosoft.com',
+      password: 'passWORD83',
+    },
+    {
+      username: 'vasya38',
+      email: 'vasya38@macrosoft.com',
+      password: 'passWORD38',
+    },
+  ];
+  const usersDB = JSON.parse(localStorage.getItem('usersDB')) || dummyUsersDB;
+
+  // const dummyUser1 = {
+  //   username: 'vasya83',
+  //   email: 'vasya83@macrosoft.com',
+  //   password: 'passWORD83',
+  // };
+  // const dummyUser2 = {
+  //   username: 'vasya38',
+  //   email: 'vasya38@macrosoft.com',
+  //   password: 'passWORD38',
+  // };
+
+  function setLocalStorage() {
+    localStorage.removeItem('usersDB');
+    localStorage.setItem('usersDB', JSON.stringify(usersDB));
+  }
+
+  // usersDB.push(dummyUser1);
+  // usersDB.push(dummyUser2);
+
+  setLocalStorage();
 
   ////////////////////
   ///// ACCOUNT SECTION FORMS
@@ -625,6 +646,7 @@ function ready() {
     };
 
     usersDB.push(newUser);
+    setLocalStorage();
 
     welcomeMsg.innerText = `Congratulations, ${username}! You've successfully created a new account.`;
     gotoSide('settings');
@@ -640,6 +662,4 @@ function ready() {
     e.preventDefault();
     gotoSide('login');
   });
-
-  //
 }
