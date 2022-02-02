@@ -490,6 +490,61 @@ function ready() {
     '.account-card__side--settings'
   );
   const welcomeMsg = document.querySelector('.account-card__welcome-msg');
+  const generatedPwdLink = document.querySelector(
+    '.account-card__generated-pwd'
+  );
+
+  generatedPwdLink.addEventListener('click', e => e.preventDefault());
+
+  btnGeneratePwd.addEventListener('click', e => {
+    e.preventDefault();
+    generatedPwdLink.innerText = generatePwd();
+  });
+
+  function generatePwd() {
+    function getRandomLower() {
+      return String.fromCharCode(randomInt(97, 122));
+    }
+
+    function getRandomUpper() {
+      return String.fromCharCode(randomInt(65, 90));
+    }
+
+    function getRandomDigit() {
+      return String.fromCharCode(randomInt(48, 57));
+    }
+
+    const length = randomInt(8, 12);
+    let [hasLower, hasUpper, hasDigit] = [false, false, false];
+    let pwd = '';
+
+    for (let i = 0; i < length; i++) {
+      let rndSymbol;
+
+      switch (randomInt(1, 3)) {
+        case 1:
+          rndSymbol = getRandomLower();
+          hasLower = true;
+          break;
+        case 2:
+          rndSymbol = getRandomUpper();
+          hasUpper = true;
+          break;
+        case 3:
+          rndSymbol = getRandomDigit();
+          hasDigit = true;
+          break;
+      }
+      pwd += rndSymbol;
+    }
+
+    if (!(hasLower && hasUpper && hasDigit)) {
+      console.log('trying again');
+      pwd = generatePwd();
+    }
+
+    return pwd;
+  }
 
   ///// LOG IN CARDs
   // 0. register now / create a new one button - go to SIGN UP

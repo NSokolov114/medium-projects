@@ -50,6 +50,10 @@
       text-align: left;
       transition: 0.5s linear;
       width: 100%;
+
+      &.account-card__generated-pwd {
+        text-align: center;
+      }
     }
   }
 

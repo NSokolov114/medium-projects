@@ -2056,6 +2056,10 @@ body {
   width: 100%;
 }
 
+.account-card__side p.account-card__generated-pwd {
+  text-align: center;
+}
+
 .account-card__btn {
   background: var(--color-primary-light);
   border-radius: 5px;
