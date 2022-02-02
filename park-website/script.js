@@ -89,87 +89,6 @@ function ready() {
   }
 
   ////////////////////
-  ///// ACCOUNT
-  // animation for labels
-  const labels = document.querySelectorAll('.account-card__form label');
-
-  labels.forEach(label => {
-    label.innerHTML = label.innerText
-      .split('')
-      .map(
-        (letter, idx) =>
-          `<span style="transition-delay:${idx * 30}ms">${letter}</span>`
-      )
-      .join('');
-  });
-
-  // nav between rotating cards
-  const cards = document.querySelectorAll('.account-card__side');
-  const testBtn = document.querySelector('.testing');
-  let counter = 0;
-  const rotations = [0, 1, 1];
-  const sidesNum = cards.length / 2;
-
-  rotateCards(cards, rotations);
-  testBtn.addEventListener('click', () => {
-    rotations[counter]++;
-    rotations[counter + sidesNum]++;
-    counter++;
-    if (counter > 2) counter = 0;
-    rotations[counter]++;
-    rotations[counter + sidesNum]++;
-    console.log(counter);
-    rotateCards(cards, rotations);
-  });
-
-  function rotateCards(cards, rotations) {
-    cards.forEach((card, idx) => {
-      card.style.transform = `rotateY(${rotations[idx % sidesNum] * 180}deg)`;
-    });
-  }
-
-  const activateLoginBtn = document.querySelector(
-    '.account-card__activate-login'
-  );
-  const activateSignupBtn = document.querySelector(
-    '.account-card__activate-signup'
-  );
-
-  activateLoginBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (rotations[0] % 2) {
-      rotations[0]++;
-      rotations[0 + sidesNum]++;
-    }
-    if (!(rotations[1] % 2)) {
-      rotations[1]++;
-      rotations[1 + sidesNum]++;
-    }
-    if (!(rotations[2] % 2)) {
-      rotations[2]++;
-      rotations[2 + sidesNum]++;
-    }
-    rotateCards(cards, rotations);
-  });
-
-  activateSignupBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (rotations[1] % 2) {
-      rotations[1]++;
-      rotations[1 + sidesNum]++;
-    }
-    if (!(rotations[0] % 2)) {
-      rotations[0]++;
-      rotations[0 + sidesNum]++;
-    }
-    if (!(rotations[2] % 2)) {
-      rotations[2]++;
-      rotations[2 + sidesNum]++;
-    }
-    rotateCards(cards, rotations);
-  });
-
-  ////////////////////
   ///// LEAFLET MAP
 
   // Leaflet JS map and markers
@@ -432,17 +351,6 @@ function ready() {
 
   sectionEls.forEach(el => navObserver.observe(el));
 
-  /////////////////////
-
-  // document.querySelector('.nav__links').addEventListener('click', function (e) {
-  //   e.preventDefault();
-
-  //   if (e.target.classList.contains('nav__link')) {
-  //     const id = e.target.getAttribute('href');
-  //     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // });
-
   ////////////////////
   ///// nav via buttons
   const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
@@ -483,39 +391,106 @@ function ready() {
       document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
     })
   );
-}
 
-const obj = {
-  gender: 'female',
-  name: { title: 'Mrs', first: 'Abby', last: 'Holland' },
-  location: {
-    street: { number: 9647, name: 'London Road' },
-    city: 'Westminster',
-    state: 'Greater Manchester',
-    country: 'United Kingdom',
-    postcode: 'U5H 2DP',
-    coordinates: { latitude: '13.7113', longitude: '107.9493' },
-    timezone: { offset: '+2:00', description: 'Kaliningrad, South Africa' },
-  },
-  email: 'abby.holland@example.com',
-  login: {
-    uuid: '0668f5e6-75eb-4803-b031-9c05cb2e678c',
-    username: 'beautifulmeercat783',
-    password: 'candace',
-    salt: 'x6RGdoRd',
-    md5: 'fe64dc2634687519dc6a5593017a2baf',
-    sha1: '7cc5142d95c6f0620653ea7cfd60a7757b7194e4',
-    sha256: '20041e1dbf17c5d0e09ca500e8fecccb792f9e1b253838562cfcb2b03a520a70',
-  },
-  dob: { date: '1946-03-10T15:06:15.140Z', age: 76 },
-  registered: { date: '2008-04-09T16:36:09.355Z', age: 14 },
-  phone: '013873 65028',
-  cell: '0741-659-275',
-  id: { name: 'NINO', value: 'SZ 19 73 26 O' },
-  picture: {
-    large: 'https://randomuser.me/api/portraits/women/76.jpg',
-    medium: 'https://randomuser.me/api/portraits/med/women/76.jpg',
-    thumbnail: 'https://randomuser.me/api/portraits/thumb/women/76.jpg',
-  },
-  nat: 'GB',
-};
+  ///////////////////////////////////////////////
+  ////////////////////
+  ///// ACCOUNT
+  // animation for labels
+  const labels = document.querySelectorAll('.account-card__form label');
+
+  labels.forEach(label => {
+    label.innerHTML = label.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          `<span style="transition-delay:${idx * 30}ms">${letter}</span>`
+      )
+      .join('');
+  });
+
+  // nav between rotating cards
+  const cards = document.querySelectorAll('.account-card__side');
+  const testBtn = document.querySelector('.testing');
+  let counter = 0;
+  const rotations = [0, 1, 1];
+  const sidesNum = cards.length / 2;
+
+  rotateCards(cards, rotations);
+  testBtn.addEventListener('click', () => {
+    rotations[counter]++;
+    rotations[counter + sidesNum]++;
+    counter++;
+    if (counter > 2) counter = 0;
+    rotations[counter]++;
+    rotations[counter + sidesNum]++;
+    console.log(counter);
+    rotateCards(cards, rotations);
+  });
+
+  function rotateCards(cards, rotations) {
+    cards.forEach((card, idx) => {
+      card.style.transform = `rotateY(${rotations[idx % sidesNum] * 180}deg)`;
+    });
+  }
+
+  const gotoLoginBtn = document.querySelector('.account-card__goto-login');
+  const gotoSignupBtn = document.querySelector('.account-card__goto-signup');
+
+  gotoLoginBtn.addEventListener('click', e => {
+    e.preventDefault();
+    if (rotations[0] % 2) {
+      rotations[0]++;
+      rotations[0 + sidesNum]++;
+    }
+    if (!(rotations[1] % 2)) {
+      rotations[1]++;
+      rotations[1 + sidesNum]++;
+    }
+    if (!(rotations[2] % 2)) {
+      rotations[2]++;
+      rotations[2 + sidesNum]++;
+    }
+    rotateCards(cards, rotations);
+  });
+
+  gotoSignupBtn.addEventListener('click', e => {
+    e.preventDefault();
+    if (rotations[1] % 2) {
+      rotations[1]++;
+      rotations[1 + sidesNum]++;
+    }
+    if (!(rotations[0] % 2)) {
+      rotations[0]++;
+      rotations[0 + sidesNum]++;
+    }
+    if (!(rotations[2] % 2)) {
+      rotations[2]++;
+      rotations[2 + sidesNum]++;
+    }
+    rotateCards(cards, rotations);
+  });
+
+  ////////////////////
+  ///// USERS DB (via local storage)
+
+  ////////////////////
+  ///// ACCOUNT SECTION FORMS
+  const btnLogin = document.querySelector('.account-card__login');
+  const btnSignup = document.querySelector('.account-card__signup');
+  const btnLogout = document.querySelector('.account-card__logout');
+  const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
+  ///// LOG IN CARDs
+  // 0. register now / create a new one button - go to SIGN UP
+  // 1. take input username and password and check if they match the DB
+  // .account-card__login
+  // if MATCH, go to WELCOME + upload favorite lodgings
+  // if FAIL, highlight 'email us for support' <p>
+  ///// SIGN UP CARDs
+  // 0. log in now button - go to LOG IN
+  // 1. Generate pwd - generate pwd and paste it .account-card__generate-pwd
+  // click on generated pwd - copy to clipboard
+  // 2. check input, create new user, go to WELCOME .account-card__signup
+  ///// WELCOME BACK CARDs
+  // 1. add/rm favorites from/to local storage
+  // 2. logout button - log out, go to LOG IN .account-card__logout
+}

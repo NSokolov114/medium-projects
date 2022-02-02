@@ -452,35 +452,53 @@
               <div class="account-card__side">
                 <h3>Log In</h3>
                 <div class="account-card__form">
-                  <input type="text" required />
+                  <input
+                    type="text"
+                    title="Please, enter your username"
+                    placeholder="&nbsp;"
+                  />
                   <label>Username</label>
                 </div>
 
                 <div class="account-card__form">
-                  <input type="password" required />
+                  <input
+                    type="password"
+                    title="Please, enter your password"
+                    placeholder="&nbsp;"
+                  />
                   <label>Password</label>
                 </div>
-                <button class="account-card__btn">Log In</button>
+                <button class="account-card__btn account-card__login">
+                  Log In
+                </button>
 
                 <p>
-                  <small
-                    >Don't have an account?
-                    <a class="account-card__activate-signup"
-                      >Register now!</a
-                    ></small
-                  >
+                  Don't have an account?
+                  <a class="account-card__goto-signup">Register&nbsp;now!</a>
                 </p>
               </div>
               <!-- side B -->
               <div class="account-card__side">
                 <h3>Sign Up</h3>
                 <div class="account-card__form">
-                  <input type="text" required />
+                  <input
+                    type="text"
+                    required
+                    minlength="5"
+                    title="Please, enter your username (5+ symbols)"
+                    placeholder="&nbsp;"
+                  />
                   <label>Username</label>
                 </div>
 
                 <div class="account-card__form">
-                  <input type="text" required />
+                  <input
+                    type="text"
+                    required
+                    pattern="^[^ ]+@[^ ]+\.[a-z]{2,3}$"
+                    title="Please, enter your email"
+                    placeholder="&nbsp;"
+                  />
                   <label>Email</label>
                 </div>
 
@@ -489,19 +507,18 @@
                     type="password"
                     required
                     pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
-                    title="Please, include at least 1 uppercase character, 1 lowercase character, and 1 number"
+                    title="Example of a valid password: passWor1"
+                    placeholder="&nbsp;"
                   />
                   <label>Password</label>
                 </div>
-                <button class="account-card__btn">Create account</button>
+                <button class="account-card__btn account-card__signup">
+                  Create account
+                </button>
 
                 <p>
-                  <small
-                    >Already have an account?
-                    <a class="account-card__activate-login"
-                      >Log in now!</a
-                    ></small
-                  >
+                  Already have an account?
+                  <a class="account-card__goto-login">Log&nbsp;in&nbsp;back!</a>
                 </p>
               </div>
               <!-- side C -->
@@ -620,9 +637,7 @@
                   least one of each: lowercase letters, uppercase letters and
                   digits.
                 </p>
-                <button
-                  class="account-card__btn account-card__btn-generate-pwd"
-                >
+                <button class="account-card__btn account-card__generate-pwd">
                   Generate password
                 </button>
 
@@ -642,7 +657,7 @@
                 <button class="account-card__btn disabled">
                   Manage your bookings
                 </button>
-                <button class="account-card__btn account-card__btn-logout">
+                <button class="account-card__btn account-card__logout">
                   Log out
                 </button>
               </div>

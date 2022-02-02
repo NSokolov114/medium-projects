@@ -2107,9 +2107,15 @@ body {
 }
 
 .account-card__form input:focus,
-.account-card__form input:valid {
+.account-card__form input:valid,
+.account-card__form input:invalid {
   border-bottom-color: var(--color-primary-light);
   outline: 0;
+}
+
+.account-card__form input:invalid:focus:required,
+.account-card__form input:not(:placeholder-shown):invalid:required {
+  border-bottom-color: var(--color-heart);
 }
 
 .account-card__form label {
@@ -2128,10 +2134,18 @@ body {
 }
 
 .account-card__form input:focus + label span,
-.account-card__form input:valid + label span {
-  color: var(--color-primary-light);
+.account-card__form input:not(:placeholder-shown) + label span {
   -webkit-transform: translateY(-3rem);
           transform: translateY(-3rem);
+}
+
+.account-card__form input:focus + label span,
+.account-card__form input:valid + label span {
+  color: var(--color-primary-light);
+}
+
+.account-card__form input:invalid:focus:required + label span {
+  color: var(--color-heart);
 }
 
 .account-card__side--settings ul {

@@ -103,9 +103,15 @@
     }
 
     & input:focus,
-    & input:valid {
+    & input:valid,
+    & input:invalid {
       border-bottom-color: var(--color-primary-light);
       outline: 0;
+    }
+
+    & input:invalid:focus:required,
+    & input:not(:placeholder-shown):invalid:required {
+      border-bottom-color: var(--color-heart);
     }
 
     & label {
@@ -123,10 +129,20 @@
     }
 
     & input:focus + label span,
-    & input:valid + label span {
-      color: var(--color-primary-light);
+    & input:not(:placeholder-shown) + label span {
       transform: translateY(-3rem);
     }
+
+    & input:focus + label span,
+    & input:valid + label span {
+      color: var(--color-primary-light);
+    }
+
+    & input:invalid:focus:required + label span {
+      color: var(--color-heart);
+    }
+
+    // var(--color-heart)
   }
 
   // favorite list
