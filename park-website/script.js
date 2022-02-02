@@ -409,69 +409,87 @@ function ready() {
   });
 
   // nav between rotating cards
-  const cards = document.querySelectorAll('.account-card__side');
-  const testBtn = document.querySelector('.testing');
+  const sides = document.querySelectorAll('.account-card__side');
+  // const testBtn = document.querySelector('.testing');
   let counter = 0;
-  const rotations = [0, 1, 1];
-  const sidesNum = cards.length / 2;
+  const sidesRot = [];
+  const sidesNum = sides.length / 2;
+  for (let i = 0; i < sidesNum; i++) {
+    i === 0 ? sidesRot.push(0) : sidesRot.push(1);
+  }
 
-  rotateCards(cards, rotations);
-  testBtn.addEventListener('click', () => {
-    rotations[counter]++;
-    rotations[counter + sidesNum]++;
-    counter++;
-    if (counter > 2) counter = 0;
-    rotations[counter]++;
-    rotations[counter + sidesNum]++;
-    console.log(counter);
-    rotateCards(cards, rotations);
-  });
+  // rotateCards(cards, rotations);
+  // testBtn.addEventListener('click', () => {
+  //   rotations[counter]++;
+  //   rotations[counter + sidesNum]++;
+  //   counter++;
+  //   if (counter > 2) counter = 0;
+  //   rotations[counter]++;
+  //   rotations[counter + sidesNum]++;
+  //   console.log(counter);
+  //   rotateCards(cards, rotations);
+  // });
 
-  function rotateCards(cards, rotations) {
-    cards.forEach((card, idx) => {
-      card.style.transform = `rotateY(${rotations[idx % sidesNum] * 180}deg)`;
+  function rotateSides(sides, rotations) {
+    sides.forEach((side, idx) => {
+      side.style.transform = `rotateY(${rotations[idx % sidesNum] * 180}deg)`;
     });
   }
 
+  function gotoSignup() {
+    console.log(sidesRot);
+    updateRots(1);
+    console.log(sidesRot);
+    rotateSides(sides, sidesRot);
+  }
+
+  function gotoLogin() {
+    console.log(sidesRot);
+    updateRots(0);
+    console.log(sidesRot);
+    rotateSides(sides, sidesRot);
+  }
+
+  function updateRots(activeSideIdx) {
+    for (let i = 0; i < sidesNum; i++) {
+      if (i === activeSideIdx || !(sidesRot[i] % 2)) {
+        sidesRot[i]++;
+      }
+    }
+  }
+
+  rotateSides(sides, sidesRot);
+
   const gotoLoginBtn = document.querySelector('.account-card__goto-login');
-  const gotoSignupBtn = document.querySelector('.account-card__goto-signup');
+  const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
 
   gotoLoginBtn.addEventListener('click', e => {
     e.preventDefault();
-    if (rotations[0] % 2) {
-      rotations[0]++;
-      rotations[0 + sidesNum]++;
-    }
-    if (!(rotations[1] % 2)) {
-      rotations[1]++;
-      rotations[1 + sidesNum]++;
-    }
-    if (!(rotations[2] % 2)) {
-      rotations[2]++;
-      rotations[2 + sidesNum]++;
-    }
-    rotateCards(cards, rotations);
+    gotoLogin();
   });
 
-  gotoSignupBtn.addEventListener('click', e => {
-    e.preventDefault();
-    if (rotations[1] % 2) {
-      rotations[1]++;
-      rotations[1 + sidesNum]++;
-    }
-    if (!(rotations[0] % 2)) {
-      rotations[0]++;
-      rotations[0 + sidesNum]++;
-    }
-    if (!(rotations[2] % 2)) {
-      rotations[2]++;
-      rotations[2 + sidesNum]++;
-    }
-    rotateCards(cards, rotations);
-  });
+  gotoSignupBtn.forEach(btn =>
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      gotoSignup();
+    })
+  );
 
   ////////////////////
   ///// USERS DB (via local storage)
+  const usersDB = [];
+  const dummyUser1 = {
+    username: 'vasya83',
+    email: 'vasya83@macrosoft.com',
+    password: 'passWORD83',
+  };
+  const dummyUser2 = {
+    username: 'vasya38',
+    email: 'vasya38@macrosoft.com',
+    password: 'passWORD38',
+  };
+  usersDB.push(dummyUser1);
+  usersDB.push(dummyUser2);
 
   ////////////////////
   ///// ACCOUNT SECTION FORMS
@@ -479,17 +497,64 @@ function ready() {
   const btnSignup = document.querySelector('.account-card__signup');
   const btnLogout = document.querySelector('.account-card__logout');
   const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
+  const sidesLogin = document.querySelectorAll('.account-card__side--login');
+  const sidesSignup = document.querySelectorAll('.account-card__side--signup');
+  const sidesSettings = document.querySelectorAll(
+    '.account-card__side--settings'
+  );
+
   ///// LOG IN CARDs
   // 0. register now / create a new one button - go to SIGN UP
   // 1. take input username and password and check if they match the DB
   // .account-card__login
   // if MATCH, go to WELCOME + upload favorite lodgings
   // if FAIL, highlight 'email us for support' <p>
+
   ///// SIGN UP CARDs
   // 0. log in now button - go to LOG IN
   // 1. Generate pwd - generate pwd and paste it .account-card__generate-pwd
   // click on generated pwd - copy to clipboard
   // 2. check input, create new user, go to WELCOME .account-card__signup
+  btnSignup.addEventListener('click', e => {
+    e.preventDefault();
+    const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
+      '.account-card__form input'
+    );
+
+    const isValid =
+      usernameEl.validity.valid &&
+      emailEl.validity.valid &&
+      pwdEl.validity.valid;
+
+    if (!isValid) return;
+
+    const username = usernameEl.value;
+    const email = emailEl.value;
+    const pwd = pwdEl.value;
+
+    if (usersDB.find(user => user.username === username)) {
+      usernameEl.value = '';
+      usernameEl.focus();
+      usernameEl.placeholder = 'This username is already taken';
+      return;
+    }
+
+    if (usersDB.find(user => user.email === email)) {
+      emailEl.value = '';
+      emailEl.focus();
+      emailEl.placeholder = 'This email is already taken';
+      return;
+    }
+
+    const newUser = {
+      username: username,
+      email: email,
+      password: pwd,
+    };
+
+    usersDB.push(newUser);
+  });
+
   ///// WELCOME BACK CARDs
   // 1. add/rm favorites from/to local storage
   // 2. logout button - log out, go to LOG IN .account-card__logout
