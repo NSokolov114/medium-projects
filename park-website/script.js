@@ -19,10 +19,9 @@ function ready() {
     tooltipNumber: totalDays => {
       return totalDays - 1;
     },
-    lockDays: ['2021-11-22', ['1970-11-11', currentDate]],
+    lockDays: [['1970-11-11', currentDate]],
   });
   // picker.show();
-  console.log(currentDate);
 
   ////////////////////
   ///// HEART icons & order based on HEARTS
@@ -32,6 +31,9 @@ function ready() {
   const hotelEls = document.querySelectorAll('.hotel');
   const numberOfSections = 3;
   const numberOfHotels = heartIcons.length / numberOfSections;
+
+  const favoriteHotels = new Array(numberOfHotels);
+  favoriteHotels.fill(false);
 
   function toggleMatchingHeartIcons(idx) {
     const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
@@ -63,6 +65,8 @@ function ready() {
       toggleMatchingHeartIcons(idx);
       sortCards(idx);
       iconToast(icon);
+      favoriteHotels[idx % 6] = !favoriteHotels[idx % 6];
+      console.log(favoriteHotels);
     });
   });
 
@@ -195,9 +199,6 @@ function ready() {
   const reviewPhotos = document.querySelectorAll('.review__photo');
   const reviewsNumber = reviewNames.length;
 
-  // const averageRatings = [];
-  // const countRatings = [];
-
   function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
   }
@@ -280,8 +281,8 @@ function ready() {
 
   function scrollFunction() {
     if (
-      document.body.scrollTop > 100 ||
-      document.documentElement.scrollTop > 100
+      document.body.scrollTop > 200 ||
+      document.documentElement.scrollTop > 200
     ) {
       toTopBtn.classList.remove('hidden');
     } else {
@@ -289,16 +290,26 @@ function ready() {
     }
   }
 
-  function topFunction() {
+  const header = document.querySelector('.header');
+  const headerObserverOptions = {
+    root: null,
+    threshold: 0,
+  };
+  const headerObserver = new IntersectionObserver(
+    scrollFunction,
+    headerObserverOptions
+  );
+
+  headerObserver.observe(header);
+
+  // window.onscroll = function () {
+  //   scrollFunction();
+  // };
+
+  toTopBtn.addEventListener('click', () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  }
-
-  window.onscroll = function () {
-    scrollFunction();
-  };
-
-  toTopBtn.addEventListener('click', topFunction);
+  });
 
   ////////////////////
   ///// Highlighting nav items
