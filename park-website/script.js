@@ -353,11 +353,26 @@ function ready() {
 
   ////////////////////
   ///// nav via buttons
-  const moveToAccountBtn1 = document.querySelector('.user-nav__to-account');
-  const moveToAccountBtn2 = document.querySelector('.user-nav__user');
+  const userNav = document.querySelector('.user-nav');
+  const userNavLoginBtn = document.querySelector('.user-nav__to-account');
+  const userNavUserBtn = document.querySelector('.user-nav__user');
   const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
   const navBar = document.querySelector('.sidebar');
   const cardLinks = document.querySelectorAll('.card__btn a');
+
+  function toggleUserNav() {
+    if (activeUser) {
+      userNavLoginBtn.classList.add('hidden');
+      userNav.classList.remove('hidden');
+      userNavUsername.innerText = activeUser;
+      gotoSide('settings');
+    } else {
+      userNavLoginBtn.classList.remove('hidden');
+      userNav.classList.add('hidden');
+      userNavUsername.innerText = '';
+      gotoSide('login');
+    }
+  }
 
   function navigateButtons(buttons, section) {
     buttons.forEach(btn => {
@@ -370,7 +385,7 @@ function ready() {
   }
 
   navigateButtons(moveToBookingBtns, 'booking');
-  navigateButtons([moveToAccountBtn1, moveToAccountBtn2], 'account');
+  navigateButtons([userNavLoginBtn, userNavUserBtn], 'account');
 
   // sidebar nav buttons
   navBar.addEventListener('click', e => {
@@ -464,6 +479,7 @@ function ready() {
 
   ////////////////////
   ///// USERS DB (via local storage)
+
   const dummyUsersDB = [
     {
       username: 'vasya83',
@@ -477,25 +493,13 @@ function ready() {
     },
   ];
   const usersDB = JSON.parse(localStorage.getItem('usersDB')) || dummyUsersDB;
-
-  // const dummyUser1 = {
-  //   username: 'vasya83',
-  //   email: 'vasya83@macrosoft.com',
-  //   password: 'passWORD83',
-  // };
-  // const dummyUser2 = {
-  //   username: 'vasya38',
-  //   email: 'vasya38@macrosoft.com',
-  //   password: 'passWORD38',
-  // };
+  let activeUser = localStorage.getItem('activeUser') || '';
+  console.log(activeUser, '-> activeUser');
 
   function setLocalStorage() {
     localStorage.removeItem('usersDB');
     localStorage.setItem('usersDB', JSON.stringify(usersDB));
   }
-
-  // usersDB.push(dummyUser1);
-  // usersDB.push(dummyUser2);
 
   setLocalStorage();
 
@@ -511,10 +515,12 @@ function ready() {
     '.account-card__side--settings'
   );
   const welcomeMsg = document.querySelector('.account-card__welcome-msg');
+  const userNavUsername = document.querySelector('.user-nav__user-name');
   const generatedPwdLink = document.querySelector(
     '.account-card__generated-pwd'
   );
 
+  toggleUserNav();
   generatedPwdLink.addEventListener('click', e => e.preventDefault());
 
   btnGeneratePwd.addEventListener('click', e => {
@@ -585,20 +591,21 @@ function ready() {
       usersDB.findIndex(user => user.username === userInfo),
       usersDB.findIndex(user => user.email === userInfo)
     );
-    console.log(match, userInfo);
 
     if (match < 0 || usersDB[match].password !== pwd) {
       pwdEl.value = '';
       pwdEl.focus();
       pwdEl.placeholder = 'Wrong email or password';
-      //account-card__help-msg
       document.querySelector('.account-card__help-msg').style.color =
         'var(--color-primary-light)';
       return;
     }
 
-    welcomeMsg.innerText = `You're logged in as ${usersDB[match].username}!`;
-    gotoSide('settings');
+    activeUser = usersDB[match].username;
+    toggleUserNav();
+    localStorage.setItem('activeUser', activeUser);
+    welcomeMsg.innerText = `You're logged in as ${activeUser}!`;
+
     userInfoEl.value = '';
     pwdEl.value = '';
   });
@@ -648,8 +655,12 @@ function ready() {
     usersDB.push(newUser);
     setLocalStorage();
 
-    welcomeMsg.innerText = `Congratulations, ${username}! You've successfully created a new account.`;
-    gotoSide('settings');
+    activeUser = username;
+
+    toggleUserNav();
+    localStorage.setItem('activeUser', activeUser);
+    welcomeMsg.innerText = `Congratulations, ${activeUser}! You've successfully created a new account.`;
+
     usernameEl.value = '';
     emailEl.value = '';
     pwdEl.value = '';
@@ -660,6 +671,9 @@ function ready() {
   // 2. logout button - log out, go to LOG IN .account-card__logout
   btnLogout.addEventListener('click', e => {
     e.preventDefault();
-    gotoSide('login');
+    activeUser = '';
+    localStorage.setItem('activeUser', activeUser);
+
+    toggleUserNav();
   });
 }

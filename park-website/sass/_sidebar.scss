@@ -3,6 +3,10 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+
+  @media only screen and (max-height: 730px) and (min-width: $bp-medium) {
+    margin-top: -120px;
+  }
 }
 
 .side-nav {
