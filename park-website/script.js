@@ -32,7 +32,7 @@ function ready() {
   const numberOfSections = 3;
   const numberOfHotels = heartIcons.length / numberOfSections;
 
-  const favoriteHotels = new Array(numberOfHotels);
+  let favoriteHotels = new Array(numberOfHotels);
   favoriteHotels.fill(false);
 
   function toggleMatchingHeartIcons(idx) {
@@ -46,6 +46,14 @@ function ready() {
       }
       position += numberOfHotels;
     }
+  }
+
+  function restoreUserHearts(favorites) {
+    favorites.forEach((fav, idx) => {
+      if (fav) {
+        heartIcons[idx].click();
+      }
+    });
   }
 
   function sortCards(idx) {
@@ -378,6 +386,7 @@ function ready() {
       userNav.classList.add('hidden');
       userNavUsername.innerText = '';
       gotoSide('login');
+      // console.log('going to login');
     }
   }
 
@@ -432,7 +441,7 @@ function ready() {
 
   // nav between rotating cards
   const sides = document.querySelectorAll('.account-card__side');
-  const sidesRot = [0, 1, 1]; // initial rotation
+  const sidesRot = [0, 0, 0]; // initial rotation
   const sidesNum = 3;
 
   function rotateSides() {
@@ -454,19 +463,23 @@ function ready() {
       return;
     }
 
+    console.log('go to side ', idx);
+
     updateRots(idx);
     rotateSides();
   }
 
   function updateRots(activeSideIdx) {
     for (let i = 0; i < sidesNum; i++) {
-      if (i === activeSideIdx || !(sidesRot[i] % 2)) {
-        sidesRot[i]++;
-      }
+      // if (i === activeSideIdx || !(sidesRot[i] % 2)) {
+      //   sidesRot[i]++;
+      // }
+      if (activeSideIdx === i && sidesRot[i] % 2) sidesRot[i]++;
+      if (activeSideIdx !== i && !(sidesRot[i] % 2)) sidesRot[i]++;
     }
   }
 
-  rotateSides();
+  // rotateSides();
 
   const gotoLoginBtn = document.querySelector('.account-card__goto-login');
   const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
@@ -492,16 +505,41 @@ function ready() {
       username: 'vasya83',
       email: 'vasya83@macrosoft.com',
       password: 'passWORD83',
+      favoriteHotels: [false, false, true, true, true, false],
+      lastBooking: {
+        hotel: 1,
+        rooms: 1,
+        ppl: 3,
+        date: '',
+      },
     },
     {
       username: 'vasya38',
       email: 'vasya38@macrosoft.com',
       password: 'passWORD38',
+      favoriteHotels: [true, true, false, false, false, true],
+      lastBooking: {
+        hotel: 1,
+        rooms: 2,
+        ppl: 4,
+        date: '',
+      },
     },
   ];
   const usersDB = JSON.parse(localStorage.getItem('usersDB')) || dummyUsersDB;
   let activeUser = localStorage.getItem('activeUser') || '';
   console.log(activeUser, '-> activeUser');
+  console.log(usersDB.find(user => user.username === activeUser));
+  console.log(favoriteHotels);
+  let activeUserProfile = activeUser
+    ? usersDB.find(user => user.username === activeUser)
+    : {};
+  console.log(activeUserProfile);
+  if (activeUser) {
+    favoriteHotels = activeUserProfile.favoriteHotels;
+    console.log(favoriteHotels);
+  }
+  restoreUserHearts(favoriteHotels);
 
   function setLocalStorage() {
     localStorage.removeItem('usersDB');

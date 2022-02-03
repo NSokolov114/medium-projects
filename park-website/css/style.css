@@ -685,7 +685,7 @@ body {
   margin-left: 2rem;
 }
 
-@media only screen and (max-height: 730px) {
+@media only screen and (max-height: 730px) and (min-width: 900px) {
   .logo {
     margin-left: 220px;
   }
