@@ -548,8 +548,8 @@
               </div>
               <!-- side C -->
               <div class="account-card__side account-card__side--settings">
-                <h3>Your favorite lodgings</h3>
-                <ul>
+                <h3 class="hidden">Your favorite lodgings</h3>
+                <ul class="hidden">
                   <li>
                     <input
                       type="checkbox"
@@ -623,6 +623,19 @@
                     <label for="item6">Lakeside Campground</label>
                   </li>
                 </ul>
+                <h3 class="">Your last booking</h3>
+                <p>Lodgings: <span>Bear Meadow Campground</span></p>
+                <p>Rooms: <span>1</span></p>
+                <p>People: <span>3</span></p>
+                <p>Dates: <span>2022-02-10 - 2022-02-17</span></p>
+                <p class="account-card__help-msg">
+                  If you want to change the details of your booking, please
+                  write us and we'll be happy to help you.
+                </p>
+                <p>
+                  Email:
+                  <a href="mailto:support@snpicm.cz">support@snpicm.cz</a>
+                </p>
               </div>
             </div>
 
@@ -675,15 +688,15 @@
                 <p class="account-card__welcome-msg">
                   You're logged in as Vasya.
                 </p>
-                <p>
-                  Now you can change some account settings and manage your
-                  bookings.
-                </p>
+
                 <button class="account-card__btn cta__book-btn">
                   Book your next holiday
                 </button>
                 <button class="account-card__btn disabled">
                   Manage your bookings
+                </button>
+                <button class="account-card__btn disabled">
+                  Manage your favorites
                 </button>
                 <button class="account-card__btn account-card__logout">
                   Log out
