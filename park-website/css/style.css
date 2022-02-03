@@ -1003,7 +1003,10 @@ body {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
+  .side-nav__item {
+    letter-spacing: 0;
+  }
   .side-nav__item--gallery {
     display: none;
   }

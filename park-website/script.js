@@ -48,10 +48,29 @@ function ready() {
     }
   }
 
-  function restoreUserHearts(favorites) {
+  function saveHearts() {
+    favoriteHotels = [];
+    for (let i = 0; i < numberOfSections; i++) {
+      favoriteHotels.push(
+        heartIcons[i].classList.contains('icon-heart--active')
+      );
+    }
+    console.log(favoriteHotels);
+  }
+
+  function loadHearts(favorites) {
     favorites.forEach((fav, idx) => {
       if (fav) {
         heartIcons[idx].click();
+      }
+    });
+  }
+
+  function resetHearts() {
+    heartIcons.forEach(heart => {
+      heart.classList.remove('icon-heart--active');
+      if (heart.tagName === 'INPUT' && heart.checked) {
+        heart.checked = false;
       }
     });
   }
@@ -539,7 +558,7 @@ function ready() {
     favoriteHotels = activeUserProfile.favoriteHotels;
     console.log(favoriteHotels);
   }
-  restoreUserHearts(favoriteHotels);
+  loadHearts(favoriteHotels);
 
   function setLocalStorage() {
     localStorage.removeItem('usersDB');
@@ -647,6 +666,8 @@ function ready() {
     }
 
     activeUser = usersDB[match].username;
+    activeUserProfile = usersDB.find(user => user.username === activeUser);
+    loadHearts(activeUserProfile.favoriteHotels);
     toggleUserNav();
     localStorage.setItem('activeUser', activeUser);
     welcomeMsg.innerText = `You're logged in as ${activeUser}!`;
@@ -690,18 +711,22 @@ function ready() {
       emailEl.placeholder = 'This email is already taken';
       return;
     }
+    saveHearts();
 
     const newUser = {
       username: username,
       email: email,
       password: pwd,
+      favoriteHotels: favoriteHotels,
+      lastBooking: {},
     };
 
     usersDB.push(newUser);
     setLocalStorage();
 
     activeUser = username;
-
+    activeUserProfile = usersDB.find(user => user.username === activeUser);
+    loadHearts(activeUserProfile.favoriteHotels);
     toggleUserNav();
     localStorage.setItem('activeUser', activeUser);
     welcomeMsg.innerText = `Congratulations, ${activeUser}! You've successfully created a new account.`;
@@ -720,5 +745,8 @@ function ready() {
     localStorage.setItem('activeUser', activeUser);
 
     toggleUserNav();
+    resetHearts();
   });
+
+  welcomeMsg.innerText = `You're logged in as ${activeUser}!`;
 }
