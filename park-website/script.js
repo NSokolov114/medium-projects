@@ -749,4 +749,34 @@ function ready() {
   });
 
   welcomeMsg.innerText = `You're logged in as ${activeUser}!`;
+
+  ////////////////////
+  ///// booking object
+
+  const bookingForm = document.querySelector('.booking__form');
+  const bookingLodgings = bookingForm.querySelector('.booking__lodgings');
+  const bookingRooms = bookingForm.querySelector('.booking__rooms');
+  const bookingPeople = bookingForm.querySelector('.booking__people');
+  const bookingDates = bookingForm.querySelector('.booking__dates');
+  const bookingBtn = bookingForm.querySelector('.booking__submit');
+  let lastBooking = {};
+
+  function createBooking(e) {
+    e.preventDefault();
+    if (!bookingForm.checkValidity()) return;
+    lastBooking.hotel = bookingLodgings.value;
+    lastBooking.rooms = bookingRooms.value;
+    lastBooking.ppl = bookingPeople.value;
+    lastBooking.date = bookingDates.value;
+    console.log(lastBooking);
+  }
+
+  // lastBooking: {
+  //   hotel: 1,
+  //   rooms: 2,
+  //   ppl: 4,
+  //   date: '',
+  // }
+
+  bookingBtn.addEventListener('click', createBooking);
 }

@@ -361,7 +361,12 @@
             <form action="#" class="booking__form">
               <h3 class="section-title">Book Now!</h3>
               <label for="booking__lodgings">Where do you want to stay?</label>
-              <select name="booking__lodgings" id="booking__lodgings" required>
+              <select
+                name="booking__lodgings"
+                id="booking__lodgings"
+                class="booking__lodgings"
+                required
+              >
                 <option value="none" disabled selected>...</option>
                 <option value="1">Ursa Major Cabins</option>
                 <option value="2">Spruce Cabins</option>
@@ -372,7 +377,12 @@
               </select>
 
               <label for="booking__rooms">How many rooms/tents to book?</label>
-              <select name="booking__rooms" id="booking__rooms" required>
+              <select
+                name="booking__rooms"
+                id="booking__rooms"
+                class="booking__rooms"
+                required
+              >
                 <option value="none" disabled selected>...</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -381,7 +391,12 @@
               </select>
 
               <label for="booking__people">How many people will come?</label>
-              <select name="booking__people" id="booking__people" required>
+              <select
+                name="booking__people"
+                id="booking__people"
+                class="booking__people"
+                required
+              >
                 <option value="none" disabled selected>...</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -393,12 +408,18 @@
 
               <!-- calendar -->
               <label for="litepicker">What are the dates of your visit?</label>
-              <input id="litepicker" placeholder="Pick the dates" />
+              <input
+                id="litepicker"
+                placeholder="Pick the dates"
+                class="booking__dates"
+                required
+              />
 
               <input
                 type="submit"
                 value="Finish your booking"
                 id="booking__submit"
+                class="booking__submit"
               />
             </form>
           </section>
