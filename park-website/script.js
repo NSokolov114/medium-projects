@@ -278,38 +278,34 @@ function ready() {
   ////////////////////
   ///// BACK TO TOP BUTTON
   const toTopBtn = document.querySelector('.to-top-btn');
-
-  function scrollFunction() {
-    if (
-      document.body.scrollTop > 200 ||
-      document.documentElement.scrollTop > 200
-    ) {
-      toTopBtn.classList.remove('hidden');
-    } else {
-      toTopBtn.classList.add('hidden');
-    }
-  }
-
   const header = document.querySelector('.header');
+
+  const toggleToTopBtn = function (entries) {
+    const [entry] = entries;
+
+    if (entry.isIntersecting) {
+      toTopBtn.classList.add('hidden');
+    } else {
+      toTopBtn.classList.remove('hidden');
+    }
+  };
+
   const headerObserverOptions = {
     root: null,
     threshold: 0,
+    rootMargin: '250px',
   };
+
   const headerObserver = new IntersectionObserver(
-    scrollFunction,
+    toggleToTopBtn,
     headerObserverOptions
   );
 
   headerObserver.observe(header);
 
-  // window.onscroll = function () {
-  //   scrollFunction();
-  // };
-
-  toTopBtn.addEventListener('click', () => {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-  });
+  toTopBtn.addEventListener('click', () =>
+    header.scrollIntoView({ behavior: 'smooth' })
+  );
 
   ////////////////////
   ///// Highlighting nav items
