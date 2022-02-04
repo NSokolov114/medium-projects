@@ -51,6 +51,10 @@ function ready() {
       : createNotification('Please, login to finish booking', 'info');
   }
 
+  function createAccountToast() {
+    createNotification('Congratulations, you created new account', 'success');
+  }
+
   ////////////////////
   ///// LEAFLET MAP
 
@@ -349,7 +353,6 @@ function ready() {
       userNav.classList.add('hidden');
       userNavUsername.innerText = '';
       gotoSide('login');
-      // console.log('going to login');
     }
   }
 
@@ -533,11 +536,10 @@ function ready() {
       idx = 1;
     } else if (side === 'settings') {
       idx = 2;
-    } else {
-      return;
+      welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
     }
 
-    console.log('go to side ', idx);
+    console.log('going to side ', idx);
 
     updateRots(idx);
     rotateSides();
@@ -671,7 +673,6 @@ function ready() {
     loadHearts();
     toggleUserNav();
     localStorage.setItem('loggedAs', loggedAs);
-    welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
 
     userInfoEl.value = '';
     pwdEl.value = '';
@@ -723,7 +724,7 @@ function ready() {
 
     toggleUserNav();
     localStorage.setItem('loggedAs', loggedAs);
-    welcomeMsg.innerText = `Congratulations, ${loggedAs}! You've successfully created a new account.`;
+    createAccountToast();
 
     usernameEl.value = '';
     emailEl.value = '';
@@ -744,10 +745,44 @@ function ready() {
     loadHearts();
   });
 
-  welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
+  // show last booking / show favorites
+  const lastBookingEls = document.querySelectorAll(
+    '.account-card__last-booking'
+  );
+  const favoritesEls = document.querySelectorAll('.account-card__favorites');
+  const showLastBookingBtn = document.querySelector(
+    '.account-card__booking-btn'
+  );
+  const showFavoritesBtn = document.querySelector(
+    '.account-card__favorites-btn'
+  );
+
+  const lastBookingInfo = document.querySelector(
+    'p.account-card__last-booking'
+  );
+
+  function setLastBookingMsg() {
+    const roomOrTent = user.lastBooking.hotel < 4 ? 'room' : 'tent';
+    const manyOrOneHotel = user.lastBooking.rooms < 2 ? '' : 's';
+    const personOrPeople = user.lastBooking.ppl < 2 ? 'person' : 'people';
+
+    lastBookingInfo.innerText = `You booked ${user.lastBooking.rooms} ${roomOrTent}${manyOrOneHotel} for ${user.lastBooking.ppl} ${personOrPeople} in the ${user.lastBooking.hotel} for ${user.lastBooking.date}.`;
+  }
+
+  showLastBookingBtn.addEventListener('click', e => {
+    e.preventDefault();
+    favoritesEls.forEach(el => el.classList.add('hidden'));
+    lastBookingEls.forEach(el => el.classList.remove('hidden'));
+  });
+
+  showFavoritesBtn.addEventListener('click', e => {
+    e.preventDefault();
+    favoritesEls.forEach(el => el.classList.remove('hidden'));
+    lastBookingEls.forEach(el => el.classList.add('hidden'));
+  });
 
   ////////////////////
-  ///// booking object
+  ///// booking section
 
   const bookingForm = document.querySelector('.booking__form');
   const bookingLodgings = bookingForm.querySelector('.booking__lodgings');
@@ -765,6 +800,7 @@ function ready() {
     user.lastBooking.date = bookingDates.value;
     console.log(user.lastBooking);
 
+    setLastBookingMsg();
     bookingToast();
 
     updateUsersDB();
