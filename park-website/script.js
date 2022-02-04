@@ -51,6 +51,10 @@ function ready() {
       : createNotification('Please, login to finish booking', 'info');
   }
 
+  function bookingFailToast() {
+    createNotification('Please, fill all the fields', 'error');
+  }
+
   function createAccountToast() {
     createNotification('Congratulations, you created new account', 'success');
   }
@@ -686,6 +690,7 @@ function ready() {
     user = usersDB.find(user => user.username === loggedAs);
     loadHearts();
     toggleUserNav();
+    setLastBookingMsg();
     localStorage.setItem('loggedAs', loggedAs);
 
     userInfoEl.value = '';
@@ -739,7 +744,7 @@ function ready() {
     toggleUserNav();
     localStorage.setItem('loggedAs', loggedAs);
     createAccountToast();
-
+    setLastBookingMsg();
     usernameEl.value = '';
     emailEl.value = '';
     pwdEl.value = '';
@@ -775,6 +780,11 @@ function ready() {
   );
 
   function setLastBookingMsg() {
+    if (!user.lastBooking.hotel) {
+      lastBookingInfo.innerText = `You didn't book anything yet. To make your first booking go to the BOOKING section.`;
+      return;
+    }
+
     const roomOrTent = user.lastBooking.hotel < 4 ? 'room' : 'tent';
     const manyOrOneHotel = user.lastBooking.rooms < 2 ? '' : 's';
     const personOrPeople = user.lastBooking.ppl < 2 ? 'person' : 'people';
@@ -814,7 +824,10 @@ function ready() {
 
   function createBooking(e) {
     e.preventDefault();
-    if (!bookingForm.checkValidity()) return;
+    if (!bookingForm.checkValidity()) {
+      bookingFailToast();
+      return;
+    }
     user.lastBooking.hotel = bookingLodgings.value;
     user.lastBooking.rooms = bookingRooms.value;
     user.lastBooking.ppl = bookingPeople.value;
@@ -849,12 +862,6 @@ function ready() {
     }
   }
 
-  // lastBooking: {
-  //   hotel: 1,
-  //   rooms: 2,
-  //   ppl: 4,
-  //   date: '',
-  // }
-
   bookingBtn.addEventListener('click', createBooking);
+  setLastBookingMsg();
 }
