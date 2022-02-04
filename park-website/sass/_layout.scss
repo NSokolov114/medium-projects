@@ -15,28 +15,15 @@
 .header {
   background-color: var(--color-white);
   border-bottom: var(--line);
-  // position: fixed;
-  // top: 0;
-  // z-index: 2;
   min-height: 12rem;
-
-  @media only screen and (max-width: $bp-small) {
-    // height: 20rem;
-  }
 }
 
 .content {
-  // box-shadow: var(--shadow-dark);
   display: flex;
-  // padding-top: 12rem;
   position: relative;
 
   @media only screen and (max-width: $bp-medium) {
     flex-direction: column;
-  }
-
-  @media only screen and (max-width: $bp-small) {
-    // padding-top: 20rem;
   }
 }
 
@@ -54,14 +41,13 @@
 }
 
 .account {
-  // height: 800px;
-  width: 100%;
+  align-items: center;
   background-image: var(--background-gradient-1);
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: center;
   padding-bottom: 3rem;
+  width: 100%;
 }
 
 .booking {
@@ -86,9 +72,9 @@
   flex: 1;
 }
 
-.hotel {
-  // flex: 1;
-}
+// .hotel {
+// placeholder
+// }
 
 .gallery {
   background-image: var(--background-gradient-1);

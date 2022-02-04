@@ -3,13 +3,10 @@
   display: flex;
   font-size: 1.4rem;
   justify-content: space-between;
-
   max-width: $bp-largest;
   width: 100%;
-  // opacity: 0.5;
 
   @media only screen and (max-width: $bp-small) {
-    // align-items: stretch;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -65,8 +62,8 @@
   }
 
   @media only screen and (max-width: $bp-small) {
-    flex: 1;
     align-self: center;
+    flex: 1;
   }
 }
 
@@ -77,8 +74,8 @@
   display: flex;
 
   @media only screen and (max-width: $bp-small) {
-    justify-content: center;
     background-color: var(--color-grey-light-4);
+    justify-content: center;
     width: 100%;
   }
 
@@ -96,12 +93,12 @@
   }
 
   &__icon-box {
+    align-items: center;
     border: none;
-    min-width: 8rem;
-    position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
+    min-width: 8rem;
+    position: relative;
 
     &:hover {
       background-color: var(--color-grey-light-4);
@@ -156,19 +153,18 @@
   }
 
   &__user-photo {
+    background-image: url(../img/user.svg);
+    background-size: cover;
     border-radius: 50%;
     height: 3.75rem;
     margin-right: 1rem;
     width: 3.75rem;
 
-    background-image: url(../img/user.svg);
-    background-size: cover;
-
     @supports (mask-image: url()) or (-webkit-mask-image: url()) {
       background-color: var(--color-grey-dark-2);
+      background-image: none;
       mask-image: url(../img/user.svg);
       mask-size: cover;
-      background-image: none;
     }
 
     @media only screen and (max-width: $bp-small) {
@@ -200,7 +196,6 @@
 
     &:hover {
       background-color: var(--color-primary-light);
-      // border: none;
     }
 
     &:focus {

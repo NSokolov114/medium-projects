@@ -1,32 +1,32 @@
 .hotel__hotels-container {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .hotel {
   background-image: var(--background-gradient-1);
-  padding-top: 4.5rem;
   order: 3;
+  padding-top: 4.5rem;
 }
 
 // OVERVIEW
 .overview {
   align-items: center;
   display: flex;
-  position: relative;
   justify-content: center;
+  position: relative;
 
   &__heading {
     font-family: var(--font-title);
     font-size: 2.5rem;
     font-weight: 500;
     letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 1.5rem 3rem;
     margin-left: 2rem;
     margin-right: auto;
+    padding: 1.5rem 3rem;
+    text-transform: uppercase;
 
     @media only screen and (max-width: $bp-small) {
       font-size: 1.8rem;
@@ -35,10 +35,10 @@
   }
 
   &__icon-heart {
-    height: 2rem;
-    width: 2rem;
     display: inline-block;
+    height: 2rem;
     margin-left: 1rem;
+    width: 2rem;
   }
 
   &__icon-location {
@@ -52,15 +52,16 @@
     font-size: 1.2rem;
     vertical-align: center;
   }
+
   &__icon-location {
     margin-right: 0.5rem;
   }
 
   &__rating {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
     margin-left: 3rem;
     padding: 0 2.25rem;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 
     @media only screen and (max-width: $bp-small) {
       padding: 0 1.5rem;
@@ -70,10 +71,8 @@
 
 // DETAIL
 .detail {
-  // background-color: var(--color-grey-light-1);
-  // border-bottom: var(--line);
-  font-size: 1.4rem;
   display: flex;
+  font-size: 1.4rem;
   padding: 4.5rem;
 
   @media only screen and (max-width: $bp-medium) {
@@ -88,15 +87,15 @@
 // DESCRIPTION
 .description {
   background-color: var(--color-white);
+  border-radius: 5px;
   box-shadow: var(--shadow-light);
   flex: 0 0 60%;
   margin-right: 4.5rem;
   padding: 3rem;
-  border-radius: 5px;
 
   @media only screen and (max-width: $bp-medium) {
-    padding: 2rem;
     margin-right: 3rem;
+    padding: 2rem;
   }
 
   @media only screen and (max-width: $bp-small) {
@@ -109,8 +108,8 @@
 .user-reviews {
   align-items: center;
   display: flex;
-  flex: 1;
   flex-direction: column;
+  flex: 1;
 
   & figure {
     border-radius: 5px;
@@ -151,9 +150,9 @@
 
       @supports (mask-image: url()) or (-webkit-mask-image: url()) {
         background-color: var(--color-primary);
+        background-image: none;
         mask-image: url(../img/chevron.svg);
         mask-size: cover;
-        background-image: none;
       }
     }
   }
@@ -175,8 +174,8 @@
   }
 
   &__photo {
-    border: 3px solid var(--color-white);
     border-radius: 50%;
+    border: 3px solid var(--color-white);
     box-sizing: content-box;
     height: 4rem;
     width: 4rem;

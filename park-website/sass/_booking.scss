@@ -1,12 +1,12 @@
 .booking {
-  display: flex;
-  flex-direction: column;
   align-items: flex-end;
-  justify-content: center;
   background-image: url(../img/book2000.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
 
   @media only screen and (max-width: $bp-medium) {
@@ -14,18 +14,18 @@
   }
 
   &__form {
+    align-items: center;
+    background-color: var(--color-grey-dark-1);
+    border-radius: 5px;
+    color: var(--color-grey-light-3);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     font-size: 1.5rem;
-    width: 300px;
-    background-color: var(--color-grey-dark-1);
-    color: var(--color-grey-light-3);
+    justify-content: center;
     margin: 4rem;
-    padding: 1rem 3rem;
-    border-radius: 5px;
     min-height: 55rem;
+    padding: 1rem 3rem;
+    width: 300px;
 
     & .section-title {
       color: var(--color-white);
@@ -37,16 +37,16 @@
 
     & select,
     input {
-      color: var(--color-grey-light-3);
-      width: 250px;
-      font-size: 1.4rem;
-      border: none;
-      outline: none;
       background-color: var(--color-grey-dark-1);
-      filter: brightness(1.2);
       border-radius: 3px;
+      border: none;
+      color: var(--color-grey-light-3);
+      filter: brightness(1.2);
+      font-size: 1.4rem;
       margin-bottom: 2rem;
+      outline: none;
       padding: 1rem 0.5rem;
+      width: 250px;
     }
 
     & #booking__submit {
@@ -66,26 +66,24 @@
   }
 
   &__confirmation {
+    align-items: center;
+    background-color: var(--color-grey-dark-1);
+    border-radius: 5px;
+    color: var(--color-grey-light-3);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     font-size: 1.5rem;
-    width: 300px;
-    background-color: var(--color-grey-dark-1);
-    color: var(--color-grey-light-3);
+    justify-content: center;
     margin: 4rem;
-    padding: 1rem 3rem;
-    border-radius: 5px;
     min-height: 55rem;
+    padding: 1rem 3rem;
+    width: 300px;
 
     & .section-title {
       color: var(--color-white);
     }
   }
 }
-
-// .booking
 
 .litepicker {
   font-size: 1.5rem;

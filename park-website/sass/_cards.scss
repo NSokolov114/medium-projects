@@ -86,18 +86,12 @@
       color: var(--color-grey-light-4);
       letter-spacing: 0.5px;
     }
-
-    // & a:link,
-    // a:visited {
-    //   text-decoration: none;
-    // }
   }
 
   &__rating {
     border-radius: 5px;
-    left: -1rem;
     height: 70px;
-    // margin: 0;
+    left: -1rem;
     position: absolute;
     top: -1rem;
     width: 70px;
@@ -110,10 +104,10 @@
   }
 
   &__icon-heart {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
     height: 3rem;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
     width: 3rem;
   }
 

@@ -1,6 +1,6 @@
 .intro {
-  position: relative;
   overflow: hidden;
+  position: relative;
 
   &__img-container {
     background-image: linear-gradient(
@@ -11,14 +11,12 @@
         var(--color-primary-semitransparent) 100%
       ),
       url(../img/hero2000.jpg);
+
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-
     height: 100%;
     width: 100%;
-
-    // transition: all 0.5s ease-in-out;
 
     @media only screen and (max-width: $bp-small) {
       background-image: linear-gradient(
@@ -31,12 +29,6 @@
         url(../img/hero2000.jpg);
     }
   }
-
-  // &:hover &__img-container,
-  // &:focus &__img-container {
-  //   transform: scale(1.2);
-  // it makes the image load again on hover and on un-hover >_<
-  // }
 
   &__text-container {
     bottom: 0;
@@ -62,7 +54,6 @@
 
   &__subtitle {
     font-family: var(--font-title);
-
     font-size: 2.5rem;
     font-weight: 600;
   }

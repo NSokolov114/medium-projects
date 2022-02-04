@@ -1,7 +1,9 @@
 'use strict';
 
-console.log(`Hi there! Your account details are stored only in the local storage of your browser.
-You can delete it by typing "localStorage.clear()" in the console.`);
+console.log(`Hi there! Your account is stored only in the local storage.
+You can clear it by typing "localStorage.clear()" in the console.`);
+console.log(`You can create a new account or use a dummy user:
+username/email: vasya83, password: passWORD83`);
 
 document.addEventListener('DOMContentLoaded', ready);
 
@@ -21,15 +23,15 @@ function ready() {
     },
     lockDays: [['1970-11-11', currentDate]],
   });
-  // picker.show();
 
   ////////////////////
   ///// TOAST NOTIFICATIONS
   const toasts = document.querySelector('.toasts');
-  // const types = ['info', 'success', 'error'];
+  // valid types: ['info', 'success', 'error'];
 
   function createNotification(message = null, type = null) {
     const notification = document.createElement('div');
+
     notification.classList.add('toast');
     notification.classList.add(type);
     notification.innerText = message;
@@ -69,6 +71,7 @@ function ready() {
   // Leaflet JS map and markers
   function createMarker(coords, text) {
     const marker = L.marker(coords).addTo(myMap);
+
     marker.bindPopup(`${text}`);
     return marker;
   }
@@ -104,6 +107,7 @@ function ready() {
     locations[0].coords,
     locations[0].description
   ).openPopup();
+
   markerEntrance._icon.classList.add('entranceIcon');
 
   // show marker on map and scroll to map when clicking on hotel location
@@ -159,7 +163,6 @@ function ready() {
   const averageRatingEls = document.querySelectorAll('.rating__average');
   const countRatingEls = document.querySelectorAll('.rating__count');
   const ratingsNumber = countRatingEls.length / 2;
-
   const recommendCount = document.querySelectorAll('.recommend__count');
   const recommendPhotos = document.querySelectorAll('.recommend__photo');
   const reviewRatings = document.querySelectorAll('.review__rating');
@@ -263,7 +266,7 @@ function ready() {
   const toTopBtn = document.querySelector('.to-top-btn');
   const header = document.querySelector('.header');
 
-  const toggleToTopBtn = function (entries) {
+  function toggleToTopBtn(entries) {
     const [entry] = entries;
 
     if (entry.isIntersecting) {
@@ -271,7 +274,7 @@ function ready() {
     } else {
       toTopBtn.classList.remove('hidden');
     }
-  };
+  }
 
   const headerObserverOptions = {
     root: null,
@@ -306,10 +309,12 @@ function ready() {
     threshold: [0, 0.25, 0.5],
     rootMargin: '150px',
   };
+
   const navObserver = new IntersectionObserver(
     highlightNavEls,
     navObserverOptions
   );
+
   let activeSectionIdx;
 
   function highlightNavEls() {
@@ -407,8 +412,6 @@ function ready() {
     })
   );
 
-  ///////////////////////////////////////////////
-
   ////////////////////
   ///// USERS DB (via local storage)
 
@@ -452,6 +455,7 @@ function ready() {
       },
     },
   ];
+
   const emptyUser = {
     username: '',
     email: '',
@@ -468,13 +472,7 @@ function ready() {
     ? usersDB.find(user => user.username === loggedAs)
     : emptyUser;
 
-  console.log(user);
-
   updateLocalStorage();
-
-  // loadHearts;
-  // toggle top menu
-  // go to account card 0 or 2
 
   ////////////////////
   ///// HEART icons & order based on HEARTS
@@ -557,8 +555,6 @@ function ready() {
       welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
     }
 
-    console.log('going to side ', idx);
-
     updateRots(idx);
     rotateSides();
   }
@@ -574,11 +570,8 @@ function ready() {
     }
   }
 
-  // rotateSides();
-
   const gotoLoginBtn = document.querySelector('.account-card__goto-login');
   const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
-  // const gotoSignupBtn = document.querySelectorAll('.account-card__goto-settings');
 
   gotoLoginBtn.addEventListener('click', e => {
     e.preventDefault();
@@ -597,12 +590,10 @@ function ready() {
   const btnLogin = document.querySelector('.account-card__login');
   const btnSignup = document.querySelector('.account-card__signup');
   const btnLogout = document.querySelector('.account-card__logout');
+  const helpMsg = document.querySelector('.account-card__help-msg');
   const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
   const sidesLogin = document.querySelectorAll('.account-card__side--login');
   const sidesSignup = document.querySelectorAll('.account-card__side--signup');
-  const sidesSettings = document.querySelectorAll(
-    '.account-card__side--settings'
-  );
   const welcomeMsg = document.querySelector('.account-card__welcome-msg');
   const userNavUsername = document.querySelector('.user-nav__user-name');
   const generatedPwdLink = document.querySelector(
@@ -611,7 +602,6 @@ function ready() {
 
   toggleUserNav();
   generatedPwdLink.addEventListener('click', e => e.preventDefault());
-
   btnGeneratePwd.addEventListener('click', e => {
     e.preventDefault();
     generatedPwdLink.innerText = generatePwd();
@@ -655,7 +645,6 @@ function ready() {
     }
 
     if (!(hasLower && hasUpper && hasDigit)) {
-      console.log('trying again');
       pwd = generatePwd();
     }
 
@@ -666,23 +655,21 @@ function ready() {
 
   btnLogin.addEventListener('click', e => {
     e.preventDefault();
+
     const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
       '.account-card__form input'
     );
-    const userInfo = userInfoEl.value;
-    const pwd = pwdEl.value;
 
     const match = Math.max(
-      usersDB.findIndex(user => user.username === userInfo),
-      usersDB.findIndex(user => user.email === userInfo)
+      usersDB.findIndex(user => user.username === userInfoEl.value),
+      usersDB.findIndex(user => user.email === userInfoEl.value)
     );
 
-    if (match < 0 || usersDB[match].password !== pwd) {
+    if (match < 0 || usersDB[match].password !== pwdEl.value) {
       pwdEl.value = '';
       pwdEl.focus();
       pwdEl.placeholder = 'Wrong email or password';
-      document.querySelector('.account-card__help-msg').style.color =
-        'var(--color-primary-light)';
+      helpMsg.style.color = 'var(--color-primary-light)';
       return;
     }
 
@@ -698,10 +685,7 @@ function ready() {
   });
 
   ///// SIGN UP CARDs
-  // 0. log in now button - go to LOG IN
-  // 1. Generate pwd - generate pwd and paste it .account-card__generate-pwd
-  // click on generated pwd - copy to clipboard
-  // 2. check input, create new user, go to WELCOME .account-card__signup
+
   btnSignup.addEventListener('click', e => {
     e.preventDefault();
     const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
@@ -737,14 +721,13 @@ function ready() {
     user.password = pwdEl.value;
 
     usersDB.push(user);
-
     loggedAs = user.username;
     updateLocalStorage();
-
     toggleUserNav();
     localStorage.setItem('loggedAs', loggedAs);
     createAccountToast();
     setLastBookingMsg();
+
     usernameEl.value = '';
     emailEl.value = '';
     pwdEl.value = '';
@@ -774,7 +757,6 @@ function ready() {
   const showFavoritesBtn = document.querySelector(
     '.account-card__favorites-btn'
   );
-
   const lastBookingInfo = document.querySelector(
     'p.account-card__last-booking'
   );
@@ -814,7 +796,6 @@ function ready() {
   const bookingDates = bookingForm.querySelector('.booking__dates');
   const bookingBtn = bookingForm.querySelector('.booking__submit');
   const bookingConfirmation = document.querySelector('.booking__confirmation');
-
   const loggedOutEls = bookingConfirmation.querySelectorAll(
     '.booking__msg-logged-out'
   );
@@ -832,19 +813,17 @@ function ready() {
     user.lastBooking.rooms = bookingRooms.value;
     user.lastBooking.ppl = bookingPeople.value;
     user.lastBooking.date = bookingDates.value;
-    console.log(user.lastBooking);
+
     bookingForm.reset();
 
     setLastBookingMsg();
     bookingToast();
-
     updateUsersDB();
     updateLocalStorage();
     toggleBookingWindow.bind(true)();
   }
 
   function toggleBookingWindow() {
-    console.log(this);
     if (this) {
       bookingForm.classList.add('hidden');
       bookingConfirmation.classList.remove('hidden');
@@ -853,6 +832,7 @@ function ready() {
       bookingConfirmation.classList.add('hidden');
       return;
     }
+
     if (loggedAs) {
       loggedOutEls.forEach(el => el.classList.add('hidden'));
       loggedInEls.forEach(el => el.classList.remove('hidden'));
