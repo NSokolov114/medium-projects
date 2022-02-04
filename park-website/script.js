@@ -24,80 +24,6 @@ function ready() {
   // picker.show();
 
   ////////////////////
-  ///// HEART icons & order based on HEARTS
-
-  const heartIcons = document.querySelectorAll('.icon-heart');
-  const homeCardEls = document.querySelectorAll('.card');
-  const hotelEls = document.querySelectorAll('.hotel');
-  const numberOfSections = 3;
-  const numberOfHotels = heartIcons.length / numberOfSections;
-
-  let favoriteHotels = new Array(numberOfHotels);
-  favoriteHotels.fill(false);
-
-  function toggleMatchingHeartIcons(idx) {
-    const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
-    let position = idx % numberOfHotels;
-
-    for (let i = 0; i < numberOfSections; i++) {
-      heartIcons[position].classList.toggle('icon-heart--active');
-      if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') {
-        heartIcons[position].checked = !heartIcons[position].checked;
-      }
-      position += numberOfHotels;
-    }
-  }
-
-  function saveHearts() {
-    favoriteHotels = [];
-    for (let i = 0; i < numberOfSections; i++) {
-      favoriteHotels.push(
-        heartIcons[i].classList.contains('icon-heart--active')
-      );
-    }
-    console.log(favoriteHotels);
-  }
-
-  function loadHearts(favorites) {
-    favorites.forEach((fav, idx) => {
-      if (fav) {
-        heartIcons[idx].click();
-      }
-    });
-  }
-
-  function resetHearts() {
-    heartIcons.forEach(heart => {
-      heart.classList.remove('icon-heart--active');
-      if (heart.tagName === 'INPUT' && heart.checked) {
-        heart.checked = false;
-      }
-    });
-  }
-
-  function sortCards(idx) {
-    const position = idx % numberOfHotels;
-
-    if (heartIcons[position].classList.contains('icon-heart--active')) {
-      homeCardEls[position].style.order = '2';
-      hotelEls[position].style.order = '2';
-    } else {
-      homeCardEls[position].style.order = '3';
-      hotelEls[position].style.order = '3';
-    }
-  }
-
-  heartIcons.forEach((icon, idx) => {
-    icon.addEventListener('click', () => {
-      toggleMatchingHeartIcons(idx);
-      sortCards(idx);
-      iconToast(icon);
-      favoriteHotels[idx % 6] = !favoriteHotels[idx % 6];
-      console.log(favoriteHotels);
-    });
-  });
-
-  ////////////////////
   ///// TOAST NOTIFICATIONS
   const toasts = document.querySelector('.toasts');
   // const types = ['info', 'success', 'error'];
@@ -119,6 +45,12 @@ function ready() {
       : createNotification('Removed from favorites', 'info');
   }
 
+  function bookingToast() {
+    loggedAs
+      ? createNotification('Congratulations, booking is completed', 'success')
+      : createNotification('Please, login to finish booking', 'info');
+  }
+
   ////////////////////
   ///// LEAFLET MAP
 
@@ -129,12 +61,13 @@ function ready() {
     return marker;
   }
 
+  const sectionAbout = document.querySelector('.about');
   const overviewLocationBtns = document.querySelectorAll(
     '.overview__location-btn'
   );
 
   const locations = [
-    { description: 'Park entrance & reception', coords: [49.494, 18.472] },
+    { description: 'Ski Park Reception', coords: [49.494, 18.472] },
     { description: 'Ursa Major Cabins', coords: [49.495, 18.426] },
     { description: 'Spruce Cabins', coords: [49.5, 18.45] },
     { description: 'Fire Cabins', coords: [49.481, 18.456] },
@@ -158,17 +91,14 @@ function ready() {
   const markerEntrance = createMarker(
     locations[0].coords,
     locations[0].description
-  );
+  ).openPopup();
   markerEntrance._icon.classList.add('entranceIcon');
 
   // show marker on map and scroll to map when clicking on hotel location
   overviewLocationBtns.forEach((btn, idx) => {
     btn.addEventListener('click', e => {
-      const id = e.target.getAttribute('href');
-
       e.preventDefault();
-      document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-
+      sectionAbout.scrollIntoView({ behavior: 'smooth' });
       createMarker(
         locations[idx + 1].coords,
         locations[idx + 1].description
@@ -201,7 +131,7 @@ function ready() {
     });
   }
 
-  const galleryImgsAmount = 25;
+  const galleryImgsAmount = 25; // files in img/gallery folder
   const galleryImgs = document.querySelectorAll('.gallery__img');
   const galleryRndOrder = Array.from(
     { length: galleryImgsAmount },
@@ -303,6 +233,20 @@ function ready() {
   recommendPhotos.forEach(photo => (photo.src = generatePhotoLink()));
 
   ////////////////////
+  ///// animation for labels in account section
+  const labels = document.querySelectorAll('.account-card__form label');
+
+  labels.forEach(label => {
+    label.innerHTML = label.innerText
+      .split('')
+      .map(
+        (letter, idx) =>
+          `<span style="transition-delay:${idx * 30}ms">${letter}</span>`
+      )
+      .join('');
+  });
+
+  ////////////////////
   ///// BACK TO TOP BUTTON
   const toTopBtn = document.querySelector('.to-top-btn');
   const header = document.querySelector('.header');
@@ -395,10 +339,10 @@ function ready() {
   const cardLinks = document.querySelectorAll('.card__btn a');
 
   function toggleUserNav() {
-    if (activeUser) {
+    if (loggedAs) {
       userNavLoginBtn.classList.add('hidden');
       userNav.classList.remove('hidden');
-      userNavUsername.innerText = activeUser;
+      userNavUsername.innerText = loggedAs;
       gotoSide('settings');
     } else {
       userNavLoginBtn.classList.remove('hidden');
@@ -443,20 +387,131 @@ function ready() {
   );
 
   ///////////////////////////////////////////////
+
+  ////////////////////
+  ///// USERS DB (via local storage)
+
+  function updateLocalStorage() {
+    if (!loggedAs) return;
+
+    localStorage.setItem('usersDB', JSON.stringify(usersDB));
+  }
+
+  function updateUsersDB() {
+    if (!loggedAs) return;
+
+    const idx = usersDB.findIndex(user => user.username === loggedAs);
+
+    usersDB[idx] = user;
+  }
+
+  const dummyUsersDB = [
+    {
+      username: 'vasya83',
+      email: 'vasya83@macrosoft.com',
+      password: 'passWORD83',
+      favoriteHotels: [false, false, true, true, true, false],
+      lastBooking: {
+        hotel: 1,
+        rooms: 1,
+        ppl: 3,
+        date: '2022-02-10 - 2022-02-17',
+      },
+    },
+    {
+      username: 'vasya38',
+      email: 'vasya38@macrosoft.com',
+      password: 'passWORD38',
+      favoriteHotels: [true, true, false, false, false, true],
+      lastBooking: {
+        hotel: 1,
+        rooms: 2,
+        ppl: 4,
+        date: '2022-03-22 - 2022-03-27',
+      },
+    },
+  ];
+  const emptyUser = {
+    username: '',
+    email: '',
+    password: '',
+    favoriteHotels: [false, false, false, false, false, false],
+    lastBooking: {},
+  };
+
+  const usersDB = JSON.parse(localStorage.getItem('usersDB')) || dummyUsersDB;
+
+  let loggedAs = localStorage.getItem('loggedAs') || '';
+
+  let user = loggedAs
+    ? usersDB.find(user => user.username === loggedAs)
+    : emptyUser;
+
+  console.log(user);
+
+  updateLocalStorage();
+
+  // loadHearts;
+  // toggle top menu
+  // go to account card 0 or 2
+
+  ////////////////////
+  ///// HEART icons & order based on HEARTS
+
+  const heartIcons = document.querySelectorAll('.icon-heart');
+  const homeCardEls = document.querySelectorAll('.card');
+  const hotelEls = document.querySelectorAll('.hotel');
+  const numberOfSections = 3;
+  const numberOfHotels = heartIcons.length / numberOfSections;
+
+  function toggleMatchingHeartIcons(idx) {
+    const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
+    let position = idx % numberOfHotels;
+
+    user.favoriteHotels[position] = !user.favoriteHotels[position];
+    for (let i = 0; i < numberOfSections; i++) {
+      heartIcons[position].classList.toggle('icon-heart--active');
+      if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') {
+        heartIcons[position].checked = !heartIcons[position].checked;
+      }
+      position += numberOfHotels;
+    }
+  }
+
+  function sortCards(idx) {
+    const position = idx % numberOfHotels;
+
+    if (heartIcons[position].classList.contains('icon-heart--active')) {
+      homeCardEls[position].style.order = '2';
+      hotelEls[position].style.order = '2';
+    } else {
+      homeCardEls[position].style.order = '3';
+      hotelEls[position].style.order = '3';
+    }
+  }
+
+  function loadHearts() {
+    user.favoriteHotels.forEach((hot, idx) => {
+      if (
+        (hot && !heartIcons[idx].classList.contains('icon-heart--active')) ||
+        (!hot && heartIcons[idx].classList.contains('icon-heart--active'))
+      ) {
+        heartIcons[idx].click();
+      }
+    });
+  }
+
+  heartIcons.forEach((icon, idx) => {
+    icon.addEventListener('click', () => {
+      toggleMatchingHeartIcons(idx);
+      sortCards(idx);
+      iconToast(icon);
+      updateUsersDB();
+    });
+  });
+
   ////////////////////
   ///// ACCOUNT
-  // animation for labels
-  const labels = document.querySelectorAll('.account-card__form label');
-
-  labels.forEach(label => {
-    label.innerHTML = label.innerText
-      .split('')
-      .map(
-        (letter, idx) =>
-          `<span style="transition-delay:${idx * 30}ms">${letter}</span>`
-      )
-      .join('');
-  });
 
   // nav between rotating cards
   const sides = document.querySelectorAll('.account-card__side');
@@ -490,11 +545,12 @@ function ready() {
 
   function updateRots(activeSideIdx) {
     for (let i = 0; i < sidesNum; i++) {
-      // if (i === activeSideIdx || !(sidesRot[i] % 2)) {
-      //   sidesRot[i]++;
-      // }
-      if (activeSideIdx === i && sidesRot[i] % 2) sidesRot[i]++;
-      if (activeSideIdx !== i && !(sidesRot[i] % 2)) sidesRot[i]++;
+      if (
+        (activeSideIdx === i && sidesRot[i] % 2) ||
+        (activeSideIdx !== i && !(sidesRot[i] % 2))
+      ) {
+        sidesRot[i]++;
+      }
     }
   }
 
@@ -515,57 +571,6 @@ function ready() {
       gotoSide('signup');
     })
   );
-
-  ////////////////////
-  ///// USERS DB (via local storage)
-
-  const dummyUsersDB = [
-    {
-      username: 'vasya83',
-      email: 'vasya83@macrosoft.com',
-      password: 'passWORD83',
-      favoriteHotels: [false, false, true, true, true, false],
-      lastBooking: {
-        hotel: 1,
-        rooms: 1,
-        ppl: 3,
-        date: '',
-      },
-    },
-    {
-      username: 'vasya38',
-      email: 'vasya38@macrosoft.com',
-      password: 'passWORD38',
-      favoriteHotels: [true, true, false, false, false, true],
-      lastBooking: {
-        hotel: 1,
-        rooms: 2,
-        ppl: 4,
-        date: '',
-      },
-    },
-  ];
-  const usersDB = JSON.parse(localStorage.getItem('usersDB')) || dummyUsersDB;
-  let activeUser = localStorage.getItem('activeUser') || '';
-  console.log(activeUser, '-> activeUser');
-  console.log(usersDB.find(user => user.username === activeUser));
-  console.log(favoriteHotels);
-  let activeUserProfile = activeUser
-    ? usersDB.find(user => user.username === activeUser)
-    : {};
-  console.log(activeUserProfile);
-  if (activeUser) {
-    favoriteHotels = activeUserProfile.favoriteHotels;
-    console.log(favoriteHotels);
-  }
-  loadHearts(favoriteHotels);
-
-  function setLocalStorage() {
-    localStorage.removeItem('usersDB');
-    localStorage.setItem('usersDB', JSON.stringify(usersDB));
-  }
-
-  setLocalStorage();
 
   ////////////////////
   ///// ACCOUNT SECTION FORMS
@@ -638,11 +643,7 @@ function ready() {
   }
 
   ///// LOG IN CARDs
-  // 0. register now / create a new one button - go to SIGN UP
-  // 1. take input username and password and check if they match the DB
-  // .account-card__login
-  // if MATCH, go to WELCOME + upload favorite lodgings
-  // if FAIL, highlight 'email us for support' <p>
+
   btnLogin.addEventListener('click', e => {
     e.preventDefault();
     const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
@@ -665,12 +666,12 @@ function ready() {
       return;
     }
 
-    activeUser = usersDB[match].username;
-    activeUserProfile = usersDB.find(user => user.username === activeUser);
-    loadHearts(activeUserProfile.favoriteHotels);
+    loggedAs = usersDB[match].username;
+    user = usersDB.find(user => user.username === loggedAs);
+    loadHearts();
     toggleUserNav();
-    localStorage.setItem('activeUser', activeUser);
-    welcomeMsg.innerText = `You're logged in as ${activeUser}!`;
+    localStorage.setItem('loggedAs', loggedAs);
+    welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
 
     userInfoEl.value = '';
     pwdEl.value = '';
@@ -687,49 +688,42 @@ function ready() {
       '.account-card__form input'
     );
 
-    const isValid =
-      usernameEl.validity.valid &&
-      emailEl.validity.valid &&
-      pwdEl.validity.valid;
+    if (
+      !(
+        usernameEl.validity.valid &&
+        emailEl.validity.valid &&
+        pwdEl.validity.valid
+      )
+    ) {
+      return;
+    }
 
-    if (!isValid) return;
-
-    const username = usernameEl.value;
-    const email = emailEl.value;
-    const pwd = pwdEl.value;
-
-    if (usersDB.find(user => user.username === username)) {
+    if (usersDB.find(user => user.username === usernameEl.value)) {
       usernameEl.value = '';
       usernameEl.focus();
       usernameEl.placeholder = 'This username is already taken';
       return;
     }
 
-    if (usersDB.find(user => user.email === email)) {
+    if (usersDB.find(user => user.email === emailEl.value)) {
       emailEl.value = '';
       emailEl.focus();
       emailEl.placeholder = 'This email is already taken';
       return;
     }
-    saveHearts();
 
-    const newUser = {
-      username: username,
-      email: email,
-      password: pwd,
-      favoriteHotels: favoriteHotels,
-      lastBooking: {},
-    };
+    user.username = usernameEl.value;
+    user.email = emailEl.value;
+    user.password = pwdEl.value;
 
-    usersDB.push(newUser);
-    setLocalStorage();
+    usersDB.push(user);
 
-    activeUser = username;
-    activeUserProfile = usersDB.find(user => user.username === activeUser);
-    loadHearts(activeUserProfile.favoriteHotels);
+    loggedAs = user.username;
+    updateLocalStorage();
+
     toggleUserNav();
-    localStorage.setItem('activeUser', activeUser);
-    welcomeMsg.innerText = `Congratulations, ${activeUser}! You've successfully created a new account.`;
+    localStorage.setItem('loggedAs', loggedAs);
+    welcomeMsg.innerText = `Congratulations, ${loggedAs}! You've successfully created a new account.`;
 
     usernameEl.value = '';
     emailEl.value = '';
@@ -737,18 +731,20 @@ function ready() {
   });
 
   ///// WELCOME BACK CARDs
-  // 1. add/rm favorites from/to local storage
-  // 2. logout button - log out, go to LOG IN .account-card__logout
+
+  // logout btn
   btnLogout.addEventListener('click', e => {
     e.preventDefault();
-    activeUser = '';
-    localStorage.setItem('activeUser', activeUser);
-
+    loggedAs = '';
+    localStorage.setItem('loggedAs', loggedAs);
+    console.log(user);
+    user = emptyUser;
+    console.log(user);
     toggleUserNav();
-    resetHearts();
+    loadHearts();
   });
 
-  welcomeMsg.innerText = `You're logged in as ${activeUser}!`;
+  welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
 
   ////////////////////
   ///// booking object
@@ -759,16 +755,20 @@ function ready() {
   const bookingPeople = bookingForm.querySelector('.booking__people');
   const bookingDates = bookingForm.querySelector('.booking__dates');
   const bookingBtn = bookingForm.querySelector('.booking__submit');
-  let lastBooking = {};
 
   function createBooking(e) {
     e.preventDefault();
     if (!bookingForm.checkValidity()) return;
-    lastBooking.hotel = bookingLodgings.value;
-    lastBooking.rooms = bookingRooms.value;
-    lastBooking.ppl = bookingPeople.value;
-    lastBooking.date = bookingDates.value;
-    console.log(lastBooking);
+    user.lastBooking.hotel = bookingLodgings.value;
+    user.lastBooking.rooms = bookingRooms.value;
+    user.lastBooking.ppl = bookingPeople.value;
+    user.lastBooking.date = bookingDates.value;
+    console.log(user.lastBooking);
+
+    bookingToast();
+
+    updateUsersDB();
+    updateLocalStorage();
   }
 
   // lastBooking: {
