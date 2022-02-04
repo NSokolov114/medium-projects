@@ -25,6 +25,7 @@
     margin: 4rem;
     padding: 1rem 3rem;
     border-radius: 5px;
+    min-height: 55rem;
 
     & .section-title {
       color: var(--color-white);
@@ -51,10 +52,7 @@
     & #booking__submit {
       background-color: var(--color-primary-light);
       filter: none;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.2s;
+      height: 5rem;
 
       &:hover,
       &:focus {
@@ -66,7 +64,28 @@
       }
     }
   }
+
+  &__confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    width: 300px;
+    background-color: var(--color-grey-dark-1);
+    color: var(--color-grey-light-3);
+    margin: 4rem;
+    padding: 1rem 3rem;
+    border-radius: 5px;
+    min-height: 55rem;
+
+    & .section-title {
+      color: var(--color-white);
+    }
+  }
 }
+
+// .booking
 
 .litepicker {
   font-size: 1.5rem;

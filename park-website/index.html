@@ -419,9 +419,30 @@
                 type="submit"
                 value="Finish your booking"
                 id="booking__submit"
-                class="booking__submit"
+                class="booking__submit account-card__btn"
               />
             </form>
+            <div class="booking__confirmation hidden">
+              <h3 class="section-title">Confirmation</h3>
+              <p class="booking__msg-logged-out">
+                Please, log in or create a new account to finish the booking
+                process
+              </p>
+              <button
+                class="account-card__btn booking__goto-account booking__msg-logged-out"
+              >
+                Log in / Sign up
+              </button>
+              <p class="booking__msg-logged-in">
+                Booking successful! You can manage your bookings on your account
+                section
+              </p>
+              <button
+                class="account-card__btn booking__goto-account booking__msg-logged-in"
+              >
+                Go to your account
+              </button>
+            </div>
           </section>
 
           <!-- about -->
@@ -623,7 +644,9 @@
                     <label for="item6">Lakeside Campground</label>
                   </li>
                 </ul>
-                <h3 class="account-card__last-booking hidden">Your last booking</h3>
+                <h3 class="account-card__last-booking hidden">
+                  Your last booking
+                </h3>
                 <p class="account-card__last-booking hidden">
                   You booked 3 rooms/tents for 2 people/person in the Bear
                   Meadow Campground for 2022-02-10 - 2022-02-17
@@ -688,7 +711,7 @@
                 </p>
 
                 <button class="account-card__btn cta__book-btn">
-                  Book your next holiday
+                  Create new booking
                 </button>
                 <button class="account-card__btn account-card__booking-btn">
                   Manage your bookings

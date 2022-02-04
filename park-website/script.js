@@ -55,6 +55,10 @@ function ready() {
     createNotification('Congratulations, you created new account', 'success');
   }
 
+  function logoutToast() {
+    createNotification('You are logged out', 'info');
+  }
+
   ////////////////////
   ///// LEAFLET MAP
 
@@ -341,6 +345,9 @@ function ready() {
   const moveToBookingBtns = document.querySelectorAll('.cta__book-btn');
   const navBar = document.querySelector('.sidebar');
   const cardLinks = document.querySelectorAll('.card__btn a');
+  const bookingToAccountBtns = document.querySelectorAll(
+    '.booking__goto-account'
+  );
 
   function toggleUserNav() {
     if (loggedAs) {
@@ -367,7 +374,14 @@ function ready() {
   }
 
   navigateButtons(moveToBookingBtns, 'booking');
-  navigateButtons([userNavLoginBtn, userNavUserBtn], 'account');
+  navigateButtons(
+    [userNavLoginBtn, userNavUserBtn, ...bookingToAccountBtns],
+    'account'
+  );
+
+  moveToBookingBtns.forEach(btn =>
+    btn.addEventListener('click', toggleBookingWindow.bind(false))
+  );
 
   // sidebar nav buttons
   navBar.addEventListener('click', e => {
@@ -738,11 +752,10 @@ function ready() {
     e.preventDefault();
     loggedAs = '';
     localStorage.setItem('loggedAs', loggedAs);
-    console.log(user);
     user = emptyUser;
-    console.log(user);
     toggleUserNav();
     loadHearts();
+    logoutToast();
   });
 
   // show last booking / show favorites
@@ -790,6 +803,14 @@ function ready() {
   const bookingPeople = bookingForm.querySelector('.booking__people');
   const bookingDates = bookingForm.querySelector('.booking__dates');
   const bookingBtn = bookingForm.querySelector('.booking__submit');
+  const bookingConfirmation = document.querySelector('.booking__confirmation');
+
+  const loggedOutEls = bookingConfirmation.querySelectorAll(
+    '.booking__msg-logged-out'
+  );
+  const loggedInEls = bookingConfirmation.querySelectorAll(
+    '.booking__msg-logged-in'
+  );
 
   function createBooking(e) {
     e.preventDefault();
@@ -799,12 +820,33 @@ function ready() {
     user.lastBooking.ppl = bookingPeople.value;
     user.lastBooking.date = bookingDates.value;
     console.log(user.lastBooking);
+    bookingForm.reset();
 
     setLastBookingMsg();
     bookingToast();
 
     updateUsersDB();
     updateLocalStorage();
+    toggleBookingWindow.bind(true)();
+  }
+
+  function toggleBookingWindow() {
+    console.log(this);
+    if (this) {
+      bookingForm.classList.add('hidden');
+      bookingConfirmation.classList.remove('hidden');
+    } else {
+      bookingForm.classList.remove('hidden');
+      bookingConfirmation.classList.add('hidden');
+      return;
+    }
+    if (loggedAs) {
+      loggedOutEls.forEach(el => el.classList.add('hidden'));
+      loggedInEls.forEach(el => el.classList.remove('hidden'));
+    } else {
+      loggedOutEls.forEach(el => el.classList.remove('hidden'));
+      loggedInEls.forEach(el => el.classList.add('hidden'));
+    }
   }
 
   // lastBooking: {
