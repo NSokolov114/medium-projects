@@ -99,6 +99,7 @@
                 src="./img/nat-1-large.jpg"
                 alt="Photo 1"
                 class="composition__photo composition__photo--p1"
+                loading="lazy"
               />
               <img
                 srcset="./img/nat-2.jpg 300w, ./img/nat-2-large.jpg 1000w"
@@ -106,6 +107,7 @@
                 src="./img/nat-2-large.jpg"
                 alt="Photo 2"
                 class="composition__photo composition__photo--p2"
+                loading="lazy"
               />
               <img
                 srcset="./img/nat-3.jpg 300w, ./img/nat-3-large.jpg 1000w"
@@ -113,6 +115,7 @@
                 src="./img/nat-3-large.jpg"
                 alt="Photo 3"
                 class="composition__photo composition__photo--p3"
+                loading="lazy"
               />
             </div>
           </div>
@@ -278,7 +281,7 @@
       <!-- STORIES -->
       <section class="section-stories">
         <div class="bg-video">
-          <video class="bg-video__content" autoplay muted loop>
+          <video class="bg-video__content" autoplay muted loop preload="none">
             <source src="./img/video.mp4" type="video/mp4" />
             <source src="./img/video.webm" type="video/webm" />
             Your browser is not supported!
@@ -294,6 +297,7 @@
                 src="./img/nat-8-small.jpg"
                 class="story__image"
                 alt="Person on a tour"
+                loading="lazy"
               />
               <figcaption class="story__caption">Mary Smith</figcaption>
             </figure>
@@ -318,6 +322,7 @@
                 src="./img/nat-9-small.jpg"
                 class="story__image"
                 alt="Person on a tour"
+                loading="lazy"
               />
               <figcaption class="story__caption">Jack Wilson</figcaption>
             </figure>
@@ -472,11 +477,13 @@
             src="./img/nat-8-small.jpg"
             alt="Tour photo"
             class="popup__img"
+            loading="lazy"
           />
           <img
             src="./img/nat-9-small.jpg"
             alt="Tour photo"
             class="popup__img"
+            loading="lazy"
           />
         </div>
         <div class="popup__right">
