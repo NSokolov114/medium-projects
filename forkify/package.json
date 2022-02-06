@@ -2,14 +2,15 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "recipe application",
-  "main": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html"
   },
   "author": "Nick",
   "license": "ISC",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.2.1",
     "parcel": "^2.2.1"
   }
 }
