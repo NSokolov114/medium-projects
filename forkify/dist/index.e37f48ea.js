@@ -524,7 +524,8 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 //   module.hot.accept();
 // }
 // import icons from '../img/icons.svg'; // parcel 1
-var _webImmediateJs = require("core-js/modules/web.immediate.js");
+var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', showRecipe);
+ // window.addEventListener('load', showRecipe);
 var _iconsSvg = require("url:../img/icons.svg"); // parcel 2
 var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 var _runtime = require("regenerator-runtime/runtime"); // polyfill async await
@@ -551,13 +552,13 @@ const renderSpinner = function(parentEl) {
 };
 const showRecipe = async function() {
     try {
+        const id = window.location.hash.slice(1); // #5ed6604591c37cdc054bca57
+        console.log(id);
         // loading recipe
         renderSpinner(recipeContainer);
-        const res = await fetch(// 'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886'
-        'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bce0d');
+        const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
         const data = await res.json();
         if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-        // console.log(res, data);
         let { recipe  } = data.data;
         recipe = {
             id: recipe.id,
@@ -667,6 +668,11 @@ const showRecipe = async function() {
 };
 // https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza
 showRecipe();
+[
+    'hashchange',
+    'load'
+].forEach((ev)=>window.addEventListener(ev, showRecipe)
+);
 
 },{"url:../img/icons.svg":"loVOp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ"}],"loVOp":[function(require,module,exports) {
 module.exports = require('./helpers/bundle-url').getBundleURL('hWUTQ') + "icons.dfd7a6db.svg" + "?" + Date.now();
