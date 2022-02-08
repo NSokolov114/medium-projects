@@ -523,8 +523,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 // if (module.hot) {
 //   module.hot.accept();
 // }
-var _webImmediateJs = require("core-js/modules/web.immediate.js"); // window.addEventListener('hashchange', controlRecipes);
- // window.addEventListener('load', controlRecipes);
+var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _modelJs = require("./model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
@@ -547,11 +546,10 @@ const controlRecipes = async function() {
 };
 // https://forkify-api.herokuapp.com/api/v2/recipes?search=pizza
 controlRecipes();
-[
-    'hashchange',
-    'load'
-].forEach((ev)=>window.addEventListener(ev, controlRecipes)
-);
+const init = function() {
+    _recipeViewJsDefault.default.addHandlerRender(controlRecipes);
+};
+init();
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
@@ -2327,6 +2325,13 @@ class RecipeView {
         this.#parentElement.innerHTML = '';
         this.#parentElement.insertAdjacentHTML('afterbegin', markup);
     };
+    addHandlerRender(handler) {
+        [
+            'hashchange',
+            'load'
+        ].forEach((ev)=>window.addEventListener(ev, handler)
+        );
+    }
      #generateMarkup() {
         return `
     <figure class="recipe__fig">
