@@ -22,6 +22,8 @@ const controlRecipes = async function () {
 
     // rendering recipe
     recipeView.render(model.state.recipe);
+
+    // controlServings();
   } catch (err) {
     recipeView.renderError();
   }
@@ -56,8 +58,16 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+const controlServings = function (newServings) {
+  // update the recipe servings (in state)
+  model.updateServings(newServings);
+  // update the recipe view
+  recipeView.render(model.state.recipe);
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
