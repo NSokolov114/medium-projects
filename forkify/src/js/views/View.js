@@ -3,7 +3,15 @@ import icons from 'url:../../img/icons.svg'; // parcel 2
 
 export default class View {
   _data;
-
+  /**
+   *  Render the received object to the DOM // function description
+   * @param {Object | Object[]} data The data to be rendered // type we expect, name of the parameter and its description
+   * @param {boolean} [render=true] If false, create markup string instead of rendering to the DOM
+   * @returns {undefined | string} A markup string is returned if render=false
+   * @this {Object} View instance
+   * @author Vasya
+   * @todo Finish the dishes
+   */
   render(data, render = true) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
