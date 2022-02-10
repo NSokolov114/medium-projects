@@ -4,13 +4,13 @@
   "description": "recipe application",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "author": "Nick",
   "license": "ISC",
   "dependencies": {
     "core-js": "^3.21.0",
-    "fractional": "^1.0.0",
+    "fracty": "^1.0.9",
     "regenerator-runtime": "^0.13.9"
   },
   "devDependencies": {
