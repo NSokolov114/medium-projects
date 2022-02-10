@@ -6,7 +6,7 @@ node_modules/
 # .nyc_output/
 # .cache/
 .parcel-cache/
-dist/
+# dist/
 # lib/
 .vscode/
 # .idea/
