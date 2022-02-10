@@ -15,6 +15,36 @@ Your task will be to use properties and methods of the String, Regexp, Array,
 and JSON objects to check and manipulate values entered by users
 ---------------------------------------------------------
 
+USER STORIES As a [type of user], I want [an action] so that [a benefit].
+1. As a user, I want to reserve lodgings so that I will have a place to sleep when I come skiing.
+1. As a user, I want to add lodgings to favorites so that I can see them next time.
+1. As a user, I want to create an account to save and load my data when I come back.
+1. As a user, I want to .
+1. As a user, I want to .
+1. As a user, I want to .
+
+FEATURES
+side navigation, highlighting items on scroll
+back to top button
+user menu nav on top or login button
+storing user database and loading it via local storage API
+caching new user input and adding it to account when user logs in
+create new account form
+login into existing account form
+log out of your account
+rotating cards for the account forms
+generate password
+booking form
+render bookings
+render favorites
+add / remove favorites in 3 different sections
+generate random data: ratings, votes, comments, portraits
+generate random picture order in gallery
+randomize pictures in gallery on click
+map: load, center, load lodgings, toggle zoom on mouseover
+toast notifications
+
+
 1. Website for some National Park (keywords: Czech, Mountains, Ski)
 2. User can create a profile. Info about preferable lodgings.
 3. Logged User can reserve lodgings.
@@ -23,7 +53,7 @@ and JSON objects to check and manipulate values entered by users
 
 
 
-Features to implement:
+Bonus features to implement:
 dark/light mode
 generate object of random reviews, bookings, etc and store it in session storage
 pwd generator - allow user to generate a good password
