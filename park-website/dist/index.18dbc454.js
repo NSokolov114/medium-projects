@@ -1968,31 +1968,36 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "controlGalleryImgs", ()=>controlGalleryImgs
 );
-///// RND gallery images order
-function shuffle(array) {
-    for(let i1 = array.length - 1; i1 > 0; i1--){
-        let j = Math.floor(Math.random() * (i1 + 1));
-        [array[i1], array[j]] = [
-            array[j],
-            array[i1]
-        ];
-    }
-}
+var _helperJs = require("./helper.js");
 function randomizeGalleryImgs() {
-    shuffle(imgSources);
-    for(let i2 = 0; i2 < shownImgs; i2++)galleryImgs[i2].src = imgSources[i2];
+    _helperJs.shuffle(imgSources);
+    for(let i1 = 0; i1 < shownImgs; i1++)galleryImgs[i1].src = imgSources[i1];
 }
-const shownImgs = 14;
+const shownImgs = 14; // max images shown on the website
 const availableImgs = 25; // files in img/gallery folder
 const galleryImgs = document.querySelectorAll('.gallery__img');
+const gallery = document.querySelector('.gallery');
 const imgSources = [];
 for(let i = 0; i < availableImgs; i++)imgSources.push(galleryImgs[i].src);
 const controlGalleryImgs = function() {
     randomizeGalleryImgs();
-    galleryImgs.forEach((el)=>el.addEventListener('click', randomizeGalleryImgs)
-    );
-    console.log('init gallery');
+    gallery.addEventListener('click', randomizeGalleryImgs);
 };
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"lVRAz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "shuffle", ()=>shuffle
+);
+function shuffle(array) {
+    for(let i = array.length - 1; i > 0; i--){
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [
+            array[j],
+            array[i]
+        ];
+    }
+}
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
