@@ -520,9 +520,15 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"1SICI":[function(require,module,exports) {
 var _litepickerJs = require("./litepicker.js");
+var _galleryJs = require("./gallery.js");
 console.log('hello world');
+function init() {
+    // controlGalleryImgs();
+    _galleryJs.randomizeGalleryImgs();
+}
+init();
 
-},{"./litepicker.js":"eqr8J"}],"eqr8J":[function(require,module,exports) {
+},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6"}],"eqr8J":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litepicker = require("litepicker");
@@ -1958,6 +1964,48 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{}],"iXSQ6":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "randomizeGalleryImgs", ()=>randomizeGalleryImgs
+);
+parcelHelpers.export(exports, "controlGalleryImgs", ()=>controlGalleryImgs
+);
+///// RND gallery images order
+function shuffle(array) {
+    for(let i = array.length - 1; i > 0; i--){
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [
+            array[j],
+            array[i]
+        ];
+    }
+}
+function randomizeGalleryImgs() {
+    shuffle(galleryRndOrder);
+    const imgSources = [];
+    galleryRndOrder.forEach((i)=>{
+        imgSources.push(galleryImgs[i].src);
+    });
+    console.log(imgSources.length, galleryRndOrder.length, galleryImgs.length);
+    // el.getAttribute('src')
+    for(let i = 0; i < shownImgs; i++)galleryImgs[i].src = imgSources[i];
+    console.log('gal rnd');
+}
+const shownImgs = 14;
+const availableImgs = 24; // files in img/gallery folder
+const galleryImgs = document.querySelectorAll('.gallery__img');
+const galleryRndOrder = Array.from({
+    length: availableImgs
+}, (_, idx)=>idx + 1
+);
+const controlGalleryImgs = function() {
+    randomizeGalleryImgs();
+    galleryImgs.forEach((el)=>el.addEventListener('click', randomizeGalleryImgs)
+    );
+    console.log('init gallery');
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map
