@@ -6,29 +6,21 @@ function shuffle(array) {
   }
 }
 
-export function randomizeGalleryImgs() {
-  shuffle(galleryRndOrder);
-
-  const imgSources = [];
-  galleryRndOrder.forEach(i => {
-    imgSources.push(galleryImgs[i].src);
-  });
-  console.log(imgSources.length, galleryRndOrder.length, galleryImgs.length);
-  // el.getAttribute('src')
-
+function randomizeGalleryImgs() {
+  shuffle(imgSources);
   for (let i = 0; i < shownImgs; i++) {
     galleryImgs[i].src = imgSources[i];
   }
-
-  console.log('gal rnd');
 }
+
 const shownImgs = 14;
-const availableImgs = 24; // files in img/gallery folder
+const availableImgs = 25; // files in img/gallery folder
 const galleryImgs = document.querySelectorAll('.gallery__img');
-const galleryRndOrder = Array.from(
-  { length: availableImgs },
-  (_, idx) => idx + 1
-);
+const imgSources = [];
+
+for (let i = 0; i < availableImgs; i++) {
+  imgSources.push(galleryImgs[i].src);
+}
 
 export const controlGalleryImgs = function () {
   randomizeGalleryImgs();

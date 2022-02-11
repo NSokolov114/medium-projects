@@ -523,8 +523,7 @@ var _litepickerJs = require("./litepicker.js");
 var _galleryJs = require("./gallery.js");
 console.log('hello world');
 function init() {
-    // controlGalleryImgs();
-    _galleryJs.randomizeGalleryImgs();
+    _galleryJs.controlGalleryImgs();
 }
 init();
 
@@ -1967,38 +1966,27 @@ exports.export = function(dest, destName, get) {
 },{}],"iXSQ6":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "randomizeGalleryImgs", ()=>randomizeGalleryImgs
-);
 parcelHelpers.export(exports, "controlGalleryImgs", ()=>controlGalleryImgs
 );
 ///// RND gallery images order
 function shuffle(array) {
-    for(let i = array.length - 1; i > 0; i--){
-        let j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [
+    for(let i1 = array.length - 1; i1 > 0; i1--){
+        let j = Math.floor(Math.random() * (i1 + 1));
+        [array[i1], array[j]] = [
             array[j],
-            array[i]
+            array[i1]
         ];
     }
 }
 function randomizeGalleryImgs() {
-    shuffle(galleryRndOrder);
-    const imgSources = [];
-    galleryRndOrder.forEach((i)=>{
-        imgSources.push(galleryImgs[i].src);
-    });
-    console.log(imgSources.length, galleryRndOrder.length, galleryImgs.length);
-    // el.getAttribute('src')
-    for(let i = 0; i < shownImgs; i++)galleryImgs[i].src = imgSources[i];
-    console.log('gal rnd');
+    shuffle(imgSources);
+    for(let i2 = 0; i2 < shownImgs; i2++)galleryImgs[i2].src = imgSources[i2];
 }
 const shownImgs = 14;
-const availableImgs = 24; // files in img/gallery folder
+const availableImgs = 25; // files in img/gallery folder
 const galleryImgs = document.querySelectorAll('.gallery__img');
-const galleryRndOrder = Array.from({
-    length: availableImgs
-}, (_, idx)=>idx + 1
-);
+const imgSources = [];
+for(let i = 0; i < availableImgs; i++)imgSources.push(galleryImgs[i].src);
 const controlGalleryImgs = function() {
     randomizeGalleryImgs();
     galleryImgs.forEach((el)=>el.addEventListener('click', randomizeGalleryImgs)
