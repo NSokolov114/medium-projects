@@ -523,15 +523,17 @@ var _litepickerJs = require("./litepicker.js");
 var _galleryJs = require("./gallery.js");
 var _helperJs = require("./helper.js");
 var _mapJs = require("./map.js");
+var _accountJs = require("./account.js");
 console.log('hello world');
 function init() {
     _galleryJs.controlGalleryImgs();
     _helperJs.createNotification('Page is loaded', 'success'); // temp
     _mapJs.initMap();
+    _accountJs.animateLabels();
 }
 init();
 
-},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP"}],"eqr8J":[function(require,module,exports) {
+},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w"}],"eqr8J":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litepicker = require("litepicker");
@@ -12359,6 +12361,20 @@ function initMap() {
     window.L = exports;
 });
 
-},{}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{}],"jaN5w":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
+);
+///// animation for labels in account section
+const labels = document.querySelectorAll('.account-card__form label');
+function animateLabels() {
+    labels.forEach((label)=>{
+        label.innerHTML = label.innerText.split('').map((letter, idx)=>`<span style="transition-delay:${idx * 30}ms">${letter}</span>`
+        ).join('');
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map
