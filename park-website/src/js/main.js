@@ -3,6 +3,7 @@ import { controlGalleryImgs } from './gallery.js';
 import { createNotification } from './helper.js';
 import { initMap } from './map.js';
 import { animateLabels } from './account.js';
+import { initToTopBtn } from './components.js';
 
 console.log('hello world');
 
@@ -11,6 +12,7 @@ function init() {
   createNotification('Page is loaded', 'success'); // temp
   initMap();
   animateLabels();
+  initToTopBtn();
 }
 
 init();
