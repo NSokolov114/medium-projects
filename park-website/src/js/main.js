@@ -4,6 +4,7 @@ import { createNotification } from './helper.js';
 import { initMap } from './map.js';
 import { animateLabels } from './account.js';
 import { initToTopBtn, initHighlightNavEls } from './components.js';
+import { generateRndReviews } from './rndReviews.js';
 
 console.log('hello world');
 
@@ -14,6 +15,7 @@ function init() {
   animateLabels();
   initToTopBtn();
   initHighlightNavEls();
+  generateRndReviews();
 }
 
 init();
