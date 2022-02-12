@@ -521,13 +521,15 @@ function hmrAcceptRun(bundle, id) {
 },{}],"1SICI":[function(require,module,exports) {
 var _litepickerJs = require("./litepicker.js");
 var _galleryJs = require("./gallery.js");
+var _helperJs = require("./helper.js");
 console.log('hello world');
 function init() {
     _galleryJs.controlGalleryImgs();
+    _helperJs.createNotification('Page is loaded', 'success'); // temp
 }
 init();
 
-},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6"}],"eqr8J":[function(require,module,exports) {
+},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz"}],"eqr8J":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litepicker = require("litepicker");
@@ -1984,10 +1986,13 @@ const controlGalleryImgs = function() {
     gallery.addEventListener('click', randomizeGalleryImgs);
 };
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"lVRAz":[function(require,module,exports) {
+},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lVRAz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+// shuffling an array
 parcelHelpers.export(exports, "shuffle", ()=>shuffle
+);
+parcelHelpers.export(exports, "createNotification", ()=>createNotification
 );
 function shuffle(array) {
     for(let i = array.length - 1; i > 0; i--){
@@ -1997,6 +2002,19 @@ function shuffle(array) {
             array[i]
         ];
     }
+}
+// creating toast notification
+const toasts = document.querySelector('.toasts');
+function createNotification(message = null, type = null) {
+    const notification = document.createElement('div');
+    notification.classList.add('toast');
+    // valid types: ['info', 'success', 'error'];
+    notification.classList.add(type);
+    notification.innerText = message;
+    toasts.appendChild(notification);
+    setTimeout(()=>{
+        notification.remove();
+    }, 5000);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
