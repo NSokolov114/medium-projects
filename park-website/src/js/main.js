@@ -5,6 +5,7 @@ import { initMap } from './map.js';
 import { animateLabels } from './account.js';
 import { initToTopBtn, initHighlightNavEls } from './components.js';
 import { generateRndReviews } from './rndReviews.js';
+import { initHeartIcons } from './heartIcons.js';
 
 console.log('hello world');
 
@@ -16,6 +17,7 @@ function init() {
   initToTopBtn();
   initHighlightNavEls();
   generateRndReviews();
+  initHeartIcons();
 }
 
 init();
