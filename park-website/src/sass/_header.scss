@@ -153,19 +153,11 @@
   }
 
   &__user-photo {
-    background-image: url(../img/user.svg);
-    background-size: cover;
     border-radius: 50%;
-    height: 3.75rem;
+    height: 5rem;
     margin-right: 1rem;
-    width: 3.75rem;
-
-    @supports (mask-image: url()) or (-webkit-mask-image: url()) {
-      background-color: var(--color-grey-dark-2);
-      background-image: none;
-      mask-image: url(../img/user.svg);
-      mask-size: cover;
-    }
+    width: 5rem;
+    background-color: var(--color-grey-light-3);
 
     @media only screen and (max-width: $bp-small) {
       height: 5rem;
