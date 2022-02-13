@@ -43,7 +43,8 @@ function toggleBookingWindow() {
     bookingConfirmation.classList.add('hidden');
     return;
   }
-
+  // TODO
+  const loggedAs = false;
   if (loggedAs) {
     loggedOutEls.forEach(el => el.classList.add('hidden'));
     loggedInEls.forEach(el => el.classList.remove('hidden'));
