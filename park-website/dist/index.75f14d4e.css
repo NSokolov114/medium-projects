@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap";
+@import "https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Open+Sans:wght@300;400;600&display=swap";
 @charset "UTF-8";
 :root {
   --color-primary: #4682b4;
@@ -1268,21 +1268,15 @@ body {
   }
 }
 .list__item::before {
-  background-image: url("chevron.2687e406.svg");
   background-size: cover;
-  content: "";
+  color: var(--color-primary);
+  content: "༅";
   display: inline-block;
+  font-size: 3rem;
+  font-weight: bold;
   height: 1rem;
   margin-right: 0.7rem;
   width: 1rem;
-}
-@supports (mask-image: url()) or (-webkit-mask-image: url()) {
-  .list__item::before {
-    background-color: var(--color-primary);
-    background-image: none;
-    mask-image: url("chevron.2687e406.svg");
-    mask-size: cover;
-  }
 }
 .recommend {
   align-items: center;

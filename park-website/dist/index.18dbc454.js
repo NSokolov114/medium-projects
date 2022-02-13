@@ -2136,7 +2136,7 @@ function initMap() {
     toggleZoom();
 }
 
-},{"leaflet":"iFbO2","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"iFbO2":[function(require,module,exports) {
+},{"leaflet":"iFbO2","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iFbO2":[function(require,module,exports) {
 (function(global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define([
         'exports'

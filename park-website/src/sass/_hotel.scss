@@ -140,20 +140,15 @@
     }
 
     &::before {
-      background-image: url(../img/chevron.svg);
       background-size: cover;
-      content: '';
+      color: var(--color-primary);
+      content: '\0F05';
       display: inline-block;
+      font-size: 3rem;
+      font-weight: bold;
       height: 1rem;
       margin-right: 0.7rem;
       width: 1rem;
-
-      @supports (mask-image: url()) or (-webkit-mask-image: url()) {
-        background-color: var(--color-primary);
-        background-image: none;
-        mask-image: url(../img/chevron.svg);
-        mask-size: cover;
-      }
     }
   }
 }
