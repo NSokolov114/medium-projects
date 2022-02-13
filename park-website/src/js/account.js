@@ -1,3 +1,5 @@
+import { generatePwd } from './components.js';
+
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
 export function animateLabels() {

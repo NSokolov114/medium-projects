@@ -1,3 +1,5 @@
+import { randomInt } from './helper.js';
+
 ///// BACK TO TOP BUTTON /////
 const toTopBtn = document.querySelector('.to-top-btn');
 const header = document.querySelector('.header');
@@ -81,4 +83,49 @@ function highlightNavEls() {
 
 export function initHighlightNavEls() {
   sectionEls.forEach(el => navObserver.observe(el));
+}
+
+// generate pwd
+export function generatePwd() {
+  function getRandomLower() {
+    return String.fromCharCode(randomInt(97, 122));
+  }
+
+  function getRandomUpper() {
+    return String.fromCharCode(randomInt(65, 90));
+  }
+
+  function getRandomDigit() {
+    return String.fromCharCode(randomInt(48, 57));
+  }
+
+  const length = randomInt(8, 12);
+  let [hasLower, hasUpper, hasDigit] = [false, false, false];
+  let pwd = '';
+
+  for (let i = 0; i < length; i++) {
+    let rndSymbol;
+
+    switch (randomInt(1, 3)) {
+      case 1:
+        rndSymbol = getRandomLower();
+        hasLower = true;
+        break;
+      case 2:
+        rndSymbol = getRandomUpper();
+        hasUpper = true;
+        break;
+      case 3:
+        rndSymbol = getRandomDigit();
+        hasDigit = true;
+        break;
+    }
+    pwd += rndSymbol;
+  }
+
+  if (!(hasLower && hasUpper && hasDigit)) {
+    pwd = generatePwd();
+  }
+
+  return pwd;
 }

@@ -6,6 +6,11 @@ export function shuffle(array) {
   }
 }
 
+// generating rnd integer
+export function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 // creating toast notification
 const toasts = document.querySelector('.toasts');
 export function createNotification(message = null, type = null) {

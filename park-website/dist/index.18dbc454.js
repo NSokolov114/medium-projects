@@ -2001,6 +2001,9 @@ parcelHelpers.defineInteropFlag(exports);
 // shuffling an array
 parcelHelpers.export(exports, "shuffle", ()=>shuffle
 );
+// generating rnd integer
+parcelHelpers.export(exports, "randomInt", ()=>randomInt
+);
 parcelHelpers.export(exports, "createNotification", ()=>createNotification
 );
 function shuffle(array) {
@@ -2011,6 +2014,9 @@ function shuffle(array) {
             array[i]
         ];
     }
+}
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 // creating toast notification
 const toasts = document.querySelector('.toasts');
@@ -12371,6 +12377,7 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
 );
+var _componentsJs = require("./components.js");
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
 function animateLabels() {
@@ -12380,13 +12387,17 @@ function animateLabels() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components.js":"4xsbx"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initToTopBtn", ()=>initToTopBtn
 );
 parcelHelpers.export(exports, "initHighlightNavEls", ()=>initHighlightNavEls
 );
+// generate pwd
+parcelHelpers.export(exports, "generatePwd", ()=>generatePwd
+);
+var _helperJs = require("./helper.js");
 ///// BACK TO TOP BUTTON /////
 const toTopBtn = document.querySelector('.to-top-btn');
 const header = document.querySelector('.header');
@@ -12458,12 +12469,51 @@ function initHighlightNavEls() {
     sectionEls.forEach((el)=>navObserver.observe(el)
     );
 }
+function generatePwd() {
+    function getRandomLower() {
+        return String.fromCharCode(_helperJs.randomInt(97, 122));
+    }
+    function getRandomUpper() {
+        return String.fromCharCode(_helperJs.randomInt(65, 90));
+    }
+    function getRandomDigit() {
+        return String.fromCharCode(_helperJs.randomInt(48, 57));
+    }
+    const length = _helperJs.randomInt(8, 12);
+    let [hasLower, hasUpper, hasDigit] = [
+        false,
+        false,
+        false
+    ];
+    let pwd = '';
+    for(let i = 0; i < length; i++){
+        let rndSymbol;
+        switch(_helperJs.randomInt(1, 3)){
+            case 1:
+                rndSymbol = getRandomLower();
+                hasLower = true;
+                break;
+            case 2:
+                rndSymbol = getRandomUpper();
+                hasUpper = true;
+                break;
+            case 3:
+                rndSymbol = getRandomDigit();
+                hasDigit = true;
+                break;
+        }
+        pwd += rndSymbol;
+    }
+    if (!(hasLower && hasUpper && hasDigit)) pwd = generatePwd();
+    return pwd;
+}
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
 );
+var _helperJs = require("./helper.js");
 ///// generating random stuff /////
 // rating, number of votes
 const averageRatingEls = document.querySelectorAll('.rating__average');
@@ -12476,15 +12526,12 @@ const reviewNames = document.querySelectorAll('.review__user-name');
 const reviewDates = document.querySelectorAll('.review__user-date');
 const reviewPhotos = document.querySelectorAll('.review__photo');
 const reviewsNumber = reviewNames.length;
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
 function generatePhotoLink() {
-    const gender = Math.random() - 0.5 > 0 ? 'men' : 'women';
-    const number = randomInt(1, 50);
+    const gender = Math.random() > 0.5 ? 'men' : 'women';
+    const number = _helperJs.randomInt(1, 50);
     return `https://randomuser.me/api/portraits/thumb/${gender}/${number}.jpg`;
 }
-// getting random user data
+// fetching random user data
 async function getRndUsers(num) {
     let api;
     if (!num) return;
@@ -12518,11 +12565,11 @@ function updateReviews(data) {
 }
 function generateRndReviews() {
     for(let i = 0; i < ratingsNumber; i++){
-        const rating = randomInt(50, 97) / 10;
-        const votes = randomInt(150, 600);
-        const recommendations = Math.floor(randomInt(25, 75) * votes / 100);
-        const reviewRating1 = randomInt(50, 90) / 10;
-        const reviewRating2 = randomInt(80, 100) / 10;
+        const rating = _helperJs.randomInt(50, 97) / 10;
+        const votes = _helperJs.randomInt(150, 600);
+        const recommendations = Math.floor(_helperJs.randomInt(25, 75) * votes / 100);
+        const reviewRating1 = _helperJs.randomInt(50, 90) / 10;
+        const reviewRating2 = _helperJs.randomInt(80, 100) / 10;
         const accType = i < 3 ? 'option' : 'campsite';
         reviewRatings[i * 2].innerText = reviewRating1;
         reviewRatings[i * 2 + 1].innerText = reviewRating2;
@@ -12538,6 +12585,6 @@ function generateRndReviews() {
     );
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map
