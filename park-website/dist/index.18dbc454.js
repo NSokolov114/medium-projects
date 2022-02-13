@@ -530,6 +530,8 @@ var _rndReviewsJs = require("./rndReviews.js");
 var _heartIconsJs = require("./heartIcons.js");
 var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+var _bookingJs = require("./booking.js");
+var _bookingJsDefault = parcelHelpers.interopDefault(_bookingJs);
 console.log(_userDBJsDefault.default.users);
 console.log(_userDBJsDefault.default.checkVacantEmail('vasya83@macrosoft.com'));
 console.log('hello world');
@@ -542,10 +544,11 @@ function init() {
     _componentsJs.initHighlightNavEls();
     _rndReviewsJs.generateRndReviews();
     _heartIconsJs.initHeartIcons();
+    _bookingJsDefault.default();
 }
 init();
 
-},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w","./components.js":"4xsbx","./rndReviews.js":"3xt2Z","./heartIcons.js":"1LRTz","./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eqr8J":[function(require,module,exports) {
+},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w","./components.js":"4xsbx","./rndReviews.js":"3xt2Z","./heartIcons.js":"1LRTz","./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./booking.js":"43yfF"}],"eqr8J":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litepicker = require("litepicker");
@@ -12675,6 +12678,9 @@ class UserDB {
     // pwdEl.placeholder = 'Wrong email or password';
     // helpMsg.style.color = 'var(--color-primary-light)';
     }
+    _addUser(user) {
+        this.users.push(user);
+    }
     updateLocalStorage() {
         localStorage.setItem('userDB', JSON.stringify(this.users));
     }
@@ -12735,6 +12741,54 @@ const emptyUser = {
     }
 };
 exports.default = new UserDB(dummyUsers);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+///// booking section
+const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
+function createBooking(e) {
+    e.preventDefault();
+    if (!bookingForm.checkValidity()) {
+        bookingFailToast();
+        return;
+    }
+    // user.lastBooking.hotel = bookingLodgings.value;
+    // user.lastBooking.rooms = bookingRooms.value;
+    // user.lastBooking.ppl = bookingPeople.value;
+    // user.lastBooking.date = bookingDates.value;
+    bookingForm.reset();
+    // setLastBookingMsg();
+    // bookingToast();
+    // updateUsersDB();
+    // updateLocalStorage();
+    toggleBookingWindow.bind(true)();
+}
+function toggleBookingWindow() {
+    if (this) {
+        bookingForm.classList.add('hidden');
+        bookingConfirmation.classList.remove('hidden');
+    } else {
+        bookingForm.classList.remove('hidden');
+        bookingConfirmation.classList.add('hidden');
+        return;
+    }
+    if (loggedAs) {
+        loggedOutEls.forEach((el)=>el.classList.add('hidden')
+        );
+        loggedInEls.forEach((el)=>el.classList.remove('hidden')
+        );
+    } else {
+        loggedOutEls.forEach((el)=>el.classList.remove('hidden')
+        );
+        loggedInEls.forEach((el)=>el.classList.add('hidden')
+        );
+    }
+}
+function initBookingForm() {
+    bookingBtn.addEventListener('click', createBooking);
+} // setLastBookingMsg();
+exports.default = initBookingForm;
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 

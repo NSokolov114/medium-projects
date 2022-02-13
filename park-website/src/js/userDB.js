@@ -30,6 +30,10 @@ class UserDB {
     // helpMsg.style.color = 'var(--color-primary-light)';
   }
 
+  _addUser(user) {
+    this.users.push(user);
+  }
+
   updateLocalStorage() {
     localStorage.setItem('userDB', JSON.stringify(this.users));
   }
