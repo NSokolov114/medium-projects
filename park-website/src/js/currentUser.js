@@ -1,14 +1,27 @@
-import userDB from './userDB';
+import userDB from './userDB.js';
 
 // temporarily storing data for an unlogged user activities
 class currentUser {
   constructor() {
     this.login = '';
     this.favoriteHotels = [false, false, false, false, false, false];
-    this.lastBooking = {};
+    this.bookings = [];
   }
 
   //JSON.parse(sessionStorage.getItem('loggedUser'))
+  loadCurrentUser() {
+    const username = JSON.parse(sessionStorage.getItem('loggedUser'));
+    if (!username) return;
+  }
+
+  addBooking(booking) {
+    if (!booking) return;
+    this.bookings.push(booking);
+  }
+
+  getLastBooking() {
+    return this.bookings.at(-1) ? this.bookings.at(-1) : null;
+  }
 
   updateLocalStorage() {
     localStorage.setItem('userDB', JSON.stringify(this.users));

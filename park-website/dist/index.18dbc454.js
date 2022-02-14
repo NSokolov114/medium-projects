@@ -12655,12 +12655,23 @@ class UserDB {
     constructor(users){
         this.users = JSON.parse(localStorage.getItem('userDB')) || users;
     }
-    checkVacantName(name) {
-        return this.users.findIndex((user)=>user.username === name
+    checkVacantName(username) {
+        return this.users.findIndex((user)=>user.username === username
         ) < 0;
     //   usernameEl.value = '';
     //   usernameEl.focus();
     //   usernameEl.placeholder = 'This username is already taken';
+    }
+    getUserInfo(username) {
+        const idx = this.users.findIndex((user)=>user.username === username
+        );
+        if (idx < 0) return null;
+        const user1 = {
+            username: this.users[idx].username,
+            favoriteHotels: this.users[idx].favoriteHotels,
+            bookings: this.users[idx].bookings
+        };
+        return user1;
     }
     checkVacantEmail(email) {
         return this.users.findIndex((user)=>user.email === email
@@ -12699,12 +12710,14 @@ const dummyUsers = [
             true,
             false
         ],
-        lastBooking: {
-            hotel: 1,
-            rooms: 1,
-            ppl: 3,
-            date: '2022-02-10 - 2022-02-17'
-        }
+        bookings: [
+            {
+                hotel: 1,
+                rooms: 1,
+                ppl: 3,
+                date: '2022-02-10 - 2022-02-17'
+            }, 
+        ]
     },
     {
         username: 'vasya38',
@@ -12718,12 +12731,14 @@ const dummyUsers = [
             false,
             true
         ],
-        lastBooking: {
-            hotel: 1,
-            rooms: 2,
-            ppl: 4,
-            date: '2022-03-22 - 2022-03-27'
-        }
+        bookings: [
+            {
+                hotel: 1,
+                rooms: 2,
+                ppl: 4,
+                date: '2022-03-22 - 2022-03-27'
+            }, 
+        ]
     }, 
 ];
 const emptyUser = {

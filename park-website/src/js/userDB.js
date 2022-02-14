@@ -3,11 +3,24 @@ class UserDB {
     this.users = JSON.parse(localStorage.getItem('userDB')) || users;
   }
 
-  checkVacantName(name) {
-    return this.users.findIndex(user => user.username === name) < 0;
+  checkVacantName(username) {
+    return this.users.findIndex(user => user.username === username) < 0;
     //   usernameEl.value = '';
     //   usernameEl.focus();
     //   usernameEl.placeholder = 'This username is already taken';
+  }
+
+  getUserInfo(username) {
+    const idx = this.users.findIndex(user => user.username === username);
+    if (idx < 0) return null;
+
+    const user = {
+      username: this.users[idx].username,
+      favoriteHotels: this.users[idx].favoriteHotels,
+      bookings: this.users[idx].bookings,
+    };
+
+    return user;
   }
 
   checkVacantEmail(email) {
@@ -45,24 +58,28 @@ const dummyUsers = [
     email: 'vasya83@macrosoft.com',
     password: 'passWORD83',
     favoriteHotels: [false, false, true, true, true, false],
-    lastBooking: {
-      hotel: 1,
-      rooms: 1,
-      ppl: 3,
-      date: '2022-02-10 - 2022-02-17',
-    },
+    bookings: [
+      {
+        hotel: 1,
+        rooms: 1,
+        ppl: 3,
+        date: '2022-02-10 - 2022-02-17',
+      },
+    ],
   },
   {
     username: 'vasya38',
     email: 'vasya38@macrosoft.com',
     password: 'passWORD38',
     favoriteHotels: [true, true, false, false, false, true],
-    lastBooking: {
-      hotel: 1,
-      rooms: 2,
-      ppl: 4,
-      date: '2022-03-22 - 2022-03-27',
-    },
+    bookings: [
+      {
+        hotel: 1,
+        rooms: 2,
+        ppl: 4,
+        date: '2022-03-22 - 2022-03-27',
+      },
+    ],
   },
 ];
 
