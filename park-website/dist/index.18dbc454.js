@@ -530,6 +530,8 @@ var _rndReviewsJs = require("./rndReviews.js");
 var _heartIconsJs = require("./heartIcons.js");
 var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+var _currentUserJs = require("./currentUser.js");
+var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 var _bookingJs = require("./booking.js");
 var _bookingJsDefault = parcelHelpers.interopDefault(_bookingJs);
 var _navigationJs = require("./navigation.js");
@@ -537,6 +539,7 @@ console.log(_userDBJsDefault.default.users);
 console.log(_userDBJsDefault.default.checkVacantEmail('vasya83@macrosoft.com'));
 console.log('hello world');
 function init() {
+    localStorage.setItem('currentUser', JSON.stringify('vasya83'));
     _galleryJs.controlGalleryImgs();
     _helperJs.createNotification('Page is loaded', 'success'); // temp
     _mapJs.initMap();
@@ -546,10 +549,13 @@ function init() {
     _rndReviewsJs.generateRndReviews();
     _heartIconsJs.initHeartIcons();
     _bookingJsDefault.default();
+    console.log(_currentUserJsDefault.default);
+    _currentUserJsDefault.default.loadCurrentUser();
+    console.log(_currentUserJsDefault.default);
 }
 init();
 
-},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w","./components.js":"4xsbx","./rndReviews.js":"3xt2Z","./heartIcons.js":"1LRTz","./userDB.js":"kkUSu","./booking.js":"43yfF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./navigation.js":"9q9cb"}],"eqr8J":[function(require,module,exports) {
+},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w","./components.js":"4xsbx","./rndReviews.js":"3xt2Z","./heartIcons.js":"1LRTz","./userDB.js":"kkUSu","./booking.js":"43yfF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./navigation.js":"9q9cb","./currentUser.js":"haS37"}],"eqr8J":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litepicker = require("litepicker");
@@ -12913,6 +12919,102 @@ gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
     })
 );
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./booking.js":"43yfF"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./booking.js":"43yfF"}],"haS37":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _userDBJs = require("./userDB.js");
+var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+// temporarily storing data for an unlogged user activities
+class CurrentUser {
+    constructor(){
+        this.username = '';
+        this.favoriteHotels = [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ];
+        this.bookings = [];
+    }
+    //JSON.parse(sessionStorage.getItem('loggedUser'))
+    loadCurrentUser() {
+        const username = JSON.parse(localStorage.getItem('currentUser')) || '';
+        if (!username) return;
+        const user = _userDBJsDefault.default.getUserInfo(username);
+        this.username = user.username;
+        this.favoriteHotels = user.favoriteHotels;
+        this.bookings = user.bookings;
+    }
+    setCurrentUser() {
+        localStorage.setItem('currentUser', JSON.stringify(this.username));
+    }
+    addBooking(booking) {
+        if (!booking) return;
+        this.bookings.push(booking);
+    }
+    getLastBooking() {
+        return this.bookings.at(-1) ? this.bookings.at(-1) : null;
+    }
+}
+const dummyUsers = [
+    {
+        username: 'vasya83',
+        email: 'vasya83@macrosoft.com',
+        password: 'passWORD83',
+        favoriteHotels: [
+            false,
+            false,
+            true,
+            true,
+            true,
+            false
+        ],
+        lastBooking: {
+            hotel: 1,
+            rooms: 1,
+            ppl: 3,
+            date: '2022-02-10 - 2022-02-17'
+        }
+    },
+    {
+        username: 'vasya38',
+        email: 'vasya38@macrosoft.com',
+        password: 'passWORD38',
+        favoriteHotels: [
+            true,
+            true,
+            false,
+            false,
+            false,
+            true
+        ],
+        lastBooking: {
+            hotel: 1,
+            rooms: 2,
+            ppl: 4,
+            date: '2022-03-22 - 2022-03-27'
+        }
+    }, 
+];
+const emptyUser = {
+    username: '',
+    email: '',
+    password: '',
+    favoriteHotels: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    lastBooking: {
+    }
+};
+exports.default = new CurrentUser();
+
+},{"./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map

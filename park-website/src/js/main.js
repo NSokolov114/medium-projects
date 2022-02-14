@@ -8,6 +8,7 @@ import { generateRndReviews } from './rndReviews.js';
 import { initHeartIcons } from './heartIcons.js';
 
 import userDB from './userDB.js';
+import currentUser from './currentUser.js';
 import initBookingForm from './booking.js';
 import { gotoSide } from './navigation.js';
 
@@ -17,6 +18,7 @@ console.log(userDB.checkVacantEmail('vasya83@macrosoft.com'));
 console.log('hello world');
 
 function init() {
+  localStorage.setItem('currentUser', JSON.stringify('vasya83'));
   controlGalleryImgs();
   createNotification('Page is loaded', 'success'); // temp
   initMap();
@@ -26,6 +28,9 @@ function init() {
   generateRndReviews();
   initHeartIcons();
   initBookingForm();
+  console.log(currentUser);
+  currentUser.loadCurrentUser();
+  console.log(currentUser);
 }
 
 init();
