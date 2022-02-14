@@ -1,6 +1,6 @@
 import { randomInt } from './helper.js';
 
-///// BACK TO TOP BUTTON /////
+///// Back To Top Button /////
 const toTopBtn = document.querySelector('.to-top-btn');
 const header = document.querySelector('.header');
 
@@ -85,7 +85,7 @@ export function initHighlightNavEls() {
   sectionEls.forEach(el => navObserver.observe(el));
 }
 
-// generate pwd
+///// generating password /////
 export function generatePwd() {
   function getRandomLower() {
     return String.fromCharCode(randomInt(97, 122));

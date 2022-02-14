@@ -532,6 +532,7 @@ var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
 var _bookingJs = require("./booking.js");
 var _bookingJsDefault = parcelHelpers.interopDefault(_bookingJs);
+var _navigationJs = require("./navigation.js");
 console.log(_userDBJsDefault.default.users);
 console.log(_userDBJsDefault.default.checkVacantEmail('vasya83@macrosoft.com'));
 console.log('hello world');
@@ -548,7 +549,7 @@ function init() {
 }
 init();
 
-},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w","./components.js":"4xsbx","./rndReviews.js":"3xt2Z","./heartIcons.js":"1LRTz","./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./booking.js":"43yfF"}],"eqr8J":[function(require,module,exports) {
+},{"./litepicker.js":"eqr8J","./gallery.js":"iXSQ6","./helper.js":"lVRAz","./map.js":"kvSuP","./account.js":"jaN5w","./components.js":"4xsbx","./rndReviews.js":"3xt2Z","./heartIcons.js":"1LRTz","./userDB.js":"kkUSu","./booking.js":"43yfF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./navigation.js":"9q9cb"}],"eqr8J":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _litepicker = require("litepicker");
@@ -12397,18 +12398,18 @@ function animateLabels() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components.js":"4xsbx"}],"4xsbx":[function(require,module,exports) {
+},{"./components.js":"4xsbx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initToTopBtn", ()=>initToTopBtn
 );
 parcelHelpers.export(exports, "initHighlightNavEls", ()=>initHighlightNavEls
 );
-// generate pwd
+///// generating password /////
 parcelHelpers.export(exports, "generatePwd", ()=>generatePwd
 );
 var _helperJs = require("./helper.js");
-///// BACK TO TOP BUTTON /////
+///// Back To Top Button /////
 const toTopBtn = document.querySelector('.to-top-btn');
 const header = document.querySelector('.header');
 function toggleToTopBtn(entries) {
@@ -12518,7 +12519,7 @@ function generatePwd() {
     return pwd;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"3xt2Z":[function(require,module,exports) {
+},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
@@ -12595,7 +12596,7 @@ function generateRndReviews() {
     );
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"1LRTz":[function(require,module,exports) {
+},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1LRTz":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // function loadHearts() {
@@ -12745,6 +12746,8 @@ exports.default = new UserDB(dummyUsers);
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "toggleBookingWindow", ()=>toggleBookingWindow
+);
 ///// booking section
 const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
 function createBooking(e) {
@@ -12792,6 +12795,109 @@ function initBookingForm() {
 } // setLastBookingMsg();
 exports.default = initBookingForm;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9q9cb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "gotoSide", ()=>gotoSide
+);
+var _bookingJs = require("./booking.js");
+///// nav via buttons
+const userNav = document.querySelector('.user-nav');
+const userNavLoginBtn = document.querySelector('.user-nav__to-account');
+const userNavUserBtn = document.querySelector('.user-nav__user');
+const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
+const navBar = document.querySelector('.sidebar');
+const cardLinks = document.querySelectorAll('.card__btn a');
+const bookingToAccountBtns = document.querySelectorAll('.booking__goto-account');
+// function toggleUserNav() {
+//   if (loggedAs) {
+//     userNavLoginBtn.classList.add('hidden');
+//     userNav.classList.remove('hidden');
+//     userNavUsername.innerText = loggedAs;
+//     gotoSide('settings');
+//   } else {
+//     userNavLoginBtn.classList.remove('hidden');
+//     userNav.classList.add('hidden');
+//     userNavUsername.innerText = '';
+//     gotoSide('login');
+//   }
+// }
+function navigateButtons(buttons, section) {
+    buttons.forEach((btn)=>{
+        btn.addEventListener('click', ()=>{
+            document.querySelector(`#${section}`).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+navigateButtons(goToBookingBtns, 'booking');
+navigateButtons([
+    userNavLoginBtn,
+    userNavUserBtn,
+    ...bookingToAccountBtns
+], 'account');
+goToBookingBtns.forEach((btn)=>btn.addEventListener('click', _bookingJs.toggleBookingWindow.bind(false))
+);
+// sidebar nav buttons
+navBar.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const navItem = e.target.closest('.side-nav__item');
+    if (!navItem) return;
+    const id = navItem.querySelector('a').getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+// card MORE INFO button
+cardLinks.forEach((link)=>link.addEventListener('click', (e)=>{
+        const id = e.target.getAttribute('href');
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({
+            behavior: 'smooth'
+        });
+    })
+);
+///////////
+// nav between rotating cards
+const sides = document.querySelectorAll('.account-card__side');
+const sidesRot = [
+    0,
+    0,
+    0
+]; // initial rotation
+const sidesNum = 3;
+function rotateSides() {
+    sides.forEach((side, idx)=>{
+        side.style.transform = `rotateY(${sidesRot[idx % sidesNum] * 180}deg)`;
+    });
+}
+function gotoSide(side) {
+    let idx;
+    if (side === 'login') idx = 0;
+    else if (side === 'signup') idx = 1;
+    else if (side === 'settings') {
+        idx = 2;
+        welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
+    }
+    updateRots(idx);
+    rotateSides();
+}
+function updateRots(activeSideIdx) {
+    for(let i = 0; i < sidesNum; i++)if (activeSideIdx === i && sidesRot[i] % 2 || activeSideIdx !== i && !(sidesRot[i] % 2)) sidesRot[i]++;
+}
+const gotoLoginBtn = document.querySelector('.account-card__goto-login');
+const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
+gotoLoginBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    gotoSide('login');
+});
+gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        gotoSide('signup');
+    })
+);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./booking.js":"43yfF"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map

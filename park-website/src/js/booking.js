@@ -34,7 +34,7 @@ function createBooking(e) {
   toggleBookingWindow.bind(true)();
 }
 
-function toggleBookingWindow() {
+export function toggleBookingWindow() {
   if (this) {
     bookingForm.classList.add('hidden');
     bookingConfirmation.classList.remove('hidden');

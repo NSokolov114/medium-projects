@@ -9,6 +9,7 @@ import { initHeartIcons } from './heartIcons.js';
 
 import userDB from './userDB.js';
 import initBookingForm from './booking.js';
+import { gotoSide } from './navigation.js';
 
 console.log(userDB.users);
 console.log(userDB.checkVacantEmail('vasya83@macrosoft.com'));
