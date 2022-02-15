@@ -1478,11 +1478,11 @@ body {
   width: 100%;
 }
 .account-card__form input:focus, .account-card__form input:valid, .account-card__form input:invalid {
-  border-bottom-color: var(--color-primary-light);
+  border-bottom: 2px var(--color-primary-light) solid;
   outline: 0;
 }
 .account-card__form input:invalid:focus:required, .account-card__form input:not(:placeholder-shown):invalid:required {
-  border-bottom-color: var(--color-heart);
+  border-bottom: 2px var(--color-heart) solid;
 }
 .account-card__form label {
   left: 0;

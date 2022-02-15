@@ -1,17 +1,17 @@
 import { randomInt } from './helper.js';
 
-///// generating random stuff /////
-// rating, number of votes
-const averageRatingEls = document.querySelectorAll('.rating__average');
-const countRatingEls = document.querySelectorAll('.rating__count');
-const ratingsNumber = countRatingEls.length / 2;
-const recommendCount = document.querySelectorAll('.recommend__count');
-const recommendPhotos = document.querySelectorAll('.recommend__photo');
-const reviewRatings = document.querySelectorAll('.review__rating');
-const reviewNames = document.querySelectorAll('.review__user-name');
-const reviewDates = document.querySelectorAll('.review__user-date');
-const reviewPhotos = document.querySelectorAll('.review__photo');
-const reviewsNumber = reviewNames.length;
+///// generating random rating, number of votes /////
+
+const averageRatingEls = document.querySelectorAll('.rating__average'),
+  countRatingEls = document.querySelectorAll('.rating__count'),
+  ratingsNumber = countRatingEls.length / 2,
+  recommendCount = document.querySelectorAll('.recommend__count'),
+  recommendPhotos = document.querySelectorAll('.recommend__photo'),
+  reviewRatings = document.querySelectorAll('.review__rating'),
+  reviewNames = document.querySelectorAll('.review__user-name'),
+  reviewDates = document.querySelectorAll('.review__user-date'),
+  reviewPhotos = document.querySelectorAll('.review__photo'),
+  reviewsNumber = reviewNames.length;
 
 function generatePhotoLink() {
   const gender = Math.random() > 0.5 ? 'men' : 'women';

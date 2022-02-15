@@ -108,13 +108,13 @@
     & input:focus,
     & input:valid,
     & input:invalid {
-      border-bottom-color: var(--color-primary-light);
+      border-bottom: 2px var(--color-primary-light) solid;
       outline: 0;
     }
 
     & input:invalid:focus:required,
     & input:not(:placeholder-shown):invalid:required {
-      border-bottom-color: var(--color-heart);
+      border-bottom: 2px var(--color-heart) solid;
     }
 
     & label {

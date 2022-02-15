@@ -1,4 +1,4 @@
-// shuffling an array
+// shuffle an array
 export function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -6,12 +6,12 @@ export function shuffle(array) {
   }
 }
 
-// generating rnd integer
+// generate rnd integer
 export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// creating toast notification
+// create toast notification
 const toasts = document.querySelector('.toasts');
 export function createNotification(message = null, type = null) {
   const notification = document.createElement('div');

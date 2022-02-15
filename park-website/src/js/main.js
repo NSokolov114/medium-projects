@@ -12,13 +12,13 @@ import currentUser from './currentUser.js';
 import initBookingForm from './booking.js';
 import { gotoSide } from './navigation.js';
 
-console.log(userDB.users);
-console.log(userDB.checkVacantEmail('vasya83@macrosoft.com'));
-
-console.log('hello world');
+// console.log(`Hi there! Your account is stored only in the local storage.
+// You can clear it by typing "localStorage.clear()" in the console.`);
+// console.log(`You can create a new account or use a dummy user:
+// username/email: vasya83, password: passWORD83`);
 
 function init() {
-  localStorage.setItem('currentUser', JSON.stringify('vasya83'));
+  // localStorage.setItem('currentUser', JSON.stringify('vasya83'));
   controlGalleryImgs();
   createNotification('Page is loaded', 'success'); // temp
   initMap();
@@ -28,9 +28,10 @@ function init() {
   generateRndReviews();
   initHeartIcons();
   initBookingForm();
-  console.log(currentUser);
-  currentUser.loadCurrentUser();
-  console.log(currentUser);
+  // console.log(currentUser);
+  // currentUser.loadCurrentUser();
+  // console.log(currentUser);
+  gotoSide('login');
 }
 
 init();

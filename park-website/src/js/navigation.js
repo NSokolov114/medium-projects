@@ -64,6 +64,7 @@ cardLinks.forEach(link =>
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   })
 );
+
 ///////////
 // nav between rotating cards
 const sides = document.querySelectorAll('.account-card__side');
