@@ -19,6 +19,7 @@ class CurrentUser {
   }
 
   setCurrentUser() {
+    localStorage.removeItem('currentUser');
     localStorage.setItem('currentUser', JSON.stringify(this.username));
   }
 

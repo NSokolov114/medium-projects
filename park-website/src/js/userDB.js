@@ -3,13 +3,6 @@ class UserDB {
     this.users = JSON.parse(localStorage.getItem('userDB')) || users;
   }
 
-  checkVacantName(username) {
-    return this.users.findIndex(user => user.username === username) < 0;
-    //   usernameEl.value = '';
-    //   usernameEl.focus();
-    //   usernameEl.placeholder = 'This username is already taken';
-  }
-
   getUserInfo(username) {
     const idx = this.users.findIndex(user => user.username === username);
     if (idx < 0) return null;
@@ -23,8 +16,15 @@ class UserDB {
     return user;
   }
 
-  checkVacantEmail(email) {
-    return this.users.findIndex(user => user.email === email) < 0;
+  findUsername(username) {
+    return this.users.findIndex(user => user.username === username);
+    //   usernameEl.value = '';
+    //   usernameEl.focus();
+    //   usernameEl.placeholder = 'This username is already taken';
+  }
+
+  findEmail(email) {
+    return this.users.findIndex(user => user.email === email);
     //   emailEl.value = '';
     //   emailEl.focus();
     //   emailEl.placeholder = 'This email is already taken';
@@ -43,11 +43,28 @@ class UserDB {
     // helpMsg.style.color = 'var(--color-primary-light)';
   }
 
-  _addUser(user) {
+  addUser(username, email, password, favoriteHotels, bookings) {
+    const user = {
+      username: username,
+      email: email,
+      password: password,
+      favoriteHotels: favoriteHotels,
+      bookings: bookings,
+    };
+
     this.users.push(user);
+    this._updateLocalStorage();
   }
 
-  updateLocalStorage() {
+  updateUser(user) {
+    const idx = this.findUsername(user.username);
+    if (idx < 0) return;
+    this.users[idx] = user;
+    this._updateLocalStorage();
+  }
+
+  _updateLocalStorage() {
+    localStorage.removeItem('userDB');
     localStorage.setItem('userDB', JSON.stringify(this.users));
   }
 }

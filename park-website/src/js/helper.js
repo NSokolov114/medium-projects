@@ -25,3 +25,27 @@ export function createNotification(message = null, type = null) {
     notification.remove();
   }, 5000);
 }
+
+// function iconToast(el) {
+//   el.classList.contains('icon-heart--active')
+//     ? createNotification('Marked as favorite', 'success')
+//     : createNotification('Removed from favorites', 'info');
+// }
+
+// function bookingToast() {
+//   loggedAs
+//     ? createNotification('Congratulations, booking is completed', 'success')
+//     : createNotification('Please, login to finish booking', 'info');
+// }
+
+// function bookingFailToast() {
+//   createNotification('Please, fill all the fields', 'error');
+// }
+
+// function createAccountToast() {
+//   createNotification('Congratulations, you created new account', 'success');
+// }
+
+// function logoutToast() {
+//   createNotification('You are logged out', 'info');
+// }

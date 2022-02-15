@@ -1,4 +1,7 @@
 import { generatePwd } from './components.js';
+import userDB from './userDB.js';
+import currentUser from './currentUser.js';
+import { createNotification } from './helper.js';
 
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
@@ -19,25 +22,18 @@ export function animateLabels() {
 
 ////////////////////
 ///// ACCOUNT SECTION FORMS
-// const btnLogin = document.querySelector('.account-card__login');
-// const btnSignup = document.querySelector('.account-card__signup');
-// const btnLogout = document.querySelector('.account-card__logout');
-// const helpMsg = document.querySelector('.account-card__help-msg');
-// const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
-// const sidesLogin = document.querySelectorAll('.account-card__side--login');
-// const sidesSignup = document.querySelectorAll('.account-card__side--signup');
-// const welcomeMsg = document.querySelector('.account-card__welcome-msg');
-// const userNavUsername = document.querySelector('.user-nav__user-name');
-// const generatedPwdLink = document.querySelector('.account-card__generated-pwd');
+const btnLogin = document.querySelector('.account-card__login');
+const btnSignup = document.querySelector('.account-card__signup');
+const btnLogout = document.querySelector('.account-card__logout');
+const helpMsg = document.querySelector('.account-card__help-msg');
+const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
+const sidesLogin = document.querySelectorAll('.account-card__side--login');
+const sidesSignup = document.querySelectorAll('.account-card__side--signup');
+const welcomeMsg = document.querySelector('.account-card__welcome-msg');
+const userNavUsername = document.querySelector('.user-nav__user-name');
+const generatedPwd = document.querySelector('.account-card__generated-pwd');
 
-// toggleUserNav();
-// generatedPwdLink.addEventListener('click', e => e.preventDefault());
-// btnGeneratePwd.addEventListener('click', e => {
-//   e.preventDefault();
-//   generatedPwdLink.innerText = generatePwd();
-// });
-
-// ///// LOG IN CARDs
+///// LOG IN CARDs
 
 // btnLogin.addEventListener('click', e => {
 //   e.preventDefault();
@@ -47,11 +43,11 @@ export function animateLabels() {
 //   );
 
 //   const match = Math.max(
-//     usersDB.findIndex(user => user.username === userInfoEl.value),
-//     usersDB.findIndex(user => user.email === userInfoEl.value)
+//     userDB.findIndex(user => user.username === userInfoEl.value),
+//     userDB.findIndex(user => user.email === userInfoEl.value)
 //   );
 
-//   if (match < 0 || usersDB[match].password !== pwdEl.value) {
+//   if (match < 0 || userDB[match].password !== pwdEl.value) {
 //     pwdEl.value = '';
 //     pwdEl.focus();
 //     pwdEl.placeholder = 'Wrong email or password';
@@ -59,8 +55,8 @@ export function animateLabels() {
 //     return;
 //   }
 
-//   loggedAs = usersDB[match].username;
-//   user = usersDB.find(user => user.username === loggedAs);
+//   loggedAs = userDB[match].username;
+//   user = userDB.find(user => user.username === loggedAs);
 //   loadHearts();
 //   toggleUserNav();
 //   setLastBookingMsg();
@@ -70,54 +66,65 @@ export function animateLabels() {
 //   pwdEl.value = '';
 // });
 
-// ///// SIGN UP CARDs
+///// SIGN UP CARDs
 
-// btnSignup.addEventListener('click', e => {
-//   e.preventDefault();
-//   const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
-//     '.account-card__form input'
-//   );
+btnGeneratePwd.addEventListener(
+  'click',
+  () => (generatedPwd.innerText = generatePwd())
+);
 
-//   if (
-//     !(
-//       usernameEl.validity.valid &&
-//       emailEl.validity.valid &&
-//       pwdEl.validity.valid
-//     )
-//   ) {
-//     return;
-//   }
+btnSignup.addEventListener('click', e => {
+  e.preventDefault();
+  const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
+    '.account-card__form input'
+  );
 
-//   if (usersDB.find(user => user.username === usernameEl.value)) {
-//     usernameEl.value = '';
-//     usernameEl.focus();
-//     usernameEl.placeholder = 'This username is already taken';
-//     return;
-//   }
+  console.log(currentUser);
 
-//   if (usersDB.find(user => user.email === emailEl.value)) {
-//     emailEl.value = '';
-//     emailEl.focus();
-//     emailEl.placeholder = 'This email is already taken';
-//     return;
-//   }
+  if (
+    !(
+      usernameEl.validity.valid &&
+      emailEl.validity.valid &&
+      pwdEl.validity.valid
+    )
+  ) {
+    return;
+  }
 
-//   user.username = usernameEl.value;
-//   user.email = emailEl.value;
-//   user.password = pwdEl.value;
+  if (userDB.findUsername(usernameEl.value) >= 0) {
+    usernameEl.value = '';
+    usernameEl.focus();
+    usernameEl.placeholder = 'This username is already taken';
+    return;
+  }
 
-//   usersDB.push(user);
-//   loggedAs = user.username;
-//   updateLocalStorage();
-//   toggleUserNav();
-//   localStorage.setItem('loggedAs', loggedAs);
-//   createAccountToast();
-//   setLastBookingMsg();
+  if (userDB.findEmail(emailEl.value) >= 0) {
+    emailEl.value = '';
+    emailEl.focus();
+    emailEl.placeholder = 'This email is already taken';
+    return;
+  }
 
-//   usernameEl.value = '';
-//   emailEl.value = '';
-//   pwdEl.value = '';
-// });
+  userDB.addUser(
+    usernameEl.value,
+    emailEl.value,
+    pwdEl.value,
+    currentUser.favoriteHotels,
+    currentUser.bookings
+  );
+
+  currentUser.username = usernameEl.value;
+  console.log(currentUser);
+
+  // toggleUserNav();
+
+  createNotification('Congratulations, you created new account', 'success');
+  // setLastBookingMsg();
+
+  usernameEl.value = '';
+  emailEl.value = '';
+  pwdEl.value = '';
+});
 
 // ///// WELCOME BACK CARDs
 

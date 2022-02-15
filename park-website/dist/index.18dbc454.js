@@ -2024,7 +2024,26 @@ parcelHelpers.export(exports, "shuffle", ()=>shuffle
 parcelHelpers.export(exports, "randomInt", ()=>randomInt
 );
 parcelHelpers.export(exports, "createNotification", ()=>createNotification
-);
+) // function iconToast(el) {
+ //   el.classList.contains('icon-heart--active')
+ //     ? createNotification('Marked as favorite', 'success')
+ //     : createNotification('Removed from favorites', 'info');
+ // }
+ // function bookingToast() {
+ //   loggedAs
+ //     ? createNotification('Congratulations, booking is completed', 'success')
+ //     : createNotification('Please, login to finish booking', 'info');
+ // }
+ // function bookingFailToast() {
+ //   createNotification('Please, fill all the fields', 'error');
+ // }
+ // function createAccountToast() {
+ //   createNotification('Congratulations, you created new account', 'success');
+ // }
+ // function logoutToast() {
+ //   createNotification('You are logged out', 'info');
+ // }
+;
 function shuffle(array) {
     for(let i = array.length - 1; i > 0; i--){
         let j = Math.floor(Math.random() * (i + 1));
@@ -12395,94 +12414,91 @@ function initMap() {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
-) ////////////////////
- ///// ACCOUNT
- ////////////////////
- ///// ACCOUNT SECTION FORMS
- // const btnLogin = document.querySelector('.account-card__login');
- // const btnSignup = document.querySelector('.account-card__signup');
- // const btnLogout = document.querySelector('.account-card__logout');
- // const helpMsg = document.querySelector('.account-card__help-msg');
- // const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
- // const sidesLogin = document.querySelectorAll('.account-card__side--login');
- // const sidesSignup = document.querySelectorAll('.account-card__side--signup');
- // const welcomeMsg = document.querySelector('.account-card__welcome-msg');
- // const userNavUsername = document.querySelector('.user-nav__user-name');
- // const generatedPwdLink = document.querySelector('.account-card__generated-pwd');
- // toggleUserNav();
- // generatedPwdLink.addEventListener('click', e => e.preventDefault());
- // btnGeneratePwd.addEventListener('click', e => {
- //   e.preventDefault();
- //   generatedPwdLink.innerText = generatePwd();
- // });
- // ///// LOG IN CARDs
- // btnLogin.addEventListener('click', e => {
- //   e.preventDefault();
- //   const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
- //     '.account-card__form input'
- //   );
- //   const match = Math.max(
- //     usersDB.findIndex(user => user.username === userInfoEl.value),
- //     usersDB.findIndex(user => user.email === userInfoEl.value)
- //   );
- //   if (match < 0 || usersDB[match].password !== pwdEl.value) {
- //     pwdEl.value = '';
- //     pwdEl.focus();
- //     pwdEl.placeholder = 'Wrong email or password';
- //     helpMsg.style.color = 'var(--color-primary-light)';
- //     return;
- //   }
- //   loggedAs = usersDB[match].username;
- //   user = usersDB.find(user => user.username === loggedAs);
- //   loadHearts();
- //   toggleUserNav();
- //   setLastBookingMsg();
- //   localStorage.setItem('loggedAs', loggedAs);
- //   userInfoEl.value = '';
- //   pwdEl.value = '';
- // });
- // ///// SIGN UP CARDs
- // btnSignup.addEventListener('click', e => {
- //   e.preventDefault();
- //   const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
- //     '.account-card__form input'
- //   );
- //   if (
- //     !(
- //       usernameEl.validity.valid &&
- //       emailEl.validity.valid &&
- //       pwdEl.validity.valid
- //     )
- //   ) {
- //     return;
- //   }
- //   if (usersDB.find(user => user.username === usernameEl.value)) {
- //     usernameEl.value = '';
- //     usernameEl.focus();
- //     usernameEl.placeholder = 'This username is already taken';
- //     return;
- //   }
- //   if (usersDB.find(user => user.email === emailEl.value)) {
- //     emailEl.value = '';
- //     emailEl.focus();
- //     emailEl.placeholder = 'This email is already taken';
- //     return;
- //   }
- //   user.username = usernameEl.value;
- //   user.email = emailEl.value;
- //   user.password = pwdEl.value;
- //   usersDB.push(user);
- //   loggedAs = user.username;
- //   updateLocalStorage();
- //   toggleUserNav();
- //   localStorage.setItem('loggedAs', loggedAs);
- //   createAccountToast();
- //   setLastBookingMsg();
- //   usernameEl.value = '';
- //   emailEl.value = '';
- //   pwdEl.value = '';
- // });
- // ///// WELCOME BACK CARDs
+);
+var _componentsJs = require("./components.js");
+var _userDBJs = require("./userDB.js");
+var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+var _currentUserJs = require("./currentUser.js");
+var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
+var _helperJs = require("./helper.js");
+///// animation for labels in account section
+const labels = document.querySelectorAll('.account-card__form label');
+function animateLabels() {
+    labels.forEach((label)=>{
+        label.innerHTML = label.innerText.split('').map((letter, idx)=>`<span style="transition-delay:${idx * 30}ms">${letter}</span>`
+        ).join('');
+    });
+}
+////////////////////
+///// ACCOUNT
+////////////////////
+///// ACCOUNT SECTION FORMS
+const btnLogin = document.querySelector('.account-card__login');
+const btnSignup = document.querySelector('.account-card__signup');
+const btnLogout = document.querySelector('.account-card__logout');
+const helpMsg = document.querySelector('.account-card__help-msg');
+const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
+const sidesLogin = document.querySelectorAll('.account-card__side--login');
+const sidesSignup = document.querySelectorAll('.account-card__side--signup');
+const welcomeMsg = document.querySelector('.account-card__welcome-msg');
+const userNavUsername = document.querySelector('.user-nav__user-name');
+const generatedPwd = document.querySelector('.account-card__generated-pwd');
+///// LOG IN CARDs
+// btnLogin.addEventListener('click', e => {
+//   e.preventDefault();
+//   const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
+//     '.account-card__form input'
+//   );
+//   const match = Math.max(
+//     userDB.findIndex(user => user.username === userInfoEl.value),
+//     userDB.findIndex(user => user.email === userInfoEl.value)
+//   );
+//   if (match < 0 || userDB[match].password !== pwdEl.value) {
+//     pwdEl.value = '';
+//     pwdEl.focus();
+//     pwdEl.placeholder = 'Wrong email or password';
+//     helpMsg.style.color = 'var(--color-primary-light)';
+//     return;
+//   }
+//   loggedAs = userDB[match].username;
+//   user = userDB.find(user => user.username === loggedAs);
+//   loadHearts();
+//   toggleUserNav();
+//   setLastBookingMsg();
+//   localStorage.setItem('loggedAs', loggedAs);
+//   userInfoEl.value = '';
+//   pwdEl.value = '';
+// });
+///// SIGN UP CARDs
+btnGeneratePwd.addEventListener('click', ()=>generatedPwd.innerText = _componentsJs.generatePwd()
+);
+btnSignup.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll('.account-card__form input');
+    console.log(_currentUserJsDefault.default);
+    if (!(usernameEl.validity.valid && emailEl.validity.valid && pwdEl.validity.valid)) return;
+    if (_userDBJsDefault.default.findUsername(usernameEl.value) >= 0) {
+        usernameEl.value = '';
+        usernameEl.focus();
+        usernameEl.placeholder = 'This username is already taken';
+        return;
+    }
+    if (_userDBJsDefault.default.findEmail(emailEl.value) >= 0) {
+        emailEl.value = '';
+        emailEl.focus();
+        emailEl.placeholder = 'This email is already taken';
+        return;
+    }
+    _userDBJsDefault.default.addUser(usernameEl.value, emailEl.value, pwdEl.value, _currentUserJsDefault.default.favoriteHotels, _currentUserJsDefault.default.bookings);
+    _currentUserJsDefault.default.username = usernameEl.value;
+    console.log(_currentUserJsDefault.default);
+    // toggleUserNav();
+    _helperJs.createNotification('Congratulations, you created new account', 'success');
+    // setLastBookingMsg();
+    usernameEl.value = '';
+    emailEl.value = '';
+    pwdEl.value = '';
+}); // ///// WELCOME BACK CARDs
  // // logout btn
  // btnLogout.addEventListener('click', e => {
  //   e.preventDefault();
@@ -12520,18 +12536,8 @@ parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
  //   lastBookingEls.forEach(el => el.classList.add('hidden'));
  // });
  ////////////////////
-;
-var _componentsJs = require("./components.js");
-///// animation for labels in account section
-const labels = document.querySelectorAll('.account-card__form label');
-function animateLabels() {
-    labels.forEach((label)=>{
-        label.innerHTML = label.innerText.split('').map((letter, idx)=>`<span style="transition-delay:${idx * 30}ms">${letter}</span>`
-        ).join('');
-    });
-}
 
-},{"./components.js":"4xsbx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
+},{"./components.js":"4xsbx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initToTopBtn", ()=>initToTopBtn
@@ -12652,7 +12658,229 @@ function generatePwd() {
     return pwd;
 }
 
-},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
+},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kkUSu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+class UserDB {
+    constructor(users){
+        this.users = JSON.parse(localStorage.getItem('userDB')) || users;
+    }
+    getUserInfo(username) {
+        const idx = this.users.findIndex((user)=>user.username === username
+        );
+        if (idx < 0) return null;
+        const user1 = {
+            username: this.users[idx].username,
+            favoriteHotels: this.users[idx].favoriteHotels,
+            bookings: this.users[idx].bookings
+        };
+        return user1;
+    }
+    findUsername(username) {
+        return this.users.findIndex((user)=>user.username === username
+        );
+    //   usernameEl.value = '';
+    //   usernameEl.focus();
+    //   usernameEl.placeholder = 'This username is already taken';
+    }
+    findEmail(email) {
+        return this.users.findIndex((user)=>user.email === email
+        );
+    //   emailEl.value = '';
+    //   emailEl.focus();
+    //   emailEl.placeholder = 'This email is already taken';
+    }
+    checkLoginInfo(login, pwd) {
+        const userID = Math.max(this.users.findIndex((user)=>user.username === login
+        ), this.users.findIndex((user)=>user.email === login
+        ));
+        return userID > 0 && this.users[userID].password === pwd;
+    // pwdEl.value = '';
+    // pwdEl.focus();
+    // pwdEl.placeholder = 'Wrong email or password';
+    // helpMsg.style.color = 'var(--color-primary-light)';
+    }
+    addUser(username, email, password, favoriteHotels, bookings) {
+        const user = {
+            username: username,
+            email: email,
+            password: password,
+            favoriteHotels: favoriteHotels,
+            bookings: bookings
+        };
+        this.users.push(user);
+        this._updateLocalStorage();
+    }
+    updateUser(user) {
+        const idx = this.findUsername(user.username);
+        if (idx < 0) return;
+        this.users[idx] = user;
+        this._updateLocalStorage();
+    }
+    _updateLocalStorage() {
+        localStorage.removeItem('userDB');
+        localStorage.setItem('userDB', JSON.stringify(this.users));
+    }
+}
+const dummyUsers = [
+    {
+        username: 'vasya83',
+        email: 'vasya83@macrosoft.com',
+        password: 'passWORD83',
+        favoriteHotels: [
+            false,
+            false,
+            true,
+            true,
+            true,
+            false
+        ],
+        bookings: [
+            {
+                hotel: 1,
+                rooms: 1,
+                ppl: 3,
+                date: '2022-02-10 - 2022-02-17'
+            }, 
+        ]
+    },
+    {
+        username: 'vasya38',
+        email: 'vasya38@macrosoft.com',
+        password: 'passWORD38',
+        favoriteHotels: [
+            true,
+            true,
+            false,
+            false,
+            false,
+            true
+        ],
+        bookings: [
+            {
+                hotel: 1,
+                rooms: 2,
+                ppl: 4,
+                date: '2022-03-22 - 2022-03-27'
+            }, 
+        ]
+    }, 
+];
+const emptyUser = {
+    username: '',
+    email: '',
+    password: '',
+    favoriteHotels: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    lastBooking: {
+    }
+};
+exports.default = new UserDB(dummyUsers);
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"haS37":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _userDBJs = require("./userDB.js");
+var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+// temporarily storing data for an unlogged user activities
+class CurrentUser {
+    constructor(){
+        this.username = '';
+        this.favoriteHotels = [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ];
+        this.bookings = [];
+    }
+    //JSON.parse(sessionStorage.getItem('loggedUser'))
+    loadCurrentUser() {
+        const username = JSON.parse(localStorage.getItem('currentUser')) || '';
+        if (!username) return;
+        const user = _userDBJsDefault.default.getUserInfo(username);
+        this.username = user.username;
+        this.favoriteHotels = user.favoriteHotels;
+        this.bookings = user.bookings;
+    }
+    setCurrentUser() {
+        localStorage.removeItem('currentUser');
+        localStorage.setItem('currentUser', JSON.stringify(this.username));
+    }
+    addBooking(booking) {
+        if (!booking) return;
+        this.bookings.push(booking);
+    }
+    getLastBooking() {
+        return this.bookings.at(-1) ? this.bookings.at(-1) : null;
+    }
+}
+const dummyUsers = [
+    {
+        username: 'vasya83',
+        email: 'vasya83@macrosoft.com',
+        password: 'passWORD83',
+        favoriteHotels: [
+            false,
+            false,
+            true,
+            true,
+            true,
+            false
+        ],
+        lastBooking: {
+            hotel: 1,
+            rooms: 1,
+            ppl: 3,
+            date: '2022-02-10 - 2022-02-17'
+        }
+    },
+    {
+        username: 'vasya38',
+        email: 'vasya38@macrosoft.com',
+        password: 'passWORD38',
+        favoriteHotels: [
+            true,
+            true,
+            false,
+            false,
+            false,
+            true
+        ],
+        lastBooking: {
+            hotel: 1,
+            rooms: 2,
+            ppl: 4,
+            date: '2022-03-22 - 2022-03-27'
+        }
+    }, 
+];
+const emptyUser = {
+    username: '',
+    email: '',
+    password: '',
+    favoriteHotels: [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    lastBooking: {
+    }
+};
+exports.default = new CurrentUser();
+
+},{"./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
@@ -12771,213 +12999,7 @@ function initHeartIcons() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kkUSu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-class UserDB {
-    constructor(users){
-        this.users = JSON.parse(localStorage.getItem('userDB')) || users;
-    }
-    checkVacantName(username) {
-        return this.users.findIndex((user)=>user.username === username
-        ) < 0;
-    //   usernameEl.value = '';
-    //   usernameEl.focus();
-    //   usernameEl.placeholder = 'This username is already taken';
-    }
-    getUserInfo(username) {
-        const idx = this.users.findIndex((user)=>user.username === username
-        );
-        if (idx < 0) return null;
-        const user1 = {
-            username: this.users[idx].username,
-            favoriteHotels: this.users[idx].favoriteHotels,
-            bookings: this.users[idx].bookings
-        };
-        return user1;
-    }
-    checkVacantEmail(email) {
-        return this.users.findIndex((user)=>user.email === email
-        ) < 0;
-    //   emailEl.value = '';
-    //   emailEl.focus();
-    //   emailEl.placeholder = 'This email is already taken';
-    }
-    checkLoginInfo(login, pwd) {
-        const userID = Math.max(this.users.findIndex((user)=>user.username === login
-        ), this.users.findIndex((user)=>user.email === login
-        ));
-        return userID > 0 && this.users[userID].password === pwd;
-    // pwdEl.value = '';
-    // pwdEl.focus();
-    // pwdEl.placeholder = 'Wrong email or password';
-    // helpMsg.style.color = 'var(--color-primary-light)';
-    }
-    _addUser(user) {
-        this.users.push(user);
-    }
-    updateLocalStorage() {
-        localStorage.setItem('userDB', JSON.stringify(this.users));
-    }
-}
-const dummyUsers = [
-    {
-        username: 'vasya83',
-        email: 'vasya83@macrosoft.com',
-        password: 'passWORD83',
-        favoriteHotels: [
-            false,
-            false,
-            true,
-            true,
-            true,
-            false
-        ],
-        bookings: [
-            {
-                hotel: 1,
-                rooms: 1,
-                ppl: 3,
-                date: '2022-02-10 - 2022-02-17'
-            }, 
-        ]
-    },
-    {
-        username: 'vasya38',
-        email: 'vasya38@macrosoft.com',
-        password: 'passWORD38',
-        favoriteHotels: [
-            true,
-            true,
-            false,
-            false,
-            false,
-            true
-        ],
-        bookings: [
-            {
-                hotel: 1,
-                rooms: 2,
-                ppl: 4,
-                date: '2022-03-22 - 2022-03-27'
-            }, 
-        ]
-    }, 
-];
-const emptyUser = {
-    username: '',
-    email: '',
-    password: '',
-    favoriteHotels: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-    ],
-    lastBooking: {
-    }
-};
-exports.default = new UserDB(dummyUsers);
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"haS37":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _userDBJs = require("./userDB.js");
-var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
-// temporarily storing data for an unlogged user activities
-class CurrentUser {
-    constructor(){
-        this.username = '';
-        this.favoriteHotels = [
-            false,
-            false,
-            false,
-            false,
-            false,
-            false
-        ];
-        this.bookings = [];
-    }
-    //JSON.parse(sessionStorage.getItem('loggedUser'))
-    loadCurrentUser() {
-        const username = JSON.parse(localStorage.getItem('currentUser')) || '';
-        if (!username) return;
-        const user = _userDBJsDefault.default.getUserInfo(username);
-        this.username = user.username;
-        this.favoriteHotels = user.favoriteHotels;
-        this.bookings = user.bookings;
-    }
-    setCurrentUser() {
-        localStorage.setItem('currentUser', JSON.stringify(this.username));
-    }
-    addBooking(booking) {
-        if (!booking) return;
-        this.bookings.push(booking);
-    }
-    getLastBooking() {
-        return this.bookings.at(-1) ? this.bookings.at(-1) : null;
-    }
-}
-const dummyUsers = [
-    {
-        username: 'vasya83',
-        email: 'vasya83@macrosoft.com',
-        password: 'passWORD83',
-        favoriteHotels: [
-            false,
-            false,
-            true,
-            true,
-            true,
-            false
-        ],
-        lastBooking: {
-            hotel: 1,
-            rooms: 1,
-            ppl: 3,
-            date: '2022-02-10 - 2022-02-17'
-        }
-    },
-    {
-        username: 'vasya38',
-        email: 'vasya38@macrosoft.com',
-        password: 'passWORD38',
-        favoriteHotels: [
-            true,
-            true,
-            false,
-            false,
-            false,
-            true
-        ],
-        lastBooking: {
-            hotel: 1,
-            rooms: 2,
-            ppl: 4,
-            date: '2022-03-22 - 2022-03-27'
-        }
-    }, 
-];
-const emptyUser = {
-    username: '',
-    email: '',
-    password: '',
-    favoriteHotels: [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false
-    ],
-    lastBooking: {
-    }
-};
-exports.default = new CurrentUser();
-
-},{"./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "toggleBookingWindow", ()=>toggleBookingWindow
