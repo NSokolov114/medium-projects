@@ -46,6 +46,12 @@ class UserDB {
     this._updateLocalStorage();
   }
 
+  addBooking(username, booking) {
+    const idx = this.findUsername(username);
+    if (idx < 0) return;
+    this.users[idx].bookings.push(booking);
+  }
+
   updateUser(user) {
     const idx = this.findUsername(user.username);
     if (idx < 0) return;
@@ -70,7 +76,7 @@ const dummyUsers = [
         hotel: 1,
         rooms: 1,
         ppl: 3,
-        date: '2022-02-10 - 2022-02-17',
+        dates: '2022-02-10 - 2022-02-17',
       },
     ],
   },
@@ -84,7 +90,7 @@ const dummyUsers = [
         hotel: 1,
         rooms: 2,
         ppl: 4,
-        date: '2022-03-22 - 2022-03-27',
+        dates: '2022-03-22 - 2022-03-27',
       },
     ],
   },

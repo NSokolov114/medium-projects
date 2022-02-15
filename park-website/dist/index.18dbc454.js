@@ -12722,6 +12722,11 @@ class UserDB {
         this.users.push(user);
         this._updateLocalStorage();
     }
+    addBooking(username, booking) {
+        const idx = this.findUsername(username);
+        if (idx < 0) return;
+        this.users[idx].bookings.push(booking);
+    }
     updateUser(user) {
         const idx = this.findUsername(user.username);
         if (idx < 0) return;
@@ -12751,7 +12756,7 @@ const dummyUsers = [
                 hotel: 1,
                 rooms: 1,
                 ppl: 3,
-                date: '2022-02-10 - 2022-02-17'
+                dates: '2022-02-10 - 2022-02-17'
             }, 
         ]
     },
@@ -12772,7 +12777,7 @@ const dummyUsers = [
                 hotel: 1,
                 rooms: 2,
                 ppl: 4,
-                date: '2022-03-22 - 2022-03-27'
+                dates: '2022-03-22 - 2022-03-27'
             }, 
         ]
     }, 
@@ -13009,23 +13014,29 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "toggleBookingWindow", ()=>toggleBookingWindow
 );
+var _currentUserJs = require("./currentUser.js");
+var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
+var _helperJs = require("./helper.js");
+var _userDBJs = require("./userDB.js");
+var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
 ///// booking section
 const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
 function createBooking(e) {
     e.preventDefault();
     if (!bookingForm.checkValidity()) {
-        bookingFailToast();
+        _helperJs.createNotification('Please, fill all the fields', 'error');
         return;
     }
-    // user.lastBooking.hotel = bookingLodgings.value;
-    // user.lastBooking.rooms = bookingRooms.value;
-    // user.lastBooking.ppl = bookingPeople.value;
-    // user.lastBooking.date = bookingDates.value;
+    const booking = {
+        hotel: bookingLodgings.value,
+        rooms: bookingRooms.value,
+        ppl: bookingPeople.value,
+        dates: bookingDates.value
+    };
+    _currentUserJsDefault.default.bookings.push(booking);
+    _userDBJsDefault.default.addBooking(_currentUserJsDefault.default.username, booking);
     bookingForm.reset();
     // setLastBookingMsg();
-    // bookingToast();
-    // updateUsersDB();
-    // updateLocalStorage();
     toggleBookingWindow.bind(true)();
 }
 function toggleBookingWindow() {
@@ -13037,18 +13048,18 @@ function toggleBookingWindow() {
         bookingConfirmation.classList.add('hidden');
         return;
     }
-    // TODO
-    const loggedAs = false;
-    if (loggedAs) {
+    if (_currentUserJsDefault.default.username) {
         loggedOutEls.forEach((el)=>el.classList.add('hidden')
         );
         loggedInEls.forEach((el)=>el.classList.remove('hidden')
         );
+        _helperJs.createNotification('Congratulations, booking is completed', 'success');
     } else {
         loggedOutEls.forEach((el)=>el.classList.remove('hidden')
         );
         loggedInEls.forEach((el)=>el.classList.add('hidden')
         );
+        _helperJs.createNotification('Please, login to finish booking', 'info');
     }
 }
 function initBookingForm() {
@@ -13056,7 +13067,7 @@ function initBookingForm() {
 } // setLastBookingMsg();
 exports.default = initBookingForm;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./currentUser.js":"haS37","./helper.js":"lVRAz","./userDB.js":"kkUSu"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews

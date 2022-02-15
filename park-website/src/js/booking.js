@@ -1,3 +1,7 @@
+import currentUser from './currentUser.js';
+import { createNotification } from './helper.js';
+import userDB from './userDB.js';
+
 ///// booking section
 
 const bookingForm = document.querySelector('.booking__form'),
@@ -16,21 +20,23 @@ function createBooking(e) {
   e.preventDefault();
 
   if (!bookingForm.checkValidity()) {
-    bookingFailToast();
+    createNotification('Please, fill all the fields', 'error');
     return;
   }
 
-  // user.lastBooking.hotel = bookingLodgings.value;
-  // user.lastBooking.rooms = bookingRooms.value;
-  // user.lastBooking.ppl = bookingPeople.value;
-  // user.lastBooking.date = bookingDates.value;
+  const booking = {
+    hotel: bookingLodgings.value,
+    rooms: bookingRooms.value,
+    ppl: bookingPeople.value,
+    dates: bookingDates.value,
+  };
+
+  currentUser.bookings.push(booking);
+  userDB.addBooking(currentUser.username, booking);
 
   bookingForm.reset();
 
   // setLastBookingMsg();
-  // bookingToast();
-  // updateUsersDB();
-  // updateLocalStorage();
   toggleBookingWindow.bind(true)();
 }
 
@@ -43,16 +49,18 @@ export function toggleBookingWindow() {
     bookingConfirmation.classList.add('hidden');
     return;
   }
-  // TODO
-  const loggedAs = false;
-  if (loggedAs) {
+
+  if (currentUser.username) {
     loggedOutEls.forEach(el => el.classList.add('hidden'));
     loggedInEls.forEach(el => el.classList.remove('hidden'));
+    createNotification('Congratulations, booking is completed', 'success');
   } else {
     loggedOutEls.forEach(el => el.classList.remove('hidden'));
     loggedInEls.forEach(el => el.classList.add('hidden'));
+    createNotification('Please, login to finish booking', 'info');
   }
 }
+
 export default function initBookingForm() {
   bookingBtn.addEventListener('click', createBooking);
 }
