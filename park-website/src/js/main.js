@@ -32,6 +32,7 @@ function init() {
   // currentUser.loadCurrentUser();
   // console.log(currentUser);
   gotoSide('login');
+  console.log(userDB.users[0]);
 }
 
 init();

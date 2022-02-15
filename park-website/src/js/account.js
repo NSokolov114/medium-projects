@@ -2,6 +2,12 @@ import { generatePwd } from './components.js';
 import userDB from './userDB.js';
 import currentUser from './currentUser.js';
 import { createNotification, clearElementsValue } from './helper.js';
+import {
+  gotoSide,
+  userNav,
+  userNavLoginBtn,
+  userNavUsername,
+} from './navigation.js';
 
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
@@ -26,6 +32,20 @@ function alertWrongInput(element, message) {
   element.placeholder = message;
 }
 
+function toggleUserInterface() {
+  if (currentUser.username) {
+    userNavLoginBtn.classList.add('hidden');
+    userNav.classList.remove('hidden');
+    userNavUsername.innerText = currentUser.username;
+    gotoSide('settings');
+  } else {
+    userNavLoginBtn.classList.remove('hidden');
+    userNav.classList.add('hidden');
+    userNavUsername.innerText = '';
+    gotoSide('login');
+  }
+}
+
 ////////////////////
 ///// ACCOUNT SECTION FORMS
 const btnLogin = document.querySelector('.account-card__login');
@@ -35,7 +55,7 @@ const helpMsg = document.querySelector('.account-card__help-msg');
 const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
 const sidesLogin = document.querySelectorAll('.account-card__side--login');
 const sidesSignup = document.querySelectorAll('.account-card__side--signup');
-const welcomeMsg = document.querySelector('.account-card__welcome-msg');
+export const welcomeMsg = document.querySelector('.account-card__welcome-msg');
 const userNavUsername = document.querySelector('.user-nav__user-name');
 const generatedPwd = document.querySelector('.account-card__generated-pwd');
 
@@ -48,24 +68,23 @@ btnLogin.addEventListener('click', e => {
     '.account-card__form input'
   );
 
-  const userID = getUserID(userLoginEl.value, pwdEl.value);
-
+  const userID = userDB.getUserID(userLoginEl.value, pwdEl.value);
+  console.log(userID);
   if (userID === null) {
     alertWrongInput(pwdEl, 'Wrong email or password');
     helpMsg.style.color = 'var(--color-primary-light)';
     return;
   }
 
-  // currentUser
+  currentUser.setCurrentUser(userDB.users[userID].username);
+  currentUser.loadCurrentUser();
 
-  // loggedAs = userDB[match].username;
-  // user = userDB.find(user => user.username === loggedAs);
   // loadHearts();
-  // toggleUserNav();
-  // setLastBookingMsg();
-  // localStorage.setItem('loggedAs', loggedAs);
 
-  gotoSide('settings');
+  // setLastBookingMsg();
+
+  createNotification(`Welcome back, ${currentUser.username}`, 'success');
+  toggleUserInterface();
   clearElementsValue([userLoginEl, pwdEl]);
 });
 
@@ -112,29 +131,31 @@ btnSignup.addEventListener('click', e => {
     currentUser.bookings
   );
 
-  currentUser.username = usernameEl.value;
+  currentUser.setCurrentUser(usernameEl.value);
+  currentUser.loadCurrentUser();
+
   console.log(currentUser);
 
-  // toggleUserNav();
-
-  createNotification('Congratulations, you created new account', 'success');
+  createNotification(
+    `Congratulations, ${currentUser.username}, you created new account`,
+    'success'
+  );
   // setLastBookingMsg();
-  gotoSide('settings');
+  toggleUserInterface();
   clearElementsValue([usernameEl, emailEl, pwdEl]);
 });
 
-// ///// WELCOME BACK CARDs
+///// WELCOME BACK CARDs
 
-// // logout btn
-// btnLogout.addEventListener('click', e => {
-//   e.preventDefault();
-//   loggedAs = '';
-//   localStorage.setItem('loggedAs', loggedAs);
-//   user = emptyUser;
-//   toggleUserNav();
-//   loadHearts();
-//   logoutToast();
-// });
+// logout btn
+btnLogout.addEventListener('click', e => {
+  e.preventDefault();
+
+  currentUser.reset();
+  toggleUserInterface();
+  // loadHearts();
+  createNotification('You are logged out', 'info');
+});
 
 // // show last booking / show favorites
 // const lastBookingEls = document.querySelectorAll('.account-card__last-booking');

@@ -4,7 +4,7 @@ class UserDB {
   }
 
   getUserInfo(username) {
-    const idx = this.users.findIndex(user => user.username === username);
+    const idx = this.findUsername(username);
     if (idx < 0) return null;
 
     const user = {
@@ -30,7 +30,7 @@ class UserDB {
       this.users.findIndex(user => user.email === login)
     );
 
-    return userID > 0 && this.users[userID].password === pwd ? userID : null;
+    return userID > -1 && this.users[userID].password === pwd ? userID : null;
   }
 
   addUser(username, email, password, favoriteHotels, bookings) {

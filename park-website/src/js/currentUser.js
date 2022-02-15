@@ -18,9 +18,9 @@ class CurrentUser {
     this.bookings = user.bookings;
   }
 
-  setCurrentUser() {
+  setCurrentUser(username) {
     localStorage.removeItem('currentUser');
-    localStorage.setItem('currentUser', JSON.stringify(this.username));
+    localStorage.setItem('currentUser', JSON.stringify(username));
   }
 
   addBooking(booking) {
@@ -30,6 +30,13 @@ class CurrentUser {
 
   getLastBooking() {
     return this.bookings.at(-1) ? this.bookings.at(-1) : null;
+  }
+
+  reset() {
+    this.username = '';
+    this.favoriteHotels = [false, false, false, false, false, false];
+    this.bookings = [];
+    this.setCurrentUser();
   }
 }
 

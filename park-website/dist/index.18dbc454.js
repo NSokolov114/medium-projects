@@ -554,6 +554,7 @@ function init() {
     // currentUser.loadCurrentUser();
     // console.log(currentUser);
     _navigationJs.gotoSide('login');
+    console.log(_userDBJsDefault.default.users[0]);
 }
 init();
 
@@ -12422,12 +12423,15 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
 );
+parcelHelpers.export(exports, "welcomeMsg", ()=>welcomeMsg
+);
 var _componentsJs = require("./components.js");
 var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
 var _currentUserJs = require("./currentUser.js");
 var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 var _helperJs = require("./helper.js");
+var _navigationJs = require("./navigation.js");
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
 function animateLabels() {
@@ -12442,6 +12446,19 @@ function alertWrongInput(element, message) {
     element.value = '';
     element.focus();
     element.placeholder = message;
+}
+function toggleUserInterface() {
+    if (_currentUserJsDefault.default.username) {
+        _navigationJs.userNavLoginBtn.classList.add('hidden');
+        _navigationJs.userNav.classList.remove('hidden');
+        _navigationJs.userNavUsername.innerText = _currentUserJsDefault.default.username;
+        _navigationJs.gotoSide('settings');
+    } else {
+        _navigationJs.userNavLoginBtn.classList.remove('hidden');
+        _navigationJs.userNav.classList.add('hidden');
+        _navigationJs.userNavUsername.innerText = '';
+        _navigationJs.gotoSide('login');
+    }
 }
 ////////////////////
 ///// ACCOUNT SECTION FORMS
@@ -12459,20 +12476,19 @@ const generatedPwd = document.querySelector('.account-card__generated-pwd');
 btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
     const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll('.account-card__form input');
-    const userID = getUserID(userLoginEl.value, pwdEl.value);
+    const userID = _userDBJsDefault.default.getUserID(userLoginEl.value, pwdEl.value);
+    console.log(userID);
     if (userID === null) {
         alertWrongInput(pwdEl, 'Wrong email or password');
         helpMsg.style.color = 'var(--color-primary-light)';
         return;
     }
-    // currentUser
-    // loggedAs = userDB[match].username;
-    // user = userDB.find(user => user.username === loggedAs);
+    _currentUserJsDefault.default.setCurrentUser(_userDBJsDefault.default.users[userID].username);
+    _currentUserJsDefault.default.loadCurrentUser();
     // loadHearts();
-    // toggleUserNav();
     // setLastBookingMsg();
-    // localStorage.setItem('loggedAs', loggedAs);
-    gotoSide('settings');
+    _helperJs.createNotification(`Welcome back, ${_currentUserJsDefault.default.username}`, 'success');
+    toggleUserInterface();
     _helperJs.clearElementsValue([
         userLoginEl,
         pwdEl
@@ -12495,29 +12511,27 @@ btnSignup.addEventListener('click', (e)=>{
         return;
     }
     _userDBJsDefault.default.addUser(usernameEl.value, emailEl.value, pwdEl.value, _currentUserJsDefault.default.favoriteHotels, _currentUserJsDefault.default.bookings);
-    _currentUserJsDefault.default.username = usernameEl.value;
+    _currentUserJsDefault.default.setCurrentUser(usernameEl.value);
+    _currentUserJsDefault.default.loadCurrentUser();
     console.log(_currentUserJsDefault.default);
-    // toggleUserNav();
-    _helperJs.createNotification('Congratulations, you created new account', 'success');
+    _helperJs.createNotification(`Congratulations, ${_currentUserJsDefault.default.username}, you created new account`, 'success');
     // setLastBookingMsg();
-    gotoSide('settings');
+    toggleUserInterface();
     _helperJs.clearElementsValue([
         usernameEl,
         emailEl,
         pwdEl
     ]);
-}); // ///// WELCOME BACK CARDs
- // // logout btn
- // btnLogout.addEventListener('click', e => {
- //   e.preventDefault();
- //   loggedAs = '';
- //   localStorage.setItem('loggedAs', loggedAs);
- //   user = emptyUser;
- //   toggleUserNav();
- //   loadHearts();
- //   logoutToast();
- // });
- // // show last booking / show favorites
+});
+///// WELCOME BACK CARDs
+// logout btn
+btnLogout.addEventListener('click', (e)=>{
+    e.preventDefault();
+    _currentUserJsDefault.default.reset();
+    toggleUserInterface();
+    // loadHearts();
+    _helperJs.createNotification('You are logged out', 'info');
+}); // // show last booking / show favorites
  // const lastBookingEls = document.querySelectorAll('.account-card__last-booking');
  // const favoritesEls = document.querySelectorAll('.account-card__favorites');
  // const showLastBookingBtn = document.querySelector('.account-card__booking-btn');
@@ -12545,7 +12559,7 @@ btnSignup.addEventListener('click', (e)=>{
  // });
  ////////////////////
 
-},{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
+},{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./navigation.js":"9q9cb"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initToTopBtn", ()=>initToTopBtn
@@ -12674,15 +12688,14 @@ class UserDB {
         this.users = JSON.parse(localStorage.getItem('userDB')) || users;
     }
     getUserInfo(username) {
-        const idx = this.users.findIndex((user)=>user.username === username
-        );
+        const idx = this.findUsername(username);
         if (idx < 0) return null;
-        const user1 = {
+        const user = {
             username: this.users[idx].username,
             favoriteHotels: this.users[idx].favoriteHotels,
             bookings: this.users[idx].bookings
         };
-        return user1;
+        return user;
     }
     findUsername(username) {
         return this.users.findIndex((user)=>user.username === username
@@ -12696,7 +12709,7 @@ class UserDB {
         const userID = Math.max(this.users.findIndex((user)=>user.username === login
         ), this.users.findIndex((user)=>user.email === login
         ));
-        return userID > 0 && this.users[userID].password === pwd ? userID : null;
+        return userID > -1 && this.users[userID].password === pwd ? userID : null;
     }
     addUser(username, email, password, favoriteHotels, bookings) {
         const user = {
@@ -12809,9 +12822,9 @@ class CurrentUser {
         this.favoriteHotels = user.favoriteHotels;
         this.bookings = user.bookings;
     }
-    setCurrentUser() {
+    setCurrentUser(username) {
         localStorage.removeItem('currentUser');
-        localStorage.setItem('currentUser', JSON.stringify(this.username));
+        localStorage.setItem('currentUser', JSON.stringify(username));
     }
     addBooking(booking) {
         if (!booking) return;
@@ -12819,6 +12832,19 @@ class CurrentUser {
     }
     getLastBooking() {
         return this.bookings.at(-1) ? this.bookings.at(-1) : null;
+    }
+    reset() {
+        this.username = '';
+        this.favoriteHotels = [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+        ];
+        this.bookings = [];
+        this.setCurrentUser();
     }
 }
 const dummyUsers = [
@@ -12878,7 +12904,159 @@ const emptyUser = {
 };
 exports.default = new CurrentUser();
 
-},{"./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
+},{"./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9q9cb":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "userNav", ()=>userNav
+);
+parcelHelpers.export(exports, "userNavLoginBtn", ()=>userNavLoginBtn
+);
+parcelHelpers.export(exports, "userNavUsername", ()=>userNavUsername
+);
+parcelHelpers.export(exports, "gotoSide", ()=>gotoSide
+);
+var _bookingJs = require("./booking.js");
+var _accountJs = require("./account.js");
+var _currentUserJs = require("./currentUser.js");
+var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
+const userNav = document.querySelector('.user-nav');
+const userNavLoginBtn = document.querySelector('.user-nav__to-account');
+const userNavUserBtn = document.querySelector('.user-nav__user');
+const userNavUsername = document.querySelector('.user-nav__user-name');
+const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
+const navBar = document.querySelector('.sidebar');
+const cardLinks = document.querySelectorAll('.card__btn a');
+const bookingToAccountBtns = document.querySelectorAll('.booking__goto-account');
+function navigateButtons(buttons, section) {
+    buttons.forEach((btn)=>{
+        if (!btn) return;
+        btn.addEventListener('click', ()=>{
+            document.querySelector(`#${section}`).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+}
+navigateButtons(goToBookingBtns, 'booking');
+navigateButtons([
+    userNavLoginBtn,
+    userNavUserBtn,
+    ...bookingToAccountBtns
+], 'account');
+goToBookingBtns.forEach((btn)=>btn.addEventListener('click', _bookingJs.toggleBookingWindow.bind(false))
+);
+// sidebar nav buttons
+navBar.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const navItem = e.target.closest('.side-nav__item');
+    if (!navItem) return;
+    const id = navItem.querySelector('a').getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+});
+// card MORE INFO button
+cardLinks.forEach((link)=>link.addEventListener('click', (e)=>{
+        const id = e.target.getAttribute('href');
+        e.preventDefault();
+        document.querySelector(id).scrollIntoView({
+            behavior: 'smooth'
+        });
+    })
+);
+///////////
+// nav between rotating cards
+const sides = document.querySelectorAll('.account-card__side');
+const sidesRot = [
+    0,
+    0,
+    0
+]; // initial rotation
+const sidesNum = 3;
+function rotateSides() {
+    sides.forEach((side, idx)=>{
+        side.style.transform = `rotateY(${sidesRot[idx % sidesNum] * 180}deg)`;
+    });
+}
+function gotoSide(side) {
+    let idx;
+    if (side === 'login') idx = 0;
+    else if (side === 'signup') idx = 1;
+    else if (side === 'settings') {
+        idx = 2;
+        _accountJs.welcomeMsg.innerText = `You're logged in as ${_currentUserJsDefault.default.username}!`;
+    }
+    updateRots(idx);
+    rotateSides();
+}
+function updateRots(activeSideIdx) {
+    for(let i = 0; i < sidesNum; i++)if (activeSideIdx === i && sidesRot[i] % 2 || activeSideIdx !== i && !(sidesRot[i] % 2)) sidesRot[i]++;
+}
+const gotoLoginBtn = document.querySelector('.account-card__goto-login');
+const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
+gotoLoginBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    gotoSide('login');
+});
+gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        gotoSide('signup');
+    })
+);
+
+},{"./booking.js":"43yfF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./account.js":"jaN5w","./currentUser.js":"haS37"}],"43yfF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "toggleBookingWindow", ()=>toggleBookingWindow
+);
+///// booking section
+const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
+function createBooking(e) {
+    e.preventDefault();
+    if (!bookingForm.checkValidity()) {
+        bookingFailToast();
+        return;
+    }
+    // user.lastBooking.hotel = bookingLodgings.value;
+    // user.lastBooking.rooms = bookingRooms.value;
+    // user.lastBooking.ppl = bookingPeople.value;
+    // user.lastBooking.date = bookingDates.value;
+    bookingForm.reset();
+    // setLastBookingMsg();
+    // bookingToast();
+    // updateUsersDB();
+    // updateLocalStorage();
+    toggleBookingWindow.bind(true)();
+}
+function toggleBookingWindow() {
+    if (this) {
+        bookingForm.classList.add('hidden');
+        bookingConfirmation.classList.remove('hidden');
+    } else {
+        bookingForm.classList.remove('hidden');
+        bookingConfirmation.classList.add('hidden');
+        return;
+    }
+    // TODO
+    const loggedAs = false;
+    if (loggedAs) {
+        loggedOutEls.forEach((el)=>el.classList.add('hidden')
+        );
+        loggedInEls.forEach((el)=>el.classList.remove('hidden')
+        );
+    } else {
+        loggedOutEls.forEach((el)=>el.classList.remove('hidden')
+        );
+        loggedInEls.forEach((el)=>el.classList.add('hidden')
+        );
+    }
+}
+function initBookingForm() {
+    bookingBtn.addEventListener('click', createBooking);
+} // setLastBookingMsg();
+exports.default = initBookingForm;
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
@@ -12997,161 +13175,6 @@ function initHeartIcons() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "toggleBookingWindow", ()=>toggleBookingWindow
-);
-///// booking section
-const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
-function createBooking(e) {
-    e.preventDefault();
-    if (!bookingForm.checkValidity()) {
-        bookingFailToast();
-        return;
-    }
-    // user.lastBooking.hotel = bookingLodgings.value;
-    // user.lastBooking.rooms = bookingRooms.value;
-    // user.lastBooking.ppl = bookingPeople.value;
-    // user.lastBooking.date = bookingDates.value;
-    bookingForm.reset();
-    // setLastBookingMsg();
-    // bookingToast();
-    // updateUsersDB();
-    // updateLocalStorage();
-    toggleBookingWindow.bind(true)();
-}
-function toggleBookingWindow() {
-    if (this) {
-        bookingForm.classList.add('hidden');
-        bookingConfirmation.classList.remove('hidden');
-    } else {
-        bookingForm.classList.remove('hidden');
-        bookingConfirmation.classList.add('hidden');
-        return;
-    }
-    // TODO
-    const loggedAs = false;
-    if (loggedAs) {
-        loggedOutEls.forEach((el)=>el.classList.add('hidden')
-        );
-        loggedInEls.forEach((el)=>el.classList.remove('hidden')
-        );
-    } else {
-        loggedOutEls.forEach((el)=>el.classList.remove('hidden')
-        );
-        loggedInEls.forEach((el)=>el.classList.add('hidden')
-        );
-    }
-}
-function initBookingForm() {
-    bookingBtn.addEventListener('click', createBooking);
-} // setLastBookingMsg();
-exports.default = initBookingForm;
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9q9cb":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "gotoSide", ()=>gotoSide
-);
-var _bookingJs = require("./booking.js");
-///// nav via buttons
-const userNav = document.querySelector('.user-nav');
-const userNavLoginBtn = document.querySelector('.user-nav__to-account');
-const userNavUserBtn = document.querySelector('.user-nav__user');
-const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
-const navBar = document.querySelector('.sidebar');
-const cardLinks = document.querySelectorAll('.card__btn a');
-const bookingToAccountBtns = document.querySelectorAll('.booking__goto-account');
-// function toggleUserNav() {
-//   if (loggedAs) {
-//     userNavLoginBtn.classList.add('hidden');
-//     userNav.classList.remove('hidden');
-//     userNavUsername.innerText = loggedAs;
-//     gotoSide('settings');
-//   } else {
-//     userNavLoginBtn.classList.remove('hidden');
-//     userNav.classList.add('hidden');
-//     userNavUsername.innerText = '';
-//     gotoSide('login');
-//   }
-// }
-function navigateButtons(buttons, section) {
-    buttons.forEach((btn)=>{
-        btn.addEventListener('click', ()=>{
-            document.querySelector(`#${section}`).scrollIntoView({
-                behavior: 'smooth'
-            });
-        });
-    });
-}
-navigateButtons(goToBookingBtns, 'booking');
-navigateButtons([
-    userNavLoginBtn,
-    userNavUserBtn,
-    ...bookingToAccountBtns
-], 'account');
-goToBookingBtns.forEach((btn)=>btn.addEventListener('click', _bookingJs.toggleBookingWindow.bind(false))
-);
-// sidebar nav buttons
-navBar.addEventListener('click', (e)=>{
-    e.preventDefault();
-    const navItem = e.target.closest('.side-nav__item');
-    if (!navItem) return;
-    const id = navItem.querySelector('a').getAttribute('href');
-    document.querySelector(id).scrollIntoView({
-        behavior: 'smooth'
-    });
-});
-// card MORE INFO button
-cardLinks.forEach((link)=>link.addEventListener('click', (e)=>{
-        const id = e.target.getAttribute('href');
-        e.preventDefault();
-        document.querySelector(id).scrollIntoView({
-            behavior: 'smooth'
-        });
-    })
-);
-///////////
-// nav between rotating cards
-const sides = document.querySelectorAll('.account-card__side');
-const sidesRot = [
-    0,
-    0,
-    0
-]; // initial rotation
-const sidesNum = 3;
-function rotateSides() {
-    sides.forEach((side, idx)=>{
-        side.style.transform = `rotateY(${sidesRot[idx % sidesNum] * 180}deg)`;
-    });
-}
-function gotoSide(side) {
-    let idx;
-    if (side === 'login') idx = 0;
-    else if (side === 'signup') idx = 1;
-    else if (side === 'settings') {
-        idx = 2;
-        welcomeMsg.innerText = `You're logged in as ${loggedAs}!`;
-    }
-    updateRots(idx);
-    rotateSides();
-}
-function updateRots(activeSideIdx) {
-    for(let i = 0; i < sidesNum; i++)if (activeSideIdx === i && sidesRot[i] % 2 || activeSideIdx !== i && !(sidesRot[i] % 2)) sidesRot[i]++;
-}
-const gotoLoginBtn = document.querySelector('.account-card__goto-login');
-const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
-gotoLoginBtn.addEventListener('click', (e)=>{
-    e.preventDefault();
-    gotoSide('login');
-});
-gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
-        e.preventDefault();
-        gotoSide('signup');
-    })
-);
-
-},{"./booking.js":"43yfF","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map
