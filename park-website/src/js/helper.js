@@ -11,6 +11,11 @@ export function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+// clear DOM elements values
+export function clearElementsValue(elements) {
+  elements.forEach(el => (el.value = ''));
+}
+
 // create toast notification
 const toasts = document.querySelector('.toasts');
 export function createNotification(message = null, type = null) {

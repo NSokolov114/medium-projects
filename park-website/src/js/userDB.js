@@ -18,29 +18,19 @@ class UserDB {
 
   findUsername(username) {
     return this.users.findIndex(user => user.username === username);
-    //   usernameEl.value = '';
-    //   usernameEl.focus();
-    //   usernameEl.placeholder = 'This username is already taken';
   }
 
   findEmail(email) {
     return this.users.findIndex(user => user.email === email);
-    //   emailEl.value = '';
-    //   emailEl.focus();
-    //   emailEl.placeholder = 'This email is already taken';
   }
 
-  checkLoginInfo(login, pwd) {
+  getUserID(login, pwd) {
     const userID = Math.max(
       this.users.findIndex(user => user.username === login),
       this.users.findIndex(user => user.email === login)
     );
 
-    return userID > 0 && this.users[userID].password === pwd;
-    // pwdEl.value = '';
-    // pwdEl.focus();
-    // pwdEl.placeholder = 'Wrong email or password';
-    // helpMsg.style.color = 'var(--color-primary-light)';
+    return userID > 0 && this.users[userID].password === pwd ? userID : null;
   }
 
   addUser(username, email, password, favoriteHotels, bookings) {

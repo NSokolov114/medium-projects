@@ -1,7 +1,7 @@
 import { generatePwd } from './components.js';
 import userDB from './userDB.js';
 import currentUser from './currentUser.js';
-import { createNotification } from './helper.js';
+import { createNotification, clearElementsValue } from './helper.js';
 
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
@@ -20,6 +20,12 @@ export function animateLabels() {
 ////////////////////
 ///// ACCOUNT
 
+function alertWrongInput(element, message) {
+  element.value = '';
+  element.focus();
+  element.placeholder = message;
+}
+
 ////////////////////
 ///// ACCOUNT SECTION FORMS
 const btnLogin = document.querySelector('.account-card__login');
@@ -35,36 +41,33 @@ const generatedPwd = document.querySelector('.account-card__generated-pwd');
 
 ///// LOG IN CARDs
 
-// btnLogin.addEventListener('click', e => {
-//   e.preventDefault();
+btnLogin.addEventListener('click', e => {
+  e.preventDefault();
 
-//   const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
-//     '.account-card__form input'
-//   );
+  const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll(
+    '.account-card__form input'
+  );
 
-//   const match = Math.max(
-//     userDB.findIndex(user => user.username === userInfoEl.value),
-//     userDB.findIndex(user => user.email === userInfoEl.value)
-//   );
+  const userID = getUserID(userLoginEl.value, pwdEl.value);
 
-//   if (match < 0 || userDB[match].password !== pwdEl.value) {
-//     pwdEl.value = '';
-//     pwdEl.focus();
-//     pwdEl.placeholder = 'Wrong email or password';
-//     helpMsg.style.color = 'var(--color-primary-light)';
-//     return;
-//   }
+  if (userID === null) {
+    alertWrongInput(pwdEl, 'Wrong email or password');
+    helpMsg.style.color = 'var(--color-primary-light)';
+    return;
+  }
 
-//   loggedAs = userDB[match].username;
-//   user = userDB.find(user => user.username === loggedAs);
-//   loadHearts();
-//   toggleUserNav();
-//   setLastBookingMsg();
-//   localStorage.setItem('loggedAs', loggedAs);
+  // currentUser
 
-//   userInfoEl.value = '';
-//   pwdEl.value = '';
-// });
+  // loggedAs = userDB[match].username;
+  // user = userDB.find(user => user.username === loggedAs);
+  // loadHearts();
+  // toggleUserNav();
+  // setLastBookingMsg();
+  // localStorage.setItem('loggedAs', loggedAs);
+
+  gotoSide('settings');
+  clearElementsValue([userLoginEl, pwdEl]);
+});
 
 ///// SIGN UP CARDs
 
@@ -92,16 +95,12 @@ btnSignup.addEventListener('click', e => {
   }
 
   if (userDB.findUsername(usernameEl.value) >= 0) {
-    usernameEl.value = '';
-    usernameEl.focus();
-    usernameEl.placeholder = 'This username is already taken';
+    alertWrongInput(usernameEl, 'This username is already taken');
     return;
   }
 
   if (userDB.findEmail(emailEl.value) >= 0) {
-    emailEl.value = '';
-    emailEl.focus();
-    emailEl.placeholder = 'This email is already taken';
+    alertWrongInput(emailEl, 'This email is already taken');
     return;
   }
 
@@ -120,10 +119,8 @@ btnSignup.addEventListener('click', e => {
 
   createNotification('Congratulations, you created new account', 'success');
   // setLastBookingMsg();
-
-  usernameEl.value = '';
-  emailEl.value = '';
-  pwdEl.value = '';
+  gotoSide('settings');
+  clearElementsValue([usernameEl, emailEl, pwdEl]);
 });
 
 // ///// WELCOME BACK CARDs

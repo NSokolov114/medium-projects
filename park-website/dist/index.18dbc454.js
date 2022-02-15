@@ -2023,6 +2023,9 @@ parcelHelpers.export(exports, "shuffle", ()=>shuffle
 // generate rnd integer
 parcelHelpers.export(exports, "randomInt", ()=>randomInt
 );
+// clear DOM elements values
+parcelHelpers.export(exports, "clearElementsValue", ()=>clearElementsValue
+);
 parcelHelpers.export(exports, "createNotification", ()=>createNotification
 ) // function iconToast(el) {
  //   el.classList.contains('icon-heart--active')
@@ -2055,6 +2058,10 @@ function shuffle(array) {
 }
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function clearElementsValue(elements) {
+    elements.forEach((el)=>el.value = ''
+    );
 }
 // create toast notification
 const toasts = document.querySelector('.toasts');
@@ -12431,6 +12438,11 @@ function animateLabels() {
 }
 ////////////////////
 ///// ACCOUNT
+function alertWrongInput(element, message) {
+    element.value = '';
+    element.focus();
+    element.placeholder = message;
+}
 ////////////////////
 ///// ACCOUNT SECTION FORMS
 const btnLogin = document.querySelector('.account-card__login');
@@ -12444,31 +12456,28 @@ const welcomeMsg = document.querySelector('.account-card__welcome-msg');
 const userNavUsername = document.querySelector('.user-nav__user-name');
 const generatedPwd = document.querySelector('.account-card__generated-pwd');
 ///// LOG IN CARDs
-// btnLogin.addEventListener('click', e => {
-//   e.preventDefault();
-//   const [userInfoEl, pwdEl] = sidesLogin[0].querySelectorAll(
-//     '.account-card__form input'
-//   );
-//   const match = Math.max(
-//     userDB.findIndex(user => user.username === userInfoEl.value),
-//     userDB.findIndex(user => user.email === userInfoEl.value)
-//   );
-//   if (match < 0 || userDB[match].password !== pwdEl.value) {
-//     pwdEl.value = '';
-//     pwdEl.focus();
-//     pwdEl.placeholder = 'Wrong email or password';
-//     helpMsg.style.color = 'var(--color-primary-light)';
-//     return;
-//   }
-//   loggedAs = userDB[match].username;
-//   user = userDB.find(user => user.username === loggedAs);
-//   loadHearts();
-//   toggleUserNav();
-//   setLastBookingMsg();
-//   localStorage.setItem('loggedAs', loggedAs);
-//   userInfoEl.value = '';
-//   pwdEl.value = '';
-// });
+btnLogin.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll('.account-card__form input');
+    const userID = getUserID(userLoginEl.value, pwdEl.value);
+    if (userID === null) {
+        alertWrongInput(pwdEl, 'Wrong email or password');
+        helpMsg.style.color = 'var(--color-primary-light)';
+        return;
+    }
+    // currentUser
+    // loggedAs = userDB[match].username;
+    // user = userDB.find(user => user.username === loggedAs);
+    // loadHearts();
+    // toggleUserNav();
+    // setLastBookingMsg();
+    // localStorage.setItem('loggedAs', loggedAs);
+    gotoSide('settings');
+    _helperJs.clearElementsValue([
+        userLoginEl,
+        pwdEl
+    ]);
+});
 ///// SIGN UP CARDs
 btnGeneratePwd.addEventListener('click', ()=>generatedPwd.innerText = _componentsJs.generatePwd()
 );
@@ -12478,15 +12487,11 @@ btnSignup.addEventListener('click', (e)=>{
     console.log(_currentUserJsDefault.default);
     if (!(usernameEl.validity.valid && emailEl.validity.valid && pwdEl.validity.valid)) return;
     if (_userDBJsDefault.default.findUsername(usernameEl.value) >= 0) {
-        usernameEl.value = '';
-        usernameEl.focus();
-        usernameEl.placeholder = 'This username is already taken';
+        alertWrongInput(usernameEl, 'This username is already taken');
         return;
     }
     if (_userDBJsDefault.default.findEmail(emailEl.value) >= 0) {
-        emailEl.value = '';
-        emailEl.focus();
-        emailEl.placeholder = 'This email is already taken';
+        alertWrongInput(emailEl, 'This email is already taken');
         return;
     }
     _userDBJsDefault.default.addUser(usernameEl.value, emailEl.value, pwdEl.value, _currentUserJsDefault.default.favoriteHotels, _currentUserJsDefault.default.bookings);
@@ -12495,9 +12500,12 @@ btnSignup.addEventListener('click', (e)=>{
     // toggleUserNav();
     _helperJs.createNotification('Congratulations, you created new account', 'success');
     // setLastBookingMsg();
-    usernameEl.value = '';
-    emailEl.value = '';
-    pwdEl.value = '';
+    gotoSide('settings');
+    _helperJs.clearElementsValue([
+        usernameEl,
+        emailEl,
+        pwdEl
+    ]);
 }); // ///// WELCOME BACK CARDs
  // // logout btn
  // btnLogout.addEventListener('click', e => {
@@ -12537,7 +12545,7 @@ btnSignup.addEventListener('click', (e)=>{
  // });
  ////////////////////
 
-},{"./components.js":"4xsbx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz"}],"4xsbx":[function(require,module,exports) {
+},{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initToTopBtn", ()=>initToTopBtn
@@ -12679,26 +12687,16 @@ class UserDB {
     findUsername(username) {
         return this.users.findIndex((user)=>user.username === username
         );
-    //   usernameEl.value = '';
-    //   usernameEl.focus();
-    //   usernameEl.placeholder = 'This username is already taken';
     }
     findEmail(email) {
         return this.users.findIndex((user)=>user.email === email
         );
-    //   emailEl.value = '';
-    //   emailEl.focus();
-    //   emailEl.placeholder = 'This email is already taken';
     }
-    checkLoginInfo(login, pwd) {
+    getUserID(login, pwd) {
         const userID = Math.max(this.users.findIndex((user)=>user.username === login
         ), this.users.findIndex((user)=>user.email === login
         ));
-        return userID > 0 && this.users[userID].password === pwd;
-    // pwdEl.value = '';
-    // pwdEl.focus();
-    // pwdEl.placeholder = 'Wrong email or password';
-    // helpMsg.style.color = 'var(--color-primary-light)';
+        return userID > 0 && this.users[userID].password === pwd ? userID : null;
     }
     addUser(username, email, password, favoriteHotels, bookings) {
         const user = {
