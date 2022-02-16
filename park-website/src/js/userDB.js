@@ -46,17 +46,18 @@ class UserDB {
     this._updateLocalStorage();
   }
 
-  addBooking(username, booking) {
-    const idx = this.findUsername(username);
-    if (idx < 0) return;
-    this.users[idx].bookings.push(booking);
-    this._updateLocalStorage();
-  }
+  // addBooking(username, booking) {
+  //   const idx = this.findUsername(username);
+  //   if (idx < 0) return;
+  //   this.users[idx].bookings.push(booking);
+  //   this._updateLocalStorage();
+  // }
 
   updateUser(user) {
     const idx = this.findUsername(user.username);
     if (idx < 0) return;
-    this.users[idx] = user;
+    this.users[idx].favoriteHotels = user.favoriteHotels;
+    this.users[idx].bookings = user.bookings;
     this._updateLocalStorage();
   }
 

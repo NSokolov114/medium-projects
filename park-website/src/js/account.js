@@ -3,6 +3,7 @@ import userDB from './userDB.js';
 import currentUser from './currentUser.js';
 import { createNotification, clearElementsValue } from './helper.js';
 import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
+import { loadHearts } from './heartIcons.js';
 
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
@@ -69,7 +70,7 @@ btnLogin.addEventListener('click', e => {
   }
 
   const userID = userDB.getUserID(userLoginEl.value, pwdEl.value);
-  console.log(userID);
+
   if (userID === null) {
     alertWrongInput(pwdEl, 'Wrong email or password');
     helpMsg.style.color = 'var(--color-primary-light)';
@@ -80,11 +81,13 @@ btnLogin.addEventListener('click', e => {
   if (currentUser.username === '' && currentUser.bookings.length > 0) {
     userDB.users[userID].bookings.push(...currentUser.bookings);
   }
-
+  console.log(currentUser.favoriteHotels);
   currentUser.setCurrentUser(userDB.users[userID].username);
+  console.log(currentUser.favoriteHotels);
   currentUser.loadCurrentUser();
+  console.log(currentUser.favoriteHotels);
 
-  // loadHearts();
+  loadHearts();
 
   createNotification(`Welcome back, ${currentUser.username}`, 'success');
   toggleUserInterface();
@@ -200,4 +203,5 @@ showFavoritesBtn.addEventListener('click', e => {
 console.log(currentUser);
 currentUser.loadCurrentUser();
 toggleUserInterface();
+loadHearts();
 console.log(currentUser);

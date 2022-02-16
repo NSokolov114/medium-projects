@@ -1,3 +1,6 @@
+import currentUser from './currentUser.js';
+import userDB from './userDB.js';
+
 ///// HEART icons & order based on HEARTS
 
 const heartIcons = document.querySelectorAll('.icon-heart');
@@ -10,7 +13,10 @@ function toggleMatchingHeartIcons(idx) {
   const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
   let position = idx % numberOfHotels;
 
-  // user.favoriteHotels[position] = !user.favoriteHotels[position];
+  currentUser.favoriteHotels[position] = !currentUser.favoriteHotels[position];
+  console.log(currentUser.favoriteHotels);
+  userDB.updateUser(currentUser);
+
   for (let i = 0; i < numberOfSections; i++) {
     heartIcons[position].classList.toggle('icon-heart--active');
     if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') {
@@ -32,16 +38,18 @@ function sortCards(idx) {
   }
 }
 
-// function loadHearts() {
-//   user.favoriteHotels.forEach((hot, idx) => {
-//     if (
-//       (hot && !heartIcons[idx].classList.contains('icon-heart--active')) ||
-//       (!hot && heartIcons[idx].classList.contains('icon-heart--active'))
-//     ) {
-//       heartIcons[idx].click();
-//     }
-//   });
-// }
+export function loadHearts() {
+  const tmp = [...currentUser.favoriteHotels];
+  currentUser.favoriteHotels.forEach((hot, idx) => {
+    if (
+      (hot && !heartIcons[idx].classList.contains('icon-heart--active')) ||
+      (!hot && heartIcons[idx].classList.contains('icon-heart--active'))
+    ) {
+      heartIcons[idx].click();
+    }
+  });
+  currentUser.favoriteHotels = [...tmp];
+}
 
 export function initHeartIcons() {
   heartIcons.forEach((icon, idx) => {

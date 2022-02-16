@@ -12427,6 +12427,7 @@ var _currentUserJs = require("./currentUser.js");
 var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 var _helperJs = require("./helper.js");
 var _navigationJs = require("./navigation.js");
+var _heartIconsJs = require("./heartIcons.js");
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
 function animateLabels() {
@@ -12477,7 +12478,6 @@ btnLogin.addEventListener('click', (e)=>{
     const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll('.account-card__form input');
     if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) return;
     const userID = _userDBJsDefault.default.getUserID(userLoginEl.value, pwdEl.value);
-    console.log(userID);
     if (userID === null) {
         alertWrongInput(pwdEl, 'Wrong email or password');
         helpMsg.style.color = 'var(--color-primary-light)';
@@ -12485,9 +12485,12 @@ btnLogin.addEventListener('click', (e)=>{
     }
     // save bookings made by unlogged user
     if (_currentUserJsDefault.default.username === '' && _currentUserJsDefault.default.bookings.length > 0) _userDBJsDefault.default.users[userID].bookings.push(..._currentUserJsDefault.default.bookings);
+    console.log(_currentUserJsDefault.default.favoriteHotels);
     _currentUserJsDefault.default.setCurrentUser(_userDBJsDefault.default.users[userID].username);
+    console.log(_currentUserJsDefault.default.favoriteHotels);
     _currentUserJsDefault.default.loadCurrentUser();
-    // loadHearts();
+    console.log(_currentUserJsDefault.default.favoriteHotels);
+    _heartIconsJs.loadHearts();
     _helperJs.createNotification(`Welcome back, ${_currentUserJsDefault.default.username}`, 'success');
     toggleUserInterface();
     _helperJs.clearElementsValue([
@@ -12568,9 +12571,10 @@ showFavoritesBtn.addEventListener('click', (e)=>{
 console.log(_currentUserJsDefault.default);
 _currentUserJsDefault.default.loadCurrentUser();
 toggleUserInterface();
+_heartIconsJs.loadHearts();
 console.log(_currentUserJsDefault.default);
 
-},{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","./navigation.js":"9q9cb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
+},{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","./navigation.js":"9q9cb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./heartIcons.js":"1LRTz"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initToTopBtn", ()=>initToTopBtn
@@ -12733,16 +12737,17 @@ class UserDB {
         this.users.push(user);
         this._updateLocalStorage();
     }
-    addBooking(username, booking) {
-        const idx = this.findUsername(username);
-        if (idx < 0) return;
-        this.users[idx].bookings.push(booking);
-        this._updateLocalStorage();
-    }
+    // addBooking(username, booking) {
+    //   const idx = this.findUsername(username);
+    //   if (idx < 0) return;
+    //   this.users[idx].bookings.push(booking);
+    //   this._updateLocalStorage();
+    // }
     updateUser(user) {
         const idx = this.findUsername(user.username);
         if (idx < 0) return;
-        this.users[idx] = user;
+        this.users[idx].favoriteHotels = user.favoriteHotels;
+        this.users[idx].bookings = user.bookings;
         this._updateLocalStorage();
     }
     _updateLocalStorage() {
@@ -13011,7 +13016,68 @@ gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
     })
 );
 
-},{"./currentUser.js":"haS37","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
+},{"./currentUser.js":"haS37","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1LRTz":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "loadHearts", ()=>loadHearts
+);
+parcelHelpers.export(exports, "initHeartIcons", ()=>initHeartIcons
+);
+var _currentUserJs = require("./currentUser.js");
+var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
+var _userDBJs = require("./userDB.js");
+var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+///// HEART icons & order based on HEARTS
+const heartIcons = document.querySelectorAll('.icon-heart');
+const homeCardEls = document.querySelectorAll('.card');
+const hotelEls = document.querySelectorAll('.hotel');
+const numberOfSections = 3;
+const numberOfHotels = heartIcons.length / numberOfSections;
+function toggleMatchingHeartIcons(idx) {
+    const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
+    let position = idx % numberOfHotels;
+    _currentUserJsDefault.default.favoriteHotels[position] = !_currentUserJsDefault.default.favoriteHotels[position];
+    console.log(_currentUserJsDefault.default.favoriteHotels);
+    _userDBJsDefault.default.updateUser(_currentUserJsDefault.default);
+    for(let i = 0; i < numberOfSections; i++){
+        heartIcons[position].classList.toggle('icon-heart--active');
+        if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') heartIcons[position].checked = !heartIcons[position].checked;
+        position += numberOfHotels;
+    }
+}
+function sortCards(idx) {
+    const position = idx % numberOfHotels;
+    if (heartIcons[position].classList.contains('icon-heart--active')) {
+        homeCardEls[position].style.order = '2';
+        hotelEls[position].style.order = '2';
+    } else {
+        homeCardEls[position].style.order = '3';
+        hotelEls[position].style.order = '3';
+    }
+}
+function loadHearts() {
+    const tmp = [
+        ..._currentUserJsDefault.default.favoriteHotels
+    ];
+    _currentUserJsDefault.default.favoriteHotels.forEach((hot, idx)=>{
+        if (hot && !heartIcons[idx].classList.contains('icon-heart--active') || !hot && heartIcons[idx].classList.contains('icon-heart--active')) heartIcons[idx].click();
+    });
+    _currentUserJsDefault.default.favoriteHotels = [
+        ...tmp
+    ];
+}
+function initHeartIcons() {
+    heartIcons.forEach((icon, idx)=>{
+        icon.addEventListener('click', ()=>{
+            toggleMatchingHeartIcons(idx);
+            sortCards(idx);
+        // iconToast(icon);
+        // updateUsersDB();
+        });
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./currentUser.js":"haS37","./userDB.js":"kkUSu"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
@@ -13078,59 +13144,7 @@ function generateRndReviews() {
     );
 }
 
-},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1LRTz":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-// function loadHearts() {
-//   user.favoriteHotels.forEach((hot, idx) => {
-//     if (
-//       (hot && !heartIcons[idx].classList.contains('icon-heart--active')) ||
-//       (!hot && heartIcons[idx].classList.contains('icon-heart--active'))
-//     ) {
-//       heartIcons[idx].click();
-//     }
-//   });
-// }
-parcelHelpers.export(exports, "initHeartIcons", ()=>initHeartIcons
-);
-///// HEART icons & order based on HEARTS
-const heartIcons = document.querySelectorAll('.icon-heart');
-const homeCardEls = document.querySelectorAll('.card');
-const hotelEls = document.querySelectorAll('.hotel');
-const numberOfSections = 3;
-const numberOfHotels = heartIcons.length / numberOfSections;
-function toggleMatchingHeartIcons(idx) {
-    const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
-    let position = idx % numberOfHotels;
-    // user.favoriteHotels[position] = !user.favoriteHotels[position];
-    for(let i = 0; i < numberOfSections; i++){
-        heartIcons[position].classList.toggle('icon-heart--active');
-        if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') heartIcons[position].checked = !heartIcons[position].checked;
-        position += numberOfHotels;
-    }
-}
-function sortCards(idx) {
-    const position = idx % numberOfHotels;
-    if (heartIcons[position].classList.contains('icon-heart--active')) {
-        homeCardEls[position].style.order = '2';
-        hotelEls[position].style.order = '2';
-    } else {
-        homeCardEls[position].style.order = '3';
-        hotelEls[position].style.order = '3';
-    }
-}
-function initHeartIcons() {
-    heartIcons.forEach((icon, idx)=>{
-        icon.addEventListener('click', ()=>{
-            toggleMatchingHeartIcons(idx);
-            sortCards(idx);
-        // iconToast(icon);
-        // updateUsersDB();
-        });
-    });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
+},{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _currentUserJs = require("./currentUser.js");
