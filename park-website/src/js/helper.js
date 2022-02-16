@@ -31,6 +31,13 @@ export function createNotification(message = null, type = null) {
   }, 5000);
 }
 
+// on wrong input clear, focus and show the message
+export function alertWrongInput(element, message) {
+  element.value = '';
+  element.focus();
+  element.placeholder = message;
+}
+
 // function iconToast(el) {
 //   el.classList.contains('icon-heart--active')
 //     ? createNotification('Marked as favorite', 'success')

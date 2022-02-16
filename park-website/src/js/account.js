@@ -1,32 +1,18 @@
 import { generatePwd } from './components.js';
 import userDB from './userDB.js';
 import currentUser from './currentUser.js';
-import { createNotification, clearElementsValue } from './helper.js';
+import {
+  createNotification,
+  clearElementsValue,
+  alertWrongInput,
+} from './helper.js';
 import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
 import { loadHearts } from './heartIcons.js';
+import { animateLabels } from './components.js';
 
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
-export function animateLabels() {
-  labels.forEach(label => {
-    label.innerHTML = label.innerText
-      .split('')
-      .map(
-        (letter, idx) =>
-          `<span style="transition-delay:${idx * 30}ms">${letter}</span>`
-      )
-      .join('');
-  });
-}
-
-////////////////////
-///// ACCOUNT
-
-function alertWrongInput(element, message) {
-  element.value = '';
-  element.focus();
-  element.placeholder = message;
-}
+animateLabels(labels);
 
 function toggleUserInterface() {
   if (currentUser.username) {
@@ -81,14 +67,11 @@ btnLogin.addEventListener('click', e => {
   if (currentUser.username === '' && currentUser.bookings.length > 0) {
     userDB.users[userID].bookings.push(...currentUser.bookings);
   }
-  console.log(currentUser.favoriteHotels);
+
   currentUser.setCurrentUser(userDB.users[userID].username);
-  console.log(currentUser.favoriteHotels);
   currentUser.loadCurrentUser();
-  console.log(currentUser.favoriteHotels);
 
   loadHearts();
-
   createNotification(`Welcome back, ${currentUser.username}`, 'success');
   toggleUserInterface();
   clearElementsValue([userLoginEl, pwdEl]);
@@ -106,8 +89,6 @@ btnSignup.addEventListener('click', e => {
   const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
     '.account-card__form input'
   );
-
-  console.log(currentUser);
 
   if (
     !(
@@ -140,8 +121,6 @@ btnSignup.addEventListener('click', e => {
   currentUser.setCurrentUser(usernameEl.value);
   currentUser.loadCurrentUser();
 
-  console.log(currentUser);
-
   createNotification(
     `Congratulations, ${currentUser.username}, you created new account`,
     'success'
@@ -158,7 +137,7 @@ btnLogout.addEventListener('click', e => {
 
   currentUser.reset();
   toggleUserInterface();
-  // loadHearts();
+  loadHearts();
   createNotification('You are logged out', 'info');
 });
 
@@ -200,8 +179,8 @@ showFavoritesBtn.addEventListener('click', e => {
 
 ////////////////////
 
-console.log(currentUser);
-currentUser.loadCurrentUser();
-toggleUserInterface();
-loadHearts();
-console.log(currentUser);
+export function initCurrentUserInterface() {
+  currentUser.loadCurrentUser();
+  toggleUserInterface();
+  loadHearts();
+}

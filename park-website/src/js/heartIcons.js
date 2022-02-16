@@ -14,7 +14,6 @@ function toggleMatchingHeartIcons(idx) {
   let position = idx % numberOfHotels;
 
   currentUser.favoriteHotels[position] = !currentUser.favoriteHotels[position];
-  console.log(currentUser.favoriteHotels);
   userDB.updateUser(currentUser);
 
   for (let i = 0; i < numberOfSections; i++) {
@@ -39,16 +38,18 @@ function sortCards(idx) {
 }
 
 export function loadHearts() {
-  const tmp = [...currentUser.favoriteHotels];
-  currentUser.favoriteHotels.forEach((hot, idx) => {
-    if (
-      (hot && !heartIcons[idx].classList.contains('icon-heart--active')) ||
-      (!hot && heartIcons[idx].classList.contains('icon-heart--active'))
-    ) {
+  heartIcons.forEach(icon => {
+    icon.classList.remove('icon-heart--active');
+    if (icon.checked) icon.checked = false;
+  });
+
+  currentUser.favoriteHotels.forEach((fav, idx) => {
+    if (fav) {
       heartIcons[idx].click();
+      currentUser.favoriteHotels[idx] = true;
+      userDB.updateUser(currentUser);
     }
   });
-  currentUser.favoriteHotels = [...tmp];
 }
 
 export function initHeartIcons() {
@@ -56,8 +57,6 @@ export function initHeartIcons() {
     icon.addEventListener('click', () => {
       toggleMatchingHeartIcons(idx);
       sortCards(idx);
-      // iconToast(icon);
-      // updateUsersDB();
     });
   });
 }

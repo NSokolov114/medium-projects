@@ -524,7 +524,6 @@ var _litepickerJs = require("./litepicker.js");
 var _galleryJs = require("./gallery.js");
 var _helperJs = require("./helper.js");
 var _mapJs = require("./map.js");
-var _accountJs = require("./account.js");
 var _componentsJs = require("./components.js");
 var _rndReviewsJs = require("./rndReviews.js");
 var _heartIconsJs = require("./heartIcons.js");
@@ -535,23 +534,20 @@ var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 var _bookingJs = require("./booking.js");
 var _bookingJsDefault = parcelHelpers.interopDefault(_bookingJs);
 var _navigationJs = require("./navigation.js");
-// console.log(`Hi there! Your account is stored only in the local storage.
-// You can clear it by typing "localStorage.clear()" in the console.`);
-// console.log(`You can create a new account or use a dummy user:
-// username/email: vasya83, password: passWORD83`);
+var _accountJs = require("./account.js");
+console.log(`Hi there! Your account is stored only in the local storage.
+You can clear it by typing "localStorage.clear()" in the console.`);
+console.log(`You can create a new account or use a dummy user:
+username/email: vasya83, password: passWORD83`);
 function init() {
     _galleryJs.controlGalleryImgs();
-    _helperJs.createNotification('Page is loaded', 'success'); // temp
     _mapJs.initMap();
-    _accountJs.animateLabels();
     _componentsJs.initToTopBtn();
     _componentsJs.initHighlightNavEls();
     _rndReviewsJs.generateRndReviews();
     _heartIconsJs.initHeartIcons();
     _bookingJsDefault.default();
-    // console.log(currentUser);
-    // gotoSide('login');
-    console.log(_userDBJsDefault.default.users.at(-1));
+    _accountJs.initCurrentUserInterface();
 }
 init();
 
@@ -2025,6 +2021,9 @@ parcelHelpers.export(exports, "randomInt", ()=>randomInt
 parcelHelpers.export(exports, "clearElementsValue", ()=>clearElementsValue
 );
 parcelHelpers.export(exports, "createNotification", ()=>createNotification
+);
+// on wrong input clear, focus and show the message
+parcelHelpers.export(exports, "alertWrongInput", ()=>alertWrongInput
 ) // function iconToast(el) {
  //   el.classList.contains('icon-heart--active')
  //     ? createNotification('Marked as favorite', 'success')
@@ -2073,6 +2072,11 @@ function createNotification(message = null, type = null) {
     setTimeout(()=>{
         notification.remove();
     }, 5000);
+}
+function alertWrongInput(element, message) {
+    element.value = '';
+    element.focus();
+    element.placeholder = message;
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kvSuP":[function(require,module,exports) {
@@ -12418,7 +12422,8 @@ function initMap() {
 },{}],"jaN5w":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
+////////////////////
+parcelHelpers.export(exports, "initCurrentUserInterface", ()=>initCurrentUserInterface
 );
 var _componentsJs = require("./components.js");
 var _userDBJs = require("./userDB.js");
@@ -12430,19 +12435,7 @@ var _navigationJs = require("./navigation.js");
 var _heartIconsJs = require("./heartIcons.js");
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
-function animateLabels() {
-    labels.forEach((label)=>{
-        label.innerHTML = label.innerText.split('').map((letter, idx)=>`<span style="transition-delay:${idx * 30}ms">${letter}</span>`
-        ).join('');
-    });
-}
-////////////////////
-///// ACCOUNT
-function alertWrongInput(element, message) {
-    element.value = '';
-    element.focus();
-    element.placeholder = message;
-}
+_componentsJs.animateLabels(labels);
 function toggleUserInterface() {
     if (_currentUserJsDefault.default.username) {
         _navigationJs.userNavLoginBtn.classList.add('hidden');
@@ -12479,17 +12472,14 @@ btnLogin.addEventListener('click', (e)=>{
     if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) return;
     const userID = _userDBJsDefault.default.getUserID(userLoginEl.value, pwdEl.value);
     if (userID === null) {
-        alertWrongInput(pwdEl, 'Wrong email or password');
+        _helperJs.alertWrongInput(pwdEl, 'Wrong email or password');
         helpMsg.style.color = 'var(--color-primary-light)';
         return;
     }
     // save bookings made by unlogged user
     if (_currentUserJsDefault.default.username === '' && _currentUserJsDefault.default.bookings.length > 0) _userDBJsDefault.default.users[userID].bookings.push(..._currentUserJsDefault.default.bookings);
-    console.log(_currentUserJsDefault.default.favoriteHotels);
     _currentUserJsDefault.default.setCurrentUser(_userDBJsDefault.default.users[userID].username);
-    console.log(_currentUserJsDefault.default.favoriteHotels);
     _currentUserJsDefault.default.loadCurrentUser();
-    console.log(_currentUserJsDefault.default.favoriteHotels);
     _heartIconsJs.loadHearts();
     _helperJs.createNotification(`Welcome back, ${_currentUserJsDefault.default.username}`, 'success');
     toggleUserInterface();
@@ -12504,20 +12494,18 @@ btnGeneratePwd.addEventListener('click', ()=>generatedPwd.innerText = _component
 btnSignup.addEventListener('click', (e)=>{
     e.preventDefault();
     const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll('.account-card__form input');
-    console.log(_currentUserJsDefault.default);
     if (!(usernameEl.validity.valid && emailEl.validity.valid && pwdEl.validity.valid)) return;
     if (_userDBJsDefault.default.findUsername(usernameEl.value) >= 0) {
-        alertWrongInput(usernameEl, 'This username is already taken');
+        _helperJs.alertWrongInput(usernameEl, 'This username is already taken');
         return;
     }
     if (_userDBJsDefault.default.findEmail(emailEl.value) >= 0) {
-        alertWrongInput(emailEl, 'This email is already taken');
+        _helperJs.alertWrongInput(emailEl, 'This email is already taken');
         return;
     }
     _userDBJsDefault.default.addUser(usernameEl.value, emailEl.value, pwdEl.value, _currentUserJsDefault.default.favoriteHotels, _currentUserJsDefault.default.bookings);
     _currentUserJsDefault.default.setCurrentUser(usernameEl.value);
     _currentUserJsDefault.default.loadCurrentUser();
-    console.log(_currentUserJsDefault.default);
     _helperJs.createNotification(`Congratulations, ${_currentUserJsDefault.default.username}, you created new account`, 'success');
     toggleUserInterface();
     _helperJs.clearElementsValue([
@@ -12532,7 +12520,7 @@ btnLogout.addEventListener('click', (e)=>{
     e.preventDefault();
     _currentUserJsDefault.default.reset();
     toggleUserInterface();
-    // loadHearts();
+    _heartIconsJs.loadHearts();
     _helperJs.createNotification('You are logged out', 'info');
 });
 // show last booking / show favorites
@@ -12567,12 +12555,11 @@ showFavoritesBtn.addEventListener('click', (e)=>{
     lastBookingEls.forEach((el)=>el.classList.add('hidden')
     );
 });
-////////////////////
-console.log(_currentUserJsDefault.default);
-_currentUserJsDefault.default.loadCurrentUser();
-toggleUserInterface();
-_heartIconsJs.loadHearts();
-console.log(_currentUserJsDefault.default);
+function initCurrentUserInterface() {
+    _currentUserJsDefault.default.loadCurrentUser();
+    toggleUserInterface();
+    _heartIconsJs.loadHearts();
+}
 
 },{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","./navigation.js":"9q9cb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./heartIcons.js":"1LRTz"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -12583,6 +12570,9 @@ parcelHelpers.export(exports, "initHighlightNavEls", ()=>initHighlightNavEls
 );
 ///// generating password /////
 parcelHelpers.export(exports, "generatePwd", ()=>generatePwd
+);
+///// animating labels /////
+parcelHelpers.export(exports, "animateLabels", ()=>animateLabels
 );
 var _helperJs = require("./helper.js");
 ///// Back To Top Button /////
@@ -12693,6 +12683,12 @@ function generatePwd() {
     }
     if (!(hasLower && hasUpper && hasDigit)) pwd = generatePwd();
     return pwd;
+}
+function animateLabels(labels) {
+    labels.forEach((label)=>{
+        label.innerHTML = label.innerText.split('').map((letter, idx)=>`<span style="transition-delay:${idx * 30}ms">${letter}</span>`
+        ).join('');
+    });
 }
 
 },{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kkUSu":[function(require,module,exports) {
@@ -13037,7 +13033,6 @@ function toggleMatchingHeartIcons(idx) {
     const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
     let position = idx % numberOfHotels;
     _currentUserJsDefault.default.favoriteHotels[position] = !_currentUserJsDefault.default.favoriteHotels[position];
-    console.log(_currentUserJsDefault.default.favoriteHotels);
     _userDBJsDefault.default.updateUser(_currentUserJsDefault.default);
     for(let i = 0; i < numberOfSections; i++){
         heartIcons[position].classList.toggle('icon-heart--active');
@@ -13056,23 +13051,23 @@ function sortCards(idx) {
     }
 }
 function loadHearts() {
-    const tmp = [
-        ..._currentUserJsDefault.default.favoriteHotels
-    ];
-    _currentUserJsDefault.default.favoriteHotels.forEach((hot, idx)=>{
-        if (hot && !heartIcons[idx].classList.contains('icon-heart--active') || !hot && heartIcons[idx].classList.contains('icon-heart--active')) heartIcons[idx].click();
+    heartIcons.forEach((icon)=>{
+        icon.classList.remove('icon-heart--active');
+        if (icon.checked) icon.checked = false;
     });
-    _currentUserJsDefault.default.favoriteHotels = [
-        ...tmp
-    ];
+    _currentUserJsDefault.default.favoriteHotels.forEach((fav, idx)=>{
+        if (fav) {
+            heartIcons[idx].click();
+            _currentUserJsDefault.default.favoriteHotels[idx] = true;
+            _userDBJsDefault.default.updateUser(_currentUserJsDefault.default);
+        }
+    });
 }
 function initHeartIcons() {
     heartIcons.forEach((icon, idx)=>{
         icon.addEventListener('click', ()=>{
             toggleMatchingHeartIcons(idx);
             sortCards(idx);
-        // iconToast(icon);
-        // updateUsersDB();
         });
     });
 }
