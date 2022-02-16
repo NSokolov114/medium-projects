@@ -73,7 +73,7 @@ const dummyUsers = [
     favoriteHotels: [false, false, true, true, true, false],
     bookings: [
       {
-        hotel: 1,
+        hotel: 'Fire Cabins',
         rooms: 1,
         ppl: 3,
         dates: '2022-02-10 - 2022-02-17',
@@ -87,7 +87,7 @@ const dummyUsers = [
     favoriteHotels: [true, true, false, false, false, true],
     bookings: [
       {
-        hotel: 1,
+        hotel: 'Leadfoot Campground',
         rooms: 2,
         ppl: 4,
         dates: '2022-03-22 - 2022-03-27',

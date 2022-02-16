@@ -25,12 +25,12 @@ function createBooking(e) {
   }
 
   const booking = {
-    hotel: bookingLodgings.value,
+    hotel: bookingLodgings.options[bookingLodgings.selectedIndex].text,
     rooms: bookingRooms.value,
     ppl: bookingPeople.value,
     dates: bookingDates.value,
   };
-
+  console.log(booking);
   currentUser.bookings.push(booking);
   userDB.addBooking(currentUser.username, booking);
 

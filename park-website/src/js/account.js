@@ -77,8 +77,6 @@ btnLogin.addEventListener('click', e => {
 
   // loadHearts();
 
-  // setLastBookingMsg();
-
   createNotification(`Welcome back, ${currentUser.username}`, 'success');
   toggleUserInterface();
   clearElementsValue([userLoginEl, pwdEl]);
@@ -136,7 +134,6 @@ btnSignup.addEventListener('click', e => {
     `Congratulations, ${currentUser.username}, you created new account`,
     'success'
   );
-  // setLastBookingMsg();
   toggleUserInterface();
   clearElementsValue([usernameEl, emailEl, pwdEl]);
 });
@@ -153,36 +150,40 @@ btnLogout.addEventListener('click', e => {
   createNotification('You are logged out', 'info');
 });
 
-// // show last booking / show favorites
-// const lastBookingEls = document.querySelectorAll('.account-card__last-booking');
-// const favoritesEls = document.querySelectorAll('.account-card__favorites');
-// const showLastBookingBtn = document.querySelector('.account-card__booking-btn');
-// const showFavoritesBtn = document.querySelector('.account-card__favorites-btn');
-// const lastBookingInfo = document.querySelector('p.account-card__last-booking');
+// show last booking / show favorites
+const lastBookingEls = document.querySelectorAll('.account-card__last-booking');
+const favoritesEls = document.querySelectorAll('.account-card__favorites');
+const showLastBookingBtn = document.querySelector('.account-card__booking-btn');
+const showFavoritesBtn = document.querySelector('.account-card__favorites-btn');
+const lastBookingInfo = document.querySelector('p.account-card__last-booking');
 
-// function setLastBookingMsg() {
-//   if (!user.lastBooking.hotel) {
-//     lastBookingInfo.innerText = `You didn't book anything yet. To make your first booking go to the BOOKING section.`;
-//     return;
-//   }
+function showLastBookingMsg() {
+  if (!currentUser.bookings.length) {
+    lastBookingInfo.innerText = `You didn't book anything yet. To make your first booking go to the BOOKING section.`;
+    return;
+  }
 
-//   const roomOrTent = user.lastBooking.hotel < 4 ? 'room' : 'tent';
-//   const manyOrOneHotel = user.lastBooking.rooms < 2 ? '' : 's';
-//   const personOrPeople = user.lastBooking.ppl < 2 ? 'person' : 'people';
+  const booking = currentUser.bookings.at(-1);
+  const roomOrTent = booking.hotel.toLowerCase().includes('cabin')
+    ? 'room'
+    : 'tent';
+  const manyOrOneHotel = booking.rooms < 2 ? '' : 's';
+  const personOrPeople = booking.ppl < 2 ? 'person' : 'people';
 
-//   lastBookingInfo.innerText = `You booked ${user.lastBooking.rooms} ${roomOrTent}${manyOrOneHotel} for ${user.lastBooking.ppl} ${personOrPeople} in the ${user.lastBooking.hotel} for ${user.lastBooking.date}.`;
-// }
+  lastBookingInfo.innerText = `You booked ${booking.rooms} ${roomOrTent}${manyOrOneHotel} for ${booking.ppl} ${personOrPeople} in the ${booking.hotel} for ${booking.dates}.`;
+}
 
-// showLastBookingBtn.addEventListener('click', e => {
-//   e.preventDefault();
-//   favoritesEls.forEach(el => el.classList.add('hidden'));
-//   lastBookingEls.forEach(el => el.classList.remove('hidden'));
-// });
+showLastBookingBtn.addEventListener('click', e => {
+  e.preventDefault();
+  showLastBookingMsg();
+  favoritesEls.forEach(el => el.classList.add('hidden'));
+  lastBookingEls.forEach(el => el.classList.remove('hidden'));
+});
 
-// showFavoritesBtn.addEventListener('click', e => {
-//   e.preventDefault();
-//   favoritesEls.forEach(el => el.classList.remove('hidden'));
-//   lastBookingEls.forEach(el => el.classList.add('hidden'));
-// });
+showFavoritesBtn.addEventListener('click', e => {
+  e.preventDefault();
+  favoritesEls.forEach(el => el.classList.remove('hidden'));
+  lastBookingEls.forEach(el => el.classList.add('hidden'));
+});
 
 ////////////////////

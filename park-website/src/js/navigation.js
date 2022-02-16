@@ -30,9 +30,9 @@ navigateButtons(
   'account'
 );
 
-goToBookingBtns.forEach(btn =>
-  btn.addEventListener('click', toggleBookingWindow.bind(false))
-);
+// goToBookingBtns.forEach(btn =>
+//   btn.addEventListener('click', toggleBookingWindow.bind(false))
+// );
 
 // sidebar nav buttons
 navBar.addEventListener('click', e => {

@@ -12488,7 +12488,6 @@ btnLogin.addEventListener('click', (e)=>{
     _currentUserJsDefault.default.setCurrentUser(_userDBJsDefault.default.users[userID].username);
     _currentUserJsDefault.default.loadCurrentUser();
     // loadHearts();
-    // setLastBookingMsg();
     _helperJs.createNotification(`Welcome back, ${_currentUserJsDefault.default.username}`, 'success');
     toggleUserInterface();
     _helperJs.clearElementsValue([
@@ -12517,7 +12516,6 @@ btnSignup.addEventListener('click', (e)=>{
     _currentUserJsDefault.default.loadCurrentUser();
     console.log(_currentUserJsDefault.default);
     _helperJs.createNotification(`Congratulations, ${_currentUserJsDefault.default.username}, you created new account`, 'success');
-    // setLastBookingMsg();
     toggleUserInterface();
     _helperJs.clearElementsValue([
         usernameEl,
@@ -12533,33 +12531,39 @@ btnLogout.addEventListener('click', (e)=>{
     toggleUserInterface();
     // loadHearts();
     _helperJs.createNotification('You are logged out', 'info');
-}); // // show last booking / show favorites
- // const lastBookingEls = document.querySelectorAll('.account-card__last-booking');
- // const favoritesEls = document.querySelectorAll('.account-card__favorites');
- // const showLastBookingBtn = document.querySelector('.account-card__booking-btn');
- // const showFavoritesBtn = document.querySelector('.account-card__favorites-btn');
- // const lastBookingInfo = document.querySelector('p.account-card__last-booking');
- // function setLastBookingMsg() {
- //   if (!user.lastBooking.hotel) {
- //     lastBookingInfo.innerText = `You didn't book anything yet. To make your first booking go to the BOOKING section.`;
- //     return;
- //   }
- //   const roomOrTent = user.lastBooking.hotel < 4 ? 'room' : 'tent';
- //   const manyOrOneHotel = user.lastBooking.rooms < 2 ? '' : 's';
- //   const personOrPeople = user.lastBooking.ppl < 2 ? 'person' : 'people';
- //   lastBookingInfo.innerText = `You booked ${user.lastBooking.rooms} ${roomOrTent}${manyOrOneHotel} for ${user.lastBooking.ppl} ${personOrPeople} in the ${user.lastBooking.hotel} for ${user.lastBooking.date}.`;
- // }
- // showLastBookingBtn.addEventListener('click', e => {
- //   e.preventDefault();
- //   favoritesEls.forEach(el => el.classList.add('hidden'));
- //   lastBookingEls.forEach(el => el.classList.remove('hidden'));
- // });
- // showFavoritesBtn.addEventListener('click', e => {
- //   e.preventDefault();
- //   favoritesEls.forEach(el => el.classList.remove('hidden'));
- //   lastBookingEls.forEach(el => el.classList.add('hidden'));
- // });
- ////////////////////
+});
+// show last booking / show favorites
+const lastBookingEls = document.querySelectorAll('.account-card__last-booking');
+const favoritesEls = document.querySelectorAll('.account-card__favorites');
+const showLastBookingBtn = document.querySelector('.account-card__booking-btn');
+const showFavoritesBtn = document.querySelector('.account-card__favorites-btn');
+const lastBookingInfo = document.querySelector('p.account-card__last-booking');
+function showLastBookingMsg() {
+    if (!_currentUserJsDefault.default.bookings.length) {
+        lastBookingInfo.innerText = `You didn't book anything yet. To make your first booking go to the BOOKING section.`;
+        return;
+    }
+    const booking = _currentUserJsDefault.default.bookings.at(-1);
+    const roomOrTent = booking.hotel.toLowerCase().includes('cabin') ? 'room' : 'tent';
+    const manyOrOneHotel = booking.rooms < 2 ? '' : 's';
+    const personOrPeople = booking.ppl < 2 ? 'person' : 'people';
+    lastBookingInfo.innerText = `You booked ${booking.rooms} ${roomOrTent}${manyOrOneHotel} for ${booking.ppl} ${personOrPeople} in the ${booking.hotel} for ${booking.dates}.`;
+}
+showLastBookingBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    showLastBookingMsg();
+    favoritesEls.forEach((el)=>el.classList.add('hidden')
+    );
+    lastBookingEls.forEach((el)=>el.classList.remove('hidden')
+    );
+});
+showFavoritesBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+    favoritesEls.forEach((el)=>el.classList.remove('hidden')
+    );
+    lastBookingEls.forEach((el)=>el.classList.add('hidden')
+    );
+}); ////////////////////
 
 },{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","./navigation.js":"9q9cb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -12755,7 +12759,7 @@ const dummyUsers = [
         ],
         bookings: [
             {
-                hotel: 1,
+                hotel: 'Fire Cabins',
                 rooms: 1,
                 ppl: 3,
                 dates: '2022-02-10 - 2022-02-17'
@@ -12776,7 +12780,7 @@ const dummyUsers = [
         ],
         bookings: [
             {
-                hotel: 1,
+                hotel: 'Leadfoot Campground',
                 rooms: 2,
                 ppl: 4,
                 dates: '2022-03-22 - 2022-03-27'
@@ -12946,8 +12950,9 @@ navigateButtons([
     userNavUserBtn,
     ...bookingToAccountBtns
 ], 'account');
-goToBookingBtns.forEach((btn)=>btn.addEventListener('click', _bookingJs.toggleBookingWindow.bind(false))
-);
+// goToBookingBtns.forEach(btn =>
+//   btn.addEventListener('click', toggleBookingWindow.bind(false))
+// );
 // sidebar nav buttons
 navBar.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -13023,11 +13028,12 @@ function createBooking(e) {
         return;
     }
     const booking = {
-        hotel: bookingLodgings.value,
+        hotel: bookingLodgings.options[bookingLodgings.selectedIndex].text,
         rooms: bookingRooms.value,
         ppl: bookingPeople.value,
         dates: bookingDates.value
     };
+    console.log(booking);
     _currentUserJsDefault.default.bookings.push(booking);
     _userDBJsDefault.default.addBooking(_currentUserJsDefault.default.username, booking);
     bookingForm.reset();
