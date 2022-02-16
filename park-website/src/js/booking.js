@@ -30,25 +30,20 @@ function createBooking(e) {
     ppl: bookingPeople.value,
     dates: bookingDates.value,
   };
-  console.log(booking);
+
   currentUser.bookings.push(booking);
-  userDB.addBooking(currentUser.username, booking);
-
+  userDB.updateUser(currentUser);
   bookingForm.reset();
-
-  // setLastBookingMsg();
-  toggleBookingWindow.bind(true)();
+  toggleBookingWindow();
 }
 
-export function toggleBookingWindow() {
-  if (this) {
-    bookingForm.classList.add('hidden');
-    bookingConfirmation.classList.remove('hidden');
-  } else {
+function toggleBookingWindow() {
+  bookingForm.classList.add('hidden');
+  bookingConfirmation.classList.remove('hidden');
+  setTimeout(() => {
     bookingForm.classList.remove('hidden');
     bookingConfirmation.classList.add('hidden');
-    return;
-  }
+  }, 10000);
 
   if (currentUser.username) {
     loggedOutEls.forEach(el => el.classList.add('hidden'));

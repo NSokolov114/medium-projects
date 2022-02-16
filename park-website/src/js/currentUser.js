@@ -36,7 +36,7 @@ class CurrentUser {
     this.username = '';
     this.favoriteHotels = [false, false, false, false, false, false];
     this.bookings = [];
-    this.setCurrentUser();
+    this.setCurrentUser('');
   }
 }
 

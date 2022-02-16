@@ -64,12 +64,21 @@ btnLogin.addEventListener('click', e => {
     '.account-card__form input'
   );
 
+  if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) {
+    return;
+  }
+
   const userID = userDB.getUserID(userLoginEl.value, pwdEl.value);
   console.log(userID);
   if (userID === null) {
     alertWrongInput(pwdEl, 'Wrong email or password');
     helpMsg.style.color = 'var(--color-primary-light)';
     return;
+  }
+
+  // save bookings made by unlogged user
+  if (currentUser.username === '' && currentUser.bookings.length > 0) {
+    userDB.users[userID].bookings.push(...currentUser.bookings);
   }
 
   currentUser.setCurrentUser(userDB.users[userID].username);
@@ -187,3 +196,8 @@ showFavoritesBtn.addEventListener('click', e => {
 });
 
 ////////////////////
+
+console.log(currentUser);
+currentUser.loadCurrentUser();
+toggleUserInterface();
+console.log(currentUser);

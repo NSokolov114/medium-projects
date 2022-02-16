@@ -18,7 +18,6 @@ import { gotoSide } from './navigation.js';
 // username/email: vasya83, password: passWORD83`);
 
 function init() {
-  // localStorage.setItem('currentUser', JSON.stringify('vasya83'));
   controlGalleryImgs();
   createNotification('Page is loaded', 'success'); // temp
   initMap();
@@ -28,11 +27,10 @@ function init() {
   generateRndReviews();
   initHeartIcons();
   initBookingForm();
+
   // console.log(currentUser);
-  // currentUser.loadCurrentUser();
-  // console.log(currentUser);
-  gotoSide('login');
-  console.log(userDB.users[0]);
+  // gotoSide('login');
+  console.log(userDB.users.at(-1));
 }
 
 init();

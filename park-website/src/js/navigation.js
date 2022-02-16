@@ -1,4 +1,3 @@
-import { toggleBookingWindow } from './booking.js';
 import currentUser from './currentUser.js';
 
 ///// nav via buttons
@@ -29,10 +28,6 @@ navigateButtons(
   [userNavLoginBtn, userNavUserBtn, ...bookingToAccountBtns],
   'account'
 );
-
-// goToBookingBtns.forEach(btn =>
-//   btn.addEventListener('click', toggleBookingWindow.bind(false))
-// );
 
 // sidebar nav buttons
 navBar.addEventListener('click', e => {

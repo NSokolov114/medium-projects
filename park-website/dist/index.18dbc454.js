@@ -540,7 +540,6 @@ var _navigationJs = require("./navigation.js");
 // console.log(`You can create a new account or use a dummy user:
 // username/email: vasya83, password: passWORD83`);
 function init() {
-    // localStorage.setItem('currentUser', JSON.stringify('vasya83'));
     _galleryJs.controlGalleryImgs();
     _helperJs.createNotification('Page is loaded', 'success'); // temp
     _mapJs.initMap();
@@ -551,10 +550,8 @@ function init() {
     _heartIconsJs.initHeartIcons();
     _bookingJsDefault.default();
     // console.log(currentUser);
-    // currentUser.loadCurrentUser();
-    // console.log(currentUser);
-    _navigationJs.gotoSide('login');
-    console.log(_userDBJsDefault.default.users[0]);
+    // gotoSide('login');
+    console.log(_userDBJsDefault.default.users.at(-1));
 }
 init();
 
@@ -12478,6 +12475,7 @@ const generatedPwd = document.querySelector('.account-card__generated-pwd');
 btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
     const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll('.account-card__form input');
+    if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) return;
     const userID = _userDBJsDefault.default.getUserID(userLoginEl.value, pwdEl.value);
     console.log(userID);
     if (userID === null) {
@@ -12485,6 +12483,8 @@ btnLogin.addEventListener('click', (e)=>{
         helpMsg.style.color = 'var(--color-primary-light)';
         return;
     }
+    // save bookings made by unlogged user
+    if (_currentUserJsDefault.default.username === '' && _currentUserJsDefault.default.bookings.length > 0) _userDBJsDefault.default.users[userID].bookings.push(..._currentUserJsDefault.default.bookings);
     _currentUserJsDefault.default.setCurrentUser(_userDBJsDefault.default.users[userID].username);
     _currentUserJsDefault.default.loadCurrentUser();
     // loadHearts();
@@ -12563,7 +12563,12 @@ showFavoritesBtn.addEventListener('click', (e)=>{
     );
     lastBookingEls.forEach((el)=>el.classList.add('hidden')
     );
-}); ////////////////////
+});
+////////////////////
+console.log(_currentUserJsDefault.default);
+_currentUserJsDefault.default.loadCurrentUser();
+toggleUserInterface();
+console.log(_currentUserJsDefault.default);
 
 },{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","./navigation.js":"9q9cb","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4xsbx":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -12732,6 +12737,7 @@ class UserDB {
         const idx = this.findUsername(username);
         if (idx < 0) return;
         this.users[idx].bookings.push(booking);
+        this._updateLocalStorage();
     }
     updateUser(user) {
         const idx = this.findUsername(user.username);
@@ -12855,7 +12861,7 @@ class CurrentUser {
             false
         ];
         this.bookings = [];
-        this.setCurrentUser();
+        this.setCurrentUser('');
     }
 }
 const dummyUsers = [
@@ -12924,7 +12930,6 @@ parcelHelpers.export(exports, "userNavLoginBtn", ()=>userNavLoginBtn
 );
 parcelHelpers.export(exports, "gotoSide", ()=>gotoSide
 );
-var _bookingJs = require("./booking.js");
 var _currentUserJs = require("./currentUser.js");
 var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 const userNav = document.querySelector('.user-nav');
@@ -12950,9 +12955,6 @@ navigateButtons([
     userNavUserBtn,
     ...bookingToAccountBtns
 ], 'account');
-// goToBookingBtns.forEach(btn =>
-//   btn.addEventListener('click', toggleBookingWindow.bind(false))
-// );
 // sidebar nav buttons
 navBar.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -13009,66 +13011,7 @@ gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
     })
 );
 
-},{"./booking.js":"43yfF","./currentUser.js":"haS37","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "toggleBookingWindow", ()=>toggleBookingWindow
-);
-var _currentUserJs = require("./currentUser.js");
-var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
-var _helperJs = require("./helper.js");
-var _userDBJs = require("./userDB.js");
-var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
-///// booking section
-const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
-function createBooking(e) {
-    e.preventDefault();
-    if (!bookingForm.checkValidity()) {
-        _helperJs.createNotification('Please, fill all the fields', 'error');
-        return;
-    }
-    const booking = {
-        hotel: bookingLodgings.options[bookingLodgings.selectedIndex].text,
-        rooms: bookingRooms.value,
-        ppl: bookingPeople.value,
-        dates: bookingDates.value
-    };
-    console.log(booking);
-    _currentUserJsDefault.default.bookings.push(booking);
-    _userDBJsDefault.default.addBooking(_currentUserJsDefault.default.username, booking);
-    bookingForm.reset();
-    // setLastBookingMsg();
-    toggleBookingWindow.bind(true)();
-}
-function toggleBookingWindow() {
-    if (this) {
-        bookingForm.classList.add('hidden');
-        bookingConfirmation.classList.remove('hidden');
-    } else {
-        bookingForm.classList.remove('hidden');
-        bookingConfirmation.classList.add('hidden');
-        return;
-    }
-    if (_currentUserJsDefault.default.username) {
-        loggedOutEls.forEach((el)=>el.classList.add('hidden')
-        );
-        loggedInEls.forEach((el)=>el.classList.remove('hidden')
-        );
-        _helperJs.createNotification('Congratulations, booking is completed', 'success');
-    } else {
-        loggedOutEls.forEach((el)=>el.classList.remove('hidden')
-        );
-        loggedInEls.forEach((el)=>el.classList.add('hidden')
-        );
-        _helperJs.createNotification('Please, login to finish booking', 'info');
-    }
-}
-function initBookingForm() {
-    bookingBtn.addEventListener('click', createBooking);
-} // setLastBookingMsg();
-exports.default = initBookingForm;
-
-},{"./currentUser.js":"haS37","./helper.js":"lVRAz","./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
+},{"./currentUser.js":"haS37","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3xt2Z":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
@@ -13187,6 +13130,59 @@ function initHeartIcons() {
     });
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"43yfF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _currentUserJs = require("./currentUser.js");
+var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
+var _helperJs = require("./helper.js");
+var _userDBJs = require("./userDB.js");
+var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+///// booking section
+const bookingForm = document.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = document.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
+function createBooking(e) {
+    e.preventDefault();
+    if (!bookingForm.checkValidity()) {
+        _helperJs.createNotification('Please, fill all the fields', 'error');
+        return;
+    }
+    const booking = {
+        hotel: bookingLodgings.options[bookingLodgings.selectedIndex].text,
+        rooms: bookingRooms.value,
+        ppl: bookingPeople.value,
+        dates: bookingDates.value
+    };
+    _currentUserJsDefault.default.bookings.push(booking);
+    _userDBJsDefault.default.updateUser(_currentUserJsDefault.default);
+    bookingForm.reset();
+    toggleBookingWindow();
+}
+function toggleBookingWindow() {
+    bookingForm.classList.add('hidden');
+    bookingConfirmation.classList.remove('hidden');
+    setTimeout(()=>{
+        bookingForm.classList.remove('hidden');
+        bookingConfirmation.classList.add('hidden');
+    }, 10000);
+    if (_currentUserJsDefault.default.username) {
+        loggedOutEls.forEach((el)=>el.classList.add('hidden')
+        );
+        loggedInEls.forEach((el)=>el.classList.remove('hidden')
+        );
+        _helperJs.createNotification('Congratulations, booking is completed', 'success');
+    } else {
+        loggedOutEls.forEach((el)=>el.classList.remove('hidden')
+        );
+        loggedInEls.forEach((el)=>el.classList.add('hidden')
+        );
+        _helperJs.createNotification('Please, login to finish booking', 'info');
+    }
+}
+function initBookingForm() {
+    bookingBtn.addEventListener('click', createBooking);
+} // setLastBookingMsg();
+exports.default = initBookingForm;
+
+},{"./currentUser.js":"haS37","./helper.js":"lVRAz","./userDB.js":"kkUSu","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["g9TDx","1SICI"], "1SICI", "parcelRequire993f")
 
 //# sourceMappingURL=index.18dbc454.js.map

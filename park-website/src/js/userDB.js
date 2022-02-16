@@ -50,6 +50,7 @@ class UserDB {
     const idx = this.findUsername(username);
     if (idx < 0) return;
     this.users[idx].bookings.push(booking);
+    this._updateLocalStorage();
   }
 
   updateUser(user) {
