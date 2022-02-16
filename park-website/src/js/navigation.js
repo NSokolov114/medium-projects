@@ -1,12 +1,11 @@
 import { toggleBookingWindow } from './booking.js';
-import { welcomeMsg } from './account.js';
 import currentUser from './currentUser.js';
 
 ///// nav via buttons
 export const userNav = document.querySelector('.user-nav');
 export const userNavLoginBtn = document.querySelector('.user-nav__to-account');
 const userNavUserBtn = document.querySelector('.user-nav__user');
-export const userNavUsername = document.querySelector('.user-nav__user-name');
+
 const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
 const navBar = document.querySelector('.sidebar');
 const cardLinks = document.querySelectorAll('.card__btn a');
@@ -76,7 +75,6 @@ export function gotoSide(side) {
     idx = 1;
   } else if (side === 'settings') {
     idx = 2;
-    welcomeMsg.innerText = `You're logged in as ${currentUser.username}!`;
   }
 
   updateRots(idx);

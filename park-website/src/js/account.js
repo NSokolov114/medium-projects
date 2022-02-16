@@ -2,12 +2,7 @@ import { generatePwd } from './components.js';
 import userDB from './userDB.js';
 import currentUser from './currentUser.js';
 import { createNotification, clearElementsValue } from './helper.js';
-import {
-  gotoSide,
-  userNav,
-  userNavLoginBtn,
-  userNavUsername,
-} from './navigation.js';
+import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
 
 ///// animation for labels in account section
 const labels = document.querySelectorAll('.account-card__form label');
@@ -37,11 +32,12 @@ function toggleUserInterface() {
     userNavLoginBtn.classList.add('hidden');
     userNav.classList.remove('hidden');
     userNavUsername.innerText = currentUser.username;
+    welcomeMsg.innerText = `You're logged in as ${currentUser.username}!`;
     gotoSide('settings');
   } else {
     userNavLoginBtn.classList.remove('hidden');
     userNav.classList.add('hidden');
-    userNavUsername.innerText = '';
+    clearElementsValue([userNavUsername, welcomeMsg]);
     gotoSide('login');
   }
 }
@@ -55,7 +51,7 @@ const helpMsg = document.querySelector('.account-card__help-msg');
 const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
 const sidesLogin = document.querySelectorAll('.account-card__side--login');
 const sidesSignup = document.querySelectorAll('.account-card__side--signup');
-export const welcomeMsg = document.querySelector('.account-card__welcome-msg');
+const welcomeMsg = document.querySelector('.account-card__welcome-msg');
 const userNavUsername = document.querySelector('.user-nav__user-name');
 const generatedPwd = document.querySelector('.account-card__generated-pwd');
 
