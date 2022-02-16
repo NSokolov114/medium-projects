@@ -16,7 +16,7 @@ const locations = [
   { description: 'Lakeside Campground', coords: [49.509, 18.426] },
 ];
 
-// map initiation
+// map initialization
 const myMap = L.map('mapid', {
   center: locations[0].coords,
   zoom: 13,

@@ -3,6 +3,7 @@ import litepicker from 'litepicker';
 // Date range picker for the booking form
 
 const currentDate = new Date();
+
 const picker = new Litepicker({
   element: document.getElementById('litepicker'),
   singleMode: false,

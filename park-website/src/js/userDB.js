@@ -1,3 +1,4 @@
+///// simulating user database /////
 class UserDB {
   constructor(users) {
     this.users = JSON.parse(localStorage.getItem('userDB')) || users;
@@ -46,13 +47,6 @@ class UserDB {
     this._updateLocalStorage();
   }
 
-  // addBooking(username, booking) {
-  //   const idx = this.findUsername(username);
-  //   if (idx < 0) return;
-  //   this.users[idx].bookings.push(booking);
-  //   this._updateLocalStorage();
-  // }
-
   updateUser(user) {
     const idx = this.findUsername(user.username);
     if (idx < 0) return;
@@ -67,6 +61,7 @@ class UserDB {
   }
 }
 
+// 2 users to add to the database on the first visit to the site
 const dummyUsers = [
   {
     username: 'vasya83',
@@ -97,13 +92,5 @@ const dummyUsers = [
     ],
   },
 ];
-
-const emptyUser = {
-  username: '',
-  email: '',
-  password: '',
-  favoriteHotels: [false, false, false, false, false, false],
-  lastBooking: {},
-};
 
 export default new UserDB(dummyUsers);

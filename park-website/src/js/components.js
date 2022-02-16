@@ -1,6 +1,6 @@
 import { randomInt } from './helper.js';
 
-///// Back To Top Button /////
+///// back-to-top button /////
 const toTopBtn = document.querySelector('.to-top-btn');
 const header = document.querySelector('.header');
 
@@ -33,12 +33,20 @@ export function initToTopBtn() {
   );
 }
 
-///// Highlighting nav items /////
+///// highlighting nav items /////
 
-//prettier-ignore
-const sectionNames = ['intro','cards','about','gallery','hotel','booking','account'];
+const sectionNames = [
+  'intro',
+  'cards',
+  'about',
+  'gallery',
+  'hotel',
+  'booking',
+  'account',
+];
 const sectionEls = sectionNames.map(n => document.getElementById(`${n}`));
 const navEls = sectionNames.map(n => document.getElementById(`side-nav__${n}`));
+
 navEls[1] = navEls[0]; // workaround for the missing nav item
 
 const navObserverOptions = {

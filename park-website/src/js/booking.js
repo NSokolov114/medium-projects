@@ -2,8 +2,6 @@ import currentUser from './currentUser.js';
 import { createNotification } from './helper.js';
 import userDB from './userDB.js';
 
-///// booking section
-
 const bookingForm = document.querySelector('.booking__form'),
   bookingLodgings = bookingForm.querySelector('.booking__lodgings'),
   bookingRooms = bookingForm.querySelector('.booking__rooms'),
@@ -59,5 +57,3 @@ function toggleBookingWindow() {
 export default function initBookingForm() {
   bookingBtn.addEventListener('click', createBooking);
 }
-
-// setLastBookingMsg();

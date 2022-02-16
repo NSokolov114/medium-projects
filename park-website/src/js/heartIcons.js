@@ -1,14 +1,12 @@
 import currentUser from './currentUser.js';
 import userDB from './userDB.js';
 
-///// HEART icons & order based on HEARTS
-
 const heartIcons = document.querySelectorAll('.icon-heart');
 const homeCardEls = document.querySelectorAll('.card');
 const hotelEls = document.querySelectorAll('.hotel');
-const numberOfSections = 3;
-const numberOfHotels = heartIcons.length / numberOfSections;
+const numberOfHotels = heartIcons.length / 3;
 
+// sync heart icons in all 3 sections
 function toggleMatchingHeartIcons(idx) {
   const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
   let position = idx % numberOfHotels;
@@ -16,7 +14,7 @@ function toggleMatchingHeartIcons(idx) {
   currentUser.favoriteHotels[position] = !currentUser.favoriteHotels[position];
   userDB.updateUser(currentUser);
 
-  for (let i = 0; i < numberOfSections; i++) {
+  for (let i = 0; i < 3; i++) {
     heartIcons[position].classList.toggle('icon-heart--active');
     if (!clickedOnInput && heartIcons[position].tagName === 'INPUT') {
       heartIcons[position].checked = !heartIcons[position].checked;
@@ -25,6 +23,7 @@ function toggleMatchingHeartIcons(idx) {
   }
 }
 
+// changing order of cards based on favorites
 function sortCards(idx) {
   const position = idx % numberOfHotels;
 
@@ -37,6 +36,7 @@ function sortCards(idx) {
   }
 }
 
+// load heart icons based on stored user data
 export function loadHearts() {
   heartIcons.forEach(icon => {
     icon.classList.remove('icon-heart--active');

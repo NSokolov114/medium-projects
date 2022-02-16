@@ -4,7 +4,6 @@ import currentUser from './currentUser.js';
 export const userNav = document.querySelector('.user-nav');
 export const userNavLoginBtn = document.querySelector('.user-nav__to-account');
 const userNavUserBtn = document.querySelector('.user-nav__user');
-
 const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
 const navBar = document.querySelector('.sidebar');
 const cardLinks = document.querySelectorAll('.card__btn a');
@@ -12,6 +11,17 @@ const bookingToAccountBtns = document.querySelectorAll(
   '.booking__goto-account'
 );
 
+///// sidebar nav buttons /////
+navBar.addEventListener('click', e => {
+  e.preventDefault();
+  const navItem = e.target.closest('.side-nav__item');
+  if (!navItem) return;
+
+  const id = navItem.querySelector('a').getAttribute('href');
+  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+});
+
+///// additional buttons /////
 function navigateButtons(buttons, section) {
   buttons.forEach(btn => {
     if (!btn) return;
@@ -29,17 +39,6 @@ navigateButtons(
   'account'
 );
 
-// sidebar nav buttons
-navBar.addEventListener('click', e => {
-  e.preventDefault();
-  const navItem = e.target.closest('.side-nav__item');
-  if (!navItem) return;
-
-  const id = navItem.querySelector('a').getAttribute('href');
-  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-});
-
-// card MORE INFO button
 cardLinks.forEach(link =>
   link.addEventListener('click', e => {
     const id = e.target.getAttribute('href');
@@ -49,11 +48,12 @@ cardLinks.forEach(link =>
   })
 );
 
-///////////
-// nav between rotating cards
+///// nav between rotating cards in the Account section /////
 const sides = document.querySelectorAll('.account-card__side');
 const sidesRot = [0, 0, 0]; // initial rotation
 const sidesNum = 3;
+const gotoLoginBtn = document.querySelector('.account-card__goto-login');
+const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
 
 function rotateSides() {
   sides.forEach((side, idx) => {
@@ -86,9 +86,6 @@ function updateRots(activeSideIdx) {
     }
   }
 }
-
-const gotoLoginBtn = document.querySelector('.account-card__goto-login');
-const gotoSignupBtn = document.querySelectorAll('.account-card__goto-signup');
 
 gotoLoginBtn.addEventListener('click', e => {
   e.preventDefault();

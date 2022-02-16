@@ -10,9 +10,24 @@ import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
 import { loadHearts } from './heartIcons.js';
 import { animateLabels } from './components.js';
 
-///// animation for labels in account section
-const labels = document.querySelectorAll('.account-card__form label');
-animateLabels(labels);
+const labels = document.querySelectorAll('.account-card__form label'),
+  btnLogin = document.querySelector('.account-card__login'),
+  btnSignup = document.querySelector('.account-card__signup'),
+  btnLogout = document.querySelector('.account-card__logout'),
+  helpMsg = document.querySelector('.account-card__help-msg'),
+  btnGeneratePwd = document.querySelector('.account-card__generate-pwd'),
+  sidesLogin = document.querySelectorAll('.account-card__side--login'),
+  sidesSignup = document.querySelectorAll('.account-card__side--signup'),
+  welcomeMsg = document.querySelector('.account-card__welcome-msg'),
+  userNavUsername = document.querySelector('.user-nav__user-name'),
+  generatedPwd = document.querySelector('.account-card__generated-pwd'),
+  lastBookingEls = document.querySelectorAll('.account-card__last-booking'),
+  favoritesEls = document.querySelectorAll('.account-card__favorites'),
+  showLastBookingBtn = document.querySelector('.account-card__booking-btn'),
+  showFavoritesBtn = document.querySelector('.account-card__favorites-btn'),
+  lastBookingInfo = document.querySelector('p.account-card__last-booking');
+
+///// common functions /////
 
 function toggleUserInterface() {
   if (currentUser.username) {
@@ -29,20 +44,7 @@ function toggleUserInterface() {
   }
 }
 
-////////////////////
-///// ACCOUNT SECTION FORMS
-const btnLogin = document.querySelector('.account-card__login');
-const btnSignup = document.querySelector('.account-card__signup');
-const btnLogout = document.querySelector('.account-card__logout');
-const helpMsg = document.querySelector('.account-card__help-msg');
-const btnGeneratePwd = document.querySelector('.account-card__generate-pwd');
-const sidesLogin = document.querySelectorAll('.account-card__side--login');
-const sidesSignup = document.querySelectorAll('.account-card__side--signup');
-const welcomeMsg = document.querySelector('.account-card__welcome-msg');
-const userNavUsername = document.querySelector('.user-nav__user-name');
-const generatedPwd = document.querySelector('.account-card__generated-pwd');
-
-///// LOG IN CARDs
+///// LOG IN CARDs /////
 
 btnLogin.addEventListener('click', e => {
   e.preventDefault();
@@ -77,7 +79,7 @@ btnLogin.addEventListener('click', e => {
   clearElementsValue([userLoginEl, pwdEl]);
 });
 
-///// SIGN UP CARDs
+///// SIGN UP CARDs /////
 
 btnGeneratePwd.addEventListener(
   'click',
@@ -129,9 +131,8 @@ btnSignup.addEventListener('click', e => {
   clearElementsValue([usernameEl, emailEl, pwdEl]);
 });
 
-///// WELCOME BACK CARDs
+///// SETTINGS & BOOKING CARDs /////
 
-// logout btn
 btnLogout.addEventListener('click', e => {
   e.preventDefault();
 
@@ -142,12 +143,6 @@ btnLogout.addEventListener('click', e => {
 });
 
 // show last booking / show favorites
-const lastBookingEls = document.querySelectorAll('.account-card__last-booking');
-const favoritesEls = document.querySelectorAll('.account-card__favorites');
-const showLastBookingBtn = document.querySelector('.account-card__booking-btn');
-const showFavoritesBtn = document.querySelector('.account-card__favorites-btn');
-const lastBookingInfo = document.querySelector('p.account-card__last-booking');
-
 function showLastBookingMsg() {
   if (!currentUser.bookings.length) {
     lastBookingInfo.innerText = `You didn't book anything yet. To make your first booking go to the BOOKING section.`;
@@ -177,10 +172,9 @@ showFavoritesBtn.addEventListener('click', e => {
   lastBookingEls.forEach(el => el.classList.add('hidden'));
 });
 
-////////////////////
-
 export function initCurrentUserInterface() {
   currentUser.loadCurrentUser();
   toggleUserInterface();
   loadHearts();
+  animateLabels(labels);
 }
