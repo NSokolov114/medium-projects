@@ -10,6 +10,7 @@ class UserDB {
 
     const user = {
       username: this.users[idx].username,
+      email: this.users[idx].email,
       favoriteHotels: this.users[idx].favoriteHotels,
       bookings: this.users[idx].bookings,
     };

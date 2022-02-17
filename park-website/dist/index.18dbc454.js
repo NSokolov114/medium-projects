@@ -12718,6 +12718,7 @@ class UserDB {
         if (idx < 0) return null;
         const user = {
             username: this.users[idx].username,
+            email: this.users[idx].email,
             favoriteHotels: this.users[idx].favoriteHotels,
             bookings: this.users[idx].bookings
         };
@@ -12878,8 +12879,10 @@ function toggleUserInterface() {
     if (_currentUserJsDefault.default.username) {
         _navigationJs.userNavLoginBtn.classList.add('hidden');
         _navigationJs.userNav.classList.remove('hidden');
-        userNavUsername.innerText = _currentUserJsDefault.default.username;
-        welcomeMsg.innerText = `You're logged in as ${_currentUserJsDefault.default.username}!`;
+        const user = _userDBJsDefault.default.getUserInfo(_currentUserJsDefault.default.username);
+        userNavUsername.innerText = user.username;
+        welcomeMsg.innerText = `You're logged in as ${user.username}!
+    Email address, associated with your account: ${user.email}`;
         _navigationJs.gotoSide('settings');
     } else {
         _navigationJs.userNavLoginBtn.classList.remove('hidden');

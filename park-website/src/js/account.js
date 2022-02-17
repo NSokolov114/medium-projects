@@ -33,8 +33,12 @@ function toggleUserInterface() {
   if (currentUser.username) {
     userNavLoginBtn.classList.add('hidden');
     userNav.classList.remove('hidden');
-    userNavUsername.innerText = currentUser.username;
-    welcomeMsg.innerText = `You're logged in as ${currentUser.username}!`;
+
+    const user = userDB.getUserInfo(currentUser.username);
+
+    userNavUsername.innerText = user.username;
+    welcomeMsg.innerText = `You're logged in as ${user.username}!
+    Email address, associated with your account: ${user.email}`;
     gotoSide('settings');
   } else {
     userNavLoginBtn.classList.remove('hidden');
