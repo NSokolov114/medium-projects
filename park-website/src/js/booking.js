@@ -1,14 +1,15 @@
 import currentUser from './currentUser.js';
 import { createNotification } from './helper.js';
 import userDB from './userDB.js';
+import { bookSect } from './helper.js';
 
-const bookingForm = document.querySelector('.booking__form'),
+const bookingForm = bookSect.querySelector('.booking__form'),
   bookingLodgings = bookingForm.querySelector('.booking__lodgings'),
   bookingRooms = bookingForm.querySelector('.booking__rooms'),
   bookingPeople = bookingForm.querySelector('.booking__people'),
   bookingDates = bookingForm.querySelector('.booking__dates'),
   bookingBtn = bookingForm.querySelector('.booking__submit'),
-  bookingConfirmation = document.querySelector('.booking__confirmation'),
+  bookingConfirmation = bookSect.querySelector('.booking__confirmation'),
   loggedOutEls = bookingConfirmation.querySelectorAll(
     '.booking__msg-logged-out'
   ),

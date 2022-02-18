@@ -1,3 +1,11 @@
+///// selecting sections /////
+export const bookSect = document.querySelector('.booking');
+export const accSect = document.querySelector('.account');
+export const hotelsSect = document.querySelector('.hotel__hotels-container');
+export const headerSect = document.querySelector('.header');
+export const cardsSect = document.querySelector('.card__container');
+export const aboutSect = document.querySelector('.about');
+
 ///// shuffle an array /////
 export function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {

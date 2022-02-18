@@ -10,8 +10,8 @@ function randomizeGalleryImgs() {
 const shownImgs = 14; // max images shown on the website
 const availableImgs = 25; // files in img/gallery folder
 
-const galleryImgs = document.querySelectorAll('.gallery__img');
-const gallery = document.querySelector('.gallery');
+const gallerySect = document.querySelector('.gallery');
+const galleryImgs = gallerySect.querySelectorAll('.gallery__img');
 const imgSources = [];
 
 for (let i = 0; i < availableImgs; i++) {
@@ -20,5 +20,5 @@ for (let i = 0; i < availableImgs; i++) {
 
 export const controlGalleryImgs = function () {
   randomizeGalleryImgs();
-  gallery.addEventListener('click', randomizeGalleryImgs);
+  gallerySect.addEventListener('click', randomizeGalleryImgs);
 };

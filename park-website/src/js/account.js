@@ -9,23 +9,24 @@ import {
 import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
 import { loadHearts } from './heartIcons.js';
 import { animateLabels } from './components.js';
+import { accSect } from './helper.js';
 
-const labels = document.querySelectorAll('.account-card__form label'),
-  btnLogin = document.querySelector('.account-card__login'),
-  btnSignup = document.querySelector('.account-card__signup'),
-  btnLogout = document.querySelector('.account-card__logout'),
-  helpMsg = document.querySelector('.account-card__help-msg'),
-  btnGeneratePwd = document.querySelector('.account-card__generate-pwd'),
-  sidesLogin = document.querySelectorAll('.account-card__side--login'),
-  sidesSignup = document.querySelectorAll('.account-card__side--signup'),
-  welcomeMsg = document.querySelector('.account-card__welcome-msg'),
-  userNavUsername = document.querySelector('.user-nav__user-name'),
-  generatedPwd = document.querySelector('.account-card__generated-pwd'),
-  lastBookingEls = document.querySelectorAll('.account-card__last-booking'),
-  favoritesEls = document.querySelectorAll('.account-card__favorites'),
-  showLastBookingBtn = document.querySelector('.account-card__booking-btn'),
-  showFavoritesBtn = document.querySelector('.account-card__favorites-btn'),
-  lastBookingInfo = document.querySelector('p.account-card__last-booking');
+const labels = accSect.querySelectorAll('.account-card__form label'),
+  btnLogin = accSect.querySelector('.account-card__login'),
+  btnSignup = accSect.querySelector('.account-card__signup'),
+  btnLogout = accSect.querySelector('.account-card__logout'),
+  helpMsg = accSect.querySelector('.account-card__help-msg'),
+  btnGeneratePwd = accSect.querySelector('.account-card__generate-pwd'),
+  sidesLogin = accSect.querySelectorAll('.account-card__side--login'),
+  sidesSignup = accSect.querySelectorAll('.account-card__side--signup'),
+  welcomeMsg = accSect.querySelector('.account-card__welcome-msg'),
+  generatedPwd = accSect.querySelector('.account-card__generated-pwd'),
+  lastBookingEls = accSect.querySelectorAll('.account-card__last-booking'),
+  favoritesEls = accSect.querySelectorAll('.account-card__favorites'),
+  showLastBookingBtn = accSect.querySelector('.account-card__booking-btn'),
+  showFavoritesBtn = accSect.querySelector('.account-card__favorites-btn'),
+  lastBookingInfo = accSect.querySelector('p.account-card__last-booking'),
+  userNavUsername = document.querySelector('.user-nav__user-name');
 
 ///// common functions /////
 

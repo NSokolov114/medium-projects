@@ -1,8 +1,15 @@
 import { randomInt } from './helper.js';
+import {
+  bookSect,
+  headerSect,
+  hotelsSect,
+  cardsSect,
+  accSect,
+  aboutSect,
+} from './helper.js';
 
 ///// back-to-top button /////
 const toTopBtn = document.querySelector('.to-top-btn');
-const header = document.querySelector('.header');
 
 function toggleToTopBtn(entries) {
   const [entry] = entries;
@@ -25,11 +32,11 @@ const headerObserver = new IntersectionObserver(
   headerObserverOptions
 );
 
-headerObserver.observe(header);
+headerObserver.observe(headerSect);
 
 export function initToTopBtn() {
   toTopBtn.addEventListener('click', () =>
-    header.scrollIntoView({ behavior: 'smooth' })
+    headerSect.scrollIntoView({ behavior: 'smooth' })
   );
 }
 

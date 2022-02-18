@@ -1,8 +1,15 @@
 import * as L from 'leaflet';
 import { createNotification } from './helper.js';
+import {
+  bookSect,
+  headerSect,
+  hotelsSect,
+  cardsSect,
+  accSect,
+  aboutSect,
+} from './helper.js';
 
-const sectionAbout = document.querySelector('.about');
-const overviewLocationBtns = document.querySelectorAll(
+const overviewLocationBtns = hotelsSect.querySelectorAll(
   '.overview__location-btn'
 );
 
@@ -52,7 +59,7 @@ function addLodgingsMarker() {
   overviewLocationBtns.forEach((btn, idx) => {
     btn.addEventListener('click', e => {
       e.preventDefault();
-      sectionAbout.scrollIntoView({ behavior: 'smooth' });
+      aboutSect.scrollIntoView({ behavior: 'smooth' });
       createMarker(
         locations[idx + 1].coords,
         locations[idx + 1].description

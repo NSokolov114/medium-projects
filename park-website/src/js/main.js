@@ -1,3 +1,6 @@
+import 'regenerator-runtime/runtime'; // polyfill async await
+import 'core-js/stable'; // polyfill everything else
+
 import { picker } from './litepicker.js';
 import { controlGalleryImgs } from './gallery.js';
 import { initMap } from './map.js';

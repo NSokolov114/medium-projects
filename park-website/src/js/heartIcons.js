@@ -1,10 +1,17 @@
 import currentUser from './currentUser.js';
 import userDB from './userDB.js';
+import {
+  bookSect,
+  headerSect,
+  hotelsSect,
+  cardsSect,
+  accSect,
+} from './helper.js';
 
 const heartIcons = document.querySelectorAll('.icon-heart');
-const homeCardEls = document.querySelectorAll('.card');
-const hotelEls = document.querySelectorAll('.hotel');
-const numberOfHotels = heartIcons.length / 3;
+const homeCardEls = cardsSect.querySelectorAll('.card');
+const hotelEls = hotelsSect.querySelectorAll('.hotel');
+const numberOfHotels = hotelEls.length;
 
 // sync heart icons in all 3 sections
 function toggleMatchingHeartIcons(idx) {

@@ -1,4 +1,12 @@
 import { randomInt } from './helper.js';
+import {
+  bookSect,
+  headerSect,
+  hotelsSect,
+  cardsSect,
+  accSect,
+  aboutSect,
+} from './helper.js';
 
 ///// generating random rating, number of votes /////
 
