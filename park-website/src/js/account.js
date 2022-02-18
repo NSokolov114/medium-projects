@@ -11,6 +11,7 @@ import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
 import { loadHearts } from './heartIcons.js';
 
 const labels = accSect.querySelectorAll('.account-card__form label'),
+  accountCards = accSect.querySelectorAll('.account-card'),
   btnLogin = accSect.querySelector('.account-card__login'),
   btnSignup = accSect.querySelector('.account-card__signup'),
   btnLogout = accSect.querySelector('.account-card__logout'),
@@ -25,9 +26,17 @@ const labels = accSect.querySelectorAll('.account-card__form label'),
   showLastBookingBtn = accSect.querySelector('.account-card__booking-btn'),
   showFavoritesBtn = accSect.querySelector('.account-card__favorites-btn'),
   lastBookingInfo = accSect.querySelector('p.account-card__last-booking'),
-  userNavUsername = document.querySelector('.user-nav__user-name');
+  userNavUsername = userNav.querySelector('.user-nav__user-name');
 
 ///// common functions /////
+
+function showAccountCards() {
+  setTimeout(() => {
+    accountCards.forEach(card =>
+      card.classList.remove('account-card--invisible')
+    );
+  }, 1100);
+}
 
 function toggleUserInterface() {
   if (currentUser.username) {
@@ -181,4 +190,5 @@ export function initCurrentUserInterface() {
   toggleUserInterface();
   loadHearts();
   animateLabels(labels);
+  showAccountCards();
 }

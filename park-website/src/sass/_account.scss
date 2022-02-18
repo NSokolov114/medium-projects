@@ -5,6 +5,12 @@
   min-width: 300px;
   perspective: 150rem;
   position: relative;
+  opacity: 1;
+  transition: opacity 1s;
+
+  &--invisible {
+    opacity: 0;
+  }
 
   &__side {
     align-items: center;

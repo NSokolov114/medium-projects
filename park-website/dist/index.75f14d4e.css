@@ -1386,6 +1386,11 @@ body {
   min-width: 300px;
   perspective: 150rem;
   position: relative;
+  opacity: 1;
+  transition: opacity 1s;
+}
+.account-card--invisible {
+  opacity: 0;
 }
 .account-card__side {
   align-items: center;

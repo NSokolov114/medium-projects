@@ -12891,8 +12891,14 @@ var _componentsJs = require("./components.js");
 var _helperJs = require("./helper.js");
 var _navigationJs = require("./navigation.js");
 var _heartIconsJs = require("./heartIcons.js");
-const labels = _helperJs.accSect.querySelectorAll('.account-card__form label'), btnLogin = _helperJs.accSect.querySelector('.account-card__login'), btnSignup = _helperJs.accSect.querySelector('.account-card__signup'), btnLogout = _helperJs.accSect.querySelector('.account-card__logout'), helpMsg = _helperJs.accSect.querySelector('.account-card__help-msg'), btnGeneratePwd = _helperJs.accSect.querySelector('.account-card__generate-pwd'), sidesLogin = _helperJs.accSect.querySelectorAll('.account-card__side--login'), sidesSignup = _helperJs.accSect.querySelectorAll('.account-card__side--signup'), welcomeMsg = _helperJs.accSect.querySelector('.account-card__welcome-msg'), generatedPwd = _helperJs.accSect.querySelector('.account-card__generated-pwd'), lastBookingEls = _helperJs.accSect.querySelectorAll('.account-card__last-booking'), favoritesEls = _helperJs.accSect.querySelectorAll('.account-card__favorites'), showLastBookingBtn = _helperJs.accSect.querySelector('.account-card__booking-btn'), showFavoritesBtn = _helperJs.accSect.querySelector('.account-card__favorites-btn'), lastBookingInfo = _helperJs.accSect.querySelector('p.account-card__last-booking'), userNavUsername = document.querySelector('.user-nav__user-name');
+const labels = _helperJs.accSect.querySelectorAll('.account-card__form label'), accountCards = _helperJs.accSect.querySelectorAll('.account-card'), btnLogin = _helperJs.accSect.querySelector('.account-card__login'), btnSignup = _helperJs.accSect.querySelector('.account-card__signup'), btnLogout = _helperJs.accSect.querySelector('.account-card__logout'), helpMsg = _helperJs.accSect.querySelector('.account-card__help-msg'), btnGeneratePwd = _helperJs.accSect.querySelector('.account-card__generate-pwd'), sidesLogin = _helperJs.accSect.querySelectorAll('.account-card__side--login'), sidesSignup = _helperJs.accSect.querySelectorAll('.account-card__side--signup'), welcomeMsg = _helperJs.accSect.querySelector('.account-card__welcome-msg'), generatedPwd = _helperJs.accSect.querySelector('.account-card__generated-pwd'), lastBookingEls = _helperJs.accSect.querySelectorAll('.account-card__last-booking'), favoritesEls = _helperJs.accSect.querySelectorAll('.account-card__favorites'), showLastBookingBtn = _helperJs.accSect.querySelector('.account-card__booking-btn'), showFavoritesBtn = _helperJs.accSect.querySelector('.account-card__favorites-btn'), lastBookingInfo = _helperJs.accSect.querySelector('p.account-card__last-booking'), userNavUsername = _navigationJs.userNav.querySelector('.user-nav__user-name');
 ///// common functions /////
+function showAccountCards() {
+    setTimeout(()=>{
+        accountCards.forEach((card)=>card.classList.remove('account-card--invisible')
+        );
+    }, 1100);
+}
 function toggleUserInterface() {
     if (_currentUserJsDefault.default.username) {
         _navigationJs.userNavLoginBtn.classList.add('hidden');
@@ -13001,6 +13007,7 @@ function initCurrentUserInterface() {
     toggleUserInterface();
     _heartIconsJs.loadHearts();
     _componentsJs.animateLabels(labels);
+    showAccountCards();
 }
 
 },{"./components.js":"4xsbx","./userDB.js":"kkUSu","./currentUser.js":"haS37","./helper.js":"lVRAz","./navigation.js":"9q9cb","./heartIcons.js":"1LRTz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"9q9cb":[function(require,module,exports) {
