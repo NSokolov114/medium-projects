@@ -14,14 +14,15 @@ const userNavUserBtn = userNav.querySelector('.user-nav__user'),
   gotoSignupBtn = accSect.querySelectorAll('.account-card__goto-signup');
 
 ///// sidebar nav buttons /////
-navBar.addEventListener('click', e => {
-  e.preventDefault();
-  const navItem = e.target.closest('.side-nav__item');
-  if (!navItem) return;
+navBar &&
+  navBar.addEventListener('click', e => {
+    e.preventDefault();
+    const navItem = e.target.closest('.side-nav__item');
+    if (!navItem) return;
 
-  const id = navItem.querySelector('a').getAttribute('href');
-  document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
-});
+    const id = navItem.querySelector('a').getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  });
 
 ///// additional buttons /////
 function navigateButtons(buttons, section) {
@@ -86,14 +87,16 @@ function updateRots(activeSideIdx) {
   }
 }
 
-gotoLoginBtn.addEventListener('click', e => {
-  e.preventDefault();
-  gotoSide('login');
-});
-
-gotoSignupBtn.forEach(btn =>
-  btn.addEventListener('click', e => {
+gotoLoginBtn &&
+  gotoLoginBtn.addEventListener('click', e => {
     e.preventDefault();
-    gotoSide('signup');
-  })
-);
+    gotoSide('login');
+  });
+
+gotoSignupBtn &&
+  gotoSignupBtn.forEach(btn =>
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      gotoSide('signup');
+    })
+  );

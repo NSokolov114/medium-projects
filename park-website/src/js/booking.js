@@ -55,5 +55,5 @@ function toggleBookingWindow() {
 }
 
 export default function initBookingForm() {
-  bookingBtn.addEventListener('click', createBooking);
+  bookingBtn && bookingBtn.addEventListener('click', createBooking);
 }

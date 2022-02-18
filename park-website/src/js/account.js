@@ -59,101 +59,105 @@ function toggleUserInterface() {
 
 ///// LOG IN CARDs /////
 
-btnLogin.addEventListener('click', e => {
-  e.preventDefault();
+btnLogin &&
+  btnLogin.addEventListener('click', e => {
+    e.preventDefault();
 
-  const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll(
-    '.account-card__form input'
-  );
+    const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll(
+      '.account-card__form input'
+    );
 
-  if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) {
-    return;
-  }
+    if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) {
+      return;
+    }
 
-  const userID = userDB.getUserID(userLoginEl.value, pwdEl.value);
+    const userID = userDB.getUserID(userLoginEl.value, pwdEl.value);
 
-  if (userID === null) {
-    alertWrongInput(pwdEl, 'Wrong email or password');
-    helpMsg.classList.add('account-card__help-msg--active');
-    return;
-  }
+    if (userID === null) {
+      alertWrongInput(pwdEl, 'Wrong email or password');
+      helpMsg.classList.add('account-card__help-msg--active');
+      return;
+    }
 
-  // save bookings made by unlogged user
-  if (currentUser.username === '' && currentUser.bookings.length > 0) {
-    userDB.users[userID].bookings.push(...currentUser.bookings);
-  }
+    // save bookings made by unlogged user
+    if (currentUser.username === '' && currentUser.bookings.length > 0) {
+      userDB.users[userID].bookings.push(...currentUser.bookings);
+    }
 
-  currentUser.setCurrentUser(userDB.users[userID].username);
-  currentUser.loadCurrentUser();
+    currentUser.setCurrentUser(userDB.users[userID].username);
+    currentUser.loadCurrentUser();
 
-  loadHearts();
-  createNotification(`Welcome back, ${currentUser.username}`, 'success');
-  toggleUserInterface();
-  clearElementsValue([userLoginEl, pwdEl]);
-});
+    loadHearts();
+    createNotification(`Welcome back, ${currentUser.username}`, 'success');
+    toggleUserInterface();
+    clearElementsValue([userLoginEl, pwdEl]);
+  });
 
 ///// SIGN UP CARDs /////
 
-btnGeneratePwd.addEventListener(
-  'click',
-  () => (generatedPwd.innerText = generatePwd())
-);
-
-btnSignup.addEventListener('click', e => {
-  e.preventDefault();
-  const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
-    '.account-card__form input'
+btnGeneratePwd &&
+  btnGeneratePwd.addEventListener(
+    'click',
+    () => (generatedPwd.innerText = generatePwd())
   );
 
-  if (
-    !(
-      usernameEl.validity.valid &&
-      emailEl.validity.valid &&
-      pwdEl.validity.valid
-    )
-  ) {
-    return;
-  }
+btnSignup &&
+  btnSignup.addEventListener('click', e => {
+    e.preventDefault();
+    const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll(
+      '.account-card__form input'
+    );
 
-  if (userDB.findUsername(usernameEl.value) >= 0) {
-    alertWrongInput(usernameEl, 'This username is already taken');
-    return;
-  }
+    if (
+      !(
+        usernameEl.validity.valid &&
+        emailEl.validity.valid &&
+        pwdEl.validity.valid
+      )
+    ) {
+      return;
+    }
 
-  if (userDB.findEmail(emailEl.value) >= 0) {
-    alertWrongInput(emailEl, 'This email is already taken');
-    return;
-  }
+    if (userDB.findUsername(usernameEl.value) >= 0) {
+      alertWrongInput(usernameEl, 'This username is already taken');
+      return;
+    }
 
-  userDB.addUser(
-    usernameEl.value,
-    emailEl.value,
-    pwdEl.value,
-    currentUser.favoriteHotels,
-    currentUser.bookings
-  );
+    if (userDB.findEmail(emailEl.value) >= 0) {
+      alertWrongInput(emailEl, 'This email is already taken');
+      return;
+    }
 
-  currentUser.setCurrentUser(usernameEl.value);
-  currentUser.loadCurrentUser();
+    userDB.addUser(
+      usernameEl.value,
+      emailEl.value,
+      pwdEl.value,
+      currentUser.favoriteHotels,
+      currentUser.bookings
+    );
 
-  createNotification(
-    `Congratulations, ${currentUser.username}, you created new account`,
-    'success'
-  );
-  toggleUserInterface();
-  clearElementsValue([usernameEl, emailEl, pwdEl]);
-});
+    currentUser.setCurrentUser(usernameEl.value);
+    currentUser.loadCurrentUser();
+
+    createNotification(
+      `Congratulations, ${currentUser.username}, you created new account`,
+      'success'
+    );
+    toggleUserInterface();
+    clearElementsValue([usernameEl, emailEl, pwdEl]);
+  });
 
 ///// SETTINGS & BOOKING CARDs /////
 
-btnLogout.addEventListener('click', e => {
-  e.preventDefault();
+btnLogout &&
+  btnLogout.addEventListener('click', e => {
+    e.preventDefault();
 
-  currentUser.reset();
-  toggleUserInterface();
-  loadHearts();
-  createNotification('You are logged out', 'info');
-});
+    currentUser.reset();
+    toggleUserInterface();
+    loadHearts();
+    createNotification('You are logged out', 'info');
+  });
 
 // show last booking / show favorites
 function showLastBookingMsg() {
@@ -172,18 +176,20 @@ function showLastBookingMsg() {
   lastBookingInfo.innerText = `You booked ${booking.rooms} ${roomOrTent}${manyOrOneHotel} for ${booking.ppl} ${personOrPeople} in the ${booking.hotel} for ${booking.dates}.`;
 }
 
-showLastBookingBtn.addEventListener('click', e => {
-  e.preventDefault();
-  showLastBookingMsg();
-  favoritesEls.forEach(el => el.classList.add('hidden'));
-  lastBookingEls.forEach(el => el.classList.remove('hidden'));
-});
+showLastBookingBtn &&
+  showLastBookingBtn.addEventListener('click', e => {
+    e.preventDefault();
+    showLastBookingMsg();
+    favoritesEls.forEach(el => el.classList.add('hidden'));
+    lastBookingEls.forEach(el => el.classList.remove('hidden'));
+  });
 
-showFavoritesBtn.addEventListener('click', e => {
-  e.preventDefault();
-  favoritesEls.forEach(el => el.classList.remove('hidden'));
-  lastBookingEls.forEach(el => el.classList.add('hidden'));
-});
+showFavoritesBtn &&
+  showFavoritesBtn.addEventListener('click', e => {
+    e.preventDefault();
+    favoritesEls.forEach(el => el.classList.remove('hidden'));
+    lastBookingEls.forEach(el => el.classList.add('hidden'));
+  });
 
 export function initCurrentUserInterface() {
   currentUser.loadCurrentUser();

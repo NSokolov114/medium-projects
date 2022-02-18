@@ -2000,7 +2000,7 @@ const imgSources = [];
 for(let i = 0; i < availableImgs; i++)imgSources.push(galleryImgs[i].src);
 const controlGalleryImgs = function() {
     randomizeGalleryImgs();
-    _helperJs.gallerySect.addEventListener('click', randomizeGalleryImgs);
+    _helperJs.gallerySect && _helperJs.gallerySect.addEventListener('click', randomizeGalleryImgs);
 };
 
 },{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lVRAz":[function(require,module,exports) {
@@ -12444,7 +12444,7 @@ const headerObserverOptions = {
 const headerObserver = new IntersectionObserver(toggleToTopBtn, headerObserverOptions);
 headerObserver.observe(_helperJs.headerSect);
 function initToTopBtn() {
-    toTopBtn.addEventListener('click', ()=>_helperJs.headerSect.scrollIntoView({
+    toTopBtn && toTopBtn.addEventListener('click', ()=>_helperJs.headerSect.scrollIntoView({
             behavior: 'smooth'
         })
     );
@@ -12874,7 +12874,7 @@ function toggleBookingWindow() {
     }
 }
 function initBookingForm() {
-    bookingBtn.addEventListener('click', createBooking);
+    bookingBtn && bookingBtn.addEventListener('click', createBooking);
 }
 exports.default = initBookingForm;
 
@@ -12919,7 +12919,7 @@ function toggleUserInterface() {
     }
 }
 ///// LOG IN CARDs /////
-btnLogin.addEventListener('click', (e)=>{
+btnLogin && btnLogin.addEventListener('click', (e)=>{
     e.preventDefault();
     const [userLoginEl, pwdEl] = sidesLogin[0].querySelectorAll('.account-card__form input');
     if (!(userLoginEl.validity.valid && pwdEl.validity.valid)) return;
@@ -12942,9 +12942,9 @@ btnLogin.addEventListener('click', (e)=>{
     ]);
 });
 ///// SIGN UP CARDs /////
-btnGeneratePwd.addEventListener('click', ()=>generatedPwd.innerText = _componentsJs.generatePwd()
+btnGeneratePwd && btnGeneratePwd.addEventListener('click', ()=>generatedPwd.innerText = _componentsJs.generatePwd()
 );
-btnSignup.addEventListener('click', (e)=>{
+btnSignup && btnSignup.addEventListener('click', (e)=>{
     e.preventDefault();
     const [usernameEl, emailEl, pwdEl] = sidesSignup[0].querySelectorAll('.account-card__form input');
     if (!(usernameEl.validity.valid && emailEl.validity.valid && pwdEl.validity.valid)) return;
@@ -12968,7 +12968,7 @@ btnSignup.addEventListener('click', (e)=>{
     ]);
 });
 ///// SETTINGS & BOOKING CARDs /////
-btnLogout.addEventListener('click', (e)=>{
+btnLogout && btnLogout.addEventListener('click', (e)=>{
     e.preventDefault();
     _currentUserJsDefault.default.reset();
     toggleUserInterface();
@@ -12987,7 +12987,7 @@ function showLastBookingMsg() {
     const personOrPeople = booking.ppl < 2 ? 'person' : 'people';
     lastBookingInfo.innerText = `You booked ${booking.rooms} ${roomOrTent}${manyOrOneHotel} for ${booking.ppl} ${personOrPeople} in the ${booking.hotel} for ${booking.dates}.`;
 }
-showLastBookingBtn.addEventListener('click', (e)=>{
+showLastBookingBtn && showLastBookingBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     showLastBookingMsg();
     favoritesEls.forEach((el)=>el.classList.add('hidden')
@@ -12995,7 +12995,7 @@ showLastBookingBtn.addEventListener('click', (e)=>{
     lastBookingEls.forEach((el)=>el.classList.remove('hidden')
     );
 });
-showFavoritesBtn.addEventListener('click', (e)=>{
+showFavoritesBtn && showFavoritesBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     favoritesEls.forEach((el)=>el.classList.remove('hidden')
     );
@@ -13024,7 +13024,7 @@ const userNav = _helperJs.headerSect.querySelector('.user-nav');
 const userNavLoginBtn = _helperJs.headerSect.querySelector('.user-nav__to-account');
 const userNavUserBtn = userNav.querySelector('.user-nav__user'), goToBookingBtns = document.querySelectorAll('.cta__book-btn'), navBar = document.querySelector('.sidebar'), cardLinks = _helperJs.cardsSect.querySelectorAll('.card__btn a'), bookingToAccountBtns = _helperJs.bookSect.querySelectorAll('.booking__goto-account'), sides = _helperJs.accSect.querySelectorAll('.account-card__side'), gotoLoginBtn = _helperJs.accSect.querySelector('.account-card__goto-login'), gotoSignupBtn = _helperJs.accSect.querySelectorAll('.account-card__goto-signup');
 ///// sidebar nav buttons /////
-navBar.addEventListener('click', (e)=>{
+navBar && navBar.addEventListener('click', (e)=>{
     e.preventDefault();
     const navItem = e.target.closest('.side-nav__item');
     if (!navItem) return;
@@ -13081,11 +13081,11 @@ function gotoSide(side) {
 function updateRots(activeSideIdx) {
     for(let i = 0; i < sidesNum; i++)if (activeSideIdx === i && sidesRot[i] % 2 || activeSideIdx !== i && !(sidesRot[i] % 2)) sidesRot[i]++;
 }
-gotoLoginBtn.addEventListener('click', (e)=>{
+gotoLoginBtn && gotoLoginBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     gotoSide('login');
 });
-gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
+gotoSignupBtn && gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
         e.preventDefault();
         gotoSide('signup');
     })

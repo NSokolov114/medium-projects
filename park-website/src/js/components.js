@@ -27,9 +27,10 @@ const headerObserver = new IntersectionObserver(
 headerObserver.observe(headerSect);
 
 export function initToTopBtn() {
-  toTopBtn.addEventListener('click', () =>
-    headerSect.scrollIntoView({ behavior: 'smooth' })
-  );
+  toTopBtn &&
+    toTopBtn.addEventListener('click', () =>
+      headerSect.scrollIntoView({ behavior: 'smooth' })
+    );
 }
 
 ///// highlighting nav items /////

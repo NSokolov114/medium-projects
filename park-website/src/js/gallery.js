@@ -19,5 +19,5 @@ for (let i = 0; i < availableImgs; i++) {
 
 export const controlGalleryImgs = function () {
   randomizeGalleryImgs();
-  gallerySect.addEventListener('click', randomizeGalleryImgs);
+  gallerySect && gallerySect.addEventListener('click', randomizeGalleryImgs);
 };
