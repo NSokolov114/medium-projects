@@ -1,24 +1,16 @@
-import { randomInt } from './helper.js';
-import {
-  bookSect,
-  headerSect,
-  hotelsSect,
-  cardsSect,
-  accSect,
-  aboutSect,
-} from './helper.js';
+import { randomInt, hotelsSect } from './helper.js';
 
 ///// generating random rating, number of votes /////
 
 const averageRatingEls = document.querySelectorAll('.rating__average'),
   countRatingEls = document.querySelectorAll('.rating__count'),
   ratingsNumber = countRatingEls.length / 2,
-  recommendCount = document.querySelectorAll('.recommend__count'),
-  recommendPhotos = document.querySelectorAll('.recommend__photo'),
-  reviewRatings = document.querySelectorAll('.review__rating'),
-  reviewNames = document.querySelectorAll('.review__user-name'),
-  reviewDates = document.querySelectorAll('.review__user-date'),
-  reviewPhotos = document.querySelectorAll('.review__photo'),
+  recommendCount = hotelsSect.querySelectorAll('.recommend__count'),
+  recommendPhotos = hotelsSect.querySelectorAll('.recommend__photo'),
+  reviewRatings = hotelsSect.querySelectorAll('.review__rating'),
+  reviewNames = hotelsSect.querySelectorAll('.review__user-name'),
+  reviewDates = hotelsSect.querySelectorAll('.review__user-date'),
+  reviewPhotos = hotelsSect.querySelectorAll('.review__photo'),
   reviewsNumber = reviewNames.length;
 
 function generatePhotoLink() {

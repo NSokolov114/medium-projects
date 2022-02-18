@@ -1,4 +1,4 @@
-import { shuffle } from './helper.js';
+import { shuffle, gallerySect } from './helper.js';
 
 function randomizeGalleryImgs() {
   shuffle(imgSources);
@@ -7,11 +7,10 @@ function randomizeGalleryImgs() {
   }
 }
 
+const galleryImgs = gallerySect.querySelectorAll('.gallery__img');
+
 const shownImgs = 14; // max images shown on the website
 const availableImgs = 25; // files in img/gallery folder
-
-const gallerySect = document.querySelector('.gallery');
-const galleryImgs = gallerySect.querySelectorAll('.gallery__img');
 const imgSources = [];
 
 for (let i = 0; i < availableImgs; i++) {

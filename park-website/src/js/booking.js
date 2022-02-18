@@ -1,7 +1,6 @@
 import currentUser from './currentUser.js';
-import { createNotification } from './helper.js';
 import userDB from './userDB.js';
-import { bookSect } from './helper.js';
+import { createNotification, bookSect } from './helper.js';
 
 const bookingForm = bookSect.querySelector('.booking__form'),
   bookingLodgings = bookingForm.querySelector('.booking__lodgings'),

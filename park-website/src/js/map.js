@@ -1,13 +1,5 @@
 import * as L from 'leaflet';
-import { createNotification } from './helper.js';
-import {
-  bookSect,
-  headerSect,
-  hotelsSect,
-  cardsSect,
-  accSect,
-  aboutSect,
-} from './helper.js';
+import { createNotification, hotelsSect, aboutSect } from './helper.js';
 
 const overviewLocationBtns = hotelsSect.querySelectorAll(
   '.overview__location-btn'

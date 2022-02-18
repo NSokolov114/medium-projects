@@ -1,15 +1,14 @@
-import { generatePwd } from './components.js';
 import userDB from './userDB.js';
 import currentUser from './currentUser.js';
+import { generatePwd, animateLabels } from './components.js';
 import {
   createNotification,
   clearElementsValue,
   alertWrongInput,
+  accSect,
 } from './helper.js';
 import { gotoSide, userNav, userNavLoginBtn } from './navigation.js';
 import { loadHearts } from './heartIcons.js';
-import { animateLabels } from './components.js';
-import { accSect } from './helper.js';
 
 const labels = accSect.querySelectorAll('.account-card__form label'),
   btnLogin = accSect.querySelector('.account-card__login'),

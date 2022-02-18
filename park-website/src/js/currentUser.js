@@ -10,8 +10,11 @@ class CurrentUser {
 
   loadCurrentUser() {
     const username = JSON.parse(localStorage.getItem('currentUser')) || '';
+
     if (!username) return;
+
     const user = userDB.getUserInfo(username);
+
     this.username = user.username;
     this.favoriteHotels = user.favoriteHotels;
     this.bookings = user.bookings;

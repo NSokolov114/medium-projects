@@ -1,25 +1,17 @@
-import currentUser from './currentUser.js';
-import {
-  bookSect,
-  headerSect,
-  hotelsSect,
-  cardsSect,
-  accSect,
-} from './helper.js';
-
-///// nav via buttons
+import { bookSect, headerSect, cardsSect, accSect } from './helper.js';
 
 export const userNav = headerSect.querySelector('.user-nav');
 export const userNavLoginBtn = headerSect.querySelector(
   '.user-nav__to-account'
 );
-const userNavUserBtn = userNav.querySelector('.user-nav__user');
-const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
-const navBar = document.querySelector('.sidebar');
-const cardLinks = cardsSect.querySelectorAll('.card__btn a');
-const bookingToAccountBtns = bookSect.querySelectorAll(
-  '.booking__goto-account'
-);
+const userNavUserBtn = userNav.querySelector('.user-nav__user'),
+  goToBookingBtns = document.querySelectorAll('.cta__book-btn'),
+  navBar = document.querySelector('.sidebar'),
+  cardLinks = cardsSect.querySelectorAll('.card__btn a'),
+  bookingToAccountBtns = bookSect.querySelectorAll('.booking__goto-account'),
+  sides = accSect.querySelectorAll('.account-card__side'),
+  gotoLoginBtn = accSect.querySelector('.account-card__goto-login'),
+  gotoSignupBtn = accSect.querySelectorAll('.account-card__goto-signup');
 
 ///// sidebar nav buttons /////
 navBar.addEventListener('click', e => {
@@ -59,11 +51,8 @@ cardLinks.forEach(link =>
 );
 
 ///// nav between rotating cards in the Account section /////
-const sides = accSect.querySelectorAll('.account-card__side');
 const sidesRot = [0, 0, 0]; // initial rotation
 const sidesNum = 3;
-const gotoLoginBtn = accSect.querySelector('.account-card__goto-login');
-const gotoSignupBtn = accSect.querySelectorAll('.account-card__goto-signup');
 
 function rotateSides() {
   sides.forEach((side, idx) => {

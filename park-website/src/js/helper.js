@@ -5,6 +5,7 @@ export const hotelsSect = document.querySelector('.hotel__hotels-container');
 export const headerSect = document.querySelector('.header');
 export const cardsSect = document.querySelector('.card__container');
 export const aboutSect = document.querySelector('.about');
+export const gallerySect = document.querySelector('.gallery');
 
 ///// shuffle an array /////
 export function shuffle(array) {

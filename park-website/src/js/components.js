@@ -1,12 +1,4 @@
-import { randomInt } from './helper.js';
-import {
-  bookSect,
-  headerSect,
-  hotelsSect,
-  cardsSect,
-  accSect,
-  aboutSect,
-} from './helper.js';
+import { randomInt, headerSect } from './helper.js';
 
 ///// back-to-top button /////
 const toTopBtn = document.querySelector('.to-top-btn');

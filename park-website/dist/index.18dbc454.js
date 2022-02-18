@@ -1993,15 +1993,14 @@ function randomizeGalleryImgs() {
     _helperJs.shuffle(imgSources);
     for(let i1 = 0; i1 < shownImgs; i1++)galleryImgs[i1].src = imgSources[i1];
 }
+const galleryImgs = _helperJs.gallerySect.querySelectorAll('.gallery__img');
 const shownImgs = 14; // max images shown on the website
 const availableImgs = 25; // files in img/gallery folder
-const gallerySect = document.querySelector('.gallery');
-const galleryImgs = gallerySect.querySelectorAll('.gallery__img');
 const imgSources = [];
 for(let i = 0; i < availableImgs; i++)imgSources.push(galleryImgs[i].src);
 const controlGalleryImgs = function() {
     randomizeGalleryImgs();
-    gallerySect.addEventListener('click', randomizeGalleryImgs);
+    _helperJs.gallerySect.addEventListener('click', randomizeGalleryImgs);
 };
 
 },{"./helper.js":"lVRAz","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"lVRAz":[function(require,module,exports) {
@@ -2018,6 +2017,8 @@ parcelHelpers.export(exports, "headerSect", ()=>headerSect
 parcelHelpers.export(exports, "cardsSect", ()=>cardsSect
 );
 parcelHelpers.export(exports, "aboutSect", ()=>aboutSect
+);
+parcelHelpers.export(exports, "gallerySect", ()=>gallerySect
 );
 ///// shuffle an array /////
 parcelHelpers.export(exports, "shuffle", ()=>shuffle
@@ -2039,6 +2040,7 @@ const hotelsSect = document.querySelector('.hotel__hotels-container');
 const headerSect = document.querySelector('.header');
 const cardsSect = document.querySelector('.card__container');
 const aboutSect = document.querySelector('.about');
+const gallerySect = document.querySelector('.gallery');
 function shuffle(array) {
     for(let i = array.length - 1; i > 0; i--){
         let j = Math.floor(Math.random() * (i + 1));
@@ -12548,7 +12550,7 @@ parcelHelpers.export(exports, "generateRndReviews", ()=>generateRndReviews
 );
 var _helperJs = require("./helper.js");
 ///// generating random rating, number of votes /////
-const averageRatingEls = document.querySelectorAll('.rating__average'), countRatingEls = document.querySelectorAll('.rating__count'), ratingsNumber = countRatingEls.length / 2, recommendCount = document.querySelectorAll('.recommend__count'), recommendPhotos = document.querySelectorAll('.recommend__photo'), reviewRatings = document.querySelectorAll('.review__rating'), reviewNames = document.querySelectorAll('.review__user-name'), reviewDates = document.querySelectorAll('.review__user-date'), reviewPhotos = document.querySelectorAll('.review__photo'), reviewsNumber = reviewNames.length;
+const averageRatingEls = document.querySelectorAll('.rating__average'), countRatingEls = document.querySelectorAll('.rating__count'), ratingsNumber = countRatingEls.length / 2, recommendCount = _helperJs.hotelsSect.querySelectorAll('.recommend__count'), recommendPhotos = _helperJs.hotelsSect.querySelectorAll('.recommend__photo'), reviewRatings = _helperJs.hotelsSect.querySelectorAll('.review__rating'), reviewNames = _helperJs.hotelsSect.querySelectorAll('.review__user-name'), reviewDates = _helperJs.hotelsSect.querySelectorAll('.review__user-date'), reviewPhotos = _helperJs.hotelsSect.querySelectorAll('.review__photo'), reviewsNumber = reviewNames.length;
 function generatePhotoLink() {
     const gender = Math.random() > 0.5 ? 'men' : 'women';
     const number = _helperJs.randomInt(1, 50);
@@ -12621,10 +12623,7 @@ var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
 var _helperJs = require("./helper.js");
-const heartIcons = document.querySelectorAll('.icon-heart');
-const homeCardEls = _helperJs.cardsSect.querySelectorAll('.card');
-const hotelEls = _helperJs.hotelsSect.querySelectorAll('.hotel');
-const numberOfHotels = hotelEls.length;
+const heartIcons = document.querySelectorAll('.icon-heart'), homeCardEls = _helperJs.cardsSect.querySelectorAll('.card'), hotelEls = _helperJs.hotelsSect.querySelectorAll('.hotel'), numberOfHotels = hotelEls.length;
 // sync heart icons in all 3 sections
 function toggleMatchingHeartIcons(idx) {
     const clickedOnInput = heartIcons[idx].tagName === 'INPUT';
@@ -12832,9 +12831,9 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _currentUserJs = require("./currentUser.js");
 var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
-var _helperJs = require("./helper.js");
 var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
+var _helperJs = require("./helper.js");
 const bookingForm = _helperJs.bookSect.querySelector('.booking__form'), bookingLodgings = bookingForm.querySelector('.booking__lodgings'), bookingRooms = bookingForm.querySelector('.booking__rooms'), bookingPeople = bookingForm.querySelector('.booking__people'), bookingDates = bookingForm.querySelector('.booking__dates'), bookingBtn = bookingForm.querySelector('.booking__submit'), bookingConfirmation = _helperJs.bookSect.querySelector('.booking__confirmation'), loggedOutEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-out'), loggedInEls = bookingConfirmation.querySelectorAll('.booking__msg-logged-in');
 function createBooking(e) {
     e.preventDefault();
@@ -12884,11 +12883,11 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initCurrentUserInterface", ()=>initCurrentUserInterface
 );
-var _componentsJs = require("./components.js");
 var _userDBJs = require("./userDB.js");
 var _userDBJsDefault = parcelHelpers.interopDefault(_userDBJs);
 var _currentUserJs = require("./currentUser.js");
 var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
+var _componentsJs = require("./components.js");
 var _helperJs = require("./helper.js");
 var _navigationJs = require("./navigation.js");
 var _heartIconsJs = require("./heartIcons.js");
@@ -13013,16 +13012,10 @@ parcelHelpers.export(exports, "userNavLoginBtn", ()=>userNavLoginBtn
 );
 parcelHelpers.export(exports, "gotoSide", ()=>gotoSide
 );
-var _currentUserJs = require("./currentUser.js");
-var _currentUserJsDefault = parcelHelpers.interopDefault(_currentUserJs);
 var _helperJs = require("./helper.js");
 const userNav = _helperJs.headerSect.querySelector('.user-nav');
 const userNavLoginBtn = _helperJs.headerSect.querySelector('.user-nav__to-account');
-const userNavUserBtn = userNav.querySelector('.user-nav__user');
-const goToBookingBtns = document.querySelectorAll('.cta__book-btn');
-const navBar = document.querySelector('.sidebar');
-const cardLinks = _helperJs.cardsSect.querySelectorAll('.card__btn a');
-const bookingToAccountBtns = _helperJs.bookSect.querySelectorAll('.booking__goto-account');
+const userNavUserBtn = userNav.querySelector('.user-nav__user'), goToBookingBtns = document.querySelectorAll('.cta__book-btn'), navBar = document.querySelector('.sidebar'), cardLinks = _helperJs.cardsSect.querySelectorAll('.card__btn a'), bookingToAccountBtns = _helperJs.bookSect.querySelectorAll('.booking__goto-account'), sides = _helperJs.accSect.querySelectorAll('.account-card__side'), gotoLoginBtn = _helperJs.accSect.querySelector('.account-card__goto-login'), gotoSignupBtn = _helperJs.accSect.querySelectorAll('.account-card__goto-signup');
 ///// sidebar nav buttons /////
 navBar.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -13059,15 +13052,12 @@ cardLinks.forEach((link)=>link.addEventListener('click', (e)=>{
     })
 );
 ///// nav between rotating cards in the Account section /////
-const sides = _helperJs.accSect.querySelectorAll('.account-card__side');
 const sidesRot = [
     0,
     0,
     0
 ]; // initial rotation
 const sidesNum = 3;
-const gotoLoginBtn = _helperJs.accSect.querySelector('.account-card__goto-login');
-const gotoSignupBtn = _helperJs.accSect.querySelectorAll('.account-card__goto-signup');
 function rotateSides() {
     sides.forEach((side, idx)=>{
         side.style.transform = `rotateY(${sidesRot[idx % sidesNum] * 180}deg)`;
@@ -13094,7 +13084,7 @@ gotoSignupBtn.forEach((btn)=>btn.addEventListener('click', (e)=>{
     })
 );
 
-},{"./currentUser.js":"haS37","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"49tUX":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./helper.js":"lVRAz"}],"49tUX":[function(require,module,exports) {
 var $ = require('../internals/export');
 var global = require('../internals/global');
 var task = require('../internals/task');
