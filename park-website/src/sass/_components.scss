@@ -3,7 +3,7 @@
   display: none !important;
 }
 
-// DISABLED BUTTONS (not implemented functionality)
+// DISABLED BUTTONS (no functionality implemented)
 .disabled {
   cursor: not-allowed !important;
 }
@@ -43,12 +43,14 @@
   padding-bottom: 2px;
   transition: all 0.25s;
 
-  & a:link,
-  a:visited {
-    color: inherit;
-    font-family: var(--font-title);
-    text-decoration: none;
-    text-transform: uppercase;
+  & a {
+    &:link,
+    &:visited {
+      color: inherit;
+      font-family: var(--font-title);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
   }
 
   & span {
@@ -218,14 +220,14 @@
       var(--color-primary),
       var(--color-primary-dark)
     );
-  }
 
-  &:hover &__visible {
-    transform: translateY(100%);
-  }
+    & .btn__visible {
+      transform: translateY(100%);
+    }
 
-  &:hover &__invisible {
-    top: 0;
+    & .btn__invisible {
+      top: 0;
+    }
   }
 
   &:focus {

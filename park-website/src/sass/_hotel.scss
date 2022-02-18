@@ -44,6 +44,7 @@
   &__icon-location {
     fill: var(--color-primary);
     height: 1.75rem;
+    margin-right: 0.5rem;
     width: 1.75rem;
   }
 
@@ -51,10 +52,6 @@
     display: flex;
     font-size: 1.2rem;
     vertical-align: center;
-  }
-
-  &__icon-location {
-    margin-right: 0.5rem;
   }
 
   &__rating {
@@ -132,8 +129,8 @@
   padding: 3rem 0;
 
   &__item {
-    margin-bottom: 0.7rem;
     flex: 0 0 50%;
+    margin-bottom: 0.7rem;
 
     @media only screen and (max-width: $bp-small) {
       flex: 0 0 100%;

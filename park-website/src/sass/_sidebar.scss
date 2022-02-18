@@ -62,56 +62,58 @@
         display: none;
       }
     }
-  }
 
-  &__item::before {
-    background-color: var(--color-primary);
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    transform: scaleY(0);
-    transition: transform 0.25s, width 0.5s cubic-bezier(1, 0, 0, 1) 0.25s,
-      background-color 0.1s;
-    width: 3px;
+    &::before {
+      background-color: var(--color-primary);
+      content: '';
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      transform: scaleY(0);
+      transition: transform 0.25s, width 0.5s cubic-bezier(1, 0, 0, 1) 0.25s,
+        background-color 0.1s;
+      width: 3px;
 
-    @media only screen and (max-width: $bp-medium) {
-      background-color: transparent;
+      @media only screen and (max-width: $bp-medium) {
+        background-color: transparent;
+      }
+    }
+
+    &:hover::before,
+    &--active::before {
+      transform: scaleY(1);
+      width: 100%;
+    }
+
+    &:active::before {
+      background-color: var(--color-primary-light);
     }
   }
 
-  &__item:hover::before,
-  &__item--active::before {
-    transform: scaleY(1);
-    width: 100%;
-  }
+  &__link {
+    &:link,
+    &:visited {
+      align-items: center;
+      color: var(--color-grey-light-1);
+      display: flex;
+      padding: 1.5rem 3rem;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      z-index: 2;
 
-  &__item:active::before {
-    background-color: var(--color-primary-light);
-  }
+      @media only screen and (max-width: $bp-medium) {
+        justify-content: center;
+        padding: 1rem;
+      }
 
-  &__link:link,
-  &__link:visited {
-    align-items: center;
-    color: var(--color-grey-light-1);
-    display: flex;
-    padding: 1.5rem 3rem;
-    position: relative;
-    text-decoration: none;
-    text-transform: uppercase;
-    z-index: 2;
-
-    @media only screen and (max-width: $bp-medium) {
-      justify-content: center;
-      padding: 1rem;
-    }
-
-    @media only screen and (max-width: $bp-small) {
-      flex-direction: column;
-      margin-right: 0;
-      padding: 1.5rem;
-      text-align: center;
+      @media only screen and (max-width: $bp-small) {
+        flex-direction: column;
+        margin-right: 0;
+        padding: 1.5rem;
+        text-align: center;
+      }
     }
   }
 

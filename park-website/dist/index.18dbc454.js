@@ -12902,7 +12902,7 @@ btnLogin.addEventListener('click', (e)=>{
     const userID = _userDBJsDefault.default.getUserID(userLoginEl.value, pwdEl.value);
     if (userID === null) {
         _helperJs.alertWrongInput(pwdEl, 'Wrong email or password');
-        helpMsg.style.color = 'var(--color-primary-light)';
+        helpMsg.classList.add('account-card__help-msg--active');
         return;
     }
     // save bookings made by unlogged user

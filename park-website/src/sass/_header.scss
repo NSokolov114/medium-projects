@@ -46,10 +46,12 @@
     text-transform: none;
   }
 
-  & a:link,
-  & a:visited {
-    color: inherit;
-    text-decoration: none;
+  & a {
+    &:link,
+    &:visited {
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   @media only screen and (max-width: $bp-medium),

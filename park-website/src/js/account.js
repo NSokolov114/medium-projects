@@ -65,7 +65,7 @@ btnLogin.addEventListener('click', e => {
 
   if (userID === null) {
     alertWrongInput(pwdEl, 'Wrong email or password');
-    helpMsg.style.color = 'var(--color-primary-light)';
+    helpMsg.classList.add('account-card__help-msg--active');
     return;
   }
 

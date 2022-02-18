@@ -94,6 +94,20 @@
     position: relative;
     width: 100%;
 
+    & label {
+      left: 0;
+      pointer-events: none;
+      position: absolute;
+      top: 10px;
+
+      & span {
+        display: inline-block;
+        font-size: 1.5rem;
+        min-width: 5px;
+        transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+    }
+
     & input {
       background-color: transparent;
       border-bottom: 2px var(--color-white) solid;
@@ -103,46 +117,32 @@
       font-size: 1.5rem;
       padding: 1.5rem 0 0.5rem;
       width: 100%;
-    }
 
-    & input:focus,
-    & input:valid,
-    & input:invalid {
-      border-bottom: 2px var(--color-primary-light) solid;
-      outline: 0;
-    }
+      &:focus,
+      &:valid,
+      &:invalid {
+        border-bottom: 2px var(--color-primary-light) solid;
+        outline: 0;
+      }
 
-    & input:invalid:focus:required,
-    & input:not(:placeholder-shown):invalid:required {
-      border-bottom: 2px var(--color-heart) solid;
-    }
+      &:invalid:focus:required,
+      &:not(:placeholder-shown):invalid:required {
+        border-bottom: 2px var(--color-heart) solid;
+      }
 
-    & label {
-      left: 0;
-      pointer-events: none;
-      position: absolute;
-      top: 10px;
-    }
+      &:focus + label span,
+      &:not(:placeholder-shown) + label span {
+        transform: translateY(-3rem);
+      }
 
-    & label span {
-      display: inline-block;
-      font-size: 1.5rem;
-      min-width: 5px;
-      transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    }
+      &:focus + label span,
+      &:valid + label span {
+        color: var(--color-primary-light);
+      }
 
-    & input:focus + label span,
-    & input:not(:placeholder-shown) + label span {
-      transform: translateY(-3rem);
-    }
-
-    & input:focus + label span,
-    & input:valid + label span {
-      color: var(--color-primary-light);
-    }
-
-    & input:invalid:focus:required + label span {
-      color: var(--color-heart);
+      &:invalid:focus:required + label span {
+        color: var(--color-heart);
+      }
     }
   }
 
@@ -161,19 +161,19 @@
       margin-bottom: 2rem;
       position: relative;
       user-select: none;
-    }
 
-    & li input {
-      -moz-appearance: none;
-      -webkit-appearance: none;
-      align-self: center;
-      appearance: none;
-      border-radius: 50%;
-      cursor: pointer;
-      height: 2rem;
-      opacity: 0;
-      width: 2rem;
-      z-index: 1;
+      & input {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        align-self: center;
+        appearance: none;
+        border-radius: 50%;
+        cursor: pointer;
+        height: 2rem;
+        opacity: 0;
+        width: 2rem;
+        z-index: 1;
+      }
     }
 
     & svg {
@@ -203,13 +203,19 @@
       }
     }
 
-    & input:checked ~ svg {
-      fill: var(--color-heart);
-      transform: scale(1.2);
-    }
+    & input:checked {
+      & ~ svg {
+        fill: var(--color-heart);
+        transform: scale(1.2);
+      }
 
-    & input:checked ~ label {
-      color: var(--color-primary-light);
+      & ~ label {
+        color: var(--color-primary-light);
+      }
     }
+  }
+
+  &__help-msg--active {
+    color: var(--color-primary-light);
   }
 }
