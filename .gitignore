@@ -8,7 +8,7 @@ node_modules/
 .parcel-cache/
 # dist/
 # lib/
-# .vscode/
+.vscode/
 # .idea/
 # *.min.js
 # # Logs
